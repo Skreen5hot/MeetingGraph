@@ -1,5 +1,5 @@
 """v2 feasibility kit (docs/mkg-v2-plan.md §5): builds the three requests for the mock seed meeting.
-  A  request-A-current.txt   the built workbench's own request (dist/MeetingGraph.html, empty board), unchanged
+  A  request-A-current.txt   the built workbench's own request (archive/v1/MeetingGraph.html, empty board), unchanged
   B  request-B-paste.txt     the slim request with the numbered meeting pasted in
   C  request-C-attach.txt    the slim request; the numbered meeting goes in as an attachment (meeting-2026-10-19.txt)
   D  request-D-lines.txt     as B, but the reply is one JSON object per line with an end line (B1 came back cut off)
@@ -71,7 +71,7 @@ def main():
         token, chat = w.prepare(TRANSCRIPT, date=DATE, time=TIME, offset=OFFSET, title=TITLE)
         assert not w.errors, w.errors
         return chat
-    chat = wb.run(os.path.join(ROOT, 'dist', 'MeetingGraph.html'), go)
+    chat = wb.run(os.path.join(ROOT, 'archive', 'v1', 'MeetingGraph.html'), go)
     meeting = '=== MEETING ===' + chat.split('=== MEETING ===', 1)[1]
     segs = re.findall(r'^(S\d{3}) \[', meeting, re.M)
     assert segs and segs[-1] == 'S%03d' % len(segs), 'statement numbering is not contiguous'
@@ -159,7 +159,7 @@ def followup():
         token, chat = w.prepare(open(F_TRANSCRIPT, encoding='utf-8').read(), date=F_DATE, time=TIME, offset=OFFSET, title=F_TITLE)
         assert not w.errors, w.errors
         return chat
-    chat = wb.run(os.path.join(ROOT, 'dist', 'MeetingGraph.html'), go)
+    chat = wb.run(os.path.join(ROOT, 'archive', 'v1', 'MeetingGraph.html'), go)
     meeting = '=== MEETING ===' + chat.split('=== MEETING ===', 1)[1]
     segs = re.findall(r'^(S\d{3}) \[', meeting, re.M)
     assert segs and segs[-1] == 'S%03d' % len(segs), 'statement numbering is not contiguous'

@@ -1,6 +1,6 @@
 # MeetingGraph: working rules for Claude Code
 
-MeetingGraph turns meeting transcripts into a reliable project board. **The product is v2: one offline HTML page, `dist/MeetingGraph2.html`, that runs in Edge** (v1, `dist/MeetingGraph.html`, is frozen). The extraction is done by an enterprise LLM, **gpt-5.6-terra-low**, used **only through its chat UI**: the page writes a request, a person pastes it into the chat and pastes the reply back, and the page checks it. There is no API.
+MeetingGraph turns meeting transcripts into a reliable project board. **The product is v2: one offline HTML page, `dist/MeetingGraph2.html`, that runs in Edge** (v1, archived as `archive/v1/MeetingGraph.html`, is frozen). The live page is published by GitHub Pages from `main`. The extraction is done by an enterprise LLM, **gpt-5.6-terra-low**, used **only through its chat UI**: the page writes a request, a person pastes it into the chat and pastes the reply back, and the page checks it. There is no API.
 
 The team folder of package files (JSON) is the source of truth; the browser mirrors it.
 
@@ -30,13 +30,14 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
 - `tests/real`: tools for real meetings without their content (`score_real.py`, `make_variant.py`, `README.txt`). Real replies and keys go in `tests/real/local/` (git-ignored); never commit real meeting content.
 - v1, frozen:
   - `src/base/MeetingGraph.orig.html` (never edit), `src/ports/`, `src/modules/`, `src/ui/`, `build.py`;
-  - `dist/MeetingGraph.html` (sha256 `35b3a2ec…`);
+  - `archive/v1/MeetingGraph.html` (sha256 `35b3a2ec…`), archived 2026-10-16;
   - the tests in `tests/unit`, `tests/playwright`, `tests/jsdom`, `tests/oi-feasibility`;
   - its plan, `docs/mkg-dux12-plan.md`.
 
 ## Commands
+- Deploy: every push to `main` publishes `dist/MeetingGraph2.html` (as `index.html`) and `templates/` to GitHub Pages (`.github/workflows/pages.yml`). The repo and the page are public: never commit meeting content.
 - v2 build: `python3 src/v2/build_v2.py` (always LF, byte for byte on any OS).
-- v1 build: `python3 build.py` writes both pages. On Windows it writes v1 with CRLF line endings (sha `8549dfe4…`; stripped, `35b3a2ec…`), so don't run it to rebuild v2.
+- v1 build: `python3 build.py` writes both pages (v1 into `archive/v1/`). On Windows it writes v1 with CRLF line endings (sha `8549dfe4…`; stripped, `35b3a2ec…`), so don't run it to rebuild v2.
 - Quick tests: `python3 run_tests.py` (unit, v2 and t38). v2 alone: `python3 run_tests.py v2`.
 - Everything: `python3 run_tests.py all` (about 1 hour; t37's own knockouts are separate, about 90 minutes).
 - Setup:

@@ -1,4 +1,4 @@
-"""Run the MeetingGraph tests against dist/MeetingGraph.html (build it first: python3 build.py).
+"""Run the MeetingGraph tests against archive/v1/MeetingGraph.html (v1) and dist/MeetingGraph2.html (v2) (build it first: python3 build.py).
 Usage: python3 run_tests.py [unit] [v2] [t38] [playwright] [jsdom] [knock] [all]
   unit        node unit tests and checker self-tests (seconds)
   v2          v2: unit tests, their knockouts, and the step-0 slice in the browser (about a minute)
@@ -9,7 +9,7 @@ Usage: python3 run_tests.py [unit] [v2] [t38] [playwright] [jsdom] [knock] [all]
 Default: unit v2 t38. Expected results are in CLAUDE.md."""
 import os, subprocess, sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
-WB = os.path.join(ROOT, 'dist', 'MeetingGraph.html')
+WB = os.path.join(ROOT, 'archive', 'v1', 'MeetingGraph.html')
 PW = os.path.join(ROOT, 'tests', 'playwright')
 U = os.path.join(ROOT, 'tests', 'unit')
 OI = os.path.join(ROOT, 'tests', 'oi-feasibility')

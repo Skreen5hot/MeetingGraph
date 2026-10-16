@@ -60,6 +60,6 @@ Each run prints PASS or FAIL for criteria 1–7, the missed keys, wrong kinds, t
 
 ## Notes
 
-- **Changing the request makes a new variant.** Rebuild it with `python3 make_kit.py` (it needs `dist/MeetingGraph.html` and Playwright), then do 3 new runs.
+- **Changing the request makes a new variant.** Rebuild it with `python3 make_kit.py` (it needs `archive/v1/MeetingGraph.html` and Playwright), then do 3 new runs.
 - **The checker's self-test and knockouts** run in `python3 run_tests.py unit`.
 - **Testers:** plain files only, one per item, never a zip. Nothing goes to them without Aaron.
