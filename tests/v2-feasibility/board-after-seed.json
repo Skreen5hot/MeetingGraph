@@ -1,0 +1,31 @@
+{
+ "about": "The board after the seed meeting (Harbor Point reopening kickoff, 2026-10-19), as the PM would have accepted it from the golden reply. The follow-up request lists these as OPEN THREADS. Action IDs follow the meeting email's numbering.",
+ "threads": [
+  {"id": "AI-101", "kind": "action", "owner": "Tom Lindqvist", "what": "Call the fire marshal's office to book the final fire inspection", "due": "this week", "status": "open"},
+  {"id": "AI-102", "kind": "action", "owner": "Luis Delgado", "what": "Get written confirmation of the furniture delivery date from the supplier", "due": "by Friday", "status": "open"},
+  {"id": "AI-103", "kind": "action", "owner": "Pete Kowalski", "what": "Set up the keycard access list (staff list from HR; Tom sends the names he has)", "due": null, "status": "open"},
+  {"id": "AI-104", "kind": "action", "owner": "Rana Haddad", "what": "Draft the winter program schedule; hold it until the inspection date is known", "due": null, "status": "open"},
+  {"id": "AI-105", "kind": "action", "owner": "Rana Haddad", "what": "Run the RoomLoop training sessions for the front desk staff", "due": "first two weeks of December", "status": "open"},
+  {"id": "AI-106", "kind": "action", "owner": "Pete Kowalski", "what": "Do a RoomLoop walk-through with Rana at the new building", "due": "next week", "status": "open"},
+  {"id": "AI-107", "kind": "action", "owner": "Rana Haddad", "what": "Get two quotes for 120 rental chairs as a backup for the open house", "due": "before our next meeting", "status": "open"},
+  {"id": "AI-108", "kind": "action", "owner": "Abena Mensah", "what": "Get the signage requoted (tactile room signs, vinyl wayfinding)", "due": null, "status": "open"},
+  {"id": "AI-109", "kind": "action", "owner": "Ken Sato", "what": "Check whether the $5,500 can move from the contingency line", "due": "end of next week", "status": "open"},
+  {"id": "AI-110", "kind": "action", "owner": "Abena Mensah", "what": "Update the website text now; new photos in early December after cleaning", "due": "early December", "status": "open"},
+  {"id": "AI-111", "kind": "action", "owner": "Tom Lindqvist", "what": "Ask the architect what the drawings show for the mural wall", "due": null, "status": "open"},
+  {"id": "AI-112", "kind": "action", "owner": "Luis Delgado", "what": "Check whether the community room hearing loop has been installed", "due": null, "status": "open"},
+  {"id": "AI-113", "kind": "action", "owner": "Rana Haddad", "what": "Send after-school parents the pickup map for the new building, with the photo release form", "due": "December", "status": "open"},
+  {"id": "AI-114", "kind": "action", "owner": "Pete Kowalski", "what": "Test RoomLoop on a cellular hotspot at the new building's front desk", "due": null, "status": "open"},
+  {"id": "AI-115", "kind": "action", "owner": "Abena Mensah", "what": "Draft the open house press release and flyer and send them to Grace for review", "due": "by November sixth", "status": "open"},
+  {"id": "Q-1", "kind": "question", "owner": "Grace Okafor", "what": "Opening: soft target the week of January 11; depends on passing the fire inspection", "due": null, "status": "open"},
+  {"id": "Q-2", "kind": "question", "owner": "Grace Okafor", "what": "Is the lobby mural being kept or painted over?", "due": null, "status": "open"},
+  {"id": "Q-3", "kind": "question", "owner": "Rana Haddad", "what": "Who is the volunteers' point of contact at the open house? Rana is checking with her director", "due": null, "status": "open"},
+  {"id": "R-1", "kind": "risk", "owner": "Luis Delgado", "what": "Furniture delivery (December 7) may slip; stacking chairs and folding tables are at risk", "due": null, "status": "open"},
+  {"id": "R-2", "kind": "risk", "owner": "Pete Kowalski", "what": "Fiber internet can't be installed until mid December at the earliest; training in early December needs internet", "due": null, "status": "open"},
+  {"id": "R-3", "kind": "risk", "owner": "Abena Mensah", "what": "Interior signage quote is $23,500 against an $18,000 budget", "due": null, "status": "open"},
+  {"id": "D-1", "kind": "decision", "owner": "Grace Okafor", "what": "Signage: tactile signs for room IDs, vinyl only for wayfinding banners", "due": null, "status": "decided"},
+  {"id": "D-2", "kind": "decision", "owner": "Grace Okafor", "what": "Open house Saturday, January 16; staff open the week of January 11 if the inspection passes", "due": null, "status": "decided"},
+  {"id": "D-3", "kind": "decision", "owner": "Grace Okafor", "what": "No public date is announced until the fire inspection is booked; the neighborhood association hears first", "due": null, "status": "decided"},
+  {"id": "D-4", "kind": "decision", "owner": "Luis Delgado", "what": "Punch list walkthrough November 12 at 9:00", "due": "November 12", "status": "decided"},
+  {"id": "D-5", "kind": "decision", "owner": "Grace Okafor", "what": "Keycard access: front desk staff get the front door and offices; storage rooms only for program leads", "due": null, "status": "decided"}
+ ]
+}

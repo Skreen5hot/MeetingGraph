@@ -1,0 +1,28 @@
+﻿Type,Project,Title,Owner,Email,Teams name,Due,Status,Waiting on,Notes
+Project,Intake portal redesign,,,,,,,,"Replace the paper-style intake form with a guided, step-by-step web workflow."
+Project,Partner data exchange,,,,,,,,"Stand up a scheduled, secure file exchange with a partner agency under the new agreement."
+Project,Reporting dashboard migration,,,,,,,,Move weekly operational reports out of spreadsheets and into the shared dashboard.
+Project,Records retention cleanup,,,,,,,,Apply the retention schedule to the shared drive and archive expired folders.
+Person,,Mei Chen,,mchen@example.gov,"Chen, Mei",,,,
+Person,,Raj Patel,,rpatel@example.gov,"Patel, Raj",,,,
+Person,,Linh Nguyen,,lnguyen@example.gov,"Nguyen, Linh",,,,
+Person,,Dana Brooks,,dbrooks@example.gov,"Brooks, Dana",,,,
+Person,,Sofia Alvarez,,salvarez@example.gov,"Alvarez, Sofia",,,,
+Person,,James Ortiz,,jortiz@example.gov,"Ortiz, James",,,,
+Action,Intake portal redesign,Draft user journey for first-time filers,Mei Chen,,,2026-09-12,Done,,v1 sample AI-101
+Action,Intake portal redesign,Inventory every field on the current intake form,Raj Patel,,,2026-09-10,Done,,v1 sample AI-102
+Action,Intake portal redesign,Build clickable prototype of steps 1-3,Linh Nguyen,,,2026-10-02,In progress,Get an accessibility review slot scheduled,v1 sample AI-103
+Action,Intake portal redesign,Decide which unused fields to drop,Mei Chen,,,2026-09-24,Blocked,Get legal review of fields 41 and 57,v1 sample AI-104
+Action,Intake portal redesign,Run the accessibility review,Dana Brooks,,,2026-10-08,Open,,v1 sample AI-105
+Action,Intake portal redesign,Get an accessibility review slot scheduled,Dana Brooks,,,,Done,,v1 sample BL-101
+Action,Intake portal redesign,Get legal review of fields 41 and 57,Sofia Alvarez,,,,Open,,v1 sample BL-102
+Action,Partner data exchange,Get the data sharing agreement signed,Sofia Alvarez,,,2026-09-19,Done,,v1 sample AI-201
+Action,Partner data exchange,Draft the file layout spec,James Ortiz,,,2026-09-17,Done,,v1 sample AI-202
+Action,Partner data exchange,Run a test transfer with a sample file,James Ortiz,,,2026-10-01,Blocked,Get the firewall rule approved,v1 sample AI-203
+Action,Partner data exchange,Get the firewall rule approved,Raj Patel,,,,Open,,v1 sample BL-202
+Action,Reporting dashboard migration,Rebuild the five weekly reports in the dashboard,Linh Nguyen,,,2026-10-15,In progress,,v1 sample AI-302
+Action,Reporting dashboard migration,Confirm the data refresh schedule,Raj Patel,,,2026-09-30,Open,,v1 sample AI-303
+Action,Records retention cleanup,Map shared drive folders to retention categories,James Ortiz,,,2026-09-15,Blocked,Records office issues updated retention schedule,v1 sample AI-401
+Action,Records retention cleanup,Records office issues updated retention schedule,James Ortiz,,,,Open,,v1 sample BL-401
+Decision,Intake portal redesign,Keep the existing case number format,,,,,,,v1 sample D-101
+Decision,Reporting dashboard migration,Retire the monthly roll-up report,,,,,,,v1 sample D-301

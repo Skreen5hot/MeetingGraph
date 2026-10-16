@@ -1,0 +1,553 @@
+{
+ "context": "MKG1_TOKEN_PLACEHOLDER",
+ "ops": [
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-5",
+   "text": "Morgan will coordinate with the host liaison for site entry, parking in the intended area, and setup before the exercise starts.",
+   "src": [
+    {
+     "seg": "S005",
+     "quote": "I will coordinate with the host liaison"
+    }
+   ]
+  },
+  {
+   "op": "Reassign",
+   "tasking": "AI-6",
+   "to": "morgan-reyes",
+   "src": [
+    {
+     "seg": "S006",
+     "quote": "provide Alex and me with a direct site point of contact"
+    },
+    {
+     "seg": "S007",
+     "quote": "I will get you a direct point of contact"
+    }
+   ],
+   "from": null
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-1",
+   "project": "P1",
+   "label": "Verify the designated vehicle entrance can accommodate the mobile unit",
+   "assignee": "morgan-reyes",
+   "src": [
+    {
+     "seg": "S008",
+     "quote": "designated vehicle entrance can accommodate"
+    },
+    {
+     "seg": "S009",
+     "quote": "I will verify the designated entrance"
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-2",
+   "project": "P1",
+   "label": "Confirm parking-area surface suitability and identify an alternate location if needed",
+   "src": [
+    {
+     "seg": "S010",
+     "quote": "Please make sure the host team confirms the surface is suitable and identifies another location if it is not."
+    },
+    {
+     "seg": "S011",
+     "quote": "we need confirmation before arrival"
+    }
+   ],
+   "assignee": null
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-3",
+   "project": "P1",
+   "label": "Send the site-information slide deck to the group",
+   "assignee": "morgan-reyes",
+   "dueDate": "2026-10-09",
+   "duePhrase": "this morning",
+   "src": [
+    {
+     "seg": "S012",
+     "quote": "This morning I will send the group the site-information slide deck"
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-4",
+   "project": "P1",
+   "label": "Send the notes from yesterday's coordination session to the group",
+   "assignee": "morgan-reyes",
+   "dueDate": "2026-10-09",
+   "duePhrase": "this morning",
+   "src": [
+    {
+     "seg": "S012",
+     "quote": "This morning I will send the group"
+    },
+    {
+     "seg": "S012",
+     "quote": "the notes from yesterday's coordination session"
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-5",
+   "project": "P1",
+   "label": "Send today's transcript to the distribution list",
+   "assignee": "morgan-reyes",
+   "dueDate": "2026-10-09",
+   "duePhrase": "today",
+   "src": [
+    {
+     "seg": "S013",
+     "quote": "I will also send today's transcript"
+    },
+    {
+     "seg": "S013",
+     "quote": "to the distribution list today"
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-6",
+   "project": "P1",
+   "label": "Send the related coordination summaries to the distribution list",
+   "assignee": "morgan-reyes",
+   "dueDate": "2026-10-09",
+   "duePhrase": "today",
+   "src": [
+    {
+     "seg": "S013",
+     "quote": "the related coordination summaries to the distribution list today"
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-7",
+   "project": "P1",
+   "label": "Confirm receipt of the updated meeting invitation",
+   "assignee": "alex-kim",
+   "src": [
+    {
+     "seg": "S017",
+     "quote": "let me know if you receive it"
+    },
+    {
+     "seg": "S018",
+     "quote": "I will confirm receipt after the meeting"
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-1",
+   "text": "Event window narrowed to 2026-10-20 through 2026-10-24 (previously through October 30); early-arrival versus later-travel determination still open.",
+   "src": [
+    {
+     "seg": "S003",
+     "quote": "now expected to run October 20 through October 24"
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-8",
+   "text": "Sensor placement undecided: mobile-unit mast versus ground stands; depends on flight plan, mounting hardware, and wind conditions.",
+   "src": [
+    {
+     "seg": "S002",
+     "quote": "depends on the flight plan, available mounting hardware, and wind conditions"
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-8",
+   "text": "Working approach described (not an accepted decision): mobile unit provides power, workspace, connectivity, and elevated placement if needed; final flight plan pending.",
+   "src": [
+    {
+     "seg": "S014",
+     "quote": "That is our working approach, but we still need the final flight plan"
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-9",
+   "text": "Invitation updates initiated for Alex and Drew (delivery unconfirmed); Sam and Priya still to be added.",
+   "src": [
+    {
+     "seg": "S016",
+     "quote": "update the recurring meeting invitations for Alex, Drew, Sam, and Priya"
+    },
+    {
+     "seg": "S017",
+     "quote": "I updated Alex and Drew just now"
+    }
+   ]
+  }
+ ],
+ "flags": [
+  {
+   "kind": "ownership",
+   "about": null,
+   "note": "Parking-area verification has no accepted owner; the host team (via Morgan) is the likely owner but no one accepted it in the meeting.",
+   "src": [
+    "S010"
+   ]
+  },
+  {
+   "kind": "open_question",
+   "about": null,
+   "note": "Observer attendance list remains fluid; a separate day-choice schedule is in development and the final list is not established.",
+   "src": [
+    "S015",
+    "S001"
+   ]
+  },
+  {
+   "kind": "open_question",
+   "about": [
+    "AI-1"
+   ],
+   "note": "Who must arrive early versus travel later for the October 20-24 window is undetermined.",
+   "src": [
+    "S003"
+   ]
+  }
+ ],
+ "segments": [
+  {
+   "seg": "S001",
+   "dispositions": [
+    {
+     "kind": "open_question",
+     "about": [],
+     "note": "Observer-list fluidity; evidence also cited by the observers open_question flag."
+    }
+   ]
+  },
+  {
+   "seg": "S002",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-8"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S003",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-1"
+     ]
+    },
+    {
+     "kind": "open_question",
+     "about": [
+      "AI-1"
+     ],
+     "note": "Early-arrival vs later-travel undetermined; carried by the open_question flag."
+    }
+   ]
+  },
+  {
+   "seg": "S004",
+   "dispositions": [
+    {
+     "kind": "context_only"
+    }
+   ]
+  },
+  {
+   "seg": "S005",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "AI-5"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S006",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "AI-6"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S007",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "AI-6"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S008",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-1"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S009",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-1"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S010",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-2"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S011",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-2"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S012",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-3",
+      "NEW-4"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S013",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-5",
+      "NEW-6"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S014",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-8"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S015",
+   "dispositions": [
+    {
+     "kind": "open_question",
+     "about": []
+    }
+   ]
+  },
+  {
+   "seg": "S016",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "AI-9"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S017",
+   "dispositions": [
+    {
+     "kind": "status_update",
+     "about": [
+      "AI-9"
+     ]
+    },
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-7"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S018",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-7"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S019",
+   "dispositions": [
+    {
+     "kind": "administrative"
+    }
+   ]
+  }
+ ],
+ "register": [
+  {
+   "id": "AI-1",
+   "coverage": "updated",
+   "segs": [
+    "S003"
+   ]
+  },
+  {
+   "id": "AI-2",
+   "coverage": "not_discussed",
+   "segs": []
+  },
+  {
+   "id": "AI-3",
+   "coverage": "not_discussed",
+   "segs": []
+  },
+  {
+   "id": "AI-4",
+   "coverage": "not_discussed",
+   "segs": []
+  },
+  {
+   "id": "AI-5",
+   "coverage": "updated",
+   "segs": [
+    "S005"
+   ]
+  },
+  {
+   "id": "AI-6",
+   "coverage": "updated",
+   "segs": [
+    "S006",
+    "S007"
+   ]
+  },
+  {
+   "id": "AI-7",
+   "coverage": "not_discussed",
+   "segs": [],
+   "note": "S002 is about sensor placement for the integration options on AI-8; nothing was reported on evaluating the alternate configuration."
+  },
+  {
+   "id": "AI-8",
+   "coverage": "updated",
+   "segs": [
+    "S002",
+    "S014"
+   ]
+  },
+  {
+   "id": "AI-9",
+   "coverage": "updated",
+   "segs": [
+    "S016",
+    "S017"
+   ]
+  },
+  {
+   "id": "AI-10",
+   "coverage": "not_discussed",
+   "segs": []
+  }
+ ],
+ "coveredProjects": [
+  "P1"
+ ],
+ "selfReview": {
+  "newVsExisting": [
+   {
+    "ref": "NEW-1",
+    "nearest": "AI-5",
+    "whyNew": "Checking that the vehicle entrance fits the mobile unit is its own verification; AI-5 is the liaison coordination for entry and parking."
+   },
+   {
+    "ref": "NEW-2",
+    "nearest": "AI-5",
+    "whyNew": "The parking-surface check and its fallback location are a separate verification asked of the host team, not Morgan's liaison coordination."
+   },
+   {
+    "ref": "NEW-3",
+    "nearest": null,
+    "whyNew": "No register item covers distributing the site-information slide deck; it is a new deliverable promised this morning."
+   },
+   {
+    "ref": "NEW-4",
+    "nearest": null,
+    "whyNew": "No register item covers sending the notes from the earlier coordination session; it is a new deliverable promised this morning."
+   },
+   {
+    "ref": "NEW-5",
+    "nearest": null,
+    "whyNew": "No register item covers distributing the meeting transcript; it is a new deliverable promised for today."
+   },
+   {
+    "ref": "NEW-6",
+    "nearest": null,
+    "whyNew": "No register item covers distributing the coordination summaries; they are a separate deliverable promised for today."
+   },
+   {
+    "ref": "NEW-7",
+    "nearest": "AI-9",
+    "whyNew": "Alex committed to confirm receipt himself; AI-9 is Morgan's invitation update, which completes when the invitations are sent."
+   }
+  ]
+ }
+}

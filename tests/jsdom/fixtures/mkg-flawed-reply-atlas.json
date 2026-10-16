@@ -1,0 +1,209 @@
+{
+ "context": "MKG1_TOKEN_PLACEHOLDER",
+ "ops": [
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-5",
+   "text": "Morgan began coordinating with the host liaison.",
+   "src": [
+    {
+     "seg": "S005",
+     "quote": "I will coordinate with the host liaison"
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-5",
+   "text": "Event window narrowed to October 20-24.",
+   "src": [
+    {
+     "seg": "S003",
+     "quote": "now expected to run October 20 through October 24"
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-4",
+   "project": "P1",
+   "label": "Send today's transcript and coordination summaries to the distribution list",
+   "assignee": "morgan-reyes",
+   "dueDate": "2026-10-09",
+   "duePhrase": "now",
+   "src": [
+    {
+     "seg": "S013",
+     "quote": "to the distribution list today"
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-9",
+   "project": "P1",
+   "label": "Update the recurring meeting invitations for the named recipients",
+   "assignee": "morgan-reyes",
+   "src": [
+    {
+     "seg": "S016",
+     "quote": "update the recurring meeting invitations"
+    },
+    {
+     "seg": "S017",
+     "quote": "let me know if you receive it"
+    }
+   ]
+  },
+  {
+   "op": "Status",
+   "tasking": "NEW-9",
+   "status": "completed",
+   "src": [
+    {
+     "seg": "S017",
+     "quote": "I updated Alex and Drew just now"
+    }
+   ]
+  }
+ ],
+ "flags": [],
+ "segments": [
+  {
+   "seg": "S001",
+   "kind": "context_only"
+  },
+  {
+   "seg": "S002",
+   "kind": "context_only"
+  },
+  {
+   "seg": "S003",
+   "kind": "discussion_of_register_item",
+   "about": "AI-1"
+  },
+  {
+   "seg": "S004",
+   "kind": "uncertain_requires_review",
+   "note": ""
+  },
+  {
+   "seg": "S005",
+   "kind": "commitment",
+   "about": "AI-5"
+  },
+  {
+   "seg": "S006",
+   "kind": "context_only"
+  },
+  {
+   "seg": "S007",
+   "kind": "context_only"
+  },
+  {
+   "seg": "S008",
+   "kind": "commitment",
+   "about": null
+  },
+  {
+   "seg": "S009",
+   "kind": "context_only"
+  },
+  {
+   "seg": "S010",
+   "kind": "commitment",
+   "about": null
+  },
+  {
+   "seg": "S011",
+   "kind": "context_only"
+  },
+  {
+   "seg": "S012",
+   "kind": "context_only"
+  },
+  {
+   "seg": "S013",
+   "kind": "commitment",
+   "about": "NEW-4"
+  },
+  {
+   "seg": "S014",
+   "kind": "discussion_of_register_item",
+   "about": "AI-8"
+  },
+  {
+   "seg": "S015",
+   "kind": "context_only"
+  },
+  {
+   "seg": "S016",
+   "kind": "commitment",
+   "about": "NEW-9"
+  },
+  {
+   "seg": "S017",
+   "kind": "status_update",
+   "about": "NEW-9"
+  },
+  {
+   "seg": "S018",
+   "kind": "context_only"
+  }
+ ],
+ "register": [
+  {
+   "id": "AI-1",
+   "coverage": "updated",
+   "segs": [
+    "S003"
+   ]
+  },
+  {
+   "id": "AI-2",
+   "coverage": "not_discussed",
+   "segs": []
+  },
+  {
+   "id": "AI-3",
+   "coverage": "not_discussed",
+   "segs": []
+  },
+  {
+   "id": "AI-4",
+   "coverage": "not_discussed",
+   "segs": []
+  },
+  {
+   "id": "AI-5",
+   "coverage": "updated",
+   "segs": [
+    "S005"
+   ]
+  },
+  {
+   "id": "AI-6",
+   "coverage": "updated",
+   "segs": [
+    "S006"
+   ]
+  },
+  {
+   "id": "AI-7",
+   "coverage": "not_discussed",
+   "segs": []
+  },
+  {
+   "id": "AI-8",
+   "coverage": "not_discussed",
+   "segs": []
+  },
+  {
+   "id": "AI-9",
+   "coverage": "updated",
+   "segs": [
+    "S016"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,81 @@
+CONTEXT TOKEN (copy it exactly into "context"): MKG2|followup|20261001T140000Z|9e22ddac
+
+You read one meeting transcript and list what a project manager needs to know from it. Meetings ramble: most of what is said needs no item. Pick out what matters; do not account for every line.
+
+THE MEETING is below, under === MEETING ===. Each statement has a number (S001, S002, ...), a time and a speaker.
+
+OPEN THREADS, under === OPEN THREADS ===, are what the board already tracks from earlier meetings: actions, open questions, risks and decisions, each with an ID. This meeting will report on some of them and add new things.
+
+PROJECTS, under === PROJECTS ===, are the projects the board tracks. A meeting can cover one project or several, often without saying their names: place each item from what is said around it.
+
+WHAT TO LIST, one item each:
+- commitment: someone says they will do something, or accepts a request ("I'll", "yes, I'll take it", "I can do that"). "Maybe I could", "I could probably" and "someone should" are not commitments.
+- decision: the group settles a choice ("let's do", "we're going with", "that's the decision"). Options discussed but not settled are not decisions.
+- question: something left open that someone still has to answer or decide.
+- risk: something that could delay or block the work.
+- update: a fact about progress, or a change to plans, dates, money or scope.
+
+FINAL STATE ONLY. Meetings change their mind. When something said early is changed later (a decision reversed, a date moved, an owner switched, something pending that came through), list only the final state, cite the statement where it was settled, and do not list the earlier version.
+
+NEW PROJECTS. When the meeting discusses a project that is not in PROJECTS (an effort with its own goal, not a task or a topic inside one), add one project line for it. If it might be a listed project under another name, use the listed project, or null.
+
+FIELDS for each item:
+- "ref": N1, N2, N3 ... in order, so other items can point to it.
+- "kind": commitment | decision | question | risk | update
+- "topic": 2 to 5 words naming the subject; use the same topic for items about the same subject.
+- "project": the project this item belongs to: a PROJECTS code, or the ref of a new project (J1, J2 ...). Give one only when the meeting names the project or the discussion around the item clearly establishes it. An item on an open thread belongs to that thread's project. If it is plausible but not certain, null: the project manager will choose.
+- "who": for a commitment, the person who will do it; otherwise the person who raised or settled it. Use the speaker name as written in the transcript ("Lindqvist, Tom"), or null.
+- "what": one plain line a team member would understand without having been in the meeting.
+- "due": the date or time exactly as said ("by Friday", "end of next week"), or null. Do not convert it.
+- "importance": "high" for what a leader would want to know (decisions, deadlines, risks to the opening date or the budget, commitments other work depends on); otherwise "normal".
+- "thread": the OPEN THREADS ID this item reports on or continues, or null when it is new work. Something that only sounds like an open thread (the same words, a different job) is new: null.
+- "status": only for an item with a thread, and only when the meeting says so: "done" when someone says that action is finished, or that question is answered or settled; "blocked" when it cannot move until something else happens; "in_progress" when it is started but not finished. Otherwise null. Never "done" for something planned, partly done, drafted but held, or not discussed.
+- "waitsOn": when a speaker says this cannot be done until something else is, the ref (N...) or thread ID of that other thing; otherwise null.
+- "seg": the one statement number where it is said most clearly (for a commitment, where the person agrees).
+- "words": 3 to 10 words copied exactly from that statement, character for character. Do not paraphrase, shorten or fix them.
+
+Say nothing about open threads the meeting does not discuss. At most 60 items; fewer, clearer items are better. Leave out greetings, small talk, stories, technical difficulties and arranging this meeting itself.
+
+OUTPUT: one fenced code block and nothing else. Inside it, one JSON object per line, never more than one object on a line:
+- The first line: {"context": "...", "lastSeg": "the number of the final statement in the meeting", "summary": "3 to 5 plain sentences: what the meeting was about and what came out of it"}
+- Then one line per new project, if any: {"newProject": "J1", "name": "a short name", "seg": "S001", "words": "..."}, where "seg" and "words" are as for an item and show where the meeting discusses it.
+- Then one line per item, in meeting order (by "seg"): {"ref": "N1", "kind": "...", "topic": "...", "project": "...", "who": "...", "what": "...", "due": null, "importance": "normal", "thread": null, "status": null, "waitsOn": null, "seg": "S001", "words": "..."}
+- The last line: {"end": <the number of item lines>}, not counting project lines
+
+=== PROJECTS ===
+CODE | name
+IPR | Intake portal redesign
+PDE | Partner data exchange
+RDM | Reporting dashboard migration
+RRC | Records retention cleanup
+
+=== OPEN THREADS ===
+ID | project | kind | owner | what | due as said | status
+IPR-A-260924-03 | IPR | action | Linh Nguyen | Build clickable prototype of steps 1-3 | 2026-10-02 | in_progress
+IPR-A-260924-04 | IPR | action | Mei Chen | Decide which unused fields to drop | 2026-09-24 | blocked
+IPR-A-260924-05 | IPR | action | Dana Brooks | Run the accessibility review | 2026-10-08 | open
+IPR-A-260924-07 | IPR | action | Sofia Alvarez | Get legal review of fields 41 and 57 | - | open
+PDE-A-260924-03 | PDE | action | James Ortiz | Run a test transfer with a sample file | 2026-10-01 | blocked
+PDE-A-260924-04 | PDE | action | Raj Patel | Get the firewall rule approved | - | open
+RDM-A-260924-01 | RDM | action | Linh Nguyen | Rebuild the five weekly reports in the dashboard | 2026-10-15 | in_progress
+RDM-A-260924-02 | RDM | action | Raj Patel | Confirm the data refresh schedule | 2026-09-30 | open
+RRC-A-260924-01 | RRC | action | James Ortiz | Map shared drive folders to retention categories | 2026-09-15 | blocked
+RRC-A-260924-02 | RRC | action | James Ortiz | Records office issues updated retention schedule | - | open
+IPR-D-260924-01 | IPR | decision | - | Keep the existing case number format | - | decided
+RDM-D-260924-01 | RDM | decision | - | Retire the monthly roll-up report | - | decided
+
+=== MEETING ===
+MEETING: 2026-10-01 (Thursday), Weekly board walk
+SEGMENTS:
+S001 [00:00:40] Chen, Mei: Quick one on the intake fields. Legal came back, and both forty-one and fifty-seven have to stay. So we can close out the field decision. We're dropping the other twenty-seven.
+S002 [00:01:30] Nguyen, Linh: Great, then step three of the prototype is unblocked on my end. I'll have the full prototype by next Wednesday.
+S003 [00:02:10] Brooks, Dana: Accessibility review is still on for the eighth.
+S004 [00:03:05] Alvarez, Sofia: On the partner exchange, the firewall rule finally went in yesterday.
+S005 [00:03:30] Ortiz, James: Good, so the test transfer can go. I'll run it Monday.
+S006 [00:04:20] Patel, Raj: Maybe someone should look at whether we can automate the monthly exports too.
+S007 [00:04:45] Alvarez, Sofia: Also, new thing from their side. They want an interconnection security agreement signed before any production transfer. I'll own that, target end of October.
+S008 [00:05:30] Nguyen, Linh: Dashboard update, three of the five reports are rebuilt now.
+S009 [00:06:00] Brooks, Dana: Linh, can you take the refresh schedule confirmation off Raj's plate? He's buried in the firewall work.
+S010 [00:06:08] Nguyen, Linh: Sure, I'll take it.
+S011 [00:06:40] Chen, Mei: Records cleanup, still nothing from the records office.
+S012 [00:07:10] Brooks, Dana: And for the dashboard we're going to publish nightly, to match the refresh.

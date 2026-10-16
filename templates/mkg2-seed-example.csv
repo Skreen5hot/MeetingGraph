@@ -1,0 +1,24 @@
+﻿Type,Project,Title,Owner,Email,Teams name,Due,Status,Waiting on,Notes
+Project,Harbor Point reopening,,,,,,,,Reopening the community center after the renovation
+Person,,Grace Okafor,,grace.okafor@example.org,"Okafor, Grace",,,,Project manager
+Person,,Tom Lindqvist,,tom.lindqvist@example.org,"Lindqvist, Tom",,,,Facilities
+Person,,Rana Haddad,,rana.haddad@example.org,"Haddad, Rana",,,,Programs
+Person,,Pete Kowalski,,pete.kowalski@example.org,"Kowalski, Pete",,,,IT
+Person,,Abena Mensah,,abena.mensah@example.org,"Mensah, Abena",,,,Communications
+Person,,Ken Sato,,ken.sato@example.org,"Sato, Ken",,,,Finance
+Person,,Luis Delgado,,luis.delgado@example.org,"Delgado, Luis",,,,Contractor liaison
+Action,Harbor Point reopening,Call the fire marshal's office to book the final fire inspection,Tom Lindqvist,,,2026-10-23,Open,,
+Action,Harbor Point reopening,Get written confirmation of the furniture delivery date from the supplier,Luis Delgado,,,2026-10-23,Open,,
+Action,Harbor Point reopening,Set up the keycard access list (staff list from HR),Pete Kowalski,,,,Blocked,,
+Action,Harbor Point reopening,Run the RoomLoop training sessions for the front desk staff,Rana Haddad,,,first two weeks of December,Open,Do a RoomLoop walk-through with Rana at the new building,
+Action,Harbor Point reopening,Do a RoomLoop walk-through with Rana at the new building,Pete Kowalski,,,2026-10-30,In progress,,
+Action,Harbor Point reopening,Get two quotes for 120 rental chairs as a backup for the open house,Rana Haddad,,,2026-10-26,Open,,
+Action,Harbor Point reopening,Update the website text; new photos after cleaning,Abena Mensah,,,early December,Open,,
+Action,Harbor Point reopening,Draft the open house press release and flyer for Grace's review,Abena Mensah,,,2026-11-06,Open,,
+Action,Harbor Point reopening,Order the outside sign,Luis Delgado,,,2026-09-30,Done,,
+Question,Harbor Point reopening,Is the lobby mural being kept or painted over?,Grace Okafor,,,,Open,,Grace takes it to the director
+Question,Harbor Point reopening,Who is the volunteers' point of contact at the open house?,Rana Haddad,,,,Open,,
+Risk,Harbor Point reopening,Fiber internet can't be installed until mid December at the earliest,Pete Kowalski,,,,Open,,Training in early December needs internet
+Risk,Harbor Point reopening,"Interior signage quote is $23,500 against an $18,000 budget",Abena Mensah,,,,Open,,
+Decision,Harbor Point reopening,Tactile signs for room IDs; vinyl only for wayfinding banners,Grace Okafor,,,2026-10-19,,,
+Decision,Harbor Point reopening,"Open house Saturday, January 16; staff open the week of January 11 if the inspection passes",Grace Okafor,,,2026-10-19,,,

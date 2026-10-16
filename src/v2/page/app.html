@@ -1,0 +1,1508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MeetingGraph</title>
+<style>
+:root{
+  --bg:#E9EDF1; --surface:#FFFFFF; --ink:#18222D; --muted:#5B6773; --line:#D3DAE1;
+  --accent:#1F5F8B; --accent-soft:#E3EEF6;
+  --block:#B42318; --block-soft:#FDECEA;
+  --due:#8A5A00; --due-soft:#FFF4DB;
+  --done:#2F7A4B; --done-soft:#E6F3EA;
+  --decide:#5B4B9A; --decide-soft:#EEEAF8;
+  --font:"Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono:Consolas, "Cascadia Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#141A21; --surface:#1C242D; --ink:#E6ECF2; --muted:#9AA6B2; --line:#2E3945;
+    --accent:#7FB4DC; --accent-soft:#1E3344;
+    --block:#F2887E; --block-soft:#3A1F1D;
+    --due:#E8B85A; --due-soft:#3A2F17;
+    --done:#7CCB97; --done-soft:#1B3325;
+    --decide:#B7A8EE; --decide-soft:#2A2540;
+  }
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--font);display:flex;flex-direction:column}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Top bar */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:10px 18px;background:var(--surface);border-bottom:1px solid var(--line)}
+.top h1{font-size:16px;font-weight:650;margin:0 12px 0 0}
+.tabs{display:flex;gap:4px}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:6px 10px;cursor:pointer;color:var(--muted);font-weight:560}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tools{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.btn{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 11px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-size:15px;font-weight:650;padding:9px 16px;min-height:40px}
+.btn:focus-visible,.btn.primary:focus-visible{outline:3px solid var(--due);outline-offset:2px}
+.stepchip{display:inline-block;font-weight:750;font-size:14px;background:var(--accent);color:#fff;border-radius:6px;padding:1px 9px;margin-right:8px}
+.revlist{list-style:none;margin:0;padding:0}
+.revlist li{padding:9px 0;border-bottom:1px solid var(--line)}
+.revlist li:last-child{border-bottom:none}
+.rev-sent{font-weight:620}
+.rev-ev{margin:3px 0 2px;opacity:.85}
+.panel-inner.compact .ownerwork .sub,.panel-inner.compact .snap .sub,.panel-inner.compact .ops .why{display:none}
+.panel-inner.compact .meeting ul.ops{display:none}
+.bd-controls .bfilter[aria-pressed="true"]{border-color:var(--accent);font-weight:650}
+@media (prefers-color-scheme: dark){.stepchip{color:#0F1A24}}
+#prep-status{font-size:15px;font-weight:650;padding:10px 12px;margin:0 0 12px}
+@media (prefers-color-scheme: dark){.btn.primary{color:#0F1A24}}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.small{font-size:13px;color:var(--muted)}
+.view{flex:1;min-height:0;display:none}
+.view.on{display:flex}
+
+/* Board */
+.board{width:100%;display:grid;grid-template-columns:330px 1fr;min-height:0}
+.list{overflow:auto;border-right:1px solid var(--line)}
+.list-head{padding:16px 18px 10px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:1}
+.asof{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.asof select{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 8px;flex:1;min-width:0}
+.projects{list-style:none;margin:0;padding:8px}
+.proj{display:block;width:100%;text-align:left;background:none;border:0;border-left:3px solid transparent;border-radius:0 6px 6px 0;padding:11px 14px;cursor:pointer}
+.proj:hover{background:color-mix(in srgb,var(--surface) 60%,transparent)}
+.proj[aria-current="true"]{background:var(--surface);border-left-color:var(--accent)}
+.proj-name{font-weight:620}
+.proj-desc{color:var(--muted);font-size:13.5px;margin:2px 0 7px}
+.signals{display:flex;flex-wrap:wrap;gap:6px;font-size:12.5px}
+.sig{padding:1px 8px;border-radius:999px;background:var(--accent-soft)}
+.sig.block{background:var(--block-soft);color:var(--block);font-weight:600}
+.sig.stale{background:var(--due-soft);color:var(--due);font-weight:600}
+.sig.quiet{background:transparent;color:var(--muted);padding-left:0}
+.panel{overflow:auto;background:var(--surface)}
+.panel-inner{max-width:1000px;margin:0 auto;padding:22px 26px 48px}
+.back{display:none;background:none;border:0;color:var(--accent);padding:0;margin-bottom:10px;cursor:pointer;font-weight:600}
+.title{font-size:24px;line-height:1.2;margin:0 0 4px;font-weight:680}
+.desc{color:var(--muted);margin:0 0 2px;max-width:70ch}
+.meta{font-size:13px;color:var(--muted);margin:0 0 22px}
+.snapshot{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
+#reply-detail-body li.bad{color:var(--block,#b42318);font-weight:560}
+#reply-detail-body h4{font-size:13px;margin:8px 0 4px}
+#reply-detail-body h4.bad-h{color:var(--block,#b42318)}
+.lasttime{border-left:3px solid var(--accent);padding:4px 0 4px 14px;margin:0 0 22px}
+.lasttime h3{font-size:15px;margin:0 0 4px}
+.lasttime .when{font-size:12.5px;color:var(--muted);margin:0 0 6px}
+.lasttime p{margin:0;line-height:1.5;max-width:75ch}
+.snap.closed details summary{cursor:pointer;color:var(--accent);font-weight:560}
+.snap.closed h4{font-size:13px;margin:12px 0 4px}
+.snap{border:1px solid var(--line);border-top:3px solid var(--line);border-radius:6px;padding:13px 15px}
+.snap.blockers{border-top-color:var(--block)}
+.snap.due{border-top-color:var(--due)}
+
+.snap h3{font-size:14px;margin:0 0 9px;font-weight:650;display:flex;justify-content:space-between}
+.snap h3 .n{color:var(--muted);font-weight:500}
+.snap ul{list-style:none;margin:0;padding:0}
+.snap li{padding:7px 0;border-top:1px solid var(--line)}
+.snap li:first-child{border-top:0;padding-top:0}
+.sub{font-size:13px;color:var(--muted)}
+.empty{color:var(--muted);font-size:13.5px;margin:0}
+.owner{font-size:15px;font-weight:700;color:var(--ink,inherit);margin:18px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+.owner .n{font-size:12.5px;font-weight:500;color:var(--muted)}
+.owner:first-child{margin-top:0}
+.ent{background:none;border:0;padding:0;text-align:left;cursor:pointer;font-weight:560;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.ent:hover{text-decoration-color:var(--accent)}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;color:var(--muted);font-weight:600;letter-spacing:.2px;margin-right:5px}
+.pill{display:inline-block;font-size:11.5px;padding:0 7px;border-radius:999px;margin-left:6px;vertical-align:1px;background:var(--accent-soft)}
+.pill.s-blocked{background:var(--block-soft);color:var(--block)}
+.pill.s-completed{background:var(--done-soft);color:var(--done)}
+.pill.s-open{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.overdue{color:var(--block);font-weight:600}
+.log-head h3{font-size:17px;margin:0 0 2px}
+.log-head p{color:var(--muted);margin:0 0 18px;font-size:13.5px}
+.meeting{position:relative;padding:0 0 24px 30px}
+.meeting::before{content:"";position:absolute;left:7px;top:8px;bottom:0;width:2px;background:var(--line)}
+.meeting:last-child::before{display:none}
+.meeting::after{content:"";position:absolute;left:1px;top:4px;width:10px;height:10px;border:2px solid var(--accent);border-radius:50%;background:var(--surface)}
+.meeting.manual::after{border-style:dashed;border-color:var(--muted)}
+.m-date{font-weight:650}
+.m-title{color:var(--muted);font-size:13px;margin-left:8px}
+.ops{list-style:none;margin:8px 0 0;padding:0}
+.op{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+.op:first-child{border-top:0}
+.tag{font-size:12px;font-weight:650;border-radius:4px;padding:2px 6px;height:fit-content;text-align:center}
+.k-new{background:var(--accent-soft);color:var(--accent)}
+.k-status{background:var(--accent-soft)}
+.k-block{background:var(--block-soft);color:var(--block)}
+.k-done{background:var(--done-soft);color:var(--done)}
+.k-due{background:var(--due-soft);color:var(--due)}
+.k-owner{background:var(--decide-soft);color:var(--decide)}
+.k-note,.k-quiet{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.k-decide{background:var(--decide-soft);color:var(--decide)}
+.detail{color:var(--muted);font-size:13.5px;margin-left:6px}
+.why{font-size:13.5px;margin-top:2px}
+.extmark{font-size:11.5px;color:var(--muted);border:1px dashed var(--line);border-radius:4px;padding:0 5px;margin-left:6px;white-space:nowrap}
+
+/* Forms (Prepare / Import) */
+.page{overflow:auto;width:100%}
+.page-inner{max-width:1040px;margin:0 auto;padding:22px 26px 60px}
+.page h2{font-size:21px;margin:0 0 4px}
+.page .lead{color:var(--muted);margin:0 0 18px;max-width:75ch}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.field{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.field input,.field select{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 8px;color:var(--ink)}
+.field.grow{flex:1;min-width:220px}
+textarea{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px;font:13px/1.45 var(--mono);color:var(--ink);resize:vertical}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-bottom:16px}
+.card h3{font-size:15px;font-weight:650;margin:0 0 8px}
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;vertical-align:top;padding:7px 8px;border-top:1px solid var(--line)}
+th{font-weight:620;color:var(--muted);font-size:12.5px;border-top:0}
+.warnrow{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-top:1px solid var(--line)}
+.warnrow:first-of-type{border-top:0}
+.rule{font-size:11px;font-weight:650;color:var(--due);background:var(--due-soft);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.ok-sig{color:var(--done);font-weight:560}
+.msg{display:block;margin:1px 0}
+.msg.error{color:var(--block);font-weight:600}
+.msg.warn{color:var(--due)}
+.msg.info{color:var(--muted)}
+.route-norm{color:var(--done);font-weight:600}
+.route-ext{color:var(--muted)}
+.banner{border-radius:6px;padding:10px 14px;margin-bottom:14px;font-weight:560}
+.banner.ok{background:var(--done-soft);color:var(--done)}
+.banner.bad{background:var(--block-soft);color:var(--block)}
+.banner.note{background:var(--accent-soft)}
+.seg{font:13px/1.45 var(--mono)}
+.seg td:first-child{white-space:nowrap;color:var(--muted)}
+
+/* Dialog */
+dialog.wide{max-width:900px}
+.report-preview{background:#fff;color:#1a1a1a;border:1px solid var(--line);border-radius:6px;padding:16px 18px;max-height:55vh;overflow:auto}
+dialog{border:1px solid var(--line);border-radius:8px;padding:0;max-width:600px;width:calc(100% - 32px);background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(10,16,22,.45)}
+.dlg{padding:0 22px 22px;max-height:82vh;overflow:auto}
+.dlg-top{display:flex;justify-content:space-between;gap:12px;align-items:start;position:sticky;top:0;z-index:2;background:var(--surface);padding:16px 0 10px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.dlg h3{margin:0;font-size:18px;line-height:1.3}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13.5px;margin:14px 0 16px}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0}
+.hist{list-style:none;margin:0;padding:0}
+.hist li{padding:10px 0;border-top:1px solid var(--line)}
+.when{font-size:12.5px;color:var(--muted)}
+.quote{margin:6px 0 0;padding:6px 10px;border-left:3px solid var(--line);font-size:13.5px;color:var(--muted)}
+.quote cite{display:block;font-style:normal;font-size:12px;margin-top:2px}
+details.seednotes{margin:0 0 18px;font-size:13.5px;max-width:75ch}
+details.seednotes summary{cursor:pointer;color:var(--accent);font-weight:560}
+details.seednotes p{margin:6px 0 0;color:var(--muted)}
+.batch{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.batch:first-of-type{border-top:0}
+.batch strong{min-width:80px}
+.done-mark{color:var(--done);font-weight:600}
+.attbtn{background:none;border:1px solid var(--line);border-radius:999px;padding:0 9px;font-size:12px;cursor:pointer;margin-left:10px;color:var(--muted)}
+.attbtn:hover{border-color:var(--accent);color:var(--ink)}
+.att-note{font-size:12.5px;color:var(--muted)}
+.attbtn.add{border-style:dashed}
+.nar-text{white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:12px 14px;font-size:14px;max-height:30vh;overflow:auto}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:6px;font-size:15px;max-width:min(92vw,620px);box-shadow:0 4px 18px rgba(10,16,22,.25);display:none;z-index:10}
+
+@media (max-width:480px){
+  .top{padding:8px 10px;gap:6px 10px}
+  .top h1{flex-basis:100%;margin:0 0 2px}
+  .tabs{flex-wrap:wrap;gap:2px}
+  .tab{padding:6px 7px;font-size:14px}
+  .tools{margin-left:0;width:100%}
+  .page-inner{padding:14px 12px}
+}
+@media (max-width:820px){
+  .board{grid-template-columns:1fr}
+  .board.show-panel .list{display:none}
+  .board:not(.show-panel) .panel{display:none}
+  .back{display:inline-block}
+  .op{grid-template-columns:1fr;gap:4px}
+  .tag{justify-self:start}
+  .tools{margin-left:0}
+}
+/* v2 additions, in v1's colours: the review's chips and controls, the board decisions */
+.hidden{display:none !important}
+.msg.ok{color:var(--done)} .msg.bad{color:var(--block);font-weight:600}
+.src{font-size:13px;color:var(--muted)}
+.note{font-size:13px;color:var(--due)}
+.chip{display:inline-block;font-size:11.5px;padding:0 7px;border-radius:999px;margin-right:4px;background:var(--accent-soft)}
+.chip.done{background:var(--done-soft);color:var(--done)} .chip.check{background:var(--block-soft);color:var(--block)}
+.chip.hi{background:var(--due-soft);color:var(--due)} .chip.pm{background:var(--decide-soft);color:var(--decide)}
+ul.items{list-style:none;margin:0;padding:0} ul.items li{padding:8px 0;border-top:1px solid var(--line)}
+.card h3 + ul.items li:first-child{border-top:0}
+.page label{color:var(--muted);font-size:13px;margin:4px 10px 4px 0;display:inline-block}
+.page input[type=text],.page input[type=date],.page input[type=time],.page select,.panel select,.panel input[type=text],dialog input[type=text],dialog input[type=date]{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 8px;color:var(--ink)}
+button.secondary{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer;margin:4px 6px 0 0}
+button.secondary:hover{border-color:var(--accent)}
+select.need{border-color:var(--block) !important}
+details.change{margin:4px 0 0} details.change summary,details.box summary{cursor:pointer;color:var(--accent);font-weight:560;font-size:13px}
+.rowc{display:flex;gap:8px;align-items:baseline}
+.decide-bar{border:1px dashed var(--line);border-radius:6px;padding:10px 12px;margin:10px 0 0}
+.decide-box{border:2px solid var(--accent);border-radius:8px;padding:12px 14px;margin:12px 0 16px;background:var(--panel,transparent)}
+.decide-box h4{margin:0 0 4px;font-size:15px}
+.decide-box .sub{margin:0 0 8px}
+.decide-box .why-raise{font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.hist-head{font-size:14px;margin:14px 0 4px}
+.decide-bar .sub{margin:0 0 6px}
+.ownerwork li{display:block}
+.k-pm{background:var(--decide-soft);color:var(--decide)}
+.snap.raised{border-top-color:var(--accent)} .snap.decisions{border-top-color:var(--decide)} .snap.qr{border-top-color:var(--due)}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.iv-sec{margin:0 0 18px}
+.iv-sec > h3{font-size:16px;margin:0 0 4px}
+.iv-sec > p.sub{margin:0 0 8px}
+.iv-sec.esc{border-left:3px solid var(--block);padding-left:12px}
+.iv-who{font-size:14px;font-weight:700;margin:12px 0 4px;padding-bottom:3px;border-bottom:1px solid var(--line)}
+.iv-row{padding:8px 0;border-top:1px solid var(--line)}
+.iv-row:first-of-type{border-top:0}
+.iv-q{font-weight:600;margin:0 0 3px}
+.iv-why{font-size:13px;color:var(--block);margin:3px 0 0}
+.iv-tag{font-size:11.5px;font-weight:650;border-radius:4px;padding:1px 6px;margin-right:6px;background:var(--accent-soft)}
+.iv-tag.k-blocked,.iv-tag.k-overdue,.iv-tag.k-waited_on_late{background:var(--block-soft);color:var(--block)}
+.iv-tag.k-waits_done{background:var(--done-soft);color:var(--done)}
+.iv-tag.k-no_owner,.iv-tag.k-vague_date{background:var(--due-soft);color:var(--due)}
+.iv-age{font-size:12px;color:var(--muted);margin-left:6px}
+.iv-since{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.iv-since details{border:1px solid var(--line);border-radius:6px;padding:4px 10px;background:var(--surface)}
+.iv-since summary{cursor:pointer;font-size:13.5px}
+.iv-since ul{list-style:none;margin:6px 0 2px;padding:0;font-size:13px}
+details.iv-more{margin:10px 0 0}
+details.iv-more > summary{cursor:pointer;color:var(--accent);font-weight:600}
+.title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.title-row .title{margin-right:auto}
+details.closedp > summary{cursor:pointer;color:var(--muted);font-size:13px;padding:8px 14px}
+.dproj{background:none;border:0;padding:0;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:3px;font:inherit}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>MeetingGraph</h1>
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="board" aria-selected="true">Board</button>
+    <button class="tab" role="tab" data-tab="dash" aria-selected="false">Dashboard</button>
+    <button class="tab" role="tab" data-tab="prepare" aria-selected="false">Process meeting</button>
+    <button class="tab" role="tab" data-tab="seed" aria-selected="false">Workspace</button>
+  </nav>
+  <div class="tools">
+    <input type="file" id="load-files" accept=".json,application/json" multiple hidden>
+    <button class="btn" id="load-btn">Open files</button>
+    <button class="btn" id="export-ws">Export workspace</button>
+    <button class="btn" id="load-sample">Load sample baseline</button>
+    <button class="btn" id="clear-ws">Clear</button>
+  </div>
+</header>
+
+<section class="view on" id="view-board">
+  <div class="board" id="board">
+    <nav class="list" aria-label="Projects">
+      <div class="list-head">
+        <div class="small ws-state" id="ws-state-board" style="margin:0 0 8px"></div>
+        <label class="asof">State as of <select id="asof"></select></label>
+        <div class="actions" style="margin:8px 0 0;flex-direction:column;align-items:stretch;gap:6px">
+          <button class="btn" id="attn-btn" data-project="__attn__">Needs attention (0)</button>
+          <button class="btn" id="email-report">Program email report</button>
+          <button class="btn" id="meeting-report">Meeting email report</button>
+        </div>
+      </div>
+      <ul class="projects" id="projects"></ul>
+    </nav>
+    <main class="panel" id="panel"></main>
+  </div>
+</section>
+
+<section class="view" id="view-dash">
+  <div class="page"><div class="page-inner" id="dash-inner"></div></div>
+</section>
+
+<section class="view" id="view-prepare">
+  <div class="page"><div class="page-inner">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><h2>Process meeting</h2><button class="btn" id="reset-page">Reset page</button></div>
+    <p class="lead">One flow: open the transcript and number the statements, send the request to the chat, paste the chat's reply, review it, and save. Nothing is saved until you save; the saved file goes in the team folder.</p>
+    <section class="card" id="s-meeting">
+      <h3><span class="stepchip">1</span>The meeting</h3>
+      <div class="row">
+        <label class="field">Meeting date<input type="date" id="m-date"></label>
+        <label class="field">Start time<input type="time" id="m-time" value="10:00"></label>
+        <label class="field">UTC offset<input type="text" id="m-offset" size="7" placeholder="-04:00"></label>
+        <label class="field grow">Title<input type="text" id="m-title"></label>
+      </div>
+      <textarea id="transcript" rows="10" aria-label="Meeting transcript" placeholder="Paste the Teams transcript, or open the .docx"></textarea>
+      <div class="actions">
+        <button class="btn primary" id="number-btn"><span class="stepchip">2</span>Number the statements</button>
+        <input type="file" id="docx" accept=".docx" hidden>
+        <button class="btn" id="docx-btn">Open Teams .docx</button>
+        <span class="small">No project to choose: the chat places each item in a project, and you check them in the review.</span>
+      </div>
+      <details id="att-box" class="box"><summary>Attendance (optional)</summary>
+        <p class="small" style="margin:4px 0 6px">The Teams attendance report for this meeting (Attendance tab, Download). It's read here, without the chat, and its attendees go in the meeting email. Leave it out if you don't have one.</p>
+        <div class="actions" style="margin:0">
+          <input type="file" id="att-file" accept=".csv,.txt" hidden>
+          <button class="btn" id="att-btn">Open the attendance report</button>
+          <button class="btn" id="att-clear" hidden>Remove it</button>
+        </div>
+        <p id="att-msg" class="msg"></p>
+      </details>
+      <p id="meeting-msg" class="msg"></p>
+    </section>
+    <section class="card hidden" id="s-request">
+      <h3><span class="stepchip">3</span>Text for the chat</h3>
+      <p id="request-line" class="small"></p>
+      <textarea id="request" rows="8" readonly></textarea>
+      <div class="actions"><button class="btn primary" id="copy-request">Copy for the chat</button>
+        <span class="small">Paste it into a new chat as one message. Don't answer anything in the chat; copy its whole reply.</span></div>
+    </section>
+    <section class="card hidden" id="s-reply">
+      <h3><span class="stepchip">4</span>Import the chat reply</h3>
+      <textarea id="reply" rows="8" placeholder="Paste the chat's whole reply"></textarea>
+      <div class="actions"><button class="btn primary" id="check-btn">Check the reply</button></div>
+      <p id="reply-msg" class="msg"></p>
+      <details id="reply-details" class="box hidden"><summary>Check details</summary><div id="reply-detail-body"></div></details>
+      <div id="proj-box" class="hidden">
+        <div id="proposals"></div>
+        <p id="notclear-line" class="small"></p>
+        <span id="bulk-box"><label>Put every "not clear" item in <select id="bulk-proj"></select></label><button class="secondary" id="bulk-btn">Put them there</button></span>
+        <details id="np-box" class="box"><summary>Add a project yourself</summary>
+          <label>Project name <input type="text" id="np-name" size="32" placeholder="e.g. Harbor Point reopening"></label>
+          <button class="secondary" id="np-add">Add the project</button>
+          <details id="np-adv" class="change"><summary class="src">Change its short code (optional)</summary>
+            <label>Code <input type="text" id="np-code" size="5" maxlength="4"></label> <span class="src">Made from the name; it starts every ID in the project and can't change later.</span>
+          </details>
+        </details>
+        <p id="proj-msg" class="msg"></p>
+      </div>
+      <div id="people-box"></div>
+      <div id="related-box"></div>
+      <div id="results"></div>
+      <div id="add-box" class="hidden">
+        <h3>Add an item the chat missed</h3>
+        <p class="small">Type the statement number where it was said. The statement shows below so you can check it.</p>
+        <label>Statement <input type="text" id="add-seg" size="6" placeholder="S048"></label>
+        <div id="add-preview" class="small"></div>
+        <label>Kind <select id="add-kind"><option value="">choose…</option><option>commitment</option><option>decision</option><option>question</option><option>risk</option><option>update</option></select></label>
+        <label>Owner <select id="add-who"></select></label>
+        <div><label>What it is <input type="text" id="add-what" size="70"></label></div>
+        <label>Due, as said <input type="text" id="add-due" size="20" placeholder="optional"></label>
+        <button class="secondary" id="add-btn">Add the item</button>
+        <p id="add-msg" class="msg"></p>
+      </div>
+    </section>
+    <section class="card hidden" id="s-save">
+      <h3><span class="stepchip">5</span>Save the meeting</h3>
+      <div class="row"><label class="field">Your name<input type="text" id="saved-by" size="24"></label></div>
+      <div class="actions"><button class="btn primary" id="save-btn">Save the meeting</button></div>
+      <p id="save-msg" class="msg"></p>
+    </section>
+    <section class="card hidden" id="s-email">
+      <h3>The meeting email</h3>
+      <p class="small">Also on the Board: "Meeting email report", with formatted copy for Outlook.</p>
+      <textarea id="email" rows="14" readonly></textarea>
+      <div class="actions"><button class="btn" id="copy-email">Copy the email</button></div>
+    </section>
+    <section class="card hidden" id="s-summary">
+      <h3>Summary for Aaron (counts only)</h3>
+      <p class="small">This holds no names, quotes or titles. It is safe to send.</p>
+      <label>Would you send the email? <select id="verdict"><option value="">not answered</option><option>yes</option><option>yes, with edits</option><option>no</option></select></label>
+      <textarea id="summary" rows="8" readonly></textarea>
+      <div class="actions"><button class="btn" id="copy-summary">Copy the summary</button></div>
+    </section>
+  </div></div>
+</section>
+
+<section class="view" id="view-seed">
+  <div class="page"><div class="page-inner">
+    <h2>Workspace</h2>
+    <p class="lead">Administration that is not part of any meeting. The record is the team folder of saved files; this browser only mirrors it (Open files, Export workspace and Clear are in the header bar).</p>
+    <section class="card" id="saved">
+      <h3>Saved meetings</h3>
+      <p id="saved-line" class="small">No meetings loaded.</p>
+      <details id="saved-box" class="box"><summary>Review a saved meeting again</summary><ul class="items" id="saved-list"></ul></details>
+      <div id="conflicts"></div>
+    </section>
+    <section class="card">
+      <h3>Initial setup: start a board from a spreadsheet (CSV)</h3>
+      <p class="small" style="margin-top:0">One CSV with your projects, people, actions, questions, risks and decisions (templates/mkg2-seed-template.csv). Every ID is minted here.</p>
+      <input type="file" id="seed-file" accept=".csv,text/csv" hidden>
+      <div class="actions"><button class="btn" id="seed-btn">Open CSV</button></div>
+      <div id="seed-box" class="hidden">
+        <p id="seed-line" class="small"></p>
+        <label>Board as of <input type="date" id="seed-asof"></label>
+        <div id="seed-codes"></div>
+        <div id="seed-problems"></div>
+        <div class="actions"><button class="btn primary" id="seed-save">Save the board</button></div>
+        <p id="seed-msg" class="msg"></p>
+      </div>
+    </section>
+    <section class="card">
+      <h3>Out-of-meeting updates</h3>
+      <p class="small" style="margin:0">On the Board, open an item to record a Board decision on it: Mark completed (or resolved), Mark as not needed, or restore its earlier status. One item at a time, each with your name and a note, recorded as your decision, never as meeting evidence. New work, owners and dates come from meetings.</p>
+    </section>
+  </div></div>
+</section>
+
+<dialog id="hist" aria-labelledby="hist-title"></dialog>
+<div class="toast" id="toast" role="status"></div>
+<script>
+/*@MODULES@*/
+</script>
+<script>
+(function () {
+'use strict';
+const T = window.MKG2_transcript, Q = window.MKG2_request, R = window.MKG2_reply, S = window.MKG2_store, E = window.MKG2_email, U = window.MKG2_summary;
+const DT = window.MKG2_dates, PE = window.MKG2_people, RV = window.MKG2_review, AT = window.MKG2_attendance, IV = window.MKG2_interventions;
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const state = { pkgs: [], prepared: null, request: null, checked: null, saved: null, answers: {}, relTicks: new Set(), proposals: [], reviewOf: null };
+const show = id => $(id).classList.remove('hidden');
+const msg = (id, text, cls) => { const el = $(id); el.textContent = text || ''; el.className = 'msg ' + (cls || ''); };
+
+/* ---------- the browser's copy of the saved meetings (the team folder is the source of truth) ---------- */
+function idb() {
+  return new Promise((res, rej) => {
+    try { const r = indexedDB.open('mkg2', 1); r.onupgradeneeded = () => r.result.createObjectStore('pkgs', { keyPath: 'id' }); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }
+    catch (e) { rej(e); }
+  });
+}
+async function idbAll() { try { const db = await idb(); return await new Promise(res => { const q = db.transaction('pkgs').objectStore('pkgs').getAll(); q.onsuccess = () => res(q.result || []); q.onerror = () => res([]); }); } catch (e) { return []; } }
+async function idbPut(p) { try { const db = await idb(); db.transaction('pkgs', 'readwrite').objectStore('pkgs').put(p); } catch (e) { /* the download is the record */ } }
+function addPkg(p) { if (p && p.mkg2 && !state.pkgs.some(x => x.id === p.id)) { state.pkgs.push(p); return true; } return false; }
+
+function projects() { return S.projectsOf(state.pkgs); }
+function renderSaved() {
+  const { used, conflicts } = S.current(state.pkgs);
+  const ps = projects(), nm = used.filter(p => p.kind === 'meeting').length, ns = used.filter(p => p.kind === 'seed').length;
+  const what = [nm ? `${nm} meeting${nm > 1 ? 's' : ''}` : '', ns ? `${ns} board${ns > 1 ? 's' : ''} started from a spreadsheet` : ''].filter(Boolean).join(' and ');
+  $('saved-line').textContent = used.length ? `${what} saved, in ${ps.length} project${ps.length > 1 ? 's' : ''}: ${ps.map(p => `${p.name} (${p.code})`).join(', ')}.` +
+    (conflicts.length ? ` ${conflicts.length} meeting${conflicts.length > 1 ? 's were' : ' was'} saved twice by different people; the first save is used.` : '') : 'No meetings loaded.';
+  const ms = used.filter(p => p.kind === 'meeting').slice().reverse();
+  $('saved-list').innerHTML = ms.map(p => `<li>${esc(p.meeting.date)} ${esc(p.meeting.title)} <span class="src">(${esc((p.projects || []).map(x => x.code).join(', '))}; saved by ${esc(p.savedBy || '?')})</span> ` +
+    `<button class="secondary" data-again="${esc(p.id)}">Review this meeting again</button></li>`).join('') || '<li class="src">None yet.</li>';
+  $('conflicts').innerHTML = conflicts.map((c, i) => {
+    const pk = id => state.pkgs.find(x => x.id === id) || {};
+    return `<p class="note">The meeting ${esc(c.meeting)} was saved twice: the board uses the save by ${esc(pk(c.used).savedBy || '?')} (${esc(pk(c.used).savedAt || '')}). ` +
+      c.others.map(o => `<button class="secondary" data-switch="${i}|${esc(o)}">Use the save by ${esc(pk(o).savedBy || '?')} (${esc(pk(o).savedAt || '')}) instead</button>`).join(' ') + '</p>';
+  }).join('');
+  renderBoard();
+}
+$('load-btn').addEventListener('click', () => $('load-files').click());
+$('load-files').addEventListener('change', async e => {
+  let n = 0, v1 = 0, other = 0; const loaded = [];
+  for (const f of e.target.files) {
+    try {
+      const p = JSON.parse(await f.text());
+      if (p && (p.mkgWorkspace || p.mkgPackage)) { v1++; continue; }   // a MeetingGraph 1 workspace or package
+      if (p && p.mkg2Workspace) { for (const q of p.packages || []) if (addPkg(q)) { n++; idbPut(q); loaded.push(q); } continue; }   // Export workspace
+      if (addPkg(p)) { n++; idbPut(p); loaded.push(p); } else if (!p || !p.mkg2) other++;
+    } catch (err) { other++; }
+  }
+  ui.asOf = null; renderSaved(); e.target.value = '';
+  const parts = [];
+  const late = [...new Set(loaded.filter(p => p.kind === 'meeting' && S.current(state.pkgs).used.includes(p) && !p.supersedes)
+    .flatMap(p => S.laterMeetings(state.pkgs, p).map(l => l.meeting.title + ' (' + l.meeting.date + ')')))];
+  if (n) parts.push(`${n} saved meeting${n > 1 ? 's' : ''} loaded.`);
+  if (v1) parts.push(`${v1 === 1 ? 'That is a MeetingGraph 1 file' : v1 + ' files are from MeetingGraph 1'} (a workspace or a meeting package). MeetingGraph 2 starts its own board and can't read version 1 boards yet, so nothing was loaded from ${v1 === 1 ? 'it' : 'them'}. Load the mkg2-… files this page saved.`);
+  if (other) parts.push(`${other} file${other > 1 ? 's are' : ' is'} not a MeetingGraph file.`);
+  if (!parts.length) parts.push('Those meetings are already loaded.');
+  if (n && late.length) parts.push(`Some of these meetings are earlier than meetings already on the board, whose requests didn't list their items, so the same work may appear twice. Use "Same as…" in "Review this meeting again" on: ${late.join(', ')}.`);
+  msg('meeting-msg', parts.join(' '), n && !v1 && !other ? 'ok' : 'warn'); toast(parts.join(' '));
+});
+
+/* ---------- start a board from a spreadsheet (plan §10.14) ---------- */
+const SD = window.MKG2_seed;
+$('seed-btn').addEventListener('click', () => $('seed-file').click());
+$('seed-file').addEventListener('change', async e => {
+  const f = e.target.files[0]; if (!f) return; e.target.value = '';
+  const seed = SD.readSeed(await f.text());
+  show('seed-box'); msg('seed-msg', ''); $('seed-codes').innerHTML = ''; $('seed-problems').innerHTML = '';
+  if (seed.stop) { state.seed = null; $('seed-line').textContent = ''; return msg('seed-msg', seed.stop, 'bad'); }
+  state.seed = seed;
+  if (!$('seed-asof').value) $('seed-asof').value = new Date().toISOString().slice(0, 10);
+  const n = t => seed.items.filter(x => x.type === t).length;
+  $('seed-line').textContent = `${seed.projects.length} project${seed.projects.length === 1 ? '' : 's'}, ${seed.people.length} people, ${n('action')} actions, ${n('question')} questions, ${n('risk')} risks, ${n('decision')} decisions` +
+    (seed.problems.length ? `; ${seed.problems.length} row${seed.problems.length === 1 ? '' : 's'} to look at (below).` : '. Every row reads.');
+  const known = projects(), used = known.map(p => p.code);
+  $('seed-codes').innerHTML = seed.projects.map((p, i) => {
+    const had = known.find(k => k.name.toLowerCase() === p.name.toLowerCase());
+    const code = had ? had.code : S.defaultCode(p.name, used); used.push(code);
+    return `<div><label>${esc(p.name)}: code <input type="text" size="5" maxlength="4" data-seed-code="${i}" value="${esc(code)}"></label>` +
+      (had ? ' <span class="note">This project already has a board here; seeding it again can list the same work twice.</span>' : '') + '</div>';
+  }).join('');
+  $('seed-problems').innerHTML = seed.problems.length ? '<ul class="items">' + seed.problems.map(x => `<li class="note">Row ${x.row}: ${esc(x.msg)}</li>`).join('') + '</ul>' : '';
+});
+$('seed-save').addEventListener('click', () => {
+  const seed = state.seed; if (!seed) return;
+  const by = $('saved-by').value.trim() || (function () { try { return localStorage.getItem('mkg2-saved-by') || ''; } catch (e) { return ''; } })();
+  const asOf = $('seed-asof').value;
+  if (!asOf) return msg('seed-msg', 'Set the date the board is as of.', 'bad');
+  const codes = {}, seen = new Set();
+  for (const el of document.querySelectorAll('[data-seed-code]')) {
+    const c = el.value.trim().toUpperCase(), p = seed.projects[+el.getAttribute('data-seed-code')];
+    if (!S.validCode(c)) return msg('seed-msg', `The code for ${p.name} must be 2 to 4 letters or digits, starting with a letter.`, 'bad');
+    const other = projects().find(k => k.code === c && k.name.toLowerCase() !== p.name.toLowerCase());
+    if (seen.has(c) || other) return msg('seed-msg', `The code ${c} is already used by another project.`, 'bad');
+    seen.add(c); codes[p.name] = c;
+  }
+  const same = Object.values(codes).sort().join(',');
+  const prev = S.current(state.pkgs).used.filter(p => p.kind === 'seed' && p.projects.map(x => x.code).sort().join(',') === same).pop() || null;
+  const pkg = SD.seedPackage({ seed, codes, asOf, savedBy: by || null, prev });
+  addPkg(pkg); idbPut(pkg); download(pkg.id + '.json', pkg); ui.asOf = null;
+  renderSaved();
+  msg('seed-msg', `Saved. Put the downloaded file (${pkg.id}.json) in the team folder. The next meeting's request will list the open items.` + (prev ? ' It replaces the earlier spreadsheet board for these projects; keep both files.' : ''), 'ok');
+});
+
+/* ---------- the .docx reader (copied from v1: a minimal ZIP reader, no libraries) ---------- */
+async function inflateRaw(bytes) {
+  const ds = new DecompressionStream('deflate-raw');
+  const wtr = ds.writable.getWriter(); wtr.write(bytes); wtr.close();
+  const rdr = ds.readable.getReader(); const chunks = []; let n = 0;
+  for (;;) { const { done, value } = await rdr.read(); if (done) break; chunks.push(value); n += value.length; }
+  const out = new Uint8Array(n); let o = 0; for (const c of chunks) { out.set(c, o); o += c.length; }
+  return out;
+}
+async function extractDocxText(buf) {
+  const b = new Uint8Array(buf), dv = new DataView(buf);
+  if (!(b.length > 3 && b[0] === 0x50 && b[1] === 0x4B)) return { error: "That file isn't a .docx (it doesn't look like a Word document)." };
+  if (typeof DecompressionStream === 'undefined') return { error: "This browser can't unzip files; copy the transcript text and paste it instead." };
+  let e = -1;
+  for (let i = b.length - 22; i >= Math.max(0, b.length - 22 - 65536); i--) if (dv.getUint32(i, true) === 0x06054B50) { e = i; break; }
+  if (e < 0) return { error: "Couldn't read the document structure." };
+  const count = dv.getUint16(e + 10, true); let off = dv.getUint32(e + 16, true);
+  let entry = null;
+  for (let i = 0; i < count && dv.getUint32(off, true) === 0x02014B50; i++) {
+    const method = dv.getUint16(off + 10, true), csize = dv.getUint32(off + 20, true);
+    const nlen = dv.getUint16(off + 28, true), xlen = dv.getUint16(off + 30, true), clen = dv.getUint16(off + 32, true);
+    const lho = dv.getUint32(off + 42, true);
+    const name = new TextDecoder().decode(b.subarray(off + 46, off + 46 + nlen));
+    if (name === 'word/document.xml') {
+      if (csize === 0xFFFFFFFF || lho === 0xFFFFFFFF) return { error: "This .docx uses zip64, which isn't supported; paste the text instead." };
+      entry = { method, csize, lho }; break;
+    }
+    off += 46 + nlen + xlen + clen;
+  }
+  if (!entry) return { error: 'No word/document.xml inside; is this the Teams transcript .docx?' };
+  if (dv.getUint32(entry.lho, true) !== 0x04034B50) return { error: 'The document looks corrupt.' };
+  const start = entry.lho + 30 + dv.getUint16(entry.lho + 26, true) + dv.getUint16(entry.lho + 28, true);
+  const comp = b.subarray(start, start + entry.csize);
+  let xmlBytes;
+  if (entry.method === 0) xmlBytes = comp;
+  else if (entry.method === 8) { try { xmlBytes = await inflateRaw(comp); } catch (err) { return { error: "Couldn't decompress the document." }; } }
+  else return { error: 'Unsupported compression inside this .docx.' };
+  const doc = new DOMParser().parseFromString(new TextDecoder().decode(xmlBytes), 'application/xml');
+  if (doc.getElementsByTagName('parsererror').length) return { error: "Couldn't parse the document XML." };
+  const W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+  let ps = [...doc.getElementsByTagNameNS(W, 'p')];
+  if (!ps.length) ps = [...doc.getElementsByTagName('w:p')];
+  const lines = [];
+  for (const pEl of ps) {
+    let line = '';
+    (function walk(el) { for (const c of el.childNodes) {
+      if (c.nodeType !== 1) continue;
+      const ln = c.localName;
+      if (ln === 't') line += c.textContent;
+      else if (ln === 'tab') line += '\t';
+      else if (ln === 'br' || ln === 'cr') line += '\n';
+      else walk(c);
+    } })(pEl);
+    lines.push(line);
+  }
+  const text = lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  return text ? { text, paragraphs: ps.length } : { error: 'The document contains no text.' };
+}
+const localOffset = date => { const m = -new Date((date || new Date().toISOString().slice(0, 10)) + 'T12:00:00').getTimezoneOffset(); const a = Math.abs(m);
+  return (m < 0 ? '-' : '+') + String(Math.floor(a / 60)).padStart(2, '0') + ':' + String(a % 60).padStart(2, '0'); };
+function fillFromHeader(text, fileName) {
+  const h = T.parseTeamsHeader(text);
+  if (h) { if (h.title) $('m-title').value = h.title; $('m-date').value = h.date; if (h.time) $('m-time').value = h.time; }
+  else if (fileName && !$('m-title').value) $('m-title').value = fileName.replace(/\.docx$/i, '');
+  if ($('m-date').value) $('m-offset').value = localOffset($('m-date').value);
+  return h;
+}
+$('docx-btn').addEventListener('click', () => $('docx').click());
+$('docx').addEventListener('change', async e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = await extractDocxText(await f.arrayBuffer());
+  if (r.error) return msg('meeting-msg', r.error, 'bad');
+  $('transcript').value = r.text;
+  const h = fillFromHeader(r.text, f.name);
+  msg('meeting-msg', h ? 'Read the title, date and start time from the transcript. Check them, then number the statements.' : 'Opened. Set the title, date and start time, then number the statements.', 'ok');
+  e.target.value = '';
+});
+$('m-date').addEventListener('change', () => { if (!$('m-offset').value) $('m-offset').value = localOffset($('m-date').value); });
+$('transcript').addEventListener('change', () => { if (!$('m-date').value) fillFromHeader($('transcript').value); });
+
+/* ---------- 1-2. number the statements and write the request ---------- */
+$('number-btn').addEventListener('click', async () => {
+  const text = $('transcript').value, date = $('m-date').value, time = $('m-time').value, offset = $('m-offset').value.trim(), title = $('m-title').value.trim();
+  if (!text.trim()) return msg('meeting-msg', 'Open or paste the transcript first.', 'bad');
+  if (!date || !time || !/^[+-]\d{2}:\d{2}$/.test(offset) || !title) return msg('meeting-msg', 'Set the title, the date, the start time and the UTC offset (for example -04:00).', 'bad');
+  const segments = T.segmentTranscript(text);
+  if (!segments.length) return msg('meeting-msg', 'No statements found in that transcript.', 'bad');
+  const meeting = { id: T.meetingId(date, time, offset), date, time, offset, title };
+  const block = T.meetingBlock(date, title, segments);
+  // B14a: the open threads of earlier saved meetings go into the request. §10.20: every project's, and the projects
+  // themselves, so the chat places each item (nobody says which projects a meeting covered).
+  const board = S.replay(state.pkgs, { upTo: meeting.id });
+  const all = projects().filter(p => !board.closedProjects.has(p.code));   // a closed project takes no new work
+  const open = S.openThreads(board, all.map(p => p.code));
+  const req = await Q.buildRequest({ id: meeting.id, meeting: block, threads: open, projects: all }, crypto.subtle);
+  state.prepared = { projects: all, meeting, segments, block, board };
+  state.request = { token: req.token, kind: req.kind, openIds: open.map(t => t.id), text: req.text, threads: open.length, projectCodes: all.map(p => p.code) };
+  state.checked = null; state.saved = null; state.proposals = []; state.answers = {}; state.relTicks = new Set(); state.reviewOf = null;
+  $('request').value = req.text;
+  const again = S.current(state.pkgs).used.some(p => p.kind === 'meeting' && p.meeting.id === meeting.id);
+  const np = new Set(open.map(t => t.project)).size;
+  $('request-line').textContent = `${segments.length} statements (S001 to ${segments[segments.length - 1].id}). ` +
+    (req.kind === 'followup' ? `Follow-up: ${open.length} open items from ${np} project${np === 1 ? '' : 's'} are listed.` : 'First meeting: no open items yet.') +
+    (all.length ? ` The board's ${all.length} project${all.length === 1 ? ' is' : 's are'} listed; the chat places each item.` : ' No projects yet: the chat will propose them from the meeting.') +
+    (() => { const pk = [...board.threads.values()].filter(t => t.parked).length, rz = open.filter(t => t.raised).length;
+      return (rz ? ` ${rz} raised item${rz === 1 ? ' is' : 's are'} listed first.` : '') + (pk ? ` ${pk} parked item${pk === 1 ? ' is' : 's are'} left out (not discussed in ${S.PARK_AFTER} meetings; to list one again, open it on the Board and choose "Bring back into discussion").` : ''); })() +
+    ` ${req.text.length.toLocaleString('en-US')} characters.` + (again ? ' This meeting was saved before: saving it again replaces that save (the earlier file stays in the history).' : '');
+  msg('meeting-msg', 'Numbered.', 'ok');
+  show('s-request'); show('s-reply'); ['s-save', 's-email', 's-summary', 'add-box', 'proj-box'].forEach(id => $(id).classList.add('hidden'));
+  $('results').innerHTML = ''; msg('reply-msg', ''); $('reply-details').classList.add('hidden');
+});
+$('copy-request').addEventListener('click', () => copy('request', 'copy-request'));
+/* Reset page: clear the meeting being processed and start again. Saved meetings and the board are not touched; your name
+   is kept. Anything reviewed but not saved is lost, so the page asks first. */
+$('reset-page').addEventListener('click', () => {
+  if (state.checked && !state.saved && !confirm('Reset the page? The review you have not saved will be lost. Saved meetings and the board are not affected.')) return;
+  ['m-date', 'm-offset', 'm-title', 'transcript', 'request', 'reply', 'add-seg', 'add-what', 'add-due', 'np-name', 'np-code', 'email', 'summary'].forEach(id => { $(id).value = ''; });
+  $('m-time').value = '10:00'; $('add-kind').value = ''; $('verdict').value = '';
+  state.prepared = null; state.request = null; state.checked = null; state.saved = null; state.proposals = []; state.answers = {}; state.relTicks = new Set(); state.reviewOf = null; state.replyChars = 0;
+  setAttendance(null, '');
+  ['s-request', 's-reply', 's-save', 's-email', 's-summary', 'reply-details', 'proj-box', 'add-box'].forEach(id => $(id).classList.add('hidden'));
+  ['results', 'people-box', 'related-box', 'proposals', 'add-preview', 'request-line'].forEach(id => { $(id).innerHTML = ''; });
+  ['meeting-msg', 'reply-msg', 'save-msg', 'add-msg', 'proj-msg'].forEach(id => msg(id, ''));
+  ['att-box', 'np-box'].forEach(id => { $(id).open = false; });
+  msg('meeting-msg', 'The page is reset: open or paste the next transcript.', 'ok');
+  window.scrollTo(0, 0);
+});
+function copy(id, btn) {
+  const t = $(id); t.select();
+  const done = () => { const b = $(btn), was = b.textContent; b.textContent = 'Copied'; setTimeout(() => { b.textContent = was; }, 1500); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t.value).then(done, () => { document.execCommand('copy'); done(); });
+  else { document.execCommand('copy'); done(); }
+}
+
+/* ---------- 3. check the reply ---------- */
+const who = it => S.displayName(it.who) || 'no owner';
+function line(it, extra, pl) {
+  const o = (pl && pl.items.find(x => x.n === it.n)) || it, r = it.r || {};
+  const chips = [`<span class="chip">${esc(it.kind)}</span>`];
+  // An item made new work about what it was attached to still carries that item's status (fitThreads).
+  const shownStatus = o.status || (o.relatedTo ? it.status : null);
+  if (o.thread) chips.push(`<span class="chip">${esc(o.thread)}</span>`);
+  if (shownStatus) {
+    const applied = !r.undo && (!it.toCheck || r.confirm);
+    chips.push(`<span class="chip ${shownStatus === 'done' && applied ? 'done' : ''}">${esc(shownStatus.replace('_', ' '))}${o.relatedTo ? ' on ' + esc(o.relatedTo) : ''}${applied ? '' : ' (not applied)'}</span>`);
+  }
+  if (it.toCheck) chips.push('<span class="chip check">to check</span>');
+  if (it.added) chips.push('<span class="chip done">added by you</span>');
+  if (o.importance === 'high') chips.push('<span class="chip hi">high</span>');
+  if (o.mergedInto) chips.push(`<span class="chip pm">same as item ${o.mergedInto}</span>`);
+  if (o.relatedTo) chips.push(`<span class="chip pm">new ${it.kind === 'decision' ? 'decision' : 'action'} about ${esc(o.relatedTo)}</span>`);
+  if (o.edited) chips.push(`<span class="chip pm">changed: ${esc(o.edited.join(', '))}</span>`);
+  const owner = o.person !== undefined ? o.person : S.displayName(o.who);
+  return `<li>${chips.join('')} ${esc(it.what)} <span class="src">— ${esc(it.kind === 'commitment' ? (owner || 'no owner') : (owner || ''))}${o.due ? ', “' + esc(o.due) + '”' : ''}${o.dueDate ? ' (' + esc(o.dueDate) + ')' : ''}</span>` +
+    `<details><summary class="src">${esc(it.seg)}: “${esc(it.words)}” (${esc(it.src)})</summary><div class="src">${esc((state.prepared.segments.find(s => s.id === it.seg) || {}).speakerName || '')}: ${esc((state.prepared.segments.find(s => s.id === it.seg) || {}).text || '')}</div></details>` +
+    (it.notes.length ? `<div class="note">${esc(it.notes.join('; '))}</div>` : '') + statusButtons(it) + projectPicker(it, pl) + changeBox(it, o) + (extra || '') + '</li>';
+}
+/* B8, in words (UX B4, B5): a status the chat gave can be kept off ("Keep current status: Open", the item's status now) and
+   applied again ("Apply completion", "Apply proposed status: Blocked"); a status whose source is "to check" waits for the
+   PM. No control when there is no change to apply: no status, a decision (never given one), or the status it already has. */
+const W = s => STATUS_W[s] || s;
+function statusButtons(it) {
+  if (!it.thread || !it.status) return '';
+  const t = state.prepared.board.threads.get(it.thread);
+  if (!t || t.kind === 'decision' || t.status === it.status) return '';
+  const r = it.r || {}, keep = `Keep current status: ${W(t.status)}`, apply = it.status === 'done' ? 'Apply completion' : `Apply proposed status: ${W(it.status)}`;
+  if (it.toCheck) return ` <button class="secondary" data-confirm="${it.n}">${r.confirm ? keep : apply}</button>`;
+  return ` <button class="secondary" data-undo="${it.n}">${r.undo ? apply : keep}</button>`;
+}
+// Per item: the thread, "Same as…", the owner, the due date as said and its date, the importance (§10.6 step 4).
+function changeBox(it, o) {
+  const r = it.r || {}, bd = state.prepared.board;
+  const opt = (v, label, cur) => `<option value="${esc(v)}"${v === cur ? ' selected' : ''}>${esc(label)}</option>`;
+  const threads = (state.request.openIds || []).map(id => bd.threads.get(id)).filter(Boolean);
+  const tcur = r.thread !== undefined ? (r.thread || '') : (it.thread || '');
+  const others = state.checked.items.filter(x => x.n !== it.n && !x.thread && x.kind === it.kind);
+  const scur = r.sameAs != null ? String(r.sameAs) : '';
+  const labels = [...new Set(state.prepared.segments.map(x => x.speakerName).concat(people().names, it.who ? [it.who] : []))];
+  const wcur = r.who !== undefined ? (r.who || '') : (it.who || '');
+  return `<details class="change"><summary class="src">Change…</summary>` +
+    `<label>Thread <select data-r="thread" data-n="${it.n}">${opt('', 'New work', tcur)}${threads.map(t => opt(t.id, `${t.id} ${t.what.slice(0, 60)}`, tcur)).join('')}</select></label>` +
+    (it.thread ? '' : `<label>Same as <select data-r="sameAs" data-n="${it.n}">${opt('', '—', scur)}${others.map(x => opt(String(x.n), `item ${x.n}: ${x.what.slice(0, 60)}`, scur)).join('')}</select></label>`) +
+    `<label>Owner <select data-r="who" data-n="${it.n}">${opt('', 'no owner', wcur)}${labels.map(l => opt(l, S.displayName(l), wcur)).join('')}</select></label>` +
+    `<label>Due, as said <input type="text" size="18" data-r="due" data-n="${it.n}" value="${esc(r.due !== undefined ? r.due || '' : it.due || '')}"></label>` +
+    `<label>Date <input type="date" data-r="dueDate" data-n="${it.n}" value="${esc(o.dueDate || '')}"></label>` +
+    `<label>Importance <select data-r="importance" data-n="${it.n}">${opt('normal', 'normal', o.importance || 'normal')}${opt('high', 'high', o.importance || 'normal')}</select></label></details>`;
+}
+// The unticked suggestions: people (B10) and related closures (B2).
+function renderSuggestions() {
+  const c = state.checked, ppl = people();
+  const qs = PE.questions(c.items.map(it => ({ who: it.r && it.r.who !== undefined ? it.r.who : it.who })), [...new Set(state.prepared.segments.map(x => x.speakerName))], ppl);
+  $('people-box').innerHTML = qs.length ? `<h3>People to check (${qs.length})</h3><ul class="items">` + qs.map(q => {
+    const a = state.answers[q.label] || { action: 'new' };
+    const cur = a.action === 'same' ? 'same:' + a.person : a.action;
+    const opt = (v, l) => `<option value="${esc(v)}"${v === cur ? ' selected' : ''}>${esc(l)}</option>`;
+    return `<li>“${esc(q.label)}”${q.speaker ? ' speaks in this meeting' : ' is named as an owner'} and is not on the board yet. ` +
+      `<select data-ans="${esc(q.label)}">${opt('new', 'A new person')}${q.suggestion ? opt('same:' + q.suggestion, 'The same as ' + q.suggestion) : ''}` +
+      ppl.names.filter(n => n !== q.suggestion).map(n => opt('same:' + n, 'The same as ' + n)).join('') + `${opt('none', 'No owner')}</select></li>`;
+  }).join('') + '</ul><p class="src">Your answer is kept, so each name is asked once.</p>' : '';
+  const sug = RV.relatedClosures(c.items, state.prepared.board);
+  const bd = state.prepared.board;
+  $('related-box').innerHTML = sug.length ? `<h3>Related actions: close them too? (${sug.length})</h3>
+    <p class="src">This meeting settled a question. These open actions look related to it. Closing one is your decision as the reviewer, not something the chat found; each stays open unless you choose to close it.</p><ul class="items">` + sug.map(x => {
+    const k = `${x.thread}|${x.from}`, on = state.relTicks.has(k), t = bd.threads.get(x.thread);
+    return `<li><div>${entBtn(t)} ${t ? pill(t.status) : ''} <span class="src">${esc(x.owner || 'no owner')}</span></div>` +
+      `<div class="src">Suggested because it has ${esc(x.why)} ${esc(x.question)}, settled in this meeting.</div>` +
+      `<div class="row" style="gap:14px"><label><input type="radio" name="rel-${esc(k)}" data-rel-open="${esc(k)}"${on ? '' : ' checked'}> Leave open</label>` +
+      `<label><input type="radio" name="rel-${esc(k)}" data-rel="${esc(k)}"${on ? ' checked' : ''}> Also close this action</label></div></li>`;
+  }).join('') + '</ul>' : '';
+}
+/* ---------- projects in the review (§10.20) ---------- */
+// The chat's proposals, with a default decision by the evidence: a name the board already has is "same as" that project;
+// a proposal whose quote checks is added (its code from the initials); one whose quote doesn't check is not, until the PM says so.
+function initProposals(c) {
+  const known = boardProjects(), used = known.map(p => p.code);
+  state.proposals = (c.proposals || []).map(p => {
+    const same = known.find(k => k.name.toLowerCase() === p.name.toLowerCase());
+    const code = S.defaultCode(p.name, used); used.push(code);
+    return Object.assign({}, p, { action: same ? 'same' : (p.toCheck ? 'no' : 'add'), sameAs: same ? same.code : null, code });
+  });
+}
+// The review judges against the board as it was when the request was written: after Save, this meeting's own new
+// projects are on the board, and must not make their codes look taken.
+const boardProjects = () => state.prepared.projects;
+const people = () => PE.peopleOf(state.pkgs);
+const ticks = () => [...state.relTicks].map(k => { const i = k.lastIndexOf('|'); return { thread: k.slice(0, i), from: +k.slice(i + 1) }; });
+// The items as they will be saved: the review's choices (applyReview), then their projects (placeItems).
+function placed() {
+  const rv = RV.applyReview(state.checked.items, { answers: state.answers, related: ticks(), people: people(), meetingDate: state.prepared.meeting.date });
+  const pl = S.placeItems({ items: rv.items, proposals: state.proposals, known: boardProjects(), board: state.prepared.board });
+  pl.aliases = rv.aliases;
+  return pl;
+}
+// The options for an item's project: not clear, the board's projects, and the new projects being added.
+const projectOptions = pl => [['', 'Not clear: choose…']].concat(boardProjects().map(p => [p.code, p.name]), pl.added.map(a => ['J:' + a.ref, a.name + ' (new)']));
+const valueOf = (pl, it) => { const o = pl.items.find(x => x.n === it.n); if (!o || !o.project) return ''; const a = pl.added.find(x => x.code === o.project); return a ? 'J:' + a.ref : o.project; };
+function projectPicker(it, pl) {
+  if (it.thread || !pl) return '';
+  const v = valueOf(pl, it);
+  return `<label class="src">Project <select data-proj="${it.n}"${v ? '' : ' class="need"'}>${projectOptions(pl).map(([c, n]) => `<option value="${esc(c)}"${c === v ? ' selected' : ''}>${esc(n)}</option>`).join('')}</select></label>`;
+}
+function renderProjects(pl) {
+  const known = boardProjects();
+  $('proposals').innerHTML = state.proposals.length ? `<h3>New projects (${state.proposals.length})</h3><ul class="items">` + state.proposals.map((p, i) => {
+    const v = p.action === 'same' ? 'same:' + p.sameAs : p.action;
+    return `<li><span class="chip">${p.byPM ? 'added by you' : 'proposed by the chat'}</span> <input type="text" data-prop-name="${i}" size="28" value="${esc(p.name)}"> ` +
+      `<select data-prop-action="${i}"><option value="add"${v === 'add' ? ' selected' : ''}>Add as a new project</option>` +
+      known.map(k => `<option value="same:${esc(k.code)}"${v === 'same:' + k.code ? ' selected' : ''}>Same as ${esc(k.name)}</option>`).join('') +
+      `<option value="no"${v === 'no' ? ' selected' : ''}>Not a project</option></select>` +
+      (p.action === 'add' ? ` <span class="src">code ${esc(p.code)}</span> <details class="change" style="display:inline-block"><summary class="src">change</summary><label>code <input type="text" data-prop-code="${i}" size="5" maxlength="4" value="${esc(p.code)}"></label></details>` : '') +
+      (p.byPM ? '' : `<div class="src">${esc(p.seg || '')}: “${esc(p.words)}” (${esc(p.src)})</div>`) +
+      (p.toCheck ? '<div class="note">Its words were not found where cited: check the meeting before adding it.</div>' : '') + '</li>';
+  }).join('') + '</ul>' : '';
+  const nc = pl.items.filter(x => !x.thread && !x.project).length, need = pl.need.length;
+  $('notclear-line').textContent = nc ? `${nc} new item${nc === 1 ? '' : 's'} with no project yet ("not clear")` + (need ? `; ${need} of them must have one before saving (actions, questions, risks and decisions get an ID that carries the project).` : '.')
+    : 'Every new item has a project.';
+  $('bulk-box').style.display = nc ? '' : 'none';
+  $('bulk-proj').innerHTML = projectOptions(pl).slice(1).map(([c, n]) => `<option value="${esc(c)}">${esc(n)}</option>`).join('');
+  msg('proj-msg', pl.errors.join(' '), pl.errors.length ? 'bad' : '');
+}
+function renderResults(c) {
+  const pl = placed();
+  renderProjects(pl); renderSuggestions();
+  const it = c.items, okIt = it.filter(x => !x.toCheck);
+  const groups = [
+    ['Closures from the chat (applied)', okIt.filter(x => x.thread && x.status === 'done')],
+    ['Other updates to open items', okIt.filter(x => x.thread && x.status !== 'done')],
+    ['New actions', okIt.filter(x => !x.thread && x.kind === 'commitment')],
+    ['Decisions', okIt.filter(x => !x.thread && x.kind === 'decision')],
+    ['Open questions', okIt.filter(x => !x.thread && x.kind === 'question')],
+    ['Risks', okIt.filter(x => !x.thread && x.kind === 'risk')],
+    ['Notes', okIt.filter(x => !x.thread && x.kind === 'update')],
+    ['To check (the words were not found where cited; left out of the email)', it.filter(x => x.toCheck)]];
+  $('results').innerHTML = groups.filter(g => g[1].length).map(([h, xs]) => `<h3>${esc(h)} (${xs.length})</h3><ul class="items">${xs.map(x =>
+    line(x, x.added ? `<button class="secondary" data-remove="${x.n}">Remove</button>` : '', pl)).join('')}</ul>`).join('');
+}
+/* The check's result (UX B2): one short line always shown; the details below it, closed after a clean check and opened
+   when something must be fixed. Errors stop the save and say what to do; warnings allow it. */
+function replyMessage(c) {
+  const nCheck = c.items.filter(x => x.toCheck).length, nAdded = c.items.filter(x => x.added).length, pl = placed();
+  const errors = [], warns = [];
+  if (pl.need.length) errors.push(`${pl.need.length} new item${pl.need.length === 1 ? ' has' : 's have'} no project (${pl.need.map(x => `${x.seg} ${x.kind}`).join(', ')}). Choose one in each item's Project list below, or put every "not clear" item in one project.`);
+  for (const e of pl.errors) errors.push(e);
+  if (nCheck) warns.push(`${nCheck} item${nCheck === 1 ? '' : 's'} to check: the words were not found where cited, so ${nCheck === 1 ? 'it is' : 'they are'} left out of the email. They are listed last.`);
+  if (c.cut) warns.push(`The reply was cut off (${c.cut}). The complete items are kept: you can save them, or send the request again in a new chat.`);
+  if (!c.lastSegOk && !c.cut) warns.push('The reply did not name the meeting\'s last statement: check that nothing from the end of the meeting is missing.');
+  const fixed = c.items.filter(x => x.notes && x.notes.some(t => /corrected|dropped|treated as new|kept as an update|not clear/.test(t))).length;
+  if (fixed) warns.push(`${fixed} item${fixed === 1 ? ' was' : 's were'} adjusted when read (each says how, under the item).`);
+  for (const t of c.notes || []) warns.push(`The reply: ${t}.`);
+  const parts = [`${c.items.length - nAdded} items read.`];
+  if (nAdded) parts.push(`${nAdded} added by you.`);
+  parts.push(pl.need.length ? '' : 'Every new item has a project.');
+  if (errors.length) parts.push(`${errors.length} thing${errors.length === 1 ? '' : 's'} to fix before saving (see below).`);
+  else if (warns.length) parts.push(`${warns.length} warning${warns.length === 1 ? '' : 's'}; you can still save.`);
+  msg('reply-msg', parts.filter(Boolean).join(' '), errors.length ? 'bad' : warns.length ? 'warn' : 'ok');
+  const d = $('reply-details'); d.classList.remove('hidden');
+  $('reply-detail-body').innerHTML = (errors.length ? `<h4 class="bad-h">Must be fixed before saving</h4><ul class="items">${errors.map(e => `<li class="bad">${esc(e)}</li>`).join('')}</ul>` : '') +
+    (warns.length ? `<h4>Warnings (saving is still allowed)</h4><ul class="items">${warns.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : '') +
+    (!errors.length && !warns.length ? '<p class="src">Every item checked: the words were found where cited, the reply was complete, and every new item has a project.</p>' : '');
+  d.open = errors.length > 0;
+}
+function afterChange() {
+  renderResults(state.checked); replyMessage(state.checked);
+  if (state.saved) { ['s-email', 's-summary'].forEach(id => $(id).classList.add('hidden')); state.saved = null; msg('save-msg', 'Changed since the last save: save the meeting again to include it.', 'warn'); }
+}
+const segOf = v => String(v || '').trim().toUpperCase().replace(/^S?(\d+)$/, (m, d) => 'S' + d.padStart(3, '0'));
+$('add-seg').addEventListener('input', () => {
+  const s = state.prepared && state.prepared.segments.find(x => x.id === segOf($('add-seg').value));
+  $('add-preview').textContent = s ? `${s.id} ${s.speakerName}: ${s.text}` : ($('add-seg').value.trim() ? 'No statement with that number.' : '');
+});
+$('add-btn').addEventListener('click', () => {
+  if (!state.checked) return;
+  const r = R.addItem(state.checked, state.prepared.segments, { seg: segOf($('add-seg').value), kind: $('add-kind').value, who: $('add-who').value, what: $('add-what').value, due: $('add-due').value });
+  if (r.error) return msg('add-msg', r.error, 'bad');
+  msg('add-msg', 'Added. It is marked as added by you, and goes in the email.', 'ok');
+  ['add-seg', 'add-what', 'add-due'].forEach(id => { $(id).value = ''; }); $('add-kind').value = ''; $('add-preview').textContent = '';
+  afterChange();
+});
+$('results').addEventListener('change', e => {
+  const n = e.target && e.target.getAttribute && e.target.getAttribute('data-proj');
+  if (!n || !state.checked) return;
+  const it = state.checked.items.find(x => x.n === +n); if (!it) return;
+  it.pick = e.target.value;   // placeItems reads it: a code, 'J:<ref>' for a new project, or '' for not clear
+  afterChange();
+});
+$('proposals').addEventListener('change', e => {
+  const t = e.target, at = k => t.getAttribute && t.getAttribute(k);
+  const i = at('data-prop-action') || at('data-prop-name') || at('data-prop-code'); if (i == null) return;
+  const p = state.proposals[+i]; if (!p) return;
+  if (at('data-prop-action') != null) { const v = t.value; p.action = v.startsWith('same:') ? 'same' : v; p.sameAs = v.startsWith('same:') ? v.slice(5) : null; }
+  else if (at('data-prop-name') != null) p.name = t.value;
+  else p.code = t.value.trim().toUpperCase();
+  afterChange();
+});
+$('bulk-btn').addEventListener('click', () => {
+  if (!state.checked) return;
+  const pl = placed(), v = $('bulk-proj').value; if (!v) return;
+  for (const o of pl.items) if (!o.thread && !o.project) state.checked.items.find(x => x.n === o.n).pick = v;
+  afterChange();
+});
+$('np-name').addEventListener('input', () => { $('np-code').value = S.defaultCode($('np-name').value, boardProjects().map(p => p.code).concat(state.proposals.map(p => p.code))); });
+$('np-add').addEventListener('click', () => {
+  if (!state.checked) return;
+  const name = $('np-name').value.trim(); if (!name) return msg('proj-msg', 'Name the project.', 'bad');
+  state.pmRefs = (state.pmRefs || 0) + 1;
+  state.proposals.push({ ref: 'PM' + state.pmRefs, name, code: $('np-code').value.trim().toUpperCase(), action: 'add', byPM: true, seg: null, words: '', src: 'added by you', toCheck: false });
+  $('np-name').value = ''; $('np-code').value = '';
+  afterChange();
+});
+$('results').addEventListener('click', e => {
+  const at = k => e.target && e.target.getAttribute && e.target.getAttribute(k);
+  const n = at('data-remove');
+  if (n && state.checked && R.removeAdded(state.checked, +n)) return afterChange();
+  const u = at('data-undo') || at('data-confirm');
+  if (u && state.checked) {
+    const it = state.checked.items.find(x => x.n === +u); if (!it) return;
+    it.r = it.r || {};
+    if (at('data-undo')) it.r.undo = !it.r.undo; else it.r.confirm = !it.r.confirm;
+    afterChange();
+  }
+});
+$('results').addEventListener('change', e => {
+  const t = e.target, k = t.getAttribute && t.getAttribute('data-r'); if (!k || !state.checked) return;
+  const it = state.checked.items.find(x => x.n === +t.getAttribute('data-n')); if (!it) return;
+  it.r = it.r || {};
+  if (k === 'thread') it.r.thread = t.value || null;
+  else if (k === 'sameAs') it.r.sameAs = t.value ? +t.value : null;
+  else if (k === 'who') it.r.who = t.value || null;
+  else if (k === 'due') { it.r.due = t.value.trim() || null; delete it.r.dueDate; }
+  else if (k === 'dueDate') it.r.dueDate = t.value || null;
+  else if (k === 'importance') it.r.importance = t.value;
+  afterChange();
+});
+$('people-box').addEventListener('change', e => {
+  const l = e.target.getAttribute && e.target.getAttribute('data-ans'); if (l == null) return;
+  const v = e.target.value;
+  state.answers[l] = v.startsWith('same:') ? { action: 'same', person: v.slice(5) } : { action: v };
+  afterChange();
+});
+$('related-box').addEventListener('change', e => {
+  const at = a => e.target.getAttribute && e.target.getAttribute(a), k = at('data-rel'), k0 = at('data-rel-open');
+  if (k != null) { if (e.target.checked) state.relTicks.add(k); else state.relTicks.delete(k); }
+  else if (k0 != null) state.relTicks.delete(k0); else return;
+  afterChange();
+});
+$('check-btn').addEventListener('click', () => {
+  if (!state.prepared) return msg('reply-msg', 'Number the statements first.', 'bad');
+  const text = $('reply').value;
+  const c = R.checkReply(text, { segments: state.prepared.segments, token: state.request.token, openIds: state.request.openIds, projectCodes: state.request.projectCodes });
+  if (c.stop) { state.checked = null; $('results').innerHTML = ''; ['s-save', 'add-box', 'proj-box', 'reply-details'].forEach(id => $(id).classList.add('hidden')); return msg('reply-msg', c.stop + ' Fix: copy the chat\'s whole reply to this meeting\'s request, and paste it again.', 'bad'); }
+  state.checked = c; state.replyChars = text.length; state.answers = {}; state.relTicks = new Set(); state.reviewOf = null;
+  initProposals(c); show('proj-box');
+  replyMessage(c);
+  renderResults(c);
+  const speakers = [...new Set(state.prepared.segments.map(s => s.speakerName))];
+  $('add-who').innerHTML = '<option value="">no owner</option>' + speakers.map(s => `<option value="${esc(s)}">${esc(S.displayName(s))}</option>`).join('');
+  show('add-box'); msg('add-msg', '');
+  show('s-save'); msg('save-msg', '');
+});
+
+/* ---------- the optional attendance report (UX B1): read here, matched to the people register, never blocking ---------- */
+function setAttendance(att, from) {
+  state.attendance = att && att.participants && att.participants.length ? att : null;
+  $('att-clear').hidden = !state.attendance;
+  if (!state.attendance) return msg('att-msg', 'None attached.', '');
+  const speakers = state.prepared ? [...new Set(state.prepared.segments.map(s => s.speakerName))] : [];
+  const m = AT.match(state.attendance, people(), speakers), un = m.filter(x => !x.person).map(x => x.name);
+  msg('att-msg', `${m.length} participant${m.length === 1 ? '' : 's'} from ${from}${state.attendance.title ? ` (“${state.attendance.title}”)` : ''}. ` +
+    (un.length ? `${m.length - un.length} matched to the people register; not in it yet: ${un.join(', ')}. That's fine: they're listed as named.` : 'Everyone matched the people register.') +
+    (state.attendance.warnings && state.attendance.warnings.length ? ' ' + state.attendance.warnings.join(' ') : ''), un.length ? 'warn' : 'ok');
+  if (state.saved) msg('save-msg', 'The attendance changed since the last save: save the meeting again to include it.', 'warn');
+}
+$('att-btn').addEventListener('click', () => $('att-file').click());
+$('att-clear').addEventListener('click', () => setAttendance(null));
+$('att-file').addEventListener('change', ev => {
+  const f = ev.target.files[0]; ev.target.value = ''; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => {
+    const dec = AT.decode(rd.result);
+    if (dec.error === 'xlsx') return msg('att-msg', 'That is an Excel workbook. In Excel: File, Save As, CSV, then open that file. (The usual Teams download is already CSV.)', 'bad');
+    const att = AT.parse(dec.text);
+    if (!att.participants.length) return msg('att-msg', (att.warnings.join(' ') || 'No participants were found in that file.') + ' The meeting can still be processed without it.', 'bad');
+    setAttendance(att, f.name);
+  };
+  rd.onerror = () => msg('att-msg', 'That file could not be read. The meeting can still be processed without it.', 'bad');
+  rd.readAsArrayBuffer(f);
+});
+
+/* ---------- 4-6. save, the email, the summary ---------- */
+try { $('saved-by').value = localStorage.getItem('mkg2-saved-by') || ''; } catch (e) { /* per-machine convenience only */ }
+function download(name, obj) {
+  const url = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 1)], { type: 'application/json' }));
+  const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+function refreshSummary() {
+  if (!state.checked) return;
+  const pl = placed(), chat = state.proposals.filter(p => !p.byPM);
+  $('summary').value = U.countsSummary({ statements: state.prepared.segments.length, requestChars: state.request.text.length, requestKind: state.request.kind,
+    openThreads: state.request.threads, replyChars: state.replyChars || 0, checked: Object.assign({}, state.checked, { items: pl.items }), verdict: $('verdict').value,
+    projects: pl.covered.length, proposed: chat.length, added: pl.added.filter(a => chat.some(p => p.ref === a.ref)).length });
+}
+$('verdict').addEventListener('change', refreshSummary);
+$('save-btn').addEventListener('click', () => {
+  if (!state.checked) return;
+  const by = $('saved-by').value.trim();
+  if (!by) return msg('save-msg', 'Add your name: it is recorded with the save.', 'bad');
+  try { localStorage.setItem('mkg2-saved-by', by); } catch (e) { /* fine */ }
+  const p = state.prepared, pl = placed();
+  if (pl.errors.length) return msg('save-msg', pl.errors.join(' '), 'bad');
+  // J2 (§10.20): an ID carries its project and never changes, so every item that gets one needs a project first.
+  if (pl.need.length) return msg('save-msg', `${pl.need.length} item${pl.need.length === 1 ? ' needs' : 's need'} a project before saving (${pl.need.map(x => `${x.seg} ${x.kind}`).join(', ')}). ` +
+    'Choose one in its list above, or put every "not clear" item in one project.', 'bad');
+  const newProjects = state.proposals.map(x => ({ ref: x.ref, name: x.name, decision: x.action, code: pl.refCode[x.ref] || null, seg: x.seg || null, words: x.words || '', src: x.src, byPM: !!x.byPM }));
+  const pkg = S.meetingPackage({ pkgs: state.pkgs, projects: pl.covered, meeting: p.meeting, statements: p.segments, request: state.request,
+    checked: Object.assign({}, state.checked, { items: pl.items }), savedBy: by, newProjects, aliases: pl.aliases,
+    attendance: state.attendance ? AT.forPackage(state.attendance, people(), [...new Set(p.segments.map(s => s.speakerName))]) : null });
+  addPkg(pkg); idbPut(pkg); download(pkg.id + '.json', pkg);
+  state.saved = pkg; ui.asOf = null;
+  renderSaved();
+  // Items a later meeting's request never listed (§10.23): that meeting could not update or close them.
+  const unseen = S.unseenLater(state.pkgs, pkg);
+  msg('save-msg', `Saved. Put the downloaded file (${pkg.id}.json) in the team folder.` + (pkg.supersedes ? ' It replaces the earlier save of this meeting; keep both files.' : '') +
+    unseen.map(u => ` ${u.items.length} item${u.items.length === 1 ? '' : 's'} of this meeting (${u.items.join(', ')}) ${u.items.length === 1 ? 'was' : 'were'} not in the request of “${u.meeting.title}” (${u.meeting.date}): that meeting could not update or close ${u.items.length === 1 ? 'it' : 'them'}, and the same work may appear twice.`).join('') +
+    (unseen.length ? ` To fix it, run ${unseen.length === 1 ? 'that meeting' : 'those meetings'} through the chat again; or mark what was finished as Settled on the board, and use "Same as…" in "Review this meeting again" for repeats.` : ''), unseen.length ? 'warn' : 'ok');
+  $('email').value = E.meetingEmail(pkg, S.replay(state.pkgs, { upTo: p.meeting.id }));
+  refreshSummary();
+  show('s-email'); show('s-summary');
+});
+$('copy-email').addEventListener('click', () => copy('email', 'copy-email'));
+$('copy-summary').addEventListener('click', () => copy('summary', 'copy-summary'));
+
+/* ---------- review a saved meeting again (§10.3): its saved choices reopen; saving again supersedes ---------- */
+function reviewAgain(id) {
+  const pkg = state.pkgs.find(p => p.id === id); if (!pkg || pkg.kind !== 'meeting') return;
+  const segments = pkg.statements.map(x => ({ id: x.id, t: x.t, speakerName: x.speaker, text: x.text }));
+  state.prepared = { projects: projects(), meeting: Object.assign({}, pkg.meeting), segments, block: null, board: S.replay(state.pkgs, { upTo: pkg.meeting.id }) };
+  state.request = { token: pkg.request.token, kind: pkg.request.kind, openIds: pkg.request.openIds || [], text: '', threads: (pkg.request.openIds || []).length, projectCodes: projects().map(x => x.code) };
+  const items = RV.reopenItems(pkg);
+  state.checked = { items, proposals: [], notes: [], reply: { summary: pkg.reply.summary, lastSeg: pkg.reply.lastSeg }, cut: pkg.reply.cut, note: pkg.reply.note, lastSegOk: pkg.reply.lastSegOk, lastSeg: pkg.reply.lastSeg };
+  state.relTicks = new Set(pkg.items.filter(x => x.byReview).map(x => { const f = items.find(i => i.thread === x.relatedTo && i.status === 'done'); return f ? `${x.thread}|${f.n}` : null; }).filter(Boolean));
+  state.proposals = []; state.answers = {}; state.saved = null; state.reviewOf = pkg.id; state.replyChars = 0; setTab('prepare');
+  setAttendance(pkg.attendance || null, 'the saved meeting');
+  ['s-request', 's-email', 's-summary'].forEach(x => $(x).classList.add('hidden'));
+  show('s-reply'); show('proj-box'); show('add-box'); show('s-save'); msg('save-msg', '');
+  renderResults(state.checked);
+  msg('reply-msg', `Reviewing “${pkg.meeting.title}” (${pkg.meeting.date}) again, with its saved choices. Change what is wrong, then save: the new save replaces the old one, and both files stay.`, 'ok');
+  $('s-reply').scrollIntoView();
+}
+$('saved-list').addEventListener('click', e => { const id = e.target.getAttribute && e.target.getAttribute('data-again'); if (id) reviewAgain(id); });
+$('conflicts').addEventListener('click', e => {
+  const v = e.target.getAttribute && e.target.getAttribute('data-switch'); if (!v) return;
+  const by = $('saved-by').value.trim(); if (!by) return msg('meeting-msg', 'Add your name (in step 4) first: it is recorded with the choice.', 'bad');
+  const i = +v.slice(0, v.indexOf('|')), other = v.slice(v.indexOf('|') + 1);
+  const r = S.switchTo(state.pkgs, S.current(state.pkgs).conflicts[i], other, by);
+  if (r.error) return msg('meeting-msg', r.error, 'bad');
+  addPkg(r.pkg); idbPut(r.pkg); download(r.pkg.id + '.json', r.pkg); ui.asOf = null; renderSaved();
+  msg('meeting-msg', `Switched. Put the downloaded file (${r.pkg.id}.json) in the team folder.`, 'ok');
+});
+
+const SAMPLE_CSV = "\ufeffType,Project,Title,Owner,Email,Teams name,Due,Status,Waiting on,Notes\nProject,Intake portal redesign,,,,,,,,\"Replace the paper-style intake form with a guided, step-by-step web workflow.\"\nProject,Partner data exchange,,,,,,,,\"Stand up a scheduled, secure file exchange with a partner agency under the new agreement.\"\nProject,Reporting dashboard migration,,,,,,,,Move weekly operational reports out of spreadsheets and into the shared dashboard.\nProject,Records retention cleanup,,,,,,,,Apply the retention schedule to the shared drive and archive expired folders.\nPerson,,Mei Chen,,mchen@example.gov,\"Chen, Mei\",,,,\nPerson,,Raj Patel,,rpatel@example.gov,\"Patel, Raj\",,,,\nPerson,,Linh Nguyen,,lnguyen@example.gov,\"Nguyen, Linh\",,,,\nPerson,,Dana Brooks,,dbrooks@example.gov,\"Brooks, Dana\",,,,\nPerson,,Sofia Alvarez,,salvarez@example.gov,\"Alvarez, Sofia\",,,,\nPerson,,James Ortiz,,jortiz@example.gov,\"Ortiz, James\",,,,\nAction,Intake portal redesign,Draft user journey for first-time filers,Mei Chen,,,2026-09-12,Done,,v1 sample AI-101\nAction,Intake portal redesign,Inventory every field on the current intake form,Raj Patel,,,2026-09-10,Done,,v1 sample AI-102\nAction,Intake portal redesign,Build clickable prototype of steps 1-3,Linh Nguyen,,,2026-10-02,In progress,Get an accessibility review slot scheduled,v1 sample AI-103\nAction,Intake portal redesign,Decide which unused fields to drop,Mei Chen,,,2026-09-24,Blocked,Get legal review of fields 41 and 57,v1 sample AI-104\nAction,Intake portal redesign,Run the accessibility review,Dana Brooks,,,2026-10-08,Open,,v1 sample AI-105\nAction,Intake portal redesign,Get an accessibility review slot scheduled,Dana Brooks,,,,Done,,v1 sample BL-101\nAction,Intake portal redesign,Get legal review of fields 41 and 57,Sofia Alvarez,,,,Open,,v1 sample BL-102\nAction,Partner data exchange,Get the data sharing agreement signed,Sofia Alvarez,,,2026-09-19,Done,,v1 sample AI-201\nAction,Partner data exchange,Draft the file layout spec,James Ortiz,,,2026-09-17,Done,,v1 sample AI-202\nAction,Partner data exchange,Run a test transfer with a sample file,James Ortiz,,,2026-10-01,Blocked,Get the firewall rule approved,v1 sample AI-203\nAction,Partner data exchange,Get the firewall rule approved,Raj Patel,,,,Open,,v1 sample BL-202\nAction,Reporting dashboard migration,Rebuild the five weekly reports in the dashboard,Linh Nguyen,,,2026-10-15,In progress,,v1 sample AI-302\nAction,Reporting dashboard migration,Confirm the data refresh schedule,Raj Patel,,,2026-09-30,Open,,v1 sample AI-303\nAction,Records retention cleanup,Map shared drive folders to retention categories,James Ortiz,,,2026-09-15,Blocked,Records office issues updated retention schedule,v1 sample AI-401\nAction,Records retention cleanup,Records office issues updated retention schedule,James Ortiz,,,,Open,,v1 sample BL-401\nDecision,Intake portal redesign,Keep the existing case number format,,,,,,,v1 sample D-101\nDecision,Reporting dashboard migration,Retire the monthly roll-up report,,,,,,,v1 sample D-301\n";
+/* ================= v1's screens over v2's board (Aaron, 2026-10-15: "v1 screens with v2 underneath") =================
+   The Board tab is v1's: the project list (closed projects folded below), "State as of", the project panel (Last time we
+   talked, Needs attention, Due in the next two weeks, open questions and risks, Decisions in effect, Open work by owner,
+   Done and not needed, the meeting log), the item dialog with its Board decision, and the Program and Meeting email
+   reports with formatted copy for Outlook. Everything is drawn from v2's replay. */
+const STATUS_W = { open: 'Open', in_progress: 'In progress', blocked: 'Blocked', done: 'Done', not_needed: 'Not needed', decided: 'Decided' };
+const PILL = { open: 's-open', blocked: 's-blocked', done: 's-completed', not_needed: 's-completed' };
+const pill = s => `<span class="pill ${PILL[s] || ''}">${esc(STATUS_W[s] || s)}</span>`;
+const fmtDate = d => d ? new Date(String(d).slice(0, 10) + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+const longDate = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
+const daysBetween = (a, b) => Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / 86400000);
+const today = () => new Date().toISOString().slice(0, 10);
+const ui = { asOf: null, project: null, filter: { q: '', mode: 'all', compact: false } };
+const isOpen = t => !['done', 'not_needed', 'decided'].includes(t.status);
+const covers = (p, code) => (p.projects && p.projects.length ? p.projects : [p.project]).some(x => x && x.code === code);
+function toast(text) { const el = $('toast'); el.textContent = text; el.style.display = 'block'; clearTimeout(toast.t); toast.t = setTimeout(() => { el.style.display = 'none'; }, 4200); }
+
+// The board as of the chosen meeting: every meeting up to it, and the board decisions made before the next one.
+function boardAsOf() {
+  const used = S.current(state.pkgs).used; if (!used.length) return null;
+  if (!ui.asOf || !used.some(p => p.id === ui.asOf)) ui.asOf = used[used.length - 1].id;
+  const i = used.findIndex(p => p.id === ui.asOf), cur = used[i], next = used[i + 1];
+  const b = S.replay(state.pkgs, next ? { upTo: next.meeting.id } : {});
+  const latest = !next;
+  return { cur, b, date: cur.meeting.date, latest, used };   // as v1: dates are counted as of the chosen meeting
+}
+const projDesc = code => { for (const p of S.current(state.pkgs).used) for (const x of p.projects || []) if (x.code === code && x.desc) return x.desc; return ''; };
+const entBtn = t => t ? `<button class="ent" data-ent="${esc(t.id)}"><span class="code">${esc(t.id)}</span>${esc(t.what)}</button>` : '';
+const pkgOf = id => state.pkgs.find(p => p.meeting && p.meeting.id === id && S.current(state.pkgs).used.includes(p));
+const quoteOf = (p, seg) => { const s = p && (p.statements || []).find(x => x.id === seg); return s ? `<blockquote class="quote">“${esc(s.text.length > 320 ? s.text.slice(0, 320) + '…' : s.text)}”<cite>${esc(S.displayName(s.speaker))}, ${esc(fmtDate(p.meeting.date))}${s.t ? ' at ' + esc(s.t) : ''} (${esc(s.id)})</cite></blockquote>` : ''; };
+const decisionText = e => ({ close_project: `Closed with the project by ${e.by}`, reopen_project: `Reopened with the project by ${e.by}`, settled: `Marked completed or resolved by ${e.by}`, not_needed: `Marked as not needed by ${e.by}`, undo: `Earlier status restored by ${e.by}`, raise: `Brought back into discussion by ${e.by}`, lower: `No longer brought back (${e.by})` }[e.event || e.action]);
+/* What each Board decision does to this item, in words (UX A10-A13). Undo names the status it restores, from the item's
+   status history; Settled is "completed" for an action and "resolved" for a question or risk; Raise is offered only to
+   bring a parked item back into the next request. */
+const decisionLabel = (a, t) => a === 'settled' ? (t.kind === 'action' ? 'Mark completed' : 'Mark resolved')
+  : a === 'not_needed' ? 'Mark as not needed'
+  : a === 'undo' ? `Restore status: ${STATUS_W[t.statusStack[t.statusStack.length - 2]] || t.statusStack[t.statusStack.length - 2]}`
+  : a === 'raise' ? 'Bring back into discussion' : a === 'lower' ? 'Stop bringing it back' : a;
+const offered = (a, t) => a === 'raise' ? t.parked && !t.raised : true;
+
+// One item of a meeting, as a v1 log entry: { k, tag, thread, detail, why }.
+function describeItem(p, it, b) {
+  const t = it.id ? b.threads.get(it.id) : it.thread ? b.threads.get(it.thread) : null;
+  if (it.mergedInto) return null;
+  if (it.id) {
+    if (it.kind === 'decision') return { k: 'decide', tag: 'Decision', thread: t, why: it.what };
+    const tag = { commitment: 'New', question: 'Question', risk: 'Risk' }[it.kind] || 'New';
+    const dueW = it.due ? (it.dueDate && it.due === it.dueDate ? `, due ${fmtDate(it.dueDate)}` : `, “${it.due}”`) : '';
+    const seedSt = p.kind === 'seed' && it.status && it.status !== 'open' ? ` · ${STATUS_W[it.status]}` : '';
+    return { k: it.kind === 'risk' ? 'block' : 'new', tag, thread: t, detail: it.kind === 'commitment' ? `Owner ${it.person !== undefined ? (it.person || 'none') : (S.displayName(it.who) || 'none')}` + dueW + seedSt : seedSt.slice(3) };
+  }
+  if (it.thread) {
+    if (it.applied) {
+      const k = it.status === 'done' ? 'done' : it.status === 'blocked' ? 'block' : 'status';
+      return { k, tag: it.status === 'done' ? 'Completed' : STATUS_W[it.status], thread: t, detail: it.byReview ? `closed by the reviewer with ${it.relatedTo}` : '', why: it.byReview ? '' : it.what };
+    }
+    return { k: 'note', tag: 'Progress', thread: t, why: it.what };
+  }
+  return { k: 'note', tag: 'Note', thread: null, why: it.what };
+}
+const itemProject = (p, it, b) => it.project || (it.thread && b.threads.get(it.thread) ? b.threads.get(it.thread).project : (p.project && p.project.code));
+const opLi = d => `<li class="op"><span class="tag k-${d.k}">${esc(d.tag)}</span><div>${d.thread ? entBtn(d.thread) : ''}${d.detail ? `<span class="detail">${esc(d.detail)}</span>` : ''}${d.why ? `<div class="why">${esc(d.why)}</div>` : ''}</div></li>`;
+
+function attentionOf(t, date) {
+  const r = [];
+  if (t.kind === 'action') {
+    const late = DT.daysLate(t.dueDate, date);
+    if (late > 0) r.push(`<span class="overdue">overdue by ${late} day${late === 1 ? '' : 's'}</span>`);
+    else if (t.dueDate === date) r.push('<span class="overdue">due today</span>');
+    if (t.status === 'blocked') r.push('blocked' + (t.waitsOn ? `, waiting on <span class="code">${esc(t.waitsOn)}</span>` : ''));
+    if (!t.owner) r.push('no accountable owner');
+  }
+  if (t.toCheck) r.push('its source is still to check');
+  if (t.parked) r.push(`not discussed in ${t.quiet} meetings (parked)`);
+  return r;
+}
+
+function renderBoard() {
+  const A = boardAsOf(), n = state.pkgs.filter(p => p.mkg2).length;
+  $('ws-state-board').textContent = n ? `${n} package${n === 1 ? '' : 's'} mirrored in this browser · the team folder is the record` : 'Nothing loaded · open the files in the team folder';
+  $('email-report').disabled = $('meeting-report').disabled = !A;
+  if (!A) {
+    $('asof').innerHTML = ''; $('projects').innerHTML = ''; $('attn-btn').textContent = 'Needs attention (0)';
+    $('panel').innerHTML = `<div class="panel-inner"><h2 class="title">No meetings yet</h2><p class="desc">Open the saved files from the team folder, start a board from a spreadsheet under Workspace, or load the sample baseline to try it: then Process meeting turns each meeting's transcript into the board.</p></div>`;
+    renderDashboard(); return;
+  }
+  $('asof').innerHTML = A.used.map(p => `<option value="${esc(p.id)}"${p.id === ui.asOf ? ' selected' : ''}>${esc(fmtDate(p.meeting.date))} ${esc(p.meeting.title)}</option>`).join('');
+  const ps = S.projectsOf(state.pkgs), ts = A.b.order.map(id => A.b.threads.get(id));
+  if (!ui.project || (ui.project !== '__attn__' && !ps.some(p => p.code === ui.project))) ui.project = (ps.find(p => !A.b.closedProjects.has(p.code)) || ps[0] || {}).code || null;
+  const attnAll = ts.filter(t => isOpen(t) && attentionOf(t, A.date).length);
+  $('attn-btn').textContent = `Needs attention (${attnAll.length})`; $('attn-btn').setAttribute('aria-current', String(ui.project === '__attn__'));
+  const isClosedP = c => A.b.closedProjects.has(c);
+  const projLi = p => {
+    const mine = ts.filter(t => t.project === p.code), open = mine.filter(t => t.kind === 'action' && isOpen(t)).length, blocked = mine.filter(t => t.status === 'blocked').length;
+    const last = A.b.meetings.filter(m => m.kind === 'meeting' && covers(m, p.code)).map(m => m.meeting.date).pop();
+    const since = last ? daysBetween(last, A.date) : null;
+    const d = since === null ? ['quiet', 'Not discussed yet'] : since === 0 ? ['quiet', 'Discussed this meeting'] : since > 14 ? ['stale', `Not discussed in ${since} days`] : ['quiet', `Discussed ${since} days ago`];
+    return `<li><button class="proj" data-project="${esc(p.code)}" aria-current="${p.code === ui.project}"><div class="proj-name">${esc(p.name)}</div><div class="proj-desc">${esc(projDesc(p.code))}</div>` +
+      `<div class="signals">${isClosedP(p.code) ? `<span class="sig quiet">Closed ${esc(fmtDate(A.b.closedProjects.get(p.code).at))}</span>` : `<span class="sig">${open} open</span>${blocked ? `<span class="sig block">${blocked} blocked</span>` : ''}<span class="sig ${d[0]}">${d[1]}</span>`}</div></button></li>`;
+  };
+  const openPs = ps.filter(p => !isClosedP(p.code)), closedPs = ps.filter(p => isClosedP(p.code));
+  $('projects').innerHTML = openPs.map(projLi).join('') + (closedPs.length ? `<li><details class="closedp"${closedPs.some(p => p.code === ui.project) ? ' open' : ''}><summary>Closed projects (${closedPs.length})</summary><ul class="projects" style="padding:0">${closedPs.map(projLi).join('')}</ul></details></li>` : '');
+  if (ui.project === '__attn__') renderAttention(A, attnAll); else renderPanel(A, ps.find(p => p.code === ui.project));
+  renderDashboard();
+}
+
+
+function renderPanel(A, P) {
+  if (!P) { $('panel').innerHTML = '<div class="panel-inner"><p class="empty">No projects yet: open the saved files, or start a board under Workspace.</p></div>'; return; }
+  const b = A.b, ts = A.b.order.map(id => b.threads.get(id)).filter(t => t.project === P.code), closedP = b.closedProjects.get(P.code);
+  const acts = ts.filter(t => t.kind === 'action' && isOpen(t));
+  const last = b.meetings.filter(m => m.kind === 'meeting' && covers(m, P.code)).map(m => m.meeting.date).pop();
+  const since = last ? daysBetween(last, A.date) : null;
+  const attn = ts.filter(t => isOpen(t)).map(t => [t, attentionOf(t, A.date)]).filter(x => x[1].length)
+    .map(([t, r]) => `<li>${entBtn(t)}<div class="sub">${esc(t.owner || 'Unassigned')} · ${r.join(' · ')}</div></li>`);
+  const lastTime = lastTalk(A, P.code);
+  const due = acts.filter(t => t.dueDate && daysBetween(A.date, t.dueDate) > 0 && daysBetween(A.date, t.dueDate) <= 14).sort((x, y) => (x.dueDate < y.dueDate ? -1 : 1))
+    .map(t => { const n = daysBetween(A.date, t.dueDate); return `<li>${entBtn(t)}${pill(t.status)}<div class="sub">${esc(t.owner || 'Unassigned')}: Due ${esc(fmtDate(t.dueDate))}${t.due !== t.dueDate ? ` (“${esc(t.due)}”)` : ''}, in ${n} day${n === 1 ? '' : 's'}</div></li>`; });
+  const decs = ts.filter(t => t.kind === 'decision').map(t => `<li>${esc(t.what)}<div class="sub">${esc(t.id)}, ${esc(fmtDate(t.created.slice(0, 4) + '-' + t.created.slice(4, 6) + '-' + t.created.slice(6, 8)))}</div></li>`);
+  const qr = ts.filter(t => (t.kind === 'question' || t.kind === 'risk') && isOpen(t) && !t.parked)
+    .map(t => `<li>${entBtn(t)}<div class="sub">${t.kind === 'risk' ? 'Risk' : 'Open question'}${t.owner ? ' · ' + esc(t.owner) : ''}</div></li>`);
+  const byOwner = {}; acts.forEach(t => (byOwner[t.owner || '-'] = byOwner[t.owner || '-'] || []).push(t));
+  const owners = Object.keys(byOwner).sort((x, y) => (x === '-' ? 1 : y === '-' ? -1 : x.localeCompare(y))).map(k => `<div class="ownergrp"><h4 class="owner"><span>${esc(k === '-' ? 'Unassigned' : k)}</span><span class="n">${byOwner[k].length} open</span></h4><ul>${byOwner[k].map(t => {
+    const late = DT.daysLate(t.dueDate, A.date);
+    const flags = [late > 0 ? 'overdue' : '', t.status === 'blocked' ? 'blocked' : '', k === '-' ? 'unassigned' : ''].filter(Boolean).join(' ');
+    const sub = [t.due ? (t.dueDate && t.due === t.dueDate ? `Due ${fmtDate(t.dueDate)}` : `Due “${t.due}”${t.dueDate ? ' (' + fmtDate(t.dueDate) + ')' : ''}`) : '', t.waitsOn ? 'Waiting on ' + t.waitsOn : '', t.parked ? `Parked: not discussed in ${t.quiet} meetings` : '', t.raised ? 'Brought back into discussion' : '', t.toCheck ? 'Source to check' : ''].filter(Boolean).join(' · ');
+    return `<li data-f="${flags}" data-s="${esc(`${t.id} ${t.what} ${k === '-' ? 'unassigned' : k}`.toLowerCase())}"><div>${entBtn(t)}${pill(t.status)}${sub ? `<div class="sub">${esc(sub)}</div>` : ''}</div></li>`;
+  }).join('')}</ul></div>`).join('');
+  const closed = ts.filter(t => ['done', 'not_needed'].includes(t.status) && t.kind !== 'decision');
+  const closedLi = t => `<li><div>${entBtn(t)}${pill(t.status)}${t.settledOutside ? `<div class="sub">${t.kind === 'action' ? 'Marked completed' : 'Marked resolved'} by ${esc(t.settledOutside.by)} (a Board decision): ${esc(t.settledOutside.note)}</div>` : ''}</div></li>`;
+  const doneL = closed.filter(t => t.status === 'done'), nnL = closed.filter(t => t.status === 'not_needed');
+  const log = A.used.slice(0, A.used.indexOf(A.cur) + 1).slice().reverse().map(p => {
+    const evs = p.items.filter(it => itemProject(p, it, b) === P.code).map(it => describeItem(p, it, b)).filter(Boolean);
+    if (!evs.length) return '';
+    if (p.kind === 'seed') return `<section class="meeting manual"><div><span class="m-date">${esc(fmtDate(p.meeting.date))}</span><span class="m-title">${esc(p.meeting.title)} (from the spreadsheet)</span></div><p class="sub" style="margin:6px 0 0">${evs.length} entries started from the spreadsheet, without transcript evidence.</p></section>`;
+    return `<section class="meeting"><div><span class="m-date">${esc(fmtDate(p.meeting.date))}</span><span class="m-title">${esc(p.meeting.title)}</span><button class="attbtn" data-memail="${esc(p.id)}">Meeting email</button></div><ul class="ops">${evs.map(opLi).join('')}</ul></section>`;
+  }).join('');
+  $('panel').innerHTML = `<div class="panel-inner">
+    <button class="back" id="back">All projects</button>
+    <div class="title-row"><h2 class="title">${esc(P.name)}</h2>${A.latest && !closedP ? `<button class="btn" id="close-proj" data-pclose="${esc(P.code)}">Close project</button>` : ''}</div><p class="desc">${esc(projDesc(P.code))}</p>
+    ${closedP ? `<div class="banner note" style="margin:8px 0 14px">This project was closed on ${esc(longDate(closedP.at.slice(0, 10)))} by ${esc(closedP.by)}: ${esc(closedP.note)}. Its ${closedP.ids.length} open item${closedP.ids.length === 1 ? ' was' : 's were'} marked not needed with it; this is its board as it was. ${A.latest ? `<button class="btn" data-preopen="${esc(P.code)}" style="margin-left:8px">Reopen project</button>` : ''}</div>` : ''}
+    <p class="meta">${since === null ? 'Not discussed yet' : since === 0 ? 'Discussed this meeting' : `Last discussed ${since} days ago`}</p>
+    ${lastTime}
+    ${attn.length ? '' : '<p class="empty" style="margin:0 0 10px">Nothing needs attention: no overdue, blocked, or ownerless work.</p>'}
+    <div class="snapshot">
+      ${attn.length ? `<section class="snap blockers"><h3>Needs attention <span class="n">${attn.length}</span></h3><ul>${attn.join('')}</ul></section>` : ''}
+      ${due.length ? `<section class="snap due"><h3>Due in the next two weeks</h3><ul>${due.join('')}</ul></section>` : ''}
+      ${qr.length ? `<section class="snap qr"><h3>Open questions and risks <span class="n">${qr.length}</span></h3><ul>${qr.join('')}</ul></section>` : ''}
+      ${decs.length ? `<section class="snap decisions"><h3>Decisions in effect</h3><ul>${decs.join('')}</ul></section>` : ''}
+    </div>
+    <section class="snap ownerwork" style="margin-bottom:32px"><h3>Open work by owner <span class="n">${acts.length}</span></h3>
+      <div class="actions bd-controls" style="margin:0 0 8px;align-items:center">
+        <input type="search" id="bd-search" placeholder="Search (code, title, owner)" aria-label="Search open work" style="flex:1;min-width:150px">
+        <button class="btn bfilter" data-bf="all" aria-pressed="true">All</button>
+        <button class="btn bfilter" data-bf="overdue" aria-pressed="false">Overdue</button>
+        <button class="btn bfilter" data-bf="blocked" aria-pressed="false">Blocked</button>
+        <button class="btn bfilter" data-bf="unassigned" aria-pressed="false">Unassigned</button>
+        <label class="small" style="white-space:nowrap"><input type="checkbox" id="bd-compact"> Compact</label>
+      </div>
+      <p class="small" id="bd-count" style="margin:0 0 6px"></p>
+      ${owners || '<p class="empty">No open work: everything recorded for this project is reported complete.</p>'}
+      <p class="small" style="margin:10px 0 0">To record a Board decision, open the item.${A.latest ? '' : ' Board decisions are made on the latest state: set "State as of" to the last meeting.'}</p>
+    </section>
+    ${closed.length ? `<section class="snap closed" style="margin-bottom:32px"><details><summary>Done and not needed (${closed.length})</summary>
+      <h4>Completed <span class="n">(${doneL.length})</span></h4>${doneL.length ? `<ul>${doneL.map(closedLi).join('')}</ul>` : '<p class="empty">None.</p>'}
+      <h4>Not needed <span class="n">(${nnL.length})</span></h4>${nnL.length ? `<ul>${nnL.map(closedLi).join('')}</ul>` : '<p class="empty">None.</p>'}
+    </details></section>` : ''}
+    ${b.unlinked.length ? `<p class="note">${b.unlinked.length} item${b.unlinked.length === 1 ? '' : 's'} point at an ID a re-saved meeting dropped, and need a new link: ${esc(b.unlinked.map(u => u.thread).join(', '))}. Use "Review this meeting again" (Workspace) on the later meeting.</p>` : ''}
+    <div class="log-head"><h3>Meeting log</h3><p>Everything above is computed from these entries. Select an item to see its history and the transcript lines behind it.</p></div>
+    ${log || '<p class="empty">This project hasn\'t come up in a meeting yet.</p>'}
+  </div>`;
+  wireBoardFilter();
+}
+
+/* "Last time we talked…" (UX A2): the saved chat summary of the latest meeting, up to "State as of", that covered this
+   project; a summary of a meeting that covered several projects is labeled as meeting-wide. No new LLM call. */
+function lastTalk(A, code) {
+  const m = A.used.slice(0, A.used.indexOf(A.cur) + 1).filter(p => p.kind === 'meeting' && covers(p, code)).pop();
+  const head = '<h3>Last time we talked…</h3>';
+  if (!m) return `<section class="lasttime">${head}<p class="empty">No meeting has discussed this project yet.</p></section>`;
+  const n = (m.projects || []).length, sum = m.reply && m.reply.summary;
+  return `<section class="lasttime">${head}<p class="when">${esc(longDate(m.meeting.date))} · ${esc(m.meeting.title)}${n > 1 ? ` · meeting-wide summary (the meeting covered ${n} projects)` : ''}</p>` +
+    (sum ? `<p>${esc(sum)}</p>` : '<p class="empty">This meeting was saved without a summary.</p>') + '</section>';
+}
+
+function renderAttention(A, list) {
+  const ps = S.projectsOf(state.pkgs), b = A.b, cf = S.current(state.pkgs).conflicts;
+  const groups = ps.map(p => { const xs = list.filter(t => t.project === p.code); return xs.length ? `<section class="snap blockers" style="margin-bottom:14px"><h3>${esc(p.name)} <span class="n">${xs.length}</span></h3><ul>${xs.map(t => `<li>${entBtn(t)}<div class="sub">${esc(t.owner || 'Unassigned')} · ${attentionOf(t, A.date).join(' · ')}</div></li>`).join('')}</ul></section>` : ''; }).join('');
+  $('panel').innerHTML = `<div class="panel-inner"><button class="back" id="back">All projects</button><h2 class="title">Needs attention</h2>
+    <p class="desc">Across every project, as of ${esc(fmtDate(A.date))}: overdue, blocked, no accountable owner, a source still to check, or parked.</p><p class="meta"></p>
+    ${cf.length ? `<p class="note">${cf.length} meeting${cf.length === 1 ? ' was' : 's were'} saved twice: see Workspace to choose a save.</p>` : ''}
+    ${b.unlinked.length ? `<p class="note">${b.unlinked.length} item${b.unlinked.length === 1 ? ' needs' : 's need'} a new link: ${esc(b.unlinked.map(u => u.thread).join(', '))}.</p>` : ''}
+    ${groups || '<p class="empty">Nothing needs attention.</p>'}</div>`;
+}
+
+// v1's search and exception filters over the open-work list: DOM filtering, no re-render.
+function applyBoardFilter() {
+  const f = ui.filter, q = f.q.trim().toLowerCase(), lis = [...document.querySelectorAll('#panel .ownerwork .ownergrp li')];
+  lis.forEach(li => { li.hidden = !((!q || (li.dataset.s || '').includes(q)) && (f.mode === 'all' || (li.dataset.f || '').split(' ').includes(f.mode))); });
+  document.querySelectorAll('#panel .ownergrp').forEach(g => { g.hidden = ![...g.querySelectorAll('li')].some(li => !li.hidden); });
+  const c = $('bd-count'); if (c) c.textContent = (q || f.mode !== 'all') ? `Showing ${lis.filter(li => !li.hidden).length} of ${lis.length} open items.` : '';
+}
+function wireBoardFilter() {
+  const se = $('bd-search'); if (!se) return;
+  se.value = ui.filter.q;
+  se.addEventListener('input', () => { ui.filter.q = se.value; applyBoardFilter(); });
+  document.querySelectorAll('#panel .bfilter').forEach(x => {
+    x.setAttribute('aria-pressed', String(x.dataset.bf === ui.filter.mode));
+    x.addEventListener('click', () => { ui.filter.mode = x.dataset.bf; document.querySelectorAll('#panel .bfilter').forEach(y => y.setAttribute('aria-pressed', String(y.dataset.bf === ui.filter.mode))); applyBoardFilter(); });
+  });
+  const cp = $('bd-compact'); cp.checked = ui.filter.compact;
+  const apply = () => { const pi = document.querySelector('#panel .panel-inner'); if (pi) pi.classList.toggle('compact', ui.filter.compact); };
+  cp.addEventListener('change', () => { ui.filter.compact = cp.checked; apply(); }); apply();
+  applyBoardFilter();
+}
+
+// A board decision, from the item dialog: one item at a time.
+function decide(action, ids, note, label) {
+  const by = $('saved-by').value.trim() || (function () { try { return localStorage.getItem('mkg2-saved-by') || ''; } catch (err) { return ''; } })();
+  const r = S.boardDecision({ board: S.replay(state.pkgs), action, ids, note, savedBy: by });
+  if (r.error) return { error: r.error + (by ? '' : ' (Your name: Process meeting, step 5.)') };
+  addPkg(r.pkg); idbPut(r.pkg); download(r.pkg.id + '.json', r.pkg);
+  ui.asOf = null; renderSaved();
+  toast(`${label || S.DECISIONS[action]}: ${ids.join(', ')}. Put the downloaded file (${r.pkg.id}.json) in the team folder.`);
+  return { ok: true };
+}
+
+/* ---------- closing and reopening a project (the PM's ask, 2026-10-16): a note, a clear message, one decision ---------- */
+function openProjectDecision(action, code) {
+  const A = boardAsOf(); if (!A || !A.latest) return;
+  const P = S.projectsOf(state.pkgs).find(p => p.code === code); if (!P) return;
+  const open = A.b.order.map(id => A.b.threads.get(id)).filter(t => t.project === code && t.kind !== 'decision' && !['done', 'not_needed'].includes(t.status));
+  const cl = A.b.closedProjects.get(code);
+  const close = action === 'close_project';
+  $('hist').classList.remove('wide');
+  $('hist').innerHTML = `<div class="dlg">
+    <div class="dlg-top"><h3 id="hist-title">${close ? 'Close project' : 'Reopen project'}: ${esc(P.name)}</h3><button class="btn" id="close-hist">Cancel</button></div>
+    <section class="decide-box"><h4>${close ? 'This closes the project and all its open items' : 'This reopens the project'}</h4>
+      <p class="sub">${close ? `${open.length} open item${open.length === 1 ? '' : 's'} (actions, questions and risks) will be marked not needed, as closed with the project. Its decisions stay in effect, nothing is deleted, and the project moves to "Closed projects". It is left out of new meeting requests. You can reopen it later.`
+        : `The ${cl ? cl.ids.length : 0} item${cl && cl.ids.length === 1 ? '' : 's'} closed with it go back to the status ${cl && cl.ids.length === 1 ? 'it' : 'they'} had, and the project is listed again in new meeting requests.`}
+        Recorded with your name and this note as your decision, not as meeting evidence.</p>
+      ${close && open.length ? `<details style="margin:0 0 8px"><summary class="src">The ${open.length} open item${open.length === 1 ? '' : 's'}</summary><ul class="items">${open.map(t => `<li>${esc(t.id)} ${esc(t.what)} ${pill(t.status)}</li>`).join('')}</ul></details>` : ''}
+      <label class="small" for="p-note">Note (required)</label>
+      <input type="text" id="p-note" placeholder="Why, in a few words" style="width:100%;margin:2px 0 8px">
+      <div class="actions" style="margin:0"><button class="btn primary" data-pact="${action}" data-code="${esc(code)}">${close ? 'Close the project' : 'Reopen the project'}</button></div>
+      <p id="p-msg" class="msg"></p></section></div>`;
+  $('hist').showModal();
+}
+function decideProject(action, code, note) {
+  const by = $('saved-by').value.trim() || (function () { try { return localStorage.getItem('mkg2-saved-by') || ''; } catch (err) { return ''; } })();
+  const r = S.projectDecision({ board: S.replay(state.pkgs), action, project: code, note, savedBy: by });
+  if (r.error) return { error: r.error + (by ? '' : ' (Your name: Process meeting, step 5.)') };
+  addPkg(r.pkg); idbPut(r.pkg); download(r.pkg.id + '.json', r.pkg);
+  ui.asOf = null; ui.project = code; renderSaved();
+  toast(`${action === 'close_project' ? 'Project closed' : 'Project reopened'}. Put the downloaded file (${r.pkg.id}.json) in the team folder.`);
+  return { ok: true };
+}
+
+/* ---------- the item dialog: facts, history with the speakers' words, the board decisions ---------- */
+function openHistory(id) {
+  const A = boardAsOf(); const t = A && A.b.threads.get(id); if (!t) return;
+  const P = S.projectsOf(state.pkgs).find(p => p.code === t.project);
+  const hist = t.history.slice().reverse().map(h => {
+    if (h.board) return `<li><div class="when">${esc(fmtDate(h.at))} · ${/_project$/.test(h.event) ? 'project decision' : 'your decision'}</div><div><span class="tag k-pm">${esc(decisionText(h))}</span></div><div class="why">${esc(h.note)}</div><p class="sub" style="margin:2px 0 0">Recorded as ${esc(h.by)}'s decision, not as meeting evidence.</p></li>`;
+    const p = pkgOf(h.meeting), it = p && p.items.find(x => x.n === h.item);
+    const d = p && it ? describeItem(p, it, A.b) : { k: 'note', tag: h.event };
+    return `<li><div class="when">${esc(p ? fmtDate(p.meeting.date) + ' ' + p.meeting.title : h.meeting)}</div><div><span class="tag k-${d ? d.k : 'note'}">${esc(d ? d.tag : h.event)}</span>${d && d.detail ? `<span class="detail">${esc(d.detail)}</span>` : ''}</div>` +
+      `${it && it.what && h.event !== 'created' ? `<div class="why">${esc(it.what)}</div>` : ''}${it && it.seg ? quoteOf(p, it.seg) : ''}</li>`;
+  }).join('');
+  const can = a => offered(a, t) && !S.boardDecision({ board: S.replay(state.pkgs), action: a, ids: [id], note: 'x', savedBy: 'x' }).error;
+  const acts = ['settled', 'not_needed', 'undo', 'raise', 'lower'].filter(can);
+  $('hist').classList.remove('wide');
+  $('hist').innerHTML = `<div class="dlg">
+    <div class="dlg-top"><h3 id="hist-title"><span class="code">${esc(t.id)}</span>${esc(t.what)}</h3><button class="btn" id="close-hist">Close</button></div>
+    <dl class="facts">
+      <dt>Project</dt><dd>${esc(P ? P.name : t.project)}</dd>
+      <dt>Kind</dt><dd>${esc({ action: 'Action', question: 'Open question', risk: 'Risk', decision: 'Decision' }[t.kind])}</dd>
+      ${t.kind === 'decision' ? '' : `<dt>Owner</dt><dd>${esc(t.owner || 'Unassigned')}</dd><dt>Status</dt><dd>${pill(t.status)}</dd>`}
+      ${t.due ? `<dt>Due</dt><dd>${t.dueDate && t.due === t.dueDate ? esc(fmtDate(t.dueDate)) : `“${esc(t.due)}”${t.dueDate ? ' (' + esc(fmtDate(t.dueDate)) + ')' : ' (not a calendar date)'}`}</dd>` : ''}
+      ${t.waitsOn ? `<dt>Waiting on</dt><dd>${entBtn(A.b.threads.get(t.waitsOn)) || esc(t.waitsOn)}</dd>` : ''}
+      ${t.settledOutside ? `<dt>Settled</dt><dd>by ${esc(t.settledOutside.by)} outside a meeting: ${esc(t.settledOutside.note)}</dd>` : ''}
+      ${t.raised ? `<dt>Brought back</dt><dd>into discussion by ${esc(t.raised.by)}: ${esc(t.raised.note)}</dd>` : ''}
+      ${t.parked ? `<dt>Parked</dt><dd>not discussed in ${t.quiet} meetings; left out of the request</dd>` : ''}
+    </dl>
+    ${A.b.closedProjects.has(t.project) ? `<p class="note">This item's project is closed${t.closedWithProject ? ', and the item was closed with it' : ''}. To change it, reopen the project from its page.</p>` : ''}
+    ${t.kind === 'decision' || !A.latest || !acts.length ? '' : `<section class="decide-box"><h4>Record a Board decision</h4>
+      <p class="sub">Recorded with your name and this note as your decision, not as meeting evidence. It changes this item only.</p>
+      <label class="small" for="d-note">Note (required)</label>
+      <input type="text" id="d-note" placeholder="Why, in a few words" style="width:100%;margin:2px 0 8px">
+      <div class="actions" style="margin:0">${acts.map(a => `<button class="btn" data-dact="${a}" data-id="${esc(t.id)}">${esc(decisionLabel(a, t))}</button>`).join('')}</div>
+      <p id="d-msg" class="msg"></p>
+      ${acts.includes('raise') ? `<p class="why-raise">This item hasn't been discussed in ${t.quiet} meetings, so it's left out of the requests. Bringing it back lists it first in the next meeting's request, as context for the chat.</p>` : ''}</section>`}
+    <h4 class="hist-head">History</h4>
+    <ul class="hist">${hist}</ul></div>`;
+  $('hist').showModal();
+}
+
+/* ---------- the emails, as v1's dialogs: a formatted preview, copy formatted (for Outlook) or plain ---------- */
+function toHtml(text, heads, names) {
+  const out = []; let list = null, table = null;
+  const flush = () => { if (list) out.push('<ul>' + list.join('') + '</ul>'); if (table) out.push('<table border="1" cellpadding="5" style="border-collapse:collapse;font-size:13px">' + table.join('') + '</table>'); list = table = null; };
+  const named = l => names.find(n => l.startsWith(n + ': '));
+  for (const l of text.replace(/\n$/, '').split('\n')) {
+    if (!l.trim()) { flush(); continue; }
+    if (l.includes('\t')) { const c = l.split('\t'); if (!table) { flush(); table = ['<tr>' + c.map(x => `<th align="left">${esc(x)}</th>`).join('') + '</tr>']; } else table.push('<tr>' + c.map(x => `<td>${esc(x)}</td>`).join('') + '</tr>'); continue; }
+    if (table) flush();
+    if (heads.includes(l) || /^\d\. /.test(l)) { flush(); out.push(`<p><b>${esc(l)}</b></p>`); continue; }
+    if (l === '---') { flush(); out.push('<hr>'); continue; }
+    if (l.startsWith('- ')) { (list = list || []).push(`<li>${esc(l.slice(2))}</li>`); continue; }
+    const n = named(l);
+    if (n) { (list = list || []).push(`<li><b>${esc(n)}:</b> ${esc(l.slice(n.length + 2))}</li>`); continue; }
+    flush(); out.push(`<p>${esc(l)}</p>`);
+  }
+  flush(); return out.join('\n');
+}
+async function copyRich(html, text) {
+  try { await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([text], { type: 'text/plain' }) })]); toast('Copied. Paste into a new Outlook email; the tables paste as tables.'); }
+  catch (e) { try { await navigator.clipboard.writeText(text); toast('Formatted copy wasn\'t allowed; plain text copied instead.'); } catch (_) { toast('Couldn\'t copy. Use Copy plain text.'); } }
+}
+async function copyPlain(text) { try { await navigator.clipboard.writeText(text); toast('Plain text copied.'); } catch (e) { toast('Couldn\'t copy.'); } }
+
+function openReport() {
+  const A = boardAsOf(); if (!A) return toast('Nothing to report yet.');
+  const prev = A.used[A.used.indexOf(A.cur) - 1];
+  const since = prev ? new Date(new Date(prev.meeting.date + 'T12:00:00').getTime() + 86400000).toISOString().slice(0, 10) : A.cur.meeting.date;
+  $('hist').classList.add('wide');
+  $('hist').innerHTML = `<div class="dlg">
+    <div class="dlg-top"><h3 id="hist-title">Program email report</h3><button class="btn" id="close-hist">Close</button></div>
+    <p class="sub" style="margin:6px 0 10px">The whole board across all projects, in your leadership format, no LLM involved: the period's new work and developments, decisions, what needs management attention, next steps and the status table. Copy formatted, then paste into Outlook; the table pastes as a table.</p>
+    <div class="row" style="align-items:flex-end"><label class="field">From<input type="date" id="l-since" value="${esc(since)}"></label><label class="field">To<input type="date" id="l-asof" value="${esc(A.date)}"></label><button class="btn" id="lead-btn">Update</button></div>
+    <div class="report-preview" id="lead-preview"></div><textarea id="lead" hidden></textarea>
+    <div class="actions" style="margin-top:12px"><button class="btn primary" id="copy-rich">Copy formatted for email</button><button class="btn" id="copy-lead">Copy plain text</button></div></div>`;
+  const draw = () => {
+    const ps = S.projectsOf(state.pkgs), to = $('l-asof').value;
+    const text = `Subject: Project update, ${longDate(to)}\n\n` + E.leadershipEmail(S.replay(state.pkgs, A.latest ? {} : { upTo: A.used[A.used.indexOf(A.cur) + 1].meeting.id }), { since: $('l-since').value, asOf: to, projects: ps });
+    $('lead').value = text; $('lead-preview').innerHTML = toHtml(text, E.LEAD_SECTIONS.concat(['Key developments:']), ps.map(p => p.name));
+  };
+  draw(); $('hist').showModal();
+  $('lead-btn').addEventListener('click', draw);
+  $('copy-rich').addEventListener('click', () => copyRich($('lead-preview').innerHTML, $('lead').value));
+  $('copy-lead').addEventListener('click', () => copyPlain($('lead').value));
+}
+function openMeetingEmail(pkgId) {
+  const p = state.pkgs.find(x => x.id === pkgId);
+  if (!p || p.kind !== 'meeting') return toast('"State as of" is set to a board started from a spreadsheet, which has no transcript. Meeting email reports exist for meetings: pick one in the selector above.');
+  const text = `Subject: ${p.meeting.title}, ${longDate(p.meeting.date)}\n\n` + E.meetingEmail(p, S.replay(state.pkgs, { upTo: p.meeting.id }));
+  const html = toHtml(text, E.SECTIONS, []);
+  $('hist').classList.add('wide');
+  $('hist').innerHTML = `<div class="dlg">
+    <div class="dlg-top"><h3 id="hist-title">Meeting email report: ${esc(p.meeting.title)}, ${esc(fmtDate(p.meeting.date))}</h3><button class="btn" id="close-hist">Close</button></div>
+    <p class="sub" style="margin:6px 0 10px">This meeting only, in your seven sections, from the saved meeting: no second extraction. Items whose source is still to check are listed at the end, for you, and are not part of the email.</p>
+    <div class="actions" style="margin:0 0 10px"><button class="btn primary" id="msum-copy-rich">Copy formatted (for Outlook)</button><button class="btn" id="msum-copy-plain">Copy plain text</button></div>
+    <div class="report-preview" id="msum-preview">${html}</div><textarea id="msum-text" hidden>${esc(text)}</textarea></div>`;
+  $('hist').showModal();
+  $('msum-copy-rich').addEventListener('click', () => copyRich(html, text));
+  $('msum-copy-plain').addEventListener('click', () => copyPlain(text));
+}
+
+/* ---------- the dashboard: what to ask, of whom, and why now (Aaron, 2026-10-16) ----------
+   The questions come from interventions.js, as of "State as of": routine follow-up, and the few that may need management
+   intervention. Each opens the existing item dialog; nothing here records anything. The board's tables are below, folded. */
+const IV_TAG = { waits_done: 'What it waited on is done', blocked: 'Blocked', overdue: 'Overdue', no_owner: 'No owner', waited_on_late: 'Others are waiting on it',
+  question_open: 'Open question carried over', stuck: 'Follow up', risk_no_action: 'Risk with no action', vague_date: 'No real date', parked: 'Parked', to_check: 'Source to check' };
+const ivAge = r => r.age == null ? '' : r.age === 1 ? 'new since the last meeting' : `${r.age} meetings in a row`;
+function ivRows(rows, b) {
+  const by = {}; rows.forEach(r => (by[r.ask] = by[r.ask] || []).push(r));
+  return Object.entries(by).map(([who, xs]) => `<div class="iv-who">Ask ${esc(who)} <span class="sub">(${xs.length})</span></div>` + xs.map(r => {
+    const t = b.threads.get(r.id);
+    return `<div class="iv-row"><p class="iv-q"><span class="iv-tag k-${esc(r.code)}">${esc(IV_TAG[r.code])}</span>${esc(r.question)}<span class="iv-age">${esc(ivAge(r))}</span></p>` +
+      `<div>${entBtn(t)}${pill(t.status)}</div><div class="sub">${esc(r.evidence.join(' · '))}</div>` +
+      (r.escalation ? `<p class="iv-why">Why it may need intervention: ${esc(r.escalation)}</p>` : '') + '</div>';
+  }).join('')).join('');
+}
+function renderDashboard() {
+  const A = boardAsOf(), el = $('dash-inner');
+  if (!A) { el.innerHTML = '<h2>Dashboard</h2><p class="lead">Nothing loaded yet.</p>'; return; }
+  const ps = S.projectsOf(state.pkgs), ts = A.b.order.map(id => A.b.threads.get(id)), acts = ts.filter(t => t.kind === 'action' && isOpen(t));
+  const iv = IV.compute(state.pkgs, { board: A.b, cur: A.cur, date: A.date });
+  state.iv = iv; state.ivFor = { asOf: longDate(A.date), title: A.cur.meeting.title };
+  const pname = c => (ps.find(p => p.code === c) || {}).name || c;
+  const sn = iv.since, chip = (label, ids) => `<details><summary>${ids.length} ${esc(label)}</summary>${ids.length ? `<ul>${ids.map(id => `<li>${entBtn(A.b.threads.get(id))}</li>`).join('')}</ul>` : ''}</details>`;
+  const since = sn ? `<h3 style="font-size:15px;margin:0 0 6px">Since the previous meeting <span class="sub">(${esc(sn.previous.title)}, ${esc(fmtDate(sn.previous.date))})</span></h3><div class="iv-since">` +
+      chip('completed or marked not needed', sn.completed) + chip('new actions', sn.newActions) + chip('new decisions', sn.newDecisions) + chip('newly blocked', sn.newlyBlocked) +
+      chip('unblocked', sn.unblocked) + chip('newly overdue', sn.newlyOverdue) + '</div>'
+    : `<p class="sub" style="margin:0 0 16px">${A.cur.kind === 'meeting' ? 'This is the first meeting on the board: nothing to compare with yet.' : '"State as of" is a board started from a spreadsheet: nothing to compare with yet.'}</p>`;
+  const nq = iv.followUp.length + iv.escalate.length + iv.people.length + iv.projects.length;
+  const row = p => { const m = acts.filter(t => t.project === p.code);
+    return `<tr><td><button class="dproj" data-dproj="${esc(p.code)}">${esc(p.name)}</button></td><td>${m.length}</td><td>${m.filter(t => t.status === 'blocked').length}</td><td>${m.filter(t => DT.daysLate(t.dueDate, A.date) > 0).length}</td><td>${m.filter(t => !t.owner).length}</td><td>${ts.filter(t => t.project === p.code && t.parked).length}</td><td>${ts.filter(t => t.project === p.code && t.kind === 'risk' && isOpen(t)).length}</td></tr>`; };
+  const owners = {}; acts.forEach(t => { const k = t.owner || 'Unassigned'; owners[k] = owners[k] || { open: 0, late: 0 }; owners[k].open++; if (DT.daysLate(t.dueDate, A.date) > 0) owners[k].late++; });
+  el.innerHTML = `<h2>Dashboard</h2><p class="lead">What to ask, of whom, and why now: as of ${esc(longDate(A.date))} (${esc(A.cur.meeting.title)}). Every question comes from the saved records, with no LLM; select an item to see its history and the words behind it.</p>
+    ${since}
+    <div class="actions" style="margin:0 0 14px"><button class="btn primary" id="iv-copy"${nq ? '' : ' disabled'}>Copy these questions</button><span class="small">${nq} question${nq === 1 ? '' : 's'}, grouped by person, with each item's ID and evidence.</span></div>
+    ${iv.escalate.length ? `<section class="iv-sec esc card"><h3>Possible management intervention (${iv.escalate.length})</h3><p class="sub">Only where the records show something significant: a problem that has held for several meetings, other work waiting on something late, or important work with no owner. Each says why.</p>${ivRows(iv.escalate, A.b)}</section>` : ''}
+    <section class="iv-sec card"><h3>Ask in the next meeting (${iv.followUp.length})</h3><p class="sub">Routine follow-up: each item once, under its strongest reason; its other reasons are listed with it. A question, not a finding.</p>${iv.followUp.length ? ivRows(iv.followUp, A.b) : '<p class="empty">Nothing to follow up.</p>'}</section>
+    ${iv.people.length ? `<section class="iv-sec card"><h3>Capacity conversations (${iv.people.length})</h3><p class="sub">A number of actions is a reason to ask, not a finding of overload.</p>${iv.people.map(p => `<div class="iv-row"><p class="iv-q">Ask ${esc(p.person)}: ${esc(p.question)}</p><div class="sub">${p.ids.map(id => entBtn(A.b.threads.get(id))).join(' · ')}</div></div>`).join('')}</section>` : ''}
+    ${iv.projects.length ? `<section class="iv-sec card"><h3>Projects (${iv.projects.length})</h3>${iv.projects.map(p => `<div class="iv-row"><p class="iv-q">Ask the PM: ${esc(p.question)}</p><div class="sub"><button class="dproj" data-dproj="${esc(p.code)}">${esc(p.name)}</button> · ${esc(p.evidence)}</div></div>`).join('')}</section>` : ''}
+    <details class="iv-more"><summary>Project overview</summary><div class="tbl-wrap"><table><tr><th>Project</th><th>Open</th><th>Blocked</th><th>Overdue</th><th>No owner</th><th>Parked</th><th>Risks</th></tr>${ps.filter(p => !A.b.closedProjects.has(p.code)).map(row).join('')}</table></div></details>
+    <details class="iv-more"><summary>Open and overdue by owner</summary><div class="tbl-wrap"><table><tr><th>Owner</th><th>Open</th><th>Overdue</th></tr>${Object.entries(owners).sort((a, b) => b[1].open - a[1].open).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${v.open}</td><td>${v.late}</td></tr>`).join('')}</table></div></details>
+    <details class="iv-more"><summary>Data health</summary><ul class="items"><li>${S.current(state.pkgs).used.length} saved meetings and boards in use</li><li>${S.current(state.pkgs).conflicts.length} meetings saved twice</li><li>${A.b.unlinked.length} items needing a new link</li><li>${ts.filter(t => t.toCheck && isOpen(t)).length} items whose source is still to check</li></ul></details>`;
+  $('iv-copy').addEventListener('click', () => copyPlain(IV.copyText(state.iv, { asOf: state.ivFor.asOf, title: state.ivFor.title, projectName: pname })));
+}
+
+/* ---------- tabs, the header tools, the board's clicks ---------- */
+function setTab(name) {
+  document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', String(x.dataset.tab === name)));
+  ['board', 'dash', 'prepare', 'seed'].forEach(v => $('view-' + v).classList.toggle('on', v === name));
+}
+document.querySelectorAll('.tab').forEach(x => x.addEventListener('click', () => setTab(x.dataset.tab)));
+$('asof').addEventListener('change', e => { ui.asOf = e.target.value; renderBoard(); });
+$('email-report').addEventListener('click', openReport);
+$('meeting-report').addEventListener('click', () => { const A = boardAsOf(); if (!A) return toast('Nothing to report yet.'); openMeetingEmail(A.cur.id); });
+document.addEventListener('click', ev => {
+  const dp = ev.target.closest('[data-dproj]');
+  if (dp) { ui.project = dp.dataset.dproj; setTab('board'); $('board').classList.add('show-panel'); renderBoard(); $('panel').scrollTop = 0; return; }
+  const pb = ev.target.closest('[data-project]');
+  if (pb) { ui.project = pb.dataset.project; $('board').classList.add('show-panel'); renderBoard(); $('panel').scrollTop = 0; return; }
+  const eb = ev.target.closest('[data-ent]');
+  if (eb) { openHistory(eb.dataset.ent); return; }
+  const me = ev.target.closest('[data-memail]');
+  if (me) { openMeetingEmail(me.dataset.memail); return; }
+  const pc = ev.target.closest('[data-pclose]'), po = ev.target.closest('[data-preopen]');
+  if (pc || po) { openProjectDecision(pc ? 'close_project' : 'reopen_project', (pc || po).dataset[pc ? 'pclose' : 'preopen']); return; }
+  const pa = ev.target.closest('[data-pact]');
+  if (pa) { const r = decideProject(pa.dataset.pact, pa.dataset.code, $('p-note').value); if (r.error) msg('p-msg', r.error, 'bad'); else $('hist').close(); return; }
+  const da = ev.target.closest('[data-dact]');
+  if (da) { const r = decide(da.dataset.dact, [da.dataset.id], $('d-note').value, da.textContent); if (r.error) msg('d-msg', r.error, 'bad'); else $('hist').close(); return; }
+  if (ev.target.id === 'back') { $('board').classList.remove('show-panel'); return; }
+  if (ev.target.id === 'close-hist' || ev.target.id === 'hist') $('hist').close();
+});
+$('export-ws').addEventListener('click', () => {
+  if (!state.pkgs.length) return toast('Nothing to export yet.');
+  download(`mkg2-workspace-${today()}.json`, { mkg2Workspace: '1.0', exportedAt: new Date().toISOString(), packages: state.pkgs });
+  toast('Workspace exported: every saved meeting, board and decision in one file.');
+});
+$('clear-ws').addEventListener('click', async () => {
+  if (!confirm('Clear this browser\'s copy? The files in the team folder are not touched; open them again to restore the board.')) return;
+  try { const db = await idb(); db.transaction('pkgs', 'readwrite').objectStore('pkgs').clear(); } catch (e) { /* nothing stored */ }
+  state.pkgs = []; ui.asOf = null; ui.project = null; renderSaved(); toast('Cleared this browser\'s copy.');
+});
+// v1's sample baseline (fictional), as a spreadsheet board: four projects, six people, fifteen actions, two decisions.
+$('load-sample').addEventListener('click', () => {
+  if (state.pkgs.some(p => p.kind === 'seed' && p.savedBy === 'sample')) return toast('The sample baseline is already loaded.');
+  const seed = SD.readSeed(SAMPLE_CSV), codes = {}, used = projects().map(p => p.code);
+  for (const p of seed.projects) { const c = S.defaultCode(p.name, used); used.push(c); codes[p.name] = c; }
+  const pkg = SD.seedPackage({ seed, codes, asOf: '2026-09-24', savedBy: 'sample', savedAt: '2026-09-24T12:00:00.000Z' });
+  addPkg(pkg); idbPut(pkg); ui.asOf = null; renderSaved();
+  toast('Loaded the Sept 24 sample baseline (fictional). Process meeting: try the sample meeting "Weekly board walk".');
+});
+
+idbAll().then(ps => { ps.forEach(addPkg); renderSaved(); });
+renderSaved();
+window.MKG2_state = state; window.MKG2_ui = ui;   // for the browser tests
+})();
+</script>
+</body>
+</html>

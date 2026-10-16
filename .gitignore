@@ -1,0 +1,7 @@
+node_modules/
+build/
+tests/jsdom/run_*/
+tests/playwright/_t3*_out/
+__pycache__/
+*.pyc
+tests/real/local/

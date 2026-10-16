@@ -1,0 +1,25 @@
+{
+ "about": "Expected reading of v1's built-in sample meeting (fictional, from src/base/MeetingGraph.orig.html) against sample-board.csv seeded as of 2026-09-24. Project codes are the page's defaults. Thread IDs are as minted by the seed. 'project' is where the item belongs; for an item on a thread it is the thread's project.",
+ "meeting": { "title": "Weekly board walk", "date": "2026-10-01", "time": "10:00", "offset": "-04:00", "statements": 12 },
+ "projects": { "IPR": "Intake portal redesign", "PDE": "Partner data exchange", "RDM": "Reporting dashboard migration", "RRC": "Records retention cleanup" },
+ "items": [
+  { "seg": "S001", "project": "IPR", "thread": "IPR-A-260924-07", "status": "done", "what": "Legal review of fields 41 and 57 came back: both stay", "evidence": "named: 'the intake fields'" },
+  { "seg": "S001", "project": "IPR", "thread": "IPR-A-260924-04", "status": "done", "what": "Field decision closed: drop the other 27 fields", "evidence": "named: 'the intake fields'", "also_ok": "a new decision in IPR instead of the thread" },
+  { "seg": "S002", "project": "IPR", "thread": "IPR-A-260924-03", "status": "in_progress", "what": "Prototype step 3 unblocked; full prototype by next Wednesday", "evidence": "follows S001; 'the prototype' matches the IPR thread" },
+  { "seg": "S003", "project": "IPR", "thread": "IPR-A-260924-05", "status": null, "what": "Accessibility review still on for the eighth", "evidence": "matches the IPR thread", "optional": true },
+  { "seg": "S004", "project": "PDE", "thread": "PDE-A-260924-04", "status": "done", "what": "The firewall rule went in", "evidence": "named: 'the partner exchange'" },
+  { "seg": "S005", "project": "PDE", "thread": "PDE-A-260924-03", "status": null, "what": "Ortiz will run the test transfer Monday", "evidence": "follows S004" },
+  { "seg": "S007", "project": "PDE", "thread": null, "kind": "commitment", "what": "Alvarez owns getting an interconnection security agreement signed before any production transfer, by end of October", "evidence": "not named: 'their side' = the partner; 'production transfer'. The key placement test." },
+  { "seg": "S008", "project": "RDM", "thread": "RDM-A-260924-01", "status": null, "what": "Three of the five reports are rebuilt", "evidence": "named: 'Dashboard update'" },
+  { "seg": "S010", "project": "RDM", "thread": "RDM-A-260924-02", "status": null, "what": "Nguyen takes over the refresh schedule confirmation from Patel", "evidence": "the thread's owner changes; cite S010 (acceptance)" },
+  { "seg": "S011", "project": "RRC", "thread": "RRC-A-260924-02", "status": null, "what": "Still nothing from the records office", "evidence": "named: 'Records cleanup'", "optional": true },
+  { "seg": "S012", "project": "RDM", "thread": null, "kind": "decision", "what": "The dashboard will publish nightly, to match the refresh", "evidence": "named: 'for the dashboard'" }
+ ],
+ "traps": [
+  { "seg": "S006", "what": "'Maybe someone should look at automating the monthly exports' is a suggestion, not a commitment. If listed at all (as a question), its project is not clear: null or 'not clear', never a confident code." }
+ ],
+ "notes": [
+  "New items to place: S007 (PDE, by context only), S012 (RDM, named), and possibly S001's decision (IPR). Everything else is on a thread and takes the thread's project.",
+  "The request lists threads by ID only; the project's name appears nowhere unless the request includes a PROJECTS block. That is part of what §10.20 would change."
+ ]
+}

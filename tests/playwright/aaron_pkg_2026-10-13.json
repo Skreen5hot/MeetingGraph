@@ -1,0 +1,1725 @@
+{
+  "mkgPackage": "0.1",
+  "tool": "MeetingGraph 0.1",
+  "contract": {
+    "specVersion": "0.3.0",
+    "context": {
+      "file": "delta-context-0.3.0.jsonld",
+      "iri": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+      "sha256": "131585c5e46f0e7db383323a072d6d68fb0ef8788bbb7b07a5a24effa95191bc"
+    }
+  },
+  "meeting": {
+    "id": "20261001T140000Z",
+    "meetingAt": "2026-10-01T10:00:00-04:00",
+    "title": "Weekly board walk",
+    "kind": "transcript"
+  },
+  "sources": [
+    {
+      "id": "S004",
+      "t": "00:03:55",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "Understood. I heard yesterday that we may have additional observers for the partner transfer. It could include leadership and technical representatives. I do not know whether that list will grow, but there may be more people than originally expected."
+    },
+    {
+      "id": "S007",
+      "t": "00:05:33",
+      "speaker": "brooks",
+      "speakerName": "Brooks, Dana",
+      "text": "There has been some discussion about putting the monitoring equipment on the stand this time, but I am not sure we need to. The view from the work tables may be sufficient, and the equipment is fairly large."
+    },
+    {
+      "id": "S008",
+      "t": "00:05:47",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "We can support it on the stand if we have the correct mounts. The concern is stability. If the equipment has a large surface area, we may need to lower the stand during high wind or vibration conditions."
+    },
+    {
+      "id": "S009",
+      "t": "00:06:02",
+      "speaker": "brooks",
+      "speakerName": "Brooks, Dana",
+      "text": "That is what I am most uncertain about, the mounting method. The standard clips may not be sufficient."
+    },
+    {
+      "id": "S011",
+      "t": "00:06:56",
+      "speaker": "brooks",
+      "speakerName": "Brooks, Dana",
+      "text": "We can ask for the equipment documentation."
+    },
+    {
+      "id": "S012",
+      "t": "00:07:00",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "If the conditions are not favorable, we can lower the working height or keep the equipment at ground level. We can work that out once we know the transfer plan."
+    },
+    {
+      "id": "S013",
+      "t": "00:07:58",
+      "speaker": "brooks",
+      "speakerName": "Brooks, Dana",
+      "text": "Morgan, James said the partner side may have more observers for the upcoming transfer. Is there a visitor list or a process for managing those names?"
+    },
+    {
+      "id": "S014",
+      "t": "00:08:23",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "There seems to be some conflict in the dates that we are trying to clean up. The transfer period that had been discussed as May eighteenth through May twenty-eighth is now being described as May eighteenth through May twenty-second. The current expectation may be that people working directly on the transfer need to be available Monday through Friday, with travel Sunday and Saturday. There is still discussion about what that means for people who are not working hands-on."
+    },
+    {
+      "id": "S015",
+      "t": "00:10:09",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "Raj and I are planning to leave on the fourteenth. It may take us several days to get there, depending on traffic, weather, or equipment issues. We expect to arrive on the seventeenth."
+    },
+    {
+      "id": "S016",
+      "t": "00:10:28",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "If the transfer needs to be ready on the eighteenth, it would help if the technical team could have files staged and equipment connected before then."
+    },
+    {
+      "id": "S017",
+      "t": "00:10:50",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "I think the eighteenth is being treated as the setup and configuration day, not necessarily the day every participant has to arrive."
+    },
+    {
+      "id": "S018",
+      "t": "00:11:02",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "Okay. That gives us some flexibility. If we arrive on the seventeenth, we can get settled and be ready for the eighteenth."
+    },
+    {
+      "id": "S019",
+      "t": "00:11:28",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "I will send everyone information from yesterday’s discussion this morning. There will be a partner-site slide deck with location details. If we need to make arrangements before the eighteenth for the team to arrive, stage the files, and get settled, we will work through that."
+    },
+    {
+      "id": "S020",
+      "t": "00:12:11",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "That would be ideal. If the staging location can be identified ahead of time, I would prefer to deliver the files there, set up the equipment, and be out of the way before the active transfer period begins."
+    },
+    {
+      "id": "S021",
+      "t": "00:12:40",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "Would you prefer to stage the files at the final location as soon as you arrive, then use another workspace while the technical team finishes setup?"
+    },
+    {
+      "id": "S022",
+      "t": "00:12:51",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "Yes. That is probably the best approach."
+    },
+    {
+      "id": "S023",
+      "t": "00:13:01",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "All right. I will start coordinating with the Partner agency so that when you arrive, you can go directly to the site, use the intended staging area, and start preparing for the transfer period."
+    },
+    {
+      "id": "S024",
+      "t": "00:13:23",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "And Sofia, before Raj and I leave, can you get us a direct point of contact we can call if we have trouble getting into the site or reaching the right staging area?"
+    },
+    {
+      "id": "S025",
+      "t": "00:13:33",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "Yes. Absolutely."
+    },
+    {
+      "id": "S026",
+      "t": "00:13:41",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "We also need to know whether there is a specific connection route or entry process because of the file size and equipment we are bringing."
+    },
+    {
+      "id": "S027",
+      "t": "00:13:48",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "There is a route identified. I need to check that it is suitable for your transfer requirements."
+    },
+    {
+      "id": "S029",
+      "t": "00:14:28",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "Right. I will work through that so you know which route to use."
+    },
+    {
+      "id": "S030",
+      "t": "00:14:58",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "Also, additional observers may attend. I sent the names I have to the event coordinator, but that list may still grow or shrink."
+    },
+    {
+      "id": "S031",
+      "t": "00:15:59",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "We have a specific point of contact working with the event coordinator to capture observer attendees. A separate process is being developed so that group can stay informed about the day-by-day flow of activity."
+    },
+    {
+      "id": "S032",
+      "t": "00:16:25",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "They are interested in the transfer as a whole, but they may also ask questions about the technical setup. The team should be prepared for that."
+    },
+    {
+      "id": "S033",
+      "t": "00:17:25",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "We will continue this call every week. I will provide today’s transcript to this group, and you will also get the summaries from yesterday’s partner session. I am putting those materials together now to get them out today. If additional observers appear, send their names to the event coordinator. Our side is developing a flexible day-by-day schedule so observers can decide when to attend."
+    },
+    {
+      "id": "S036",
+      "t": "00:20:20",
+      "speaker": "brooks",
+      "speakerName": "Brooks, Dana",
+      "text": "I will talk through the working plan. The workstation is there primarily to host the transfer-support equipment. We need power, workspace, and probably internet backhaul. We may place monitoring equipment on the stand for better visibility, but that depends on the final transfer plan. It may be sufficient to keep it on the ground-level tables instead."
+    },
+    {
+      "id": "S038",
+      "t": "00:21:39",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "Connectivity should be fine. We will have our normal connection capability and a backup option."
+    },
+    {
+      "id": "S039",
+      "t": "00:21:55",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "One other logistics concern. The picture of the staging area looks like it may have temporary flooring or lightweight panels. Please make sure the Partner agency knows the equipment and file cases are heavy. We do not want to put them somewhere that cannot support the load."
+    },
+    {
+      "id": "S040",
+      "t": "00:22:32",
+      "speaker": "brooks",
+      "speakerName": "Brooks, Dana",
+      "text": "I think the intended area may be stable, but we need to verify it. If it does not work, there is another staging area nearby. We need to determine exactly where the files and equipment will go and make sure the location is appropriate."
+    },
+    {
+      "id": "S042",
+      "t": "00:23:20",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "There is no dedicated power. We are bringing the portable power unit."
+    },
+    {
+      "id": "S044",
+      "t": "00:24:28",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "I am on it. The transcript captured the items we discussed, and we will start tracking them and keep everyone informed as details become available."
+    },
+    {
+      "id": "S048",
+      "t": "00:25:56",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "James and Raj. Does Priya need to be on this invitation too?"
+    },
+    {
+      "id": "S049",
+      "t": "00:25:58",
+      "speaker": "brooks",
+      "speakerName": "Brooks, Dana",
+      "text": "Add Priya and Dana."
+    },
+    {
+      "id": "S050",
+      "t": "00:26:34",
+      "speaker": "alvarez",
+      "speakerName": "Alvarez, Sofia",
+      "text": "All right, I think I have that done. James, let me know if you receive it."
+    },
+    {
+      "id": "S051",
+      "t": "00:26:44",
+      "speaker": "ortiz",
+      "speakerName": "Ortiz, James",
+      "text": "I have my email open. It may take a minute."
+    }
+  ],
+  "deltas": [
+    {
+      "project": "P2",
+      "graph": "https://example.org/mkg/data/delta/20261001T140000Z/P2",
+      "doc": {
+        "@context": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+        "@graph": [
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2",
+            "@type": "MeetingDelta",
+            "project": "https://example.org/mkg/data/project/P2",
+            "meetingAt": "2026-10-01T10:00:00-04:00",
+            "title": "Weekly board walk",
+            "operation": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/010",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/020",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/040",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/060",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/070",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/080",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/090",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/100",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/110",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/120",
+              "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/130"
+            ]
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/010",
+            "@type": "ProgressNote",
+            "sequence": 10,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S014",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S016",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S017"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/390/tasking",
+            "text": "The transfer planning discussion distinguishes setup and configuration on May 18 from the active transfer period. The technical team may need files staged and equipment connected beforehand. The May 18–22 versus May 18–28 planning window remains unresolved. The year was not stated."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/020",
+            "@type": "ProgressNote",
+            "sequence": 20,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S014",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S015",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S018"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/500/tasking",
+            "text": "James and Raj plan to depart on May 14 and expect to arrive May 17, subject to travel and equipment conditions. The current expectation is hands-on transfer participation Monday through Friday with travel on Sunday and Saturday, but dates and non-hands-on participation remain unsettled."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/040",
+            "@type": "ProgressNote",
+            "sequence": 40,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S021",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S022",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S023"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/440/tasking",
+            "text": "Sofia committed to coordinate with the Partner agency so the arriving team can go directly to the intended staging area. James prefers to stage files at their final location, then use a separate workspace while technical setup continues. Site arrangements must be established before arrival."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/060",
+            "@type": "ProgressNote",
+            "sequence": 60,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S024",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S025"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/460/tasking",
+            "text": "Sofia accepted responsibility for obtaining a direct partner-site contact for James and Raj before departure, specifically for entry and staging-access problems."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/070",
+            "@type": "NewTasking",
+            "sequence": 70,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S026",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S027",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S029"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/070/tasking",
+            "project": "https://example.org/mkg/data/project/P2",
+            "code": "AI-402",
+            "label": "Verify the partner-site connection and entry route is suitable for transfer requirements and confirm which route to use",
+            "assignee": "https://example.org/mkg/data/person/alvarez"
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/080",
+            "@type": "NewTasking",
+            "sequence": 80,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S039",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S040"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/080/tasking",
+            "project": "https://example.org/mkg/data/project/P2",
+            "code": "AI-403",
+            "label": "Verify staging-area load suitability for heavy equipment and file cases, identify an alternate staging area if needed, and confirm the appropriate location"
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/090",
+            "@type": "ProgressNote",
+            "sequence": 90,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S008",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S036",
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S042"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/480/tasking",
+            "text": "The temporary workstation is planned primarily to provide power, workspace, connectivity, and support for transfer equipment. Monitoring equipment may be mounted on the stand or kept on separate tables. Mounting stability and final equipment placement remain unresolved, including the effect of wind or vibration. No dedicated site power is available; James reports the team will bring a portable power unit, with normal and backup connectivity options."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/100",
+            "@type": "NewTasking",
+            "sequence": 100,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S019"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/100/tasking",
+            "project": "https://example.org/mkg/data/project/P2",
+            "code": "AI-404",
+            "label": "Distribute partner-site discussion information and location slide deck",
+            "assignee": "https://example.org/mkg/data/person/alvarez"
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/110",
+            "@type": "NewTasking",
+            "sequence": 110,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S033"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/110/tasking",
+            "project": "https://example.org/mkg/data/project/P2",
+            "code": "AI-405",
+            "label": "Provide today's coordination-call transcript to the group",
+            "assignee": "https://example.org/mkg/data/person/alvarez"
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/120",
+            "@type": "NewTasking",
+            "sequence": 120,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S033"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/120/tasking",
+            "project": "https://example.org/mkg/data/project/P2",
+            "code": "AI-406",
+            "label": "Distribute summaries from yesterday's partner session",
+            "assignee": "https://example.org/mkg/data/person/alvarez"
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/130",
+            "@type": "ProgressNote",
+            "sequence": 130,
+            "source": [
+              "https://example.org/mkg/data/delta/20261001T140000Z/source/S039"
+            ],
+            "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/080/tasking",
+            "text": "Requested by James Ortiz: “Please make sure the Partner agency knows the equipment and file cases are heavy.” No one in the meeting took it on yet."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S008",
+            "@type": "TranscriptSource",
+            "segment": "S008",
+            "offset": "00:05:47",
+            "speaker": "https://example.org/mkg/data/person/ortiz",
+            "quote": "We can support it on the stand if we have the correct mounts. The concern is stability. If the equipment has a large surface area, we may need to lower the stand during high wind or vibration conditions."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S014",
+            "@type": "TranscriptSource",
+            "segment": "S014",
+            "offset": "00:08:23",
+            "speaker": "https://example.org/mkg/data/person/alvarez",
+            "quote": "There seems to be some conflict in the dates that we are trying to clean up. The transfer period that had been discussed as May eighteenth through May twenty-eighth is now being described as May eighteenth through May twenty-second. The current expectation may be that people working directly on the transfer need to be available Monday through Friday, with travel Sunday and Saturday. There is still discussion about what that means for people who are not working hands-on."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S015",
+            "@type": "TranscriptSource",
+            "segment": "S015",
+            "offset": "00:10:09",
+            "speaker": "https://example.org/mkg/data/person/ortiz",
+            "quote": "Raj and I are planning to leave on the fourteenth. It may take us several days to get there, depending on traffic, weather, or equipment issues. We expect to arrive on the seventeenth."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S016",
+            "@type": "TranscriptSource",
+            "segment": "S016",
+            "offset": "00:10:28",
+            "speaker": "https://example.org/mkg/data/person/ortiz",
+            "quote": "If the transfer needs to be ready on the eighteenth, it would help if the technical team could have files staged and equipment connected before then."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S017",
+            "@type": "TranscriptSource",
+            "segment": "S017",
+            "offset": "00:10:50",
+            "speaker": "https://example.org/mkg/data/person/alvarez",
+            "quote": "I think the eighteenth is being treated as the setup and configuration day, not necessarily the day every participant has to arrive."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S018",
+            "@type": "TranscriptSource",
+            "segment": "S018",
+            "offset": "00:11:02",
+            "speaker": "https://example.org/mkg/data/person/ortiz",
+            "quote": "Okay. That gives us some flexibility. If we arrive on the seventeenth, we can get settled and be ready for the eighteenth."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S019",
+            "@type": "TranscriptSource",
+            "segment": "S019",
+            "offset": "00:11:28",
+            "speaker": "https://example.org/mkg/data/person/alvarez",
+            "quote": "I will send everyone information from yesterday’s discussion this morning. There will be a partner-site slide deck with location details. If we need to make arrangements before the eighteenth for the team to arrive, stage the files, and get settled, we will work through that."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S021",
+            "@type": "TranscriptSource",
+            "segment": "S021",
+            "offset": "00:12:40",
+            "speaker": "https://example.org/mkg/data/person/alvarez",
+            "quote": "Would you prefer to stage the files at the final location as soon as you arrive, then use another workspace while the technical team finishes setup?"
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S022",
+            "@type": "TranscriptSource",
+            "segment": "S022",
+            "offset": "00:12:51",
+            "speaker": "https://example.org/mkg/data/person/ortiz",
+            "quote": "Yes. That is probably the best approach."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S023",
+            "@type": "TranscriptSource",
+            "segment": "S023",
+            "offset": "00:13:01",
+            "speaker": "https://example.org/mkg/data/person/alvarez",
+            "quote": "All right. I will start coordinating with the Partner agency so that when you arrive, you can go directly to the site, use the intended staging area, and start preparing for the transfer period."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S024",
+            "@type": "TranscriptSource",
+            "segment": "S024",
+            "offset": "00:13:23",
+            "speaker": "https://example.org/mkg/data/person/ortiz",
+            "quote": "And Sofia, before Raj and I leave, can you get us a direct point of contact we can call if we have trouble getting into the site or reaching the right staging area?"
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S025",
+            "@type": "TranscriptSource",
+            "segment": "S025",
+            "offset": "00:13:33",
+            "speaker": "https://example.org/mkg/data/person/alvarez",
+            "quote": "Yes. Absolutely."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S026",
+            "@type": "TranscriptSource",
+            "segment": "S026",
+            "offset": "00:13:41",
+            "speaker": "https://example.org/mkg/data/person/ortiz",
+            "quote": "We also need to know whether there is a specific connection route or entry process because of the file size and equipment we are bringing."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S027",
+            "@type": "TranscriptSource",
+            "segment": "S027",
+            "offset": "00:13:48",
+            "speaker": "https://example.org/mkg/data/person/alvarez",
+            "quote": "There is a route identified. I need to check that it is suitable for your transfer requirements."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S029",
+            "@type": "TranscriptSource",
+            "segment": "S029",
+            "offset": "00:14:28",
+            "speaker": "https://example.org/mkg/data/person/alvarez",
+            "quote": "Right. I will work through that so you know which route to use."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S033",
+            "@type": "TranscriptSource",
+            "segment": "S033",
+            "offset": "00:17:25",
+            "speaker": "https://example.org/mkg/data/person/alvarez",
+            "quote": "We will continue this call every week. I will provide today’s transcript to this group, and you will also get the summaries from yesterday’s partner session. I am putting those materials together now to get them out today. If additional observers appear, send their names to the event coordinator. Our side is developing a flexible day-by-day schedule so observers can decide when to attend."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S036",
+            "@type": "TranscriptSource",
+            "segment": "S036",
+            "offset": "00:20:20",
+            "speaker": "https://example.org/mkg/data/person/brooks",
+            "quote": "I will talk through the working plan. The workstation is there primarily to host the transfer-support equipment. We need power, workspace, and probably internet backhaul. We may place monitoring equipment on the stand for better visibility, but that depends on the final transfer plan. It may be sufficient to keep it on the ground-level tables instead."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S039",
+            "@type": "TranscriptSource",
+            "segment": "S039",
+            "offset": "00:21:55",
+            "speaker": "https://example.org/mkg/data/person/ortiz",
+            "quote": "One other logistics concern. The picture of the staging area looks like it may have temporary flooring or lightweight panels. Please make sure the Partner agency knows the equipment and file cases are heavy. We do not want to put them somewhere that cannot support the load."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S040",
+            "@type": "TranscriptSource",
+            "segment": "S040",
+            "offset": "00:22:32",
+            "speaker": "https://example.org/mkg/data/person/brooks",
+            "quote": "I think the intended area may be stable, but we need to verify it. If it does not work, there is another staging area nearby. We need to determine exactly where the files and equipment will go and make sure the location is appropriate."
+          },
+          {
+            "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S042",
+            "@type": "TranscriptSource",
+            "segment": "S042",
+            "offset": "00:23:20",
+            "speaker": "https://example.org/mkg/data/person/ortiz",
+            "quote": "There is no dedicated power. We are bringing the portable power unit."
+          }
+        ]
+      },
+      "sha256": "fef6ee8d09c534e30fbe9c7e3462479b414a297f156b825ceea26d6c5ff5f6c0"
+    }
+  ],
+  "extension": {
+    "graph": "https://example.org/mkg/data/delta/20261001T140000Z/ext",
+    "doc": {
+      "@context": {
+        "@vocab": "https://example.org/mkg/delta-ext#",
+        "tasking": {
+          "@type": "@id"
+        },
+        "prerequisite": {
+          "@type": "@id"
+        },
+        "about": {
+          "@type": "@id"
+        },
+        "from": {
+          "@type": "@id"
+        },
+        "to": {
+          "@type": "@id"
+        },
+        "source": {
+          "@type": "@id"
+        },
+        "party": {
+          "@type": "@id"
+        },
+        "project": {
+          "@type": "@id"
+        },
+        "decision": {
+          "@type": "@id"
+        },
+        "replaces": {
+          "@type": "@id"
+        },
+        "assignee": {
+          "@type": "@id"
+        },
+        "duplicate": {
+          "@type": "@id"
+        },
+        "survivor": {
+          "@type": "@id"
+        }
+      },
+      "@graph": [
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext",
+          "@type": "ExtensionDelta",
+          "meetingAt": "2026-10-01T10:00:00-04:00",
+          "note": "Observations outside delta contract 0.3.0. Not validated by the 0.3.0 SHACL or mapped by the CONSTRUCT until the contract supports them."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/030",
+          "@type": "Reassign",
+          "sequence": 30,
+          "source": [
+            "https://example.org/mkg/data/delta/20261001T140000Z/source/S020",
+            "https://example.org/mkg/data/delta/20261001T140000Z/source/S023"
+          ],
+          "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/440/tasking",
+          "to": "https://example.org/mkg/data/person/alvarez",
+          "contractGap": "Reassignment is unsupported in contract 0.3.0 (no provenance-bearing assignment assertion yet)."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/050",
+          "@type": "Reassign",
+          "sequence": 50,
+          "source": [
+            "https://example.org/mkg/data/delta/20261001T140000Z/source/S024",
+            "https://example.org/mkg/data/delta/20261001T140000Z/source/S025"
+          ],
+          "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/460/tasking",
+          "to": "https://example.org/mkg/data/person/alvarez",
+          "contractGap": "Reassignment is unsupported in contract 0.3.0 (no provenance-bearing assignment assertion yet)."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/102",
+          "@type": "DueDate",
+          "sequence": 102,
+          "source": [
+            "https://example.org/mkg/data/delta/20261001T140000Z/source/S019"
+          ],
+          "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/100/tasking",
+          "dueDate": "2026-10-01",
+          "duePhrase": "this morning",
+          "contractGap": "Date-only deadlines are unsupported in 0.3.0 (a Temporal Instant needs a clock time)."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/112",
+          "@type": "DueDate",
+          "sequence": 112,
+          "source": [
+            "https://example.org/mkg/data/delta/20261001T140000Z/source/S033"
+          ],
+          "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/110/tasking",
+          "dueDate": "2026-10-01",
+          "duePhrase": "today",
+          "contractGap": "Date-only deadlines are unsupported in 0.3.0 (a Temporal Instant needs a clock time)."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/122",
+          "@type": "DueDate",
+          "sequence": 122,
+          "source": [
+            "https://example.org/mkg/data/delta/20261001T140000Z/source/S033"
+          ],
+          "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/120/tasking",
+          "dueDate": "2026-10-01",
+          "duePhrase": "today",
+          "contractGap": "Date-only deadlines are unsupported in 0.3.0 (a Temporal Instant needs a clock time)."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S019",
+          "@type": "TranscriptSource",
+          "segment": "S019",
+          "offset": "00:11:28",
+          "speaker": "https://example.org/mkg/data/person/alvarez",
+          "quote": "I will send everyone information from yesterday’s discussion this morning. There will be a partner-site slide deck with location details. If we need to make arrangements before the eighteenth for the team to arrive, stage the files, and get settled, we will work through that."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S020",
+          "@type": "TranscriptSource",
+          "segment": "S020",
+          "offset": "00:12:11",
+          "speaker": "https://example.org/mkg/data/person/ortiz",
+          "quote": "That would be ideal. If the staging location can be identified ahead of time, I would prefer to deliver the files there, set up the equipment, and be out of the way before the active transfer period begins."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S023",
+          "@type": "TranscriptSource",
+          "segment": "S023",
+          "offset": "00:13:01",
+          "speaker": "https://example.org/mkg/data/person/alvarez",
+          "quote": "All right. I will start coordinating with the Partner agency so that when you arrive, you can go directly to the site, use the intended staging area, and start preparing for the transfer period."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S024",
+          "@type": "TranscriptSource",
+          "segment": "S024",
+          "offset": "00:13:23",
+          "speaker": "https://example.org/mkg/data/person/ortiz",
+          "quote": "And Sofia, before Raj and I leave, can you get us a direct point of contact we can call if we have trouble getting into the site or reaching the right staging area?"
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S025",
+          "@type": "TranscriptSource",
+          "segment": "S025",
+          "offset": "00:13:33",
+          "speaker": "https://example.org/mkg/data/person/alvarez",
+          "quote": "Yes. Absolutely."
+        },
+        {
+          "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S033",
+          "@type": "TranscriptSource",
+          "segment": "S033",
+          "offset": "00:17:25",
+          "speaker": "https://example.org/mkg/data/person/alvarez",
+          "quote": "We will continue this call every week. I will provide today’s transcript to this group, and you will also get the summaries from yesterday’s partner session. I am putting those materials together now to get them out today. If additional observers appear, send their names to the event coordinator. Our side is developing a flexible day-by-day schedule so observers can decide when to attend."
+        }
+      ]
+    },
+    "sha256": "4f105857b5ced0eff1eabdafc6bb9f3c847472e11634dbb75e1958114713e77e"
+  },
+  "flags": [
+    {
+      "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/001",
+      "kind": "open_question",
+      "about": "P2, AI-203, AI-207",
+      "seg": "S014",
+      "segs": [
+        "S014",
+        "S017"
+      ],
+      "note": "Confirm the actual transfer period, whether May 18–22 replaces May 18–28, the calendar year, and which dates apply to hands-on personnel versus observers. May 18 is tentatively described as setup and configuration."
+    },
+    {
+      "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/002",
+      "kind": "open_question",
+      "about": "P2, AI-206",
+      "seg": "S007",
+      "segs": [
+        "S007",
+        "S008",
+        "S009",
+        "S011",
+        "S012"
+      ],
+      "note": "Determine whether monitoring equipment should be mounted on the temporary workstation or placed on separate tables, and whether suitable mounting hardware and stability controls are required. Requesting equipment documentation was discussed but not accepted as a task."
+    },
+    {
+      "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/003",
+      "kind": "open_question",
+      "about": "P2",
+      "seg": "S004",
+      "segs": [
+        "S004",
+        "S013",
+        "S030",
+        "S031",
+        "S032",
+        "S033"
+      ],
+      "note": "The observer roster may change. Confirm the final list, the visitor-management process, and how observers will receive the daily schedule and technical briefings. James reports sending the names currently known to the event coordinator."
+    },
+    {
+      "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/004",
+      "kind": "ambiguous_reference",
+      "about": "P2",
+      "seg": "S013",
+      "note": "Morgan is addressed directly, but no Morgan appears in the INDEX. Confirm the person's identity and whether a durable register entry is needed."
+    },
+    {
+      "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/005",
+      "kind": "implied_change",
+      "about": "AI-203, AI-207",
+      "seg": "S014",
+      "segs": [
+        "S014",
+        "S015",
+        "S017",
+        "S018"
+      ],
+      "note": "New execution and travel dates were discussed, but no explicit Deadline change was made. Confirm the intended year and whether any existing due dates should be revised."
+    },
+    {
+      "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/006",
+      "kind": "ownership",
+      "about": "NEW-2",
+      "seg": "S039",
+      "segs": [
+        "S039",
+        "S040",
+        "S044"
+      ],
+      "note": "Staging-area load verification and alternate-location determination are required, but no individual clearly accepted ownership of that specific verification. Sofia accepted general tracking of discussed issues; confirm whether she or another partner-site representative owns the verification."
+    },
+    {
+      "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/007",
+      "kind": "ambiguous_reference",
+      "about": null,
+      "seg": "S048",
+      "segs": [
+        "S048",
+        "S049"
+      ],
+      "note": "Priya is identified only by first name and is absent from the INDEX. Confirm the intended invitee; no durable NewParty record is justified from this identification alone."
+    },
+    {
+      "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/008",
+      "kind": "open_question",
+      "about": null,
+      "seg": "S050",
+      "segs": [
+        "S050",
+        "S051"
+      ],
+      "note": "Sofia tentatively reports completing invitation updates, but does not explicitly confirm each recipient or address. James has not yet confirmed receipt. Verify which invitation updates were actually sent and whether James received his."
+    },
+    {
+      "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/009",
+      "kind": "open_question",
+      "about": null,
+      "seg": "S038",
+      "note": "Recorded by the reviewer as an open item: “Connectivity should be fine. We will have our normal connection capability and a backup option.”"
+    }
+  ],
+  "acceptedAt": "2026-10-13T08:37:51.899Z",
+  "fileName": "mkg-meeting-2026-10-01.json",
+  "coverage": {
+    "segments": [
+      {
+        "seg": "S001",
+        "dispositions": [
+          {
+            "kind": "administrative",
+            "about": null
+          }
+        ]
+      },
+      {
+        "seg": "S002",
+        "dispositions": [
+          {
+            "kind": "administrative",
+            "about": null
+          }
+        ]
+      },
+      {
+        "seg": "S003",
+        "dispositions": [
+          {
+            "kind": "administrative",
+            "about": null
+          }
+        ]
+      },
+      {
+        "seg": "S004",
+        "dispositions": [
+          {
+            "kind": "open_question",
+            "about": [
+              "P2"
+            ],
+            "note": "Potential changes in observer attendance; covered by the observer-roster flag."
+          }
+        ]
+      },
+      {
+        "seg": "S005",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S006",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S007",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-206"
+            ]
+          },
+          {
+            "kind": "open_question",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S008",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S009",
+        "dispositions": [
+          {
+            "kind": "open_question",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S010",
+        "dispositions": [
+          {
+            "kind": "context_only",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S011",
+        "dispositions": [
+          {
+            "kind": "uncertain_requires_review",
+            "about": [
+              "AI-206"
+            ],
+            "note": "Asking for equipment documentation was raised as an option, not accepted as a specific commitment."
+          }
+        ]
+      },
+      {
+        "seg": "S012",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-206"
+            ]
+          },
+          {
+            "kind": "open_question",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S013",
+        "dispositions": [
+          {
+            "kind": "open_question",
+            "about": [
+              "P2"
+            ]
+          },
+          {
+            "kind": "uncertain_requires_review",
+            "about": [
+              "P2"
+            ],
+            "note": "Morgan cannot be matched to the INDEX."
+          }
+        ]
+      },
+      {
+        "seg": "S014",
+        "dispositions": [
+          {
+            "kind": "status_update",
+            "about": [
+              "AI-203",
+              "AI-207"
+            ]
+          },
+          {
+            "kind": "open_question",
+            "about": [
+              "AI-203",
+              "AI-207"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S015",
+        "dispositions": [
+          {
+            "kind": "status_update",
+            "about": [
+              "AI-207"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S016",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-203"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S017",
+        "dispositions": [
+          {
+            "kind": "status_update",
+            "about": [
+              "AI-203"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S018",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-207"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S019",
+        "dispositions": [
+          {
+            "kind": "commitment",
+            "about": [
+              "NEW-3"
+            ]
+          },
+          {
+            "kind": "uncertain_requires_review",
+            "about": [
+              "AI-204"
+            ],
+            "note": "General willingness to work through arrival and staging arrangements is not, by itself, a distinct accepted deliverable. Later commitment in S023 establishes ownership."
+          }
+        ]
+      },
+      {
+        "seg": "S020",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-204"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S021",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-204"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S022",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-204"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S023",
+        "dispositions": [
+          {
+            "kind": "commitment",
+            "about": [
+              "AI-204"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S024",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-205"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S025",
+        "dispositions": [
+          {
+            "kind": "commitment",
+            "about": [
+              "AI-205"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S026",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "NEW-1"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S027",
+        "dispositions": [
+          {
+            "kind": "commitment",
+            "about": [
+              "NEW-1"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S028",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "NEW-1"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S029",
+        "dispositions": [
+          {
+            "kind": "commitment",
+            "about": [
+              "NEW-1"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S030",
+        "dispositions": [
+          {
+            "kind": "status_update",
+            "about": [
+              "P2"
+            ]
+          },
+          {
+            "kind": "open_question",
+            "about": [
+              "P2"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S031",
+        "dispositions": [
+          {
+            "kind": "status_update",
+            "about": [
+              "P2"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S032",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-206"
+            ]
+          },
+          {
+            "kind": "open_question",
+            "about": [
+              "P2"
+            ],
+            "note": "Observer technical-briefing needs remain unsettled and are included in the observer-process flag."
+          }
+        ]
+      },
+      {
+        "seg": "S033",
+        "dispositions": [
+          {
+            "kind": "administrative",
+            "about": [
+              "P2"
+            ],
+            "note": "The weekly meeting cadence is administrative."
+          },
+          {
+            "kind": "commitment",
+            "about": [
+              "NEW-4"
+            ]
+          },
+          {
+            "kind": "commitment",
+            "about": [
+              "NEW-5"
+            ]
+          },
+          {
+            "kind": "open_question",
+            "about": [
+              "P2"
+            ],
+            "note": "Observer attendance and the developing daily schedule are covered by the observer-process flag."
+          }
+        ]
+      },
+      {
+        "seg": "S034",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-204",
+              "AI-205",
+              "AI-207"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S035",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S036",
+        "dispositions": [
+          {
+            "kind": "status_update",
+            "about": [
+              "AI-206"
+            ]
+          },
+          {
+            "kind": "open_question",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S037",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S038",
+        "dispositions": [
+          {
+            "kind": "status_update",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S039",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-204"
+            ]
+          },
+          {
+            "kind": "open_question",
+            "about": [
+              "NEW-2"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S040",
+        "dispositions": [
+          {
+            "kind": "open_question",
+            "about": [
+              "NEW-2"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S041",
+        "dispositions": [
+          {
+            "kind": "open_question",
+            "about": [
+              "AI-206"
+            ],
+            "note": "The power-source question is answered in S042 and recorded in the AI-206 ProgressNote."
+          }
+        ]
+      },
+      {
+        "seg": "S042",
+        "dispositions": [
+          {
+            "kind": "status_update",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S043",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": [
+              "AI-206"
+            ]
+          }
+        ]
+      },
+      {
+        "seg": "S044",
+        "dispositions": [
+          {
+            "kind": "uncertain_requires_review",
+            "about": [
+              "P2",
+              "NEW-2"
+            ],
+            "note": "Sofia accepts general tracking but does not explicitly accept ownership of every outstanding verification. The NEW-2 ownership flag preserves that distinction."
+          }
+        ]
+      },
+      {
+        "seg": "S045",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": []
+          }
+        ]
+      },
+      {
+        "seg": "S046",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": []
+          }
+        ]
+      },
+      {
+        "seg": "S047",
+        "dispositions": [
+          {
+            "kind": "commitment",
+            "about": []
+          }
+        ]
+      },
+      {
+        "seg": "S048",
+        "dispositions": [
+          {
+            "kind": "open_question",
+            "about": [],
+            "note": "Priya's inclusion is resolved affirmatively in S049; her full identity remains ambiguous."
+          }
+        ]
+      },
+      {
+        "seg": "S049",
+        "dispositions": [
+          {
+            "kind": "discussion_of_register_item",
+            "about": []
+          }
+        ]
+      },
+      {
+        "seg": "S050",
+        "dispositions": [
+          {
+            "kind": "commitment",
+            "about": []
+          },
+          {
+            "kind": "uncertain_requires_review",
+            "about": [],
+            "note": "Sofia tentatively reports that invitation work is done. The specific updates completed remain uncertain; the invitation-confirmation flag preserves this."
+          }
+        ]
+      },
+      {
+        "seg": "S051",
+        "dispositions": [
+          {
+            "kind": "context_only",
+            "about": [],
+            "note": "James has opened email but has not reported receipt."
+          }
+        ]
+      },
+      {
+        "seg": "S052",
+        "dispositions": [
+          {
+            "kind": "administrative",
+            "about": null
+          }
+        ]
+      }
+    ],
+    "register": [
+      {
+        "id": "AI-203",
+        "coverage": "updated",
+        "segs": [
+          "S014",
+          "S016",
+          "S017"
+        ]
+      },
+      {
+        "id": "AI-204",
+        "coverage": "updated",
+        "segs": [
+          "S019",
+          "S020",
+          "S021",
+          "S022",
+          "S023",
+          "S034",
+          "S039"
+        ]
+      },
+      {
+        "id": "AI-205",
+        "coverage": "updated",
+        "segs": [
+          "S024",
+          "S025",
+          "S034"
+        ]
+      },
+      {
+        "id": "AI-206",
+        "coverage": "updated",
+        "segs": [
+          "S005",
+          "S006",
+          "S007",
+          "S008",
+          "S009",
+          "S010",
+          "S011",
+          "S012",
+          "S032",
+          "S035",
+          "S036",
+          "S037",
+          "S038",
+          "S041",
+          "S042",
+          "S043"
+        ]
+      },
+      {
+        "id": "AI-207",
+        "coverage": "updated",
+        "segs": [
+          "S014",
+          "S015",
+          "S018",
+          "S034"
+        ]
+      },
+      {
+        "id": "BL-202",
+        "coverage": "not_discussed",
+        "segs": []
+      }
+    ],
+    "findings": [
+      {
+        "cat": "unresolved_commitment",
+        "lvl": "info",
+        "text": "S011 needs review, per the extractor: Asking for equipment documentation was raised as an option, not accepted as a specific commitment. — “We can ask for the equipment documentation.”",
+        "resolution": "accepted"
+      },
+      {
+        "cat": "unresolved_commitment",
+        "lvl": "info",
+        "text": "S013 needs review, per the extractor: Morgan cannot be matched to the INDEX. — “Morgan, James said the partner side may have more observers for the upcoming transfer. Is …”",
+        "resolution": "accepted"
+      },
+      {
+        "cat": "unresolved_commitment",
+        "lvl": "info",
+        "text": "S019 needs review, per the extractor: General willingness to work through arrival and staging arrangements is not, by itself, a distinct accepted deliverable. Later commitment in S023 establishes ownership. — “I will send everyone information from yesterday’s discussion this morning. There will be a…”",
+        "resolution": "accepted"
+      },
+      {
+        "cat": "unresolved_commitment",
+        "lvl": "info",
+        "text": "S041 (open_question) produces nothing, by the extractor's own rationale: The power-source question is answered in S042 and recorded in the AI-206 ProgressNote.",
+        "resolution": "accepted"
+      },
+      {
+        "cat": "unresolved_commitment",
+        "lvl": "info",
+        "text": "S044 needs review, per the extractor: Sofia accepts general tracking but does not explicitly accept ownership of every outstanding verification. The NEW-2 ownership flag preserves that distinction. — “I am on it. The transcript captured the items we discussed, and we will start tracking the…”",
+        "resolution": "accepted"
+      },
+      {
+        "cat": "unresolved_commitment",
+        "lvl": "warn",
+        "text": "S047 is classified commitment but no operation or flag cites it and no rationale is given — content may be lost: “Okay.”",
+        "resolution": "accepted"
+      },
+      {
+        "cat": "unresolved_commitment",
+        "lvl": "info",
+        "text": "S050 needs review, per the extractor: Sofia tentatively reports that invitation work is done. The specific updates completed remain uncertain; the invitation-confirmation flag preserves this. — “All right, I think I have that done. James, let me know if you receive it.”",
+        "resolution": "accepted"
+      },
+      {
+        "cat": "dux10",
+        "lvl": "info",
+        "text": "QUOTE-TRUNCATED: ProgressNote:AI-203#1 quotes only part of the committing sentence (S017: &quot;I think the eighteenth is being treated as the setup and configuration day, not necessarily the day every participant has to arrive.&quot;); the label/text leaves out part of what it commits to",
+        "id": "ProgressNote:AI-203#1",
+        "code": "QUOTE-TRUNCATED",
+        "repair": false,
+        "resolution": "accepted"
+      },
+      {
+        "cat": "dux10",
+        "lvl": "info",
+        "text": "QUOTE-TRUNCATED: ProgressNote:AI-204#4 quotes only part of the committing sentence (S021: &quot;Would you prefer to stage the files at the final location as soon as you arrive, then use another workspace while the technical team finishes setup?&quot;); the label/text leaves out part of what it commits to",
+        "id": "ProgressNote:AI-204#4",
+        "code": "QUOTE-TRUNCATED",
+        "repair": false,
+        "resolution": "accepted"
+      },
+      {
+        "cat": "dux10",
+        "lvl": "info",
+        "text": "QUOTE-TRUNCATED: ProgressNote:AI-205#6 quotes only part of the committing sentence (S024: &quot;And Sofia, before Raj and I leave, can you get us a direct point of contact we can call if we have trouble getting into the site or reaching the right staging area?&quot;); the label/text leaves out part of what it commits to",
+        "id": "ProgressNote:AI-205#6",
+        "code": "QUOTE-TRUNCATED",
+        "repair": false,
+        "resolution": "accepted"
+      }
+    ]
+  },
+  "review": {
+    "model": "D-UX11",
+    "consequences": [
+      {
+        "id": "rec:S047",
+        "prompt": "The meeting said: “Okay.” Nothing on the board records it."
+      }
+    ],
+    "questions": [
+      {
+        "id": "rec:S038",
+        "kind": "unrecorded",
+        "task": null,
+        "seg": "S038",
+        "prompt": "The meeting said: “Connectivity should be fine. We will have our normal connection capability and a backup option.” Nothing on the board records it.",
+        "answer": "record",
+        "reviewerConfirmed": false,
+        "by": null,
+        "at": "2026-10-13T08:37:51.897Z"
+      }
+    ],
+    "changes": {
+      "dropped": [
+        13,
+        14,
+        15
+      ],
+      "undated": []
+    },
+    "recorded": [
+      {
+        "code": "unresolved_commitment",
+        "text": "S011 needs review, per the extractor: Asking for equipment documentation was raised as an option, not accepted as a specific commitment. — “We can ask for the equipment documentation.”"
+      },
+      {
+        "code": "unresolved_commitment",
+        "text": "S013 needs review, per the extractor: Morgan cannot be matched to the INDEX. — “Morgan, James said the partner side may have more observers for the upcoming transfer. Is …”"
+      },
+      {
+        "code": "unresolved_commitment",
+        "text": "S019 needs review, per the extractor: General willingness to work through arrival and staging arrangements is not, by itself, a distinct accepted deliverable. Later commitment in S023 establishes ownership. — “I will send everyone information from yesterday’s discussion this morning. There will be a…”"
+      },
+      {
+        "code": "unresolved_commitment",
+        "text": "S041 (open_question) produces nothing, by the extractor's own rationale: The power-source question is answered in S042 and recorded in the AI-206 ProgressNote."
+      },
+      {
+        "code": "unresolved_commitment",
+        "text": "S044 needs review, per the extractor: Sofia accepts general tracking but does not explicitly accept ownership of every outstanding verification. The NEW-2 ownership flag preserves that distinction. — “I am on it. The transcript captured the items we discussed, and we will start tracking the…”"
+      },
+      {
+        "code": "unresolved_commitment",
+        "text": "S050 needs review, per the extractor: Sofia tentatively reports that invitation work is done. The specific updates completed remain uncertain; the invitation-confirmation flag preserves this. — “All right, I think I have that done. James, let me know if you receive it.”"
+      },
+      {
+        "code": "QUOTE-TRUNCATED",
+        "text": "ProgressNote:AI-203#1 quotes only part of the committing sentence (S017: \"I think the eighteenth is being treated as the setup and configuration day, not necessarily the day every participant has to arrive.\"); the label/text leaves out part of what it commits to"
+      },
+      {
+        "code": "QUOTE-TRUNCATED",
+        "text": "ProgressNote:AI-204#4 quotes only part of the committing sentence (S021: \"Would you prefer to stage the files at the final location as soon as you arrive, then use another workspace while the technical team finishes setup?\"); the label/text leaves out part of what it commits to"
+      },
+      {
+        "code": "QUOTE-TRUNCATED",
+        "text": "ProgressNote:AI-205#6 quotes only part of the committing sentence (S024: \"And Sofia, before Raj and I leave, can you get us a direct point of contact we can call if we have trouble getting into the site or reaching the right staging area?\"); the label/text leaves out part of what it commits to"
+      }
+    ]
+  }
+}

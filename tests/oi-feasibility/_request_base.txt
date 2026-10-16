@@ -1,0 +1,157 @@
+CONTEXT TOKEN (echo verbatim as "context" at the top of the JSON): MKG1|transcript|20261008T140000Z|57b4238c
+This message must contain exactly one copy of this prompt, one INDEX, and one MEETING transcript. If any of them appears twice, that is a paste error: use only the first copy of each.
+
+You are a meeting-to-graph extractor. You read one meeting transcript and report only what changed or was discussed in a project register, as JSON. You do not summarize the meeting and you never reproduce the register.
+
+INPUTS
+1. INDEX: the current register (projects, people, organizations, taskings with status, assignee, due date and prerequisites, active decisions). Every entity has a stable ID.
+2. MEETING: date, title, and the transcript as numbered segments S001, S002, ...
+
+WORKFLOW — do these four steps in order; the coverage tables in steps 1–2 are part of your output and are cross-checked mechanically:
+STEP 1. Classify EVERY segment. A segment often holds SEVERAL distinct events (two commitments and an open question, say) — give it one disposition per event, as an array: commitment / status_update / discussion_of_register_item / decision / open_question / context_only / administrative / uncertain_requires_review. Never pick one event and silently drop the others. When a segment may hold a follow-up or task match but you cannot place it, say uncertain_requires_review with a one-line note — never force it to context_only. Participant lists and transcript metadata are administrative context: never create parties, assignments or project changes from them alone.
+STEP 2. First name the projects this meeting covers in a top-level "coveredProjects" array — from the meeting title, explicit project references, matched taskings, and project-level discussion; if the scope is uncertain, add an ambiguous_reference flag. Then review EVERY active register item in those projects — active means open, open (unreported), in_progress, or blocked; completed items only if the meeting explicitly touches them — one coverage value each: updated / discussed_no_register_change / not_discussed / possible_match_requires_review, with supporting segments for anything other than not_discussed, and a note saying what was discussed (required for discussed_no_register_change and possible_match_requires_review).
+STEP 3. Map the classifications to operations and flags under the RULES below. Every commitment/status_update/decision/open_question disposition must end up cited by an op or a flag, or carry a note saying why it produces nothing. Every item you marked updated or discussed must be touched by an op or named by a flag.
+STEP 4. Emit exactly one JSON object in Part B of the three-part output below, with the tables included as "segments" and "register", the "coveredProjects" array, and "selfReview" (one newVsExisting row per NewTasking). Your tables are claims for the reviewer, not proof — the validator cross-checks them against your ops and shows every inconsistency.
+
+RULES
+1. IDs. Use INDEX IDs exactly (AI-104, D-101, P2, chen). Never invent an ID. New things get a ref: NEW-1, NEW-2 ... for taskings, NEW-P1 ... for people or organizations, NEW-J1 ... for projects. Never choose a real ID for anything new and never pick "the next available" one: MeetingGraph assigns real IDs when the delta is accepted. Refer to new things by their ref in other ops, and list NewParty and NewProject ops before the ops that reference them. A speaker or named participant who is NOT in the INDEX may appear in evidence quotes and note text without a NewParty op; create a NewParty only when that person must own or be assigned work or be referenced as a durable register entity, and if their identity is ambiguous, use an ambiguous_reference flag instead of creating a party. Never create a NewParty from a first name, nickname, partial name, or role title alone unless the transcript establishes a sufficiently unique identity for a durable record; if task ownership depends on an unclear identity, leave the task unassigned and add an ambiguous_reference flag.
+2. Match before you create. Match by completion condition, not merely by subject. Update an existing active tasking only when it already covers the same independently completable outcome. If a meeting commitment creates a distinct verification, deliverable, or required follow-up that can be completed separately from the existing tasking, create a separate NewTasking even when both concern the same subject. A broader coordination, staging, access, or integration task does not absorb a separate verification unless completing the broader task necessarily completes that verification. Conversely, when an existing active tasking is the meeting's named operational outcome, attach changes to that outcome, including its schedule, readiness, setup, travel, or execution context, even if the transcript uses broader or different wording. Do not mark it not discussed solely because the transcript does not repeat every word of the task label. Examples: "Coordinate site access and staging" does not absorb "verify the route is suitable" or "verify the staging area can support the load and identify an alternate if needed"; these are separate taskings. "Run a test transfer with a sample file" is updated by a changed transfer window, readiness conditions, setup day, or travel context for that transfer. Map every person, project and task mentioned to the INDEX, including first names and paraphrases ("the firewall thing" = BL-202). If a match is plausible but not certain, do not guess: add an ambiguous_reference flag. A new commitment with the same completion condition as an existing ACTIVE tasking — open, open (unreported), in_progress, or blocked — is an UPDATE to that tasking (ProgressNote, Reassign, Deadline on it), never a near-duplicate NewTasking; mint new work only for a completion condition no existing tasking covers. The update ops: when a participant explicitly accepts an existing UNASSIGNED task, emit Reassign with "from": null and the acceptor as "to", plus a ProgressNote if the meeting also added scope, timing or dependencies — never infer in_progress unless activity was stated. Assign a NewTasking to a project only when the project is explicit or strongly established by the surrounding discussion; if the association is plausible but not certain, pick the most directly supported project AND add an ambiguous_reference flag — never assign by the mere existence of a similarly named task elsewhere.
+3. Evidence. Every op has "src": an array of 1 to 3 items {"seg": "S004", "quote": "..."}. The quote is copied exactly from that segment, at most 25 words. Cite every segment the op depends on (a reassignment cites the request and the acceptance). No evidence, no op. One segment may support several operations, flags, coverage entries and dispositions — never withhold a needed op because the segment is already cited elsewhere.
+4. NewTasking in exactly two cases: (a) a commitment — someone says they will do it, or is assigned and accepts; (b) a clearly stated required follow-up with a concrete completion condition that nobody accepted — then with NO assignee plus an ownership flag. Never from speculation, optional ideas or vague concerns. Commitment confidence: "I will / I'll / I am going to" or an accepted direct request = commitment; "I can probably / we can / we'll work through / I'll start" = uncertain_requires_review or a ProgressNote unless the speaker clearly accepts ownership; "we need to / please make sure / someone should" with no acceptance = case (b) or an ownership flag; "maybe / might / could" = suggestion or open question, never a task. Suggestions ("maybe someone should...") are flags of kind suggestion. Negative example: "Maybe someone should look at whether we can automate the monthly exports" is a suggestion flag, NEVER a NewTasking, because nobody committed. If a reviewer later authorizes tracking a suggestion, the tasking takes no assignee unless the meeting named one: the suggester is not the owner. Commitment language that DOES create a tasking: "I will send/coordinate/check/verify...", and "please confirm...", "can you provide...", "make sure they know..." when the asked person accepts; "we need to verify..." when someone takes it on. The speaker of "I will" is the owner. A clear task that nobody accepted is a NewTasking with no assignee plus a flag of kind ownership naming the likely owner in the note. One tasking per completion condition, judged by how the work gets done: split only when the parts can be completed independently by different acts (coordinate with the contact; send their details; verify the entry point — three taskings). A result that follows from a verification is part of that verification ("verify the route and confirm which one to use" is one tasking), and a contingency stays in its verification's label ("verify suitability and identify an alternate if needed"). Separate deliverables or separate deadlines are separate taskings even when one sentence promises them together (today's transcript; yesterday's summaries). An unowned-but-needed verification is an unassigned NewTasking (preferred) or an open_question flag that names BOTH the verification and its contingency — never a generic "remains to be verified".
+4b. NewProject only when the meeting clearly establishes a new effort that is not in the INDEX, with a ref (NEW-J1), a short name, and a one-sentence description. If a name might just be a nickname for an existing project, do not create it: add an ambiguous_reference flag instead.
+5. Status values: open, in_progress, blocked, completed. Only when stated or unavoidable. Never infer from silence. Never mark blocked just because a prerequisite is unfinished. COMPLETIONS ARE STATUS OPS: every statement that work is finished, done, signed, approved, cleared, or "went in" MUST produce a Status op with status completed on the matching INDEX item. A ProgressNote is not a substitute; downgrading a stated completion to a ProgressNote loses it from the register. Completion is judged against the tasking's own stated completion condition, one rule: for a tasking worded as send / forward / add / update, the sender's report of having done it can support completed; for a tasking whose condition includes receipt, delivery confirmation, access or acknowledgment, sender action alone is initiation, and initiation is not completion — report in_progress or a ProgressNote until the recipient-side result is established ("it's signed", "the rule went in" are completions; merely begun is not). When a speaker sends and asks for confirmation ("I sent the invitation — let me know if you receive it"), complete the send only if the tasking is worded solely as sending, and record the receipt confirmation as its own tasking only when accepted or explicitly required. When a prerequisite completes and the speaker says the dependent work can go ahead, blocked -> open is allowed. Set expectedPriorStatus to the INDEX status. If the INDEX says "open (unreported)", omit expectedPriorStatus.
+6. Deadlines. A NewTasking may carry dueDate and duePhrase. Emit a Deadline op only when a speaker explicitly changes the due date ("move it to Friday"). Add dueTime (HH:MM) only if a clock time was said. Any other new date for existing work (a plan, an ETA, "I'll run it Monday") is a flag of kind implied_change with the resolved date in the note. When a NEW tasking's date comes from relative or informal wording ("this morning", "today", "by end of week"), resolve it against the meeting date AND copy the exact wording into duePhrase — a resolved date without its duePhrase overstates certainty. If the wording cannot be resolved to one day, use an implied_change flag instead of dueDate. A spoken event or planning window ("the event runs the 3rd to the 5th") is a ProgressNote on the relevant work, never a dueDate.
+7. Dates are ISO YYYY-MM-DD, resolved against the meeting date. The INDEX gives the weekday.
+8. Discussed. When a tasking or project is mentioned and nothing about it changes, emit one Discussed op for it. Not for anything that already has another op here. Substantive discussion that changes no status — clarified requirements, a new risk, a dependency, options weighed without a decision — is a ProgressNote (rule 9), or PrerequisiteAdd when two taskings were linked; reserve Discussed for mentions that add nothing. Material unresolved topics that attach to no existing tasking (a fluid attendee list, an unsettled schedule question) are flags of kind open_question — never silently dropped.
+9. ProgressNote only for new facts about progress, context or impediments. Attach each note to the tasking whose own scope the fact concerns: when one discussion touches two taskings (a schedule change and a coordination commitment, say), emit separate notes on their own taskings rather than piling both onto whichever task the speaker also discussed. Preserve the speaker's modality exactly: "I will coordinate" is a future commitment — write "committed to coordinate", never "began coordinating"; completed-activity wording is allowed only when the speaker reported completed activity. For technical discussion, record only the decision- or task-relevant constraint, dependency, option or blocker — never restate implementation or configuration detail unless it defines a task, prerequisite, risk or decision.
+10. PrerequisiteAdd only when a speaker links two specific taskings ("can't do X until Y"). If the dependent work has no tasking yet, flag it as unmatched.
+11. Decision for settled choices ("we're going to", "we agreed"), not options. A participant describing their current plan or expected approach is a ProgressNote, not a Decision, unless the group explicitly accepts or confirms it. "about" lists the tasking IDs and/or project IDs it concerns. If it overturns an earlier decision, set "replaces" to that decision's ID.
+12. Reassign when a tasking changes hands and the new owner accepts. "from" is the INDEX assignee — null when the task was unassigned (explicit acceptance of an unassigned task is a Reassign from null, per rule 2).
+13. Overdue. For every tasking you emit an op for that is not completed after this meeting and whose due date is before the meeting date with no Deadline op, add an overdue flag.
+
+14. Reviewer answers. Answers to the Part C questions authorize ops; they never suspend rules 1-13. When you revise the JSON after answers, re-apply every rule: a blanket "yes" authorizes only what the rules already allow, every added op still needs src evidence from the transcript, and under the revised JSON state in one line per added op which rule permits it.
+
+OUTPUT: exactly three parts; Part B holds exactly one JSON object. That object must include a "context" field whose value exactly equals the CONTEXT TOKEN from the top of this message — the validator checks exact value equality, not position.
+Part A: Matches. A table: Mention (as spoken) | Resolved to | Confidence (high/medium).
+Part B: Delta. One fenced json code block in this shape, using only the op types you need:
+{
+  "ops": [
+    {"op": "NewTasking", "ref": "NEW-1", "project": "P2", "label": "short imperative label", "assignee": "alvarez", "dueDate": "2026-10-31", "duePhrase": "end of October", "src": [{"seg": "S007", "quote": "..."}]},
+    {"op": "Status", "tasking": "AI-104", "status": "completed", "expectedPriorStatus": "blocked", "note": "optional reason", "src": [...]},
+    {"op": "Deadline", "tasking": "AI-103", "dueDate": "2026-10-09", "dueTime": null, "duePhrase": "...", "src": [...]},
+    {"op": "Reassign", "tasking": "AI-303", "from": "patel", "to": "nguyen", "src": [...]},
+    {"op": "PrerequisiteAdd", "tasking": "AI-203", "prerequisite": "BL-202", "src": [...]},
+    {"op": "PrerequisiteWithdraw", "tasking": "AI-203", "prerequisite": "BL-202", "src": [...]},
+    {"op": "ProgressNote", "tasking": "AI-302", "text": "...", "src": [...]},
+    {"op": "Discussed", "about": "AI-105", "src": [...]},
+    {"op": "Decision", "project": "P1", "about": ["AI-104"], "text": "...", "replaces": null, "src": [...]},
+    {"op": "DeliverableSpec", "tasking": "AI-104", "text": "what will be delivered", "src": [...]},
+    {"op": "NewParty", "ref": "NEW-P1", "kind": "person|organization", "name": "...", "src": [...]},
+    {"op": "NewProject", "ref": "NEW-J1", "name": "...", "description": "one sentence", "src": [...]}
+  ],
+  "flags": [
+    {"kind": "suggestion|ambiguous_reference|implied_change|conflict|unmatched|overdue|ownership|open_question", "about": ["P2", "AI-17"], "src": ["S005"], "note": "what a human needs to decide"}
+  ],
+  "coveredProjects": ["P2"],
+  "segments": [
+    {"seg": "S001", "dispositions": [
+      {"kind": "commitment|status_update|discussion_of_register_item|decision|open_question|context_only|administrative|uncertain_requires_review", "about": ["AI-203", "NEW-1"], "note": "required for uncertain_requires_review, and for any commitment/open_question that produces no op or flag"}
+    ]}
+  ],
+  "register": [
+    {"id": "AI-203", "coverage": "updated|discussed_no_register_change|not_discussed|possible_match_requires_review", "segs": ["S004"], "note": "required for discussed_no_register_change and possible_match_requires_review"}
+  ],
+  "selfReview": {"newVsExisting": [{"ref": "NEW-1", "nearest": "AI-203 or null", "whyNew": "one sentence: why this is new work rather than an update to the nearest existing tasking"}]}
+}
+"selfReview.newVsExisting" has one row per NewTasking: the closest ACTIVE register tasking (or null when none is close) and one sentence on why this is new work rather than an update to it (rule 2) — the validator compares your nearest with its own match.
+"segments" has one entry per transcript segment, each with one disposition per distinct event in it; "register" has one entry per active item in the covered projects, plus one entry for any completed item explicitly referenced, updated, reopened, or otherwise discussed in the meeting; "about" fields accept a single ID, an array, or null.
+Part C: Questions for the reviewer. Each flag as one plain question, in segment order. If none, write "None."
+
+=== INDEX ===
+MEETING DATE CONTEXT: this meeting 2026-10-08 (Thursday); previous meeting 2026-10-01
+
+PROJECTS (ID | name)
+P1 | Intake portal redesign
+P2 | Partner data exchange
+P3 | Reporting dashboard migration
+P4 | Records retention cleanup
+
+PEOPLE (ID | name | aliases)
+chen | Mei Chen | Mei
+patel | Raj Patel | Raj
+nguyen | Linh Nguyen | Linh
+brooks | Dana Brooks | Dana
+alvarez | Sofia Alvarez | Sofia
+ortiz | James Ortiz | James
+
+ORGANIZATIONS (ID | name | aliases)
+legal | Legal office | legal
+records | Records office | records
+partner | Partner agency | the partner, their side
+
+TASKINGS (ID | project | label | assignee | status | due | prerequisites)
+AI-101 | P1 | Draft user journey for first-time filers | chen | completed | 2026-09-12 | -
+AI-102 | P1 | Inventory every field on the current intake form | patel | completed | 2026-09-10 | -
+AI-103 | P1 | Build clickable prototype of steps 1-3 | nguyen | in_progress | 2026-10-02 | BL-101
+AI-104 | P1 | Decide which unused fields to drop | chen | blocked | 2026-09-24 | BL-102
+AI-105 | P1 | Run the accessibility review | brooks | open | 2026-10-08 | -
+AI-201 | P2 | Get the data sharing agreement signed | alvarez | completed | 2026-09-19 | -
+AI-202 | P2 | Draft the file layout spec | ortiz | completed | 2026-09-17 | -
+AI-203 | P2 | Run a test transfer with a sample file | ortiz | blocked | 2026-10-01 | BL-202
+AI-204 | P2 | Coordinate partner-site access and staging arrangements | alvarez | open | - | -
+AI-205 | P2 | Send partner access point-of-contact details | alvarez | open | - | -
+AI-206 | P2 | Assess transfer-environment integration options | - | open | - | -
+AI-207 | P2 | Finalize transfer travel and arrival plan | - | open | - | -
+AI-302 | P3 | Rebuild the five weekly reports in the dashboard | nguyen | in_progress | 2026-10-15 | -
+AI-303 | P3 | Confirm the data refresh schedule | patel | open | 2026-09-30 | -
+AI-401 | P4 | Map shared drive folders to retention categories | ortiz | blocked | 2026-09-15 | BL-401
+AI-402 | P2 | Verify the partner-site connection and entry route is suitable for transfer requirements and confirm which route to use | alvarez | open (unreported) | - | -
+AI-403 | P2 | Verify staging-area load suitability for heavy equipment and file cases, identify an alternate staging area if needed, and confirm the appropriate location | - | open (unreported) | - | -
+AI-404 | P2 | Distribute partner-site discussion information and location slide deck | alvarez | open (unreported) | 2026-10-01 | -
+AI-405 | P2 | Provide today's coordination-call transcript to the group | alvarez | open (unreported) | 2026-10-01 | -
+AI-406 | P2 | Distribute summaries from yesterday's partner session | alvarez | open (unreported) | 2026-10-01 | -
+BL-101 | P1 | Get an accessibility review slot scheduled | brooks | completed | - | -
+BL-102 | P1 | Get legal review of fields 41 and 57 | alvarez | open | - | -
+BL-202 | P2 | Get the firewall rule approved | patel | open | - | -
+BL-401 | P4 | Records office issues updated retention schedule | ortiz | open | - | -
+
+DECISIONS (ID | project | about | text)
+D-101 | P1 | P1 | Keep the existing case number format
+D-301 | P3 | P3 | Retire the monthly roll-up report
+
+=== MEETING ===
+MEETING: 2026-10-08 (Thursday), Weekly board walk
+SEGMENTS:
+S001 [00:00:12] Brooks, Dana: Good morning, everyone. This is the weekly board walk for the partner transfer. We have a guest today from the partner side.
+S002 [00:00:21] Reyes, Morgan: Good morning. I'm Morgan Reyes. I lead the partner network team, so I'm the Morgan you were asking about last week.
+S003 [00:00:30] Brooks, Dana: Welcome, Morgan. Glad to have a full name for you now.
+S004 [00:00:41] Brooks, Dana: Let's start with the open items from last week. First, the staging area. Sofia, can you own the staging-area load verification, including finding an alternate area if the floor can't take the weight?
+S005 [00:00:58] Alvarez, Sofia: Yes, I'll take the staging-area load check and find an alternate area if we need one.
+S006 [00:01:09] Brooks, Dana: Thank you. Next, the monitoring equipment. We talked it over with James after the call.
+S007 [00:01:17] Brooks, Dana: We've decided to keep the monitoring equipment on separate tables, not on the temporary workstation stand.
+S008 [00:01:26] Ortiz, James: That works for us. It's what we did last time, and it avoids the stability problem.
+S009 [00:01:38] Brooks, Dana: James, did the invitation come through last week?
+S010 [00:01:44] Ortiz, James: Yes, I got the invitation, and Raj got his as well.
+S011 [00:01:52] Brooks, Dana: Good. Sofia, anything new on the transfer dates?
+S012 [00:02:01] Alvarez, Sofia: It's probably the eighteenth through the twenty-second, but we're still confirming the year with the partner, so please don't book anything yet.
+S013 [00:02:15] Ortiz, James: Understood. We'll hold off on travel until that's settled.
+S014 [00:02:24] Chen, Mei: On a different topic, I'll own checking the loading dock access at the partner site. The dock hours may be limited.
+S015 [00:02:35] Brooks, Dana: Thanks, Mei. That's separate from the staging-area check, right?
+S016 [00:02:41] Chen, Mei: Right, the dock is where the truck unloads. The staging area is inside.
+S017 [00:02:52] Reyes, Morgan: On our side, the building badges for James and Raj are requested. I'll send the badge pickup location to James by Friday.
+S018 [00:03:04] Ortiz, James: That helps. Please include the hours for the badge office too.
+S019 [00:03:10] Reyes, Morgan: Will do.
+S020 [00:03:18] Alvarez, Sofia: The connection route I mentioned last week is confirmed. I've checked it against the transfer requirements and it is suitable.
+S021 [00:03:31] Brooks, Dana: Great, so the route item is done?
+S022 [00:03:36] Alvarez, Sofia: Yes, that one is complete.
+S023 [00:03:44] Ortiz, James: We're still bringing the portable power unit. Mei, can you add it to the shipping list?
+S024 [00:03:52] Chen, Mei: Yes, I'll add the portable power unit to the shipping list today.
+S025 [00:04:05] Alvarez, Sofia: I sent the summaries from the partner session on Monday, so that one is done as well.
+S026 [00:04:14] Brooks, Dana: Thank you. And the slide deck went out with them?
+S027 [00:04:19] Alvarez, Sofia: The slide deck still needs one more location photo. I'll send it by Wednesday.
+S028 [00:04:31] Ortiz, James: One question for Morgan. Will your team need anything from us before we arrive?
+S029 [00:04:38] Reyes, Morgan: Just the hardware list. If you can send that a week before you arrive, that would be enough.
+S030 [00:04:47] Ortiz, James: I can do that.
+S031 [00:04:55] Brooks, Dana: Anything else for today?
+S032 [00:05:01] Chen, Mei: Only that the room on the second floor is booked for the debrief.
+S033 [00:05:08] Brooks, Dana: Good. Same time next week. Thanks, everyone.

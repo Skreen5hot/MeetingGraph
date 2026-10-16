@@ -1,0 +1,79 @@
+[
+ {
+  "id": "20261001T140000Z|S014|open_question|AI-203",
+  "kind": "question",
+  "target": "AI-203",
+  "question": "Confirm the actual transfer period, whether May 18–22 replaces May 18–28, the calendar year, and which dates apply to hands-on personnel versus observers. May 18 is tentatively described as setup and configuration.",
+  "needed": "Every point it asks about; if any is missing, the answer is partial."
+ },
+ {
+  "id": "20261001T140000Z|S014|open_question|AI-207",
+  "kind": "question",
+  "target": "AI-207",
+  "question": "Confirm the actual transfer period, whether May 18–22 replaces May 18–28, the calendar year, and which dates apply to hands-on personnel versus observers. May 18 is tentatively described as setup and configuration.",
+  "needed": "Every point it asks about; if any is missing, the answer is partial."
+ },
+ {
+  "id": "20261001T140000Z|S007|open_question|AI-206",
+  "kind": "question",
+  "target": "AI-206",
+  "question": "Determine whether monitoring equipment should be mounted on the temporary workstation or placed on separate tables, and whether suitable mounting hardware and stability controls are required. Requesting equipment documentation was discussed but not accepted as a task.",
+  "needed": "Every point it asks about; if any is missing, the answer is partial."
+ },
+ {
+  "id": "20261001T140000Z|S004|open_question|P2",
+  "kind": "question",
+  "target": "P2",
+  "question": "The observer roster may change. Confirm the final list, the visitor-management process, and how observers will receive the daily schedule and technical briefings. James reports sending the names currently known to the event coordinator.",
+  "needed": "Every point it asks about; if any is missing, the answer is partial."
+ },
+ {
+  "id": "20261001T140000Z|S013|ambiguous_reference|P2",
+  "kind": "who",
+  "target": "P2",
+  "question": "Who is \"Morgan\" (named in the Weekly board walk, Oct 1)?",
+  "needed": "Their full name and organization, or the person in PEOPLE they are."
+ },
+ {
+  "id": "20261001T140000Z|S014|implied_change|AI-203",
+  "kind": "dates",
+  "target": "AI-203",
+  "question": "Does this change the due date of AI-203 \"Run a test transfer with a sample file\" (now 2026-10-01)? If so, to what date?",
+  "needed": "One full date with the year, or \"no change\"."
+ },
+ {
+  "id": "20261001T140000Z|S014|implied_change|AI-207",
+  "kind": "dates",
+  "target": "AI-207",
+  "question": "Does this change the due date of AI-207 \"Finalize transfer travel and arrival plan\" (now none)? If so, to what date?",
+  "needed": "One full date with the year, or \"no change\"."
+ },
+ {
+  "id": "20261001T140000Z|S039|ownership|AI-403",
+  "kind": "owner",
+  "target": "AI-403",
+  "question": "Who owns AI-403 \"Verify staging-area load suitability for heavy equipment and file cases, identify an alternate staging area if needed, and confirm the appropriate location\"?",
+  "needed": "One person who accepts it."
+ },
+ {
+  "id": "20261001T140000Z|S048|ambiguous_reference|P2",
+  "kind": "who",
+  "target": "P2",
+  "question": "Who is \"Priya\" (named in the Weekly board walk, Oct 1)?",
+  "needed": "Their full name and organization, or the person in PEOPLE they are."
+ },
+ {
+  "id": "20261001T140000Z|S050|open_question|P2",
+  "kind": "question",
+  "target": "P2",
+  "question": "Sofia tentatively reports completing invitation updates, but does not explicitly confirm each recipient or address. James has not yet confirmed receipt. Verify which invitation updates were actually sent and whether James received his.",
+  "needed": "Every point it asks about; if any is missing, the answer is partial."
+ },
+ {
+  "id": "20261001T140000Z|S038|open_question|P2",
+  "kind": "question",
+  "target": "P2",
+  "question": "Is this confirmed: “Connectivity should be fine. We will have our normal connection capability and a backup option.”",
+  "needed": "Yes or no."
+ }
+]

@@ -1,0 +1,242 @@
+Yes. This sanitized transcript now reproduces many of the same core failure patterns as the real meeting, especially incorrect task matching, over-tasking, weak handling of existing register work, and administrative work being forced into the project register.
+
+It does not reproduce every original omission exactly, because the extractor captures most explicit commitments. But it is a strong test of whether the system can distinguish between:
+
+Existing work versus new work
+One coordination commitment versus multiple separate tasks
+Project work versus administrative work
+A complete contingency versus an incomplete verification task
+Main errors reproduced
+Real-meeting failure class	Present in this output?	Evidence
+Existing task is not properly updated	Yes	AI-203 is only possible_match_requires_review even though the discussion is clearly about readiness and execution of the sample transfer.
+New tasks created instead of updating existing work	Yes	NEW-2, NEW-3, NEW-4, NEW-5, and NEW-6 are all closely related to transfer readiness and could be updates, prerequisites, or scoped child work of AI-203.
+Broad coordination commitment over-split	Yes	One commitment in S023 becomes NEW-2 Coordinate intended staging area; access, staging, and setup are not represented coherently as one coordination action or correctly linked update.
+Separate actions created where one completion condition may be sufficient	Yes	NEW-4 Verify route suitability and NEW-5 Provide route guidance are closely coupled. Route guidance is generally the result of verifying route suitability, not necessarily a separate task.
+Parking/staging contingency incompletely captured	Yes	NEW-6 Verify staging-area load suitability omits the required fallback: identify/use an alternate staging area if needed.
+Documentation commitments incompletely decomposed	Partial	Transcript distribution is captured as NEW-7; summaries are captured as NEW-8. However, the source also commits to supporting materials, which are not distinctly retained or clearly included in NEW-8.
+Administrative work forced into project register	Yes	NEW-9 through NEW-12 place recurring meeting-invitation administration under P2 without a supported P2 task or project relationship.
+Invitation updates treated as new project taskings	Yes	Invitation requests should be administrative follow-up or remain outside the P2 project register absent a matching existing task.
+Recipient confirmation becomes tasking	Improved, but still weak	It does not create a receipt-confirmation task, but it creates invitation taskings despite the unsupported P2 association.
+Visitor coordination attached to wrong task or treated as task	Partial	Visitor issues remain project-level P2 questions, which is better than attaching them directly to AI-203. However, NEW-13 Send additional observer names may be premature because it is conditional and unowned.
+Technical capability treated as task	No	Correctly avoids creating a task merely because power/connectivity capability is discussed.
+Unsupported projects included	No	Correctly limits coverage to P2.
+Technical discussion lost	Partial	Technical support and transfer-plan dependencies are retained as flags/questions, but not consistently mapped to AI-203.
+Self-review / completeness accountability absent	Yes	There is no required selfReview object.
+Most significant defects
+1. AI-203 should be updated, not merely flagged as a possible match
+
+The existing task is:
+
+AI-203: Run a test transfer with a sample file
+
+The transcript directly discusses:
+
+Transfer timing
+Access to the environment
+Staging
+Setup
+Connection-route suitability
+File staging location
+Technical readiness requirements
+
+The output says:
+
+JSON
+ Copy
+{
+  "id": "AI-203",
+  "coverage": "possible_match_requires_review"
+}
+
+
+That is too cautious. AI-203 should receive at least a ProgressNote describing readiness dependencies and the revised transfer window.
+
+A correct treatment would be:
+
+JSON
+ Copy
+{
+  "op": "ProgressNote",
+  "tasking": "AI-203",
+  "text": "The expected transfer period was narrowed to May 18 through May 22. Transfer readiness depends on site access, staging-location suitability, route compatibility, and final setup coordination.",
+  "src": [...]
+}
+
+2. NEW-2 is under-scoped and NEW-3 is missing
+
+The source commitment is broader:
+
+“I will start coordinating with the Partner agency so that when you arrive, you can go directly to the site, use the intended staging area, and start preparing…”
+
+The output creates only:
+
+TEXT
+ Copy
+NEW-2 Coordinate intended staging area
+
+
+That loses access and setup coordination.
+
+The extractor should choose one of two valid structures:
+
+Option A: One broad coordination update
+
+Update AI-203 or create one task:
+“Coordinate transfer-site access, staging, and setup with the Partner agency.”
+
+Option B: Separate only if independently trackable
+
+Coordinate site access
+Coordinate staging area
+Coordinate setup readiness
+
+The current output is the worst middle state: it creates one new task but incompletely represents the committed scope.
+
+3. NEW-6 loses the alternate-location contingency
+
+Current label:
+
+TEXT
+ Copy
+Verify staging-area load suitability
+
+
+Required label:
+
+TEXT
+ Copy
+Verify staging-area suitability and identify an alternate location if needed
+
+
+The source explicitly includes the fallback. The output’s ownership flag mentions the alternate area, but the task itself does not preserve it. This is the same contingency-loss issue seen in the real meeting.
+
+4. NEW-5 is likely redundant
+
+Current task:
+
+TEXT
+ Copy
+Provide route guidance
+
+
+The actual completion condition is to verify that the identified route is suitable. Once that is verified, guidance follows naturally.
+
+A better representation is:
+
+TEXT
+ Copy
+Verify the identified transfer route meets access and transfer requirements
+
+
+The task can include a delivery detail:
+
+Provide the confirmed route guidance to the arriving team.
+
+But it should not necessarily be a separate task.
+
+5. The documentation action is incomplete
+
+S033 includes:
+
+Provide the current transcript.
+Provide summaries from the prior partner session.
+Provide the materials being assembled.
+
+The output creates:
+
+NEW-7 Provide meeting transcript
+NEW-8 Send partner-session summaries
+
+It should either:
+
+Use one task for “Send prior partner-session summaries and supporting materials,” or
+Create a separate supporting-materials task if those materials have a distinct completion condition.
+
+At present, “supporting materials” are dropped.
+
+6. Invitation work is incorrectly in P2
+
+This is a good reproduction of the original error.
+
+The output creates four P2 project taskings:
+
+TEXT
+ Copy
+NEW-9 Forward coordination invitation to James
+NEW-10 Send coordination invitation to Raj alternate email
+NEW-11 Add Priya to coordination invitation
+NEW-12 Add Dana to coordination invitation
+
+
+The transcript establishes that these are administrative meeting-invitation updates. It does not establish that they advance P2’s data-exchange project register.
+
+The correct disposition should be one of:
+
+An administrative-only follow-up outside project-task extraction;
+An ambiguous_reference or unmatched flag;
+A task under a separately supported recurring-meeting-administration project, if such a project/task exists in the register.
+7. NEW-13 is too strong
+
+The transcript says:
+
+“If additional observers appear, send their names to the event coordinator.”
+
+That is conditional, and the output creates an unassigned tasking:
+
+TEXT
+ Copy
+Send additional observer names to event coordinator
+
+
+This could be acceptable only if the product treats conditional recurring actions as project tasks. Otherwise it should remain:
+
+A project-level observer-process open question, or
+A progress note that names are to be provided if new observers are identified.
+Important test-fixture limitation
+
+The sample workspace does not contain direct equivalents of all real-meeting tasks.
+
+For example, the original real register had:
+
+A direct point-of-contact task
+A travel-roster task
+A sensor-integration task
+A distinct travel/access coordination task
+
+The sample P2 register has only:
+
+AI-203: Run a test transfer with a sample file
+BL-202: Get firewall rule approved
+
+Therefore, the fixture can prove:
+
+Whether the extractor over-creates work
+Whether it preserves contingencies
+Whether it wrongly assigns admin work to project scope
+
+But it cannot fully test whether the extractor matches a direct-contact commitment to an existing direct-contact task. There is no such sample task to match.
+
+Conclusion
+
+This output is useful because it reproduces the same system-level shape of several real failures:
+
+Existing work not confidently updated
+Too many new tasks
+Lost contingency in the task label
+Administrative items forced into project work
+Incomplete capture of multi-part commitments
+No self-review accountability
+
+It does not reproduce the central real-world omission failures for direct POC, route verification, transcript distribution, or parking suitability because those actions were found.
+
+To make this a complete feasibility fixture, add these active P2 taskings to the baseline before re-running:
+
+TEXT
+ Copy
+AI-204 | P2 | Coordinate partner-site access and staging arrangements | - | open | - | -
+AI-205 | P2 | Send partner access point-of-contact details | - | open | - | -
+AI-206 | P2 | Assess transfer-environment integration options | - | open | - | -
+AI-207 | P2 | Finalize transfer travel and arrival plan | - | open | - | -
+
+
+That will let the test verify whether the model properly updates existing work rather than minting NEW-2, NEW-3, NEW-4, and similar duplicate taskings.

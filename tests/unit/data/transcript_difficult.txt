@@ -1,0 +1,107 @@
+
+Transcript
+Chen, Mei   0:03:25
+Good morning, James.
+Ortiz, James   0:03:29
+Morning. I am on my phone in the car, so I may be in and out.
+Brooks, Dana   0:03:39
+No problem. Just be aware this call is recorded and transcribed.
+Ortiz, James   0:03:55
+Understood. I heard yesterday that we may have additional observers for the partner transfer. It could include leadership and technical representatives. I do not know whether that list will grow, but there may be more people than originally expected.
+Brooks, Dana   0:04:46
+Okay. There may be a lot of observers. James, when you supported the last transfer, did you put the monitoring equipment on the temporary workstation stand, or did you keep it on separate tables?
+Ortiz, James   0:05:07
+We kept the monitoring equipment on separate tables. The temporary workstation only had the communications gear attached to it.
+Brooks, Dana   0:05:33
+There has been some discussion about putting the monitoring equipment on the stand this time, but I am not sure we need to. The view from the work tables may be sufficient, and the equipment is fairly large.
+Ortiz, James   0:05:47
+We can support it on the stand if we have the correct mounts. The concern is stability. If the equipment has a large surface area, we may need to lower the stand during high wind or vibration conditions.
+Brooks, Dana   0:06:02
+That is what I am most uncertain about, the mounting method. The standard clips may not be sufficient.
+Chen, Mei   0:06:47
+I remember the equipment being on a table at the prior event, but I did not inspect how it was secured.
+Brooks, Dana   0:06:56
+We can ask for the equipment documentation.
+Ortiz, James   0:07:00
+If the conditions are not favorable, we can lower the working height or keep the equipment at ground level. We can work that out once we know the transfer plan.
+Brooks, Dana   0:07:58
+Morgan, James said the partner side may have more observers for the upcoming transfer. Is there a visitor list or a process for managing those names?
+Alvarez, Sofia   0:08:23
+There seems to be some conflict in the dates that we are trying to clean up. The transfer period that had been discussed as May eighteenth through May twenty-eighth is now being described as May eighteenth through May twenty-second. The current expectation may be that people working directly on the transfer need to be available Monday through Friday, with travel Sunday and Saturday. There is still discussion about what that means for people who are not working hands-on.
+Ortiz, James   0:10:09
+Raj and I are planning to leave on the fourteenth. It may take us several days to get there, depending on traffic, weather, or equipment issues. We expect to arrive on the seventeenth.
+Ortiz, James   0:10:28
+If the transfer needs to be ready on the eighteenth, it would help if the technical team could have files staged and equipment connected before then.
+Alvarez, Sofia   0:10:50
+I think the eighteenth is being treated as the setup and configuration day, not necessarily the day every participant has to arrive.
+Ortiz, James   0:11:02
+Okay. That gives us some flexibility. If we arrive on the seventeenth, we can get settled and be ready for the eighteenth.
+Alvarez, Sofia   0:11:28
+I will send everyone information from yesterday’s discussion this morning. There will be a partner-site slide deck with location details. If we need to make arrangements before the eighteenth for the team to arrive, stage the files, and get settled, we will work through that.
+Ortiz, James   0:12:11
+That would be ideal. If the staging location can be identified ahead of time, I would prefer to deliver the files there, set up the equipment, and be out of the way before the active transfer period begins.
+Alvarez, Sofia   0:12:40
+Would you prefer to stage the files at the final location as soon as you arrive, then use another workspace while the technical team finishes setup?
+Ortiz, James   0:12:51
+Yes. That is probably the best approach.
+Alvarez, Sofia   0:13:01
+All right. I will start coordinating with the Partner agency so that when you arrive, you can go directly to the site, use the intended staging area, and start preparing for the transfer period.
+Ortiz, James   0:13:23
+And Sofia, before Raj and I leave, can you get us a direct point of contact we can call if we have trouble getting into the site or reaching the right staging area?
+Alvarez, Sofia   0:13:33
+Yes. Absolutely.
+Ortiz, James   0:13:41
+We also need to know whether there is a specific connection route or entry process because of the file size and equipment we are bringing.
+Alvarez, Sofia   0:13:48
+There is a route identified. I need to check that it is suitable for your transfer requirements.
+Ortiz, James   0:14:19
+The last thing we want is to arrive with the files and equipment, use the wrong route, and find out that the site cannot support what we are trying to do.
+Alvarez, Sofia   0:14:28
+Right. I will work through that so you know which route to use.
+Ortiz, James   0:14:58
+Also, additional observers may attend. I sent the names I have to the event coordinator, but that list may still grow or shrink.
+Alvarez, Sofia   0:15:59
+We have a specific point of contact working with the event coordinator to capture observer attendees. A separate process is being developed so that group can stay informed about the day-by-day flow of activity.
+Ortiz, James   0:16:25
+They are interested in the transfer as a whole, but they may also ask questions about the technical setup. The team should be prepared for that.
+Alvarez, Sofia   0:17:25
+We will continue this call every week. I will provide today’s transcript to this group, and you will also get the summaries from yesterday’s partner session. I am putting those materials together now to get them out today. If additional observers appear, send their names to the event coordinator. Our side is developing a flexible day-by-day schedule so observers can decide when to attend.
+Ortiz, James   0:19:15
+We appreciate that. The main thing for Raj and me is having a point of contact and knowing the site arrangements before we arrive. Travel has enough unknowns already.
+Ortiz, James   0:20:07
+Did the technical team decide exactly how the temporary workstation is going to support the transfer?
+Brooks, Dana   0:20:20
+I will talk through the working plan. The workstation is there primarily to host the transfer-support equipment. We need power, workspace, and probably internet backhaul. We may place monitoring equipment on the stand for better visibility, but that depends on the final transfer plan. It may be sufficient to keep it on the ground-level tables instead.
+Brooks, Dana   0:21:35
+The transfer equipment will connect directly to the support system. The workstation mainly provides power, workspace, connectivity, and a usable position for the monitoring equipment.
+Ortiz, James   0:21:39
+Connectivity should be fine. We will have our normal connection capability and a backup option.
+Ortiz, James   0:21:55
+One other logistics concern. The picture of the staging area looks like it may have temporary flooring or lightweight panels. Please make sure the Partner agency knows the equipment and file cases are heavy. We do not want to put them somewhere that cannot support the load.
+Brooks, Dana   0:22:32
+I think the intended area may be stable, but we need to verify it. If it does not work, there is another staging area nearby. We need to determine exactly where the files and equipment will go and make sure the location is appropriate.
+Brooks, Dana   0:23:07
+Do we know whether dedicated power is available, or will the team need its own power unit?
+Ortiz, James   0:23:20
+There is no dedicated power. We are bringing the portable power unit.
+Ortiz, James   0:23:32
+We should be able to support the equipment with that.
+Alvarez, Sofia   0:24:28
+I am on it. The transcript captured the items we discussed, and we will start tracking them and keep everyone informed as details become available.
+Chen, Mei   0:24:57
+Can you forward the recurring coordination invitation directly to James? He did not receive the updated invitation after it was recreated.
+Chen, Mei   0:25:06
+Also, send it to Raj’s alternate email address. He only has the original invitation.
+Alvarez, Sofia   0:25:36
+Okay.
+Alvarez, Sofia   0:25:56
+James and Raj. Does Priya need to be on this invitation too?
+Brooks, Dana   0:25:58
+Add Priya and Dana.
+Alvarez, Sofia   0:26:34
+All right, I think I have that done. James, let me know if you receive it.
+Ortiz, James   0:26:44
+I have my email open. It may take a minute.
+Brooks, Dana   0:26:52
+Can we switch topics after this? I do not want the next discussion mixed into the notes.
+

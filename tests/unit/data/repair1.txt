@@ -1,0 +1,9 @@
+The workbench checked your reply against the transcript and the register and found the problems below.
+Fix only these. Keep every other op, flag, disposition and register row as it is.
+Return the complete corrected reply in the same format: one JSON block, including segments, register and selfReview.
+
+MUST FIX:
+1. Segments S019, S027 and S033 contain a first-person commitment ("I will ...", "I need to check ...") but are not classified as commitment. Classify each as commitment and record it: a NewTasking owned by the speaker, or a Reassign/Deadline on the existing tasking whose scope it fits. One sentence may hold several commitments; give each its own disposition.
+2. BL-202 is left as a possible match. Decide it: if the cited discussion concerns BL-202, record it as updates to BL-202 (ProgressNote, Reassign or Deadline on BL-202) and mark it updated; if not, mark it not_discussed with a one-line reason.
+3. NEW-2 cites no request, commitment, decision or question. A tasking's owner must be the person who committed or accepted; otherwise leave it unassigned with an ownership flag.
+4. ProgressNote:NEW-1#18 on NEW-1: S031 fits AI-205 better (2 vs 0)

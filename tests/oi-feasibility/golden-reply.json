@@ -1,0 +1,144 @@
+{
+ "context": "MKG1|transcript|20261008T140000Z|57b4238c",
+ "ops": [
+  {
+   "op": "NewParty",
+   "ref": "NEW-P1",
+   "kind": "person",
+   "name": "Morgan Reyes",
+   "src": [
+    {
+     "seg": "S002",
+     "quote": "I'm Morgan Reyes. I lead the partner network team"
+    }
+   ]
+  },
+  {
+   "op": "Reassign",
+   "tasking": "AI-403",
+   "to": "alvarez",
+   "src": [
+    {
+     "seg": "S004",
+     "quote": "Sofia, can you own the staging-area load verification"
+    },
+    {
+     "seg": "S005",
+     "quote": "Yes, I'll take the staging-area load check"
+    }
+   ]
+  },
+  {
+   "op": "Decision",
+   "project": "P2",
+   "about": [
+    "AI-206"
+   ],
+   "text": "Keep the monitoring equipment on separate tables, not on the temporary workstation stand.",
+   "src": [
+    {
+     "seg": "S007",
+     "quote": "We've decided to keep the monitoring equipment on separate tables"
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-1",
+   "project": "P2",
+   "label": "Check loading dock access at the partner site",
+   "assignee": "chen",
+   "src": [
+    {
+     "seg": "S014",
+     "quote": "I'll own checking the loading dock access at the partner site"
+    }
+   ]
+  },
+  {
+   "op": "Status",
+   "tasking": "AI-402",
+   "status": "completed",
+   "src": [
+    {
+     "seg": "S020",
+     "quote": "The connection route I mentioned last week is confirmed"
+    },
+    {
+     "seg": "S022",
+     "quote": "Yes, that one is complete."
+    }
+   ]
+  },
+  {
+   "op": "Status",
+   "tasking": "AI-406",
+   "status": "completed",
+   "src": [
+    {
+     "seg": "S025",
+     "quote": "I sent the summaries from the partner session on Monday"
+    }
+   ]
+  }
+ ],
+ "flags": [],
+ "answers": [
+  {
+   "item": "20261001T140000Z|S039|ownership|AI-403",
+   "seg": "S005",
+   "quote": "Yes, I'll take the staging-area load check",
+   "answer": "Sofia Alvarez accepted it.",
+   "status": "answered"
+  },
+  {
+   "item": "20261001T140000Z|S013|ambiguous_reference|P2",
+   "seg": "S002",
+   "quote": "I'm Morgan Reyes. I lead the partner network team",
+   "answer": "Morgan Reyes, partner network team lead.",
+   "status": "answered"
+  },
+  {
+   "item": "20261001T140000Z|S050|open_question|P2",
+   "seg": "S010",
+   "quote": "Yes, I got the invitation, and Raj got his as well.",
+   "answer": "Sent, and James and Raj received it.",
+   "status": "answered"
+  },
+  {
+   "item": "20261001T140000Z|S007|open_question|AI-206",
+   "seg": "S007",
+   "quote": "We've decided to keep the monitoring equipment on separate tables",
+   "answer": "Separate tables, not the stand.",
+   "status": "answered"
+  },
+  {
+   "item": "20261001T140000Z|S014|open_question|AI-203",
+   "seg": "S012",
+   "quote": "It's probably the eighteenth through the twenty-second",
+   "answer": "Probably May 18-22; year not confirmed.",
+   "status": "partial"
+  },
+  {
+   "item": "20261001T140000Z|S014|open_question|AI-207",
+   "seg": "S012",
+   "quote": "It's probably the eighteenth through the twenty-second",
+   "answer": "Probably May 18-22; year not confirmed.",
+   "status": "partial"
+  },
+  {
+   "item": "20261001T140000Z|S014|implied_change|AI-203",
+   "seg": "S012",
+   "quote": "It's probably the eighteenth through the twenty-second",
+   "answer": "Probably May 18-22; year not confirmed.",
+   "status": "partial"
+  },
+  {
+   "item": "20261001T140000Z|S014|implied_change|AI-207",
+   "seg": "S012",
+   "quote": "It's probably the eighteenth through the twenty-second",
+   "answer": "Probably May 18-22; year not confirmed.",
+   "status": "partial"
+  }
+ ]
+}

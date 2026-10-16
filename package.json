@@ -1,0 +1,14 @@
+{
+  "name": "meetinggraph",
+  "private": true,
+  "description": "MeetingGraph workbench: build ports, shared modules and tests",
+  "scripts": {
+    "build": "python3 build.py",
+    "test": "python3 run_tests.py",
+    "test:all": "python3 run_tests.py all"
+  },
+  "devDependencies": {
+    "fake-indexeddb": "^6.2.5",
+    "jsdom": "^29.1.1"
+  }
+}

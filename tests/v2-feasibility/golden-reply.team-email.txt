@@ -1,0 +1,56 @@
+1. Meeting Overview
+
+Meeting Name: Harbor Point reopening kickoff
+
+Date: Monday, Oct 19, 2026
+
+Projects covered: Harbor Point reopening
+
+2. Executive Summary
+
+The Harbor Point reopening kickoff on Monday, Oct 19, 2026 convened. On Harbor Point reopening: Tom Lindqvist took on 2 new actions (AI-101, AI-111); Luis Delgado took on 2 new actions (AI-102, AI-112); Pete Kowalski took on 3 new actions (AI-103, AI-106, AI-114); Rana Haddad took on 4 new actions (AI-104, AI-105, AI-107, AI-113); Abena Mensah took on 3 new actions (AI-108, AI-110, AI-115); Ken Sato took on 1 new action (AI-109). Decided: Signage: compliant tactile signs for the room IDs, vinyl only for wayfinding banners (replaces vinyl for everything); Open house is Saturday, January 16 (not the 9th); staff open the week of January 11 if the inspection passes; No public date is announced until the fire inspection is booked; the neighborhood association hears first, then the public a day or two later; Punch list walkthrough November 12 at 9:00; Luis sends the invite today; Keycard access: front desk staff get the front door and offices; storage rooms only for program leads. Also reported: The elevator certification came through (state approved it Thursday); Anything paid from this year's money must be invoiced by December 15; The furniture's second installment is due on delivery, so nothing needs holding. Still open: Opening: soft target the week of January 11, depends on passing the fire inspection; say 'early next year' publicly for now; Open: is the lobby mural being kept or painted over? Not decided; Grace will take it to the director; Open: who is the volunteers' point of contact at the open house? Rana is checking with her director. Next up: “Tom calls the fire marshal's office this week to get the final fire inspection on the calendar” (AI-101), Tom Lindqvist, “this week”; “Rana runs the RoomLoop training sessions for the front desk staff in the first two weeks of December” (AI-105), Rana Haddad, “first two weeks of December”; “Ken checks whether the $5,500 can move from the contingency line; answer by end of next week” (AI-109), Ken Sato, “end of next week”.
+
+3. New actions from this meeting
+
+Effort	Detail
+AI-101 Tom calls the fire marshal's office this week to get the final fire inspection on the calendar	Owner: Tom Lindqvist. Status: Open. Timing: “this week”.
+AI-102 Luis gets written confirmation of the furniture delivery date from the supplier by Friday	Owner: Luis Delgado. Status: Open. Timing: “by Friday”.
+AI-103 Pete owns the keycard access list (IT manages the access system); staff list from HR, Tom sends the names he has	Owner: Pete Kowalski. Status: Open. No due date stated.
+AI-104 Rana drafts the winter program schedule but holds it until the inspection date is known	Owner: Rana Haddad. Status: Open. No due date stated.
+AI-105 Rana runs the RoomLoop training sessions for the front desk staff in the first two weeks of December	Owner: Rana Haddad. Status: Open. Timing: “first two weeks of December”.
+AI-106 Pete does a RoomLoop walk-through with Rana next week (a morning, at the new building)	Owner: Pete Kowalski. Status: Open. Timing: “next week”.
+AI-107 Rana gets two quotes for 120 rental chairs as a backup, before the next meeting	Owner: Rana Haddad. Status: Open. Timing: “before our next meeting”.
+AI-108 Abena gets the signage requoted (tactile room signs, vinyl wayfinding); invoice by December 15 if possible	Owner: Abena Mensah. Status: Open. No due date stated.
+AI-109 Ken checks whether the $5,500 can move from the contingency line; answer by end of next week	Owner: Ken Sato. Status: Open. Timing: “end of next week”.
+AI-110 Abena updates the website text now; new photos in early December after cleaning	Owner: Abena Mensah. Status: Open. Timing: “early December”.
+AI-111 Tom asks the architect what the drawings show for the mural wall	Owner: Tom Lindqvist. Status: Open. No due date stated.
+AI-112 Luis checks whether the community room hearing loop has been installed	Owner: Luis Delgado. Status: Open. No due date stated.
+AI-113 Rana sends after-school parents a pickup map for the new building (with Abena), with the photo release form, in December	Owner: Rana Haddad. Status: Open. Timing: “December”.
+AI-114 Pete tests RoomLoop on a cellular hotspot at the new building's front desk	Owner: Pete Kowalski. Status: Open. No due date stated.
+AI-115 Abena drafts the open house press release and flyer and sends them to Grace for review by November 6	Owner: Abena Mensah. Status: Open. Timing: “by November sixth”.
+
+4. Existing items updated or referenced this meeting
+
+None: this is the first meeting, so the board had no existing items to update.
+
+5. Existing open items not discussed
+
+None: this is the first meeting.
+
+6. Risks, dependencies and open questions
+
+Risk: Furniture delivery (December 7) may slip; stacking chairs and folding tables are at risk
+
+Risk: Fiber internet can't be installed until mid December at the earliest; RoomLoop needs internet, so training in early December is at risk
+
+Risk: Interior signage quote is $23,500 against an $18,000 budget ($5,500 over)
+
+Open question: Opening: soft target the week of January 11, depends on passing the fire inspection; say 'early next year' publicly for now
+
+Open question: Open: is the lobby mural being kept or painted over? Not decided; Grace will take it to the director
+
+Open question: Open: who is the volunteers' point of contact at the open house? Rana is checking with her director
+
+7. Conclusion
+
+15 new actions came out of this meeting. The board has been updated with the accepted actions. 3 open questions and 3 risks remain visible for follow-up.

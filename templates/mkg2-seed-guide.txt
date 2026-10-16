@@ -1,0 +1,37 @@
+MeetingGraph 2: starting your board from a spreadsheet
+=======================================================
+
+Use this once, to start a project's board with what is true today. After that, meetings keep the board up to date.
+
+Open mkg2-seed-template.csv in Excel. Fill one row for each project, person, action, question, risk and decision.
+Save it as CSV (File > Save As > "CSV UTF-8"). mkg2-seed-example.csv shows a filled one.
+
+
+The columns
+-----------
+Type        Project, Person, Action, Question, Risk or Decision.
+Project     The project's name. On a Project row, this is the name you are creating; on every other row (except
+            Person rows) it says which project the row belongs to, spelled the same way.
+Title       What it is, in one plain line. On a Person row: the person's full name.
+Owner       The person responsible, written exactly as in their Person row. Leave it blank if nobody owns it yet.
+Email       Person rows only: their work email. It tells people apart reliably. It stays in the team folder and is
+            never sent to the chat.
+Teams name  Person rows only: the name as it appears in Teams transcripts (usually "Last, First"). This is how
+            meetings are matched to people.
+Due         Actions: the due date, as 2026-11-06 or 11/6/2026. If there is no firm date, write it as you would say
+            it ("early December"); it is kept as said. Decisions: the date it was decided.
+Status      Actions: Open, In progress, Blocked or Done. Questions and risks: Open or Done. Blank means Open.
+Waiting on  The Title of the row this one can't finish without, copied exactly.
+Notes       Anything else worth keeping. Notes are not sent to the chat.
+
+There is no ID column: MeetingGraph gives every row its ID when you load the file.
+
+
+Good to know
+------------
+- You can put the rows in any order, and leave any column blank that does not apply.
+- Done items are kept as history but are not listed as open work.
+- Every name in Owner should have a Person row. If one doesn't, it is still kept, and you are asked once who it is.
+- Two rows with the same Title are fine, but then "Waiting on" can't tell them apart: give them different titles.
+- Use one file for several projects if you like: add a Project row for each.
+- Don't put anything in this file that should not be in the team folder.

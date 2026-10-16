@@ -1,0 +1,500 @@
+{
+ "mkgWorkspace": "0.1",
+ "tool": "MeetingGraph 0.1",
+ "contract": {
+  "specVersion": "0.3.0",
+  "ontologyVersion": "https://example.org/mkg/0.3.0",
+  "context": {
+   "file": "delta-context-0.3.0.jsonld",
+   "iri": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+   "sha256": "131585c5e46f0e7db383323a072d6d68fb0ef8788bbb7b07a5a24effa95191bc"
+  },
+  "shacl": {
+   "file": "delta-shacl-0.3.0.ttl",
+   "sha256": "9319bb91f981db51372dbbaf09efee1f76564972ba5e0ab96f6729df50cb6ed1"
+  },
+  "construct": {
+   "file": "delta-to-cco-construct-0.3.0.rq",
+   "sha256": "ee308dcd374350cf535f5d2679a32ff2fce7906a7e66f1318facb7a75b95ca61"
+  },
+  "fold": {
+   "file": "fold-rules-0.3.0.yaml",
+   "sha256": "bffb73d61efeba3e8033d1e04a6eaaf1f9297db25cd5e1cb4bda20fc53a0f73f"
+  }
+ },
+ "packages": [
+  {
+   "mkgPackage": "0.1",
+   "tool": "MeetingGraph 0.1",
+   "contract": {
+    "specVersion": "0.3.0",
+    "context": {
+     "file": "delta-context-0.3.0.jsonld",
+     "iri": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+     "sha256": "131585c5e46f0e7db383323a072d6d68fb0ef8788bbb7b07a5a24effa95191bc"
+    }
+   },
+   "meeting": {
+    "id": "20260915T120000Z",
+    "meetingAt": "2026-09-15T08:00:00-04:00",
+    "title": "Atlas baseline register import",
+    "kind": "manual"
+   },
+   "sources": [
+    {
+     "id": "R01",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Finalize participant travel roster — open, no owner"
+    },
+    {
+     "id": "R02",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Protect participant travel information — open, no owner"
+    },
+    {
+     "id": "R03",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Create restricted travel roster workbook — in progress"
+    },
+    {
+     "id": "R04",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Identify technical support traveler — open"
+    },
+    {
+     "id": "R05",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Coordinate site access with host liaison — open"
+    },
+    {
+     "id": "R06",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Send host-site point-of-contact details — open, no owner"
+    },
+    {
+     "id": "R07",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Evaluate alternate equipment configuration — in progress"
+    },
+    {
+     "id": "R08",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Assess equipment integration options — open, no owner"
+    },
+    {
+     "id": "R09",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Update recurring coordination meeting invitations — in progress"
+    },
+    {
+     "id": "R10",
+     "t": null,
+     "speaker": null,
+     "speakerName": "Project register",
+     "text": "Identify future exercise scenario — open, no owner"
+    }
+   ],
+   "deltas": [],
+   "extension": {
+    "graph": "https://example.org/mkg/data/delta/20260915T120000Z/ext",
+    "doc": {
+     "@context": {
+      "@vocab": "https://example.org/mkg/delta-ext#",
+      "tasking": {
+       "@type": "@id"
+      },
+      "prerequisite": {
+       "@type": "@id"
+      },
+      "about": {
+       "@type": "@id"
+      },
+      "from": {
+       "@type": "@id"
+      },
+      "to": {
+       "@type": "@id"
+      },
+      "source": {
+       "@type": "@id"
+      },
+      "party": {
+       "@type": "@id"
+      },
+      "project": {
+       "@type": "@id"
+      },
+      "decision": {
+       "@type": "@id"
+      },
+      "replaces": {
+       "@type": "@id"
+      },
+      "assignee": {
+       "@type": "@id"
+      },
+      "duplicate": {
+       "@type": "@id"
+      },
+      "survivor": {
+       "@type": "@id"
+      }
+     },
+     "@graph": [
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext",
+       "@type": "ExtensionDelta",
+       "meetingAt": "2026-09-15T08:00:00-04:00",
+       "note": "Observations outside delta contract 0.3.0. Not validated by the 0.3.0 SHACL or mapped by the CONSTRUCT until the contract supports them."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/010",
+       "@type": "NewProject",
+       "sequence": 10,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R01"
+       ],
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "P1",
+       "name": "Atlas Field Exercise",
+       "description": "Synthetic validation project for meeting-extraction, task-provenance, timing and report testing.",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/020",
+       "@type": "NewParty",
+       "sequence": 20,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R01"
+       ],
+       "party": "https://example.org/mkg/data/person/morgan-reyes",
+       "kind": "person",
+       "name": "Morgan Reyes",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/030",
+       "@type": "NewParty",
+       "sequence": 30,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R01"
+       ],
+       "party": "https://example.org/mkg/data/person/taylor-brooks",
+       "kind": "person",
+       "name": "Taylor Brooks",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/040",
+       "@type": "NewParty",
+       "sequence": 40,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R01"
+       ],
+       "party": "https://example.org/mkg/data/person/casey-lin",
+       "kind": "person",
+       "name": "Casey Lin",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/050",
+       "@type": "NewParty",
+       "sequence": 50,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R01"
+       ],
+       "party": "https://example.org/mkg/data/person/riley-novak",
+       "kind": "person",
+       "name": "Riley Novak",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/060",
+       "@type": "NewParty",
+       "sequence": 60,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R01"
+       ],
+       "party": "https://example.org/mkg/data/person/alex-kim",
+       "kind": "person",
+       "name": "Alex Kim",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/070",
+       "@type": "NewParty",
+       "sequence": 70,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R01"
+       ],
+       "party": "https://example.org/mkg/data/person/vendor-team",
+       "kind": "organization",
+       "name": "Vendor Team",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/080",
+       "@type": "NewTasking",
+       "sequence": 80,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R01"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/080/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-1",
+       "label": "Finalize participant travel roster",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/090",
+       "@type": "NewTasking",
+       "sequence": 90,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R02"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/090/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-2",
+       "label": "Protect participant travel information",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/100",
+       "@type": "NewTasking",
+       "sequence": 100,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R03"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/100/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-3",
+       "label": "Create restricted travel roster workbook",
+       "assignee": "https://example.org/mkg/data/person/morgan-reyes",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/101",
+       "@type": "Status",
+       "sequence": 101,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R03"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/100/tasking",
+       "status": "InProgressStatus",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/110",
+       "@type": "NewTasking",
+       "sequence": 110,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R04"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/110/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-4",
+       "label": "Identify technical support traveler",
+       "assignee": "https://example.org/mkg/data/person/vendor-team",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/120",
+       "@type": "NewTasking",
+       "sequence": 120,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R05"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/120/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-5",
+       "label": "Coordinate site access with host liaison",
+       "assignee": "https://example.org/mkg/data/person/morgan-reyes",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/130",
+       "@type": "NewTasking",
+       "sequence": 130,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R06"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/130/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-6",
+       "label": "Send host-site point-of-contact details",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/140",
+       "@type": "NewTasking",
+       "sequence": 140,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R07"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/140/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-7",
+       "label": "Evaluate alternate equipment configuration",
+       "assignee": "https://example.org/mkg/data/person/morgan-reyes",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/141",
+       "@type": "Status",
+       "sequence": 141,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R07"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/140/tasking",
+       "status": "InProgressStatus",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/150",
+       "@type": "NewTasking",
+       "sequence": 150,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R08"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/150/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-8",
+       "label": "Assess equipment integration options",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/160",
+       "@type": "NewTasking",
+       "sequence": 160,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R09"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/160/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-9",
+       "label": "Update recurring coordination meeting invitations",
+       "assignee": "https://example.org/mkg/data/person/morgan-reyes",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/161",
+       "@type": "Status",
+       "sequence": 161,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R09"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/160/tasking",
+       "status": "InProgressStatus",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/170",
+       "@type": "NewTasking",
+       "sequence": 170,
+       "source": [
+        "https://example.org/mkg/data/delta/20260915T120000Z/source/R10"
+       ],
+       "tasking": "https://example.org/mkg/data/delta/20260915T120000Z/ext/op/170/tasking",
+       "project": "https://example.org/mkg/data/project/P1",
+       "code": "AI-10",
+       "label": "Identify future exercise scenario",
+       "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R01",
+       "@type": "TranscriptSource",
+       "segment": "R01",
+       "speaker": "Project register",
+       "quote": "Finalize participant travel roster — open, no owner"
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R02",
+       "@type": "TranscriptSource",
+       "segment": "R02",
+       "speaker": "Project register",
+       "quote": "Protect participant travel information — open, no owner"
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R03",
+       "@type": "TranscriptSource",
+       "segment": "R03",
+       "speaker": "Project register",
+       "quote": "Create restricted travel roster workbook — in progress"
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R04",
+       "@type": "TranscriptSource",
+       "segment": "R04",
+       "speaker": "Project register",
+       "quote": "Identify technical support traveler — open"
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R05",
+       "@type": "TranscriptSource",
+       "segment": "R05",
+       "speaker": "Project register",
+       "quote": "Coordinate site access with host liaison — open"
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R06",
+       "@type": "TranscriptSource",
+       "segment": "R06",
+       "speaker": "Project register",
+       "quote": "Send host-site point-of-contact details — open, no owner"
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R07",
+       "@type": "TranscriptSource",
+       "segment": "R07",
+       "speaker": "Project register",
+       "quote": "Evaluate alternate equipment configuration — in progress"
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R08",
+       "@type": "TranscriptSource",
+       "segment": "R08",
+       "speaker": "Project register",
+       "quote": "Assess equipment integration options — open, no owner"
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R09",
+       "@type": "TranscriptSource",
+       "segment": "R09",
+       "speaker": "Project register",
+       "quote": "Update recurring coordination meeting invitations — in progress"
+      },
+      {
+       "@id": "https://example.org/mkg/data/delta/20260915T120000Z/source/R10",
+       "@type": "TranscriptSource",
+       "segment": "R10",
+       "speaker": "Project register",
+       "quote": "Identify future exercise scenario — open, no owner"
+      }
+     ]
+    },
+    "sha256": "9577f45e8c4db83bdd9c25198281876620a9cda48b13244f37b423de845c6ac7"
+   },
+   "flags": [],
+   "acceptedAt": "2026-10-11T12:48:28.528Z",
+   "fileName": "mkg-atlas-baseline-2026-09-15.json"
+  }
+ ]
+}

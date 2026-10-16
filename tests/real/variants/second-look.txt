@@ -1,0 +1,8 @@
+SECOND LOOK. Read the whole meeting above again, from the first statement to the last, and compare it with the list you just made.
+
+List only important items that your list does not already have: commitments, decisions (including a recommendation the group accepts), open questions, risks, and updates about dates, travel, schedules, money or scope. Do not repeat, reword or correct items already in your list. If nothing important is missing, list nothing.
+
+Use the same fields and rules as before. OUTPUT: one fenced code block and nothing else. Inside it, one JSON object per line:
+- The first line: {"context": "<the same context token as before>", "secondLook": true}
+- Then one line per new item, in meeting order (by "seg").
+- The last line: {"end": <the number of new item lines>}

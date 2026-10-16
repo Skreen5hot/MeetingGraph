@@ -1,0 +1,692 @@
+{
+ "about": "Hand-marked key for the mock seed meeting (Harbor Point reopening kickoff, 2026-10-19). 'anchors' are exact phrases from the transcript; the checker turns them into statement numbers. 'kinds' are the kinds that count as right. 'kw' are regexes; an item matches a key when it cites a statement within 2 of an anchor and its 'what' matches a kw, or when it cites the anchor itself. Final state rule: where the meeting changed something, only the final state is a key and the earlier statement is a trap.",
+ "keys": [
+  {
+   "id": "K01",
+   "importance": "high",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Lindqvist",
+   "label": "Tom calls the fire marshal's office this week to get the final fire inspection on the calendar",
+   "due": "this week",
+   "anchors": [
+    "I'll call the fire marshal's office this week",
+    "I'll call today. Honestly."
+   ],
+   "kw": [
+    "fire",
+    "inspection",
+    "marshal"
+   ]
+  },
+  {
+   "id": "K02",
+   "importance": "high",
+   "kinds": [
+    "question",
+    "risk",
+    "update",
+    "decision"
+   ],
+   "who": "Okafor|Lindqvist",
+   "label": "Opening: soft target the week of January 11, depends on passing the fire inspection; say 'early next year' publicly for now",
+   "due": null,
+   "anchors": [
+    "the January eleventh target depends on the inspection",
+    "we're aiming for the week of January eleventh",
+    "if anything fails we go to the back of the line",
+    "the whole January plan goes"
+   ],
+   "kw": [
+    "january",
+    "jan\\b",
+    "\\b11\\b",
+    "eleventh",
+    "opening",
+    "reopen",
+    "target"
+   ]
+  },
+  {
+   "id": "K03",
+   "importance": "high",
+   "kinds": [
+    "risk",
+    "update"
+   ],
+   "who": "Delgado",
+   "label": "Furniture delivery (December 7) may slip; stacking chairs and folding tables are at risk",
+   "due": "December seventh",
+   "anchors": [
+    "the December seventh delivery could slip",
+    "there may be a delay on the stacking chairs"
+   ],
+   "kw": [
+    "furniture",
+    "deliver",
+    "chair",
+    "table",
+    "slip"
+   ]
+  },
+  {
+   "id": "K04",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Delgado",
+   "label": "Luis gets written confirmation of the furniture delivery date from the supplier by Friday",
+   "due": "by Friday",
+   "anchors": [
+    "I'll get written confirmation of the delivery date"
+   ],
+   "kw": [
+    "confirm",
+    "writing",
+    "written",
+    "supplier",
+    "deliver"
+   ]
+  },
+  {
+   "id": "K05",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Kowalski",
+   "label": "Pete owns the keycard access list (IT manages the access system); staff list from HR, Tom sends the names he has",
+   "due": null,
+   "anchors": [
+    "I'll get the staff list from HR",
+    "Okay, then it's yours, Pete"
+   ],
+   "kw": [
+    "keycard",
+    "key card",
+    "access"
+   ]
+  },
+  {
+   "id": "K06",
+   "importance": "normal",
+   "kinds": [
+    "question"
+   ],
+   "who": "Okafor",
+   "label": "Open: is the lobby mural being kept or painted over? Not decided; Grace will take it to the director",
+   "due": null,
+   "anchors": [
+    "I'm going to put it down as an open question",
+    "The mural question is still open",
+    "I'd rather it be decided than just happen"
+   ],
+   "kw": [
+    "mural"
+   ]
+  },
+  {
+   "id": "K07",
+   "importance": "high",
+   "kinds": [
+    "risk",
+    "update"
+   ],
+   "who": "Kowalski",
+   "label": "Fiber internet can't be installed until mid December at the earliest; RoomLoop needs internet, so training in early December is at risk",
+   "due": "mid December",
+   "anchors": [
+    "they can't install until mid December",
+    "The fiber install is mid December at the earliest"
+   ],
+   "kw": [
+    "fiber",
+    "internet",
+    "provider"
+   ]
+  },
+  {
+   "id": "K08",
+   "importance": "normal",
+   "kinds": [
+    "commitment",
+    "update"
+   ],
+   "who": "Haddad",
+   "label": "Rana drafts the winter program schedule but holds it until the inspection date is known",
+   "due": null,
+   "anchors": [
+    "I'll draft it but I won't send it",
+    "I'm drafting it but holding it"
+   ],
+   "kw": [
+    "winter",
+    "program",
+    "schedule",
+    "instructor"
+   ]
+  },
+  {
+   "id": "K09",
+   "importance": "normal",
+   "kinds": [
+    "update"
+   ],
+   "who": "Lindqvist",
+   "label": "The elevator certification came through (state approved it Thursday)",
+   "due": null,
+   "anchors": [
+    "The elevator certification came through"
+   ],
+   "kw": [
+    "elevator"
+   ]
+  },
+  {
+   "id": "K10",
+   "importance": "high",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Haddad",
+   "label": "Rana runs the RoomLoop training sessions for the front desk staff in the first two weeks of December",
+   "due": "first two weeks of December",
+   "anchors": [
+    "I'll run the RoomLoop training sessions"
+   ],
+   "kw": [
+    "train"
+   ]
+  },
+  {
+   "id": "K11",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Kowalski",
+   "label": "Pete does a RoomLoop walk-through with Rana next week (a morning, at the new building)",
+   "due": "next week",
+   "anchors": [
+    "I'll do a walk-through of RoomLoop with Rana next week"
+   ],
+   "kw": [
+    "walk-through",
+    "walkthrough",
+    "walk through",
+    "roomloop",
+    "show"
+   ]
+  },
+  {
+   "id": "K12",
+   "importance": "high",
+   "kinds": [
+    "risk",
+    "update"
+   ],
+   "who": "Mensah",
+   "label": "Interior signage quote is $23,500 against an $18,000 budget ($5,500 over)",
+   "due": null,
+   "anchors": [
+    "The quote came in at twenty-three thousand five hundred"
+   ],
+   "kw": [
+    "sign",
+    "quote",
+    "budget",
+    "23",
+    "5,500",
+    "5500"
+   ]
+  },
+  {
+   "id": "K13",
+   "importance": "high",
+   "kinds": [
+    "decision"
+   ],
+   "who": "Okafor",
+   "label": "Signage: compliant tactile signs for the room IDs, vinyl only for wayfinding banners (replaces vinyl for everything)",
+   "due": null,
+   "anchors": [
+    "scratch the vinyl for everything"
+   ],
+   "kw": [
+    "sign",
+    "tactile",
+    "vinyl",
+    "braille"
+   ]
+  },
+  {
+   "id": "K14",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Mensah",
+   "label": "Abena gets the signage requoted (tactile room signs, vinyl wayfinding); invoice by December 15 if possible",
+   "due": null,
+   "anchors": [
+    "I'll get it requoted that way"
+   ],
+   "kw": [
+    "requote",
+    "re-quote",
+    "quote",
+    "sign"
+   ]
+  },
+  {
+   "id": "K15",
+   "importance": "high",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Sato",
+   "label": "Ken checks whether the $5,500 can move from the contingency line; answer by end of next week",
+   "due": "end of next week",
+   "anchors": [
+    "move the fifty-five hundred from the contingency line"
+   ],
+   "kw": [
+    "contingency",
+    "5,500",
+    "5500",
+    "fifty-five",
+    "budget",
+    "sign"
+   ]
+  },
+  {
+   "id": "K16",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Haddad",
+   "label": "Rana gets two quotes for 120 rental chairs as a backup, before the next meeting",
+   "due": "before our next meeting",
+   "anchors": [
+    "I'll get two quotes for rental chairs"
+   ],
+   "kw": [
+    "chair",
+    "rental",
+    "rent"
+   ]
+  },
+  {
+   "id": "K17",
+   "importance": "high",
+   "kinds": [
+    "update",
+    "risk",
+    "decision"
+   ],
+   "who": "Sato",
+   "label": "Anything paid from this year's money must be invoiced by December 15",
+   "due": "December fifteenth",
+   "anchors": [
+    "has to be invoiced by December fifteenth"
+   ],
+   "kw": [
+    "invoice",
+    "december 15",
+    "fifteenth",
+    "year-end",
+    "year end"
+   ]
+  },
+  {
+   "id": "K18",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Delgado",
+   "label": "Luis checks whether the community room hearing loop has been installed",
+   "due": null,
+   "anchors": [
+    "I'll check on the hearing loop"
+   ],
+   "kw": [
+    "hearing loop",
+    "hearing"
+   ]
+  },
+  {
+   "id": "K19",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Lindqvist",
+   "label": "Tom asks the architect what the drawings show for the mural wall",
+   "due": null,
+   "anchors": [
+    "I'll ask what's in the drawings"
+   ],
+   "kw": [
+    "mural",
+    "drawing",
+    "architect"
+   ]
+  },
+  {
+   "id": "K20",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Kowalski",
+   "label": "Pete tests RoomLoop on a cellular hotspot at the new building's front desk",
+   "due": null,
+   "anchors": [
+    "I'll take a hotspot out to the building",
+    "Yeah, I'll test that."
+   ],
+   "kw": [
+    "hotspot"
+   ]
+  },
+  {
+   "id": "K21",
+   "importance": "high",
+   "kinds": [
+    "decision"
+   ],
+   "who": "Okafor",
+   "label": "Open house is Saturday, January 16 (not the 9th); staff open the week of January 11 if the inspection passes",
+   "due": "January sixteenth",
+   "anchors": [
+    "The open house is Saturday, January sixteenth",
+    "Decided. Open house January sixteenth"
+   ],
+   "kw": [
+    "open house",
+    "16",
+    "sixteenth"
+   ]
+  },
+  {
+   "id": "K22",
+   "importance": "normal",
+   "kinds": [
+    "question"
+   ],
+   "who": "Haddad",
+   "label": "Open: who is the volunteers' point of contact at the open house? Rana is checking with her director",
+   "due": null,
+   "anchors": [
+    "the volunteer point of contact for the open house is still open",
+    "I guess that falls to me"
+   ],
+   "kw": [
+    "volunteer"
+   ]
+  },
+  {
+   "id": "K23",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Mensah",
+   "label": "Abena drafts the open house press release and flyer and sends them to Grace for review by November 6",
+   "due": "by November sixth",
+   "anchors": [
+    "I can have them to you by November sixth",
+    "I'll draft the press release and the flyer"
+   ],
+   "kw": [
+    "press",
+    "flyer",
+    "release"
+   ]
+  },
+  {
+   "id": "K24",
+   "importance": "high",
+   "kinds": [
+    "decision"
+   ],
+   "who": "Okafor",
+   "label": "No public date is announced until the fire inspection is booked; the neighborhood association hears first, then the public a day or two later",
+   "due": null,
+   "anchors": [
+    "We don't announce any public date",
+    "Booked. If we wait for passed"
+   ],
+   "kw": [
+    "announce",
+    "public",
+    "neighborhood"
+   ]
+  },
+  {
+   "id": "K25",
+   "importance": "normal",
+   "kinds": [
+    "decision",
+    "commitment",
+    "update"
+   ],
+   "who": "Delgado",
+   "label": "Punch list walkthrough November 12 at 9:00; Luis sends the invite today",
+   "due": "November twelfth, nine in the morning",
+   "anchors": [
+    "Thursday the twelfth works",
+    "I'll send the invite for the punch list walkthrough"
+   ],
+   "kw": [
+    "punch"
+   ]
+  },
+  {
+   "id": "K26",
+   "importance": "normal",
+   "kinds": [
+    "update"
+   ],
+   "who": "Delgado",
+   "label": "The furniture's second installment is due on delivery, so nothing needs holding",
+   "due": null,
+   "anchors": [
+    "The second installment is due on delivery"
+   ],
+   "kw": [
+    "installment",
+    "payment"
+   ]
+  },
+  {
+   "id": "K27",
+   "importance": "normal",
+   "kinds": [
+    "decision"
+   ],
+   "who": "Okafor",
+   "label": "Keycard access: front desk staff get the front door and offices; storage rooms only for program leads",
+   "due": null,
+   "anchors": [
+    "Front door and offices for front desk staff"
+   ],
+   "kw": [
+    "keycard",
+    "access",
+    "storage"
+   ]
+  },
+  {
+   "id": "K28",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Mensah",
+   "label": "Abena updates the website text now; new photos in early December after cleaning",
+   "due": "early December",
+   "anchors": [
+    "I'll update the text now"
+   ],
+   "kw": [
+    "website",
+    "web",
+    "page",
+    "photo"
+   ]
+  },
+  {
+   "id": "K29",
+   "importance": "normal",
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Haddad",
+   "label": "Rana sends after-school parents a pickup map for the new building (with Abena), with the photo release form, in December",
+   "due": "December",
+   "anchors": [
+    "I need to make a little map",
+    "Same email."
+   ],
+   "kw": [
+    "map",
+    "pickup",
+    "pick-up",
+    "photo release",
+    "consent"
+   ]
+  }
+ ],
+ "traps": [
+  {
+   "id": "T1",
+   "stale": false,
+   "label": "Pete's shared booking calendar was parked; it is not a commitment",
+   "anchors": [
+    "set up a shared calendar for room bookings"
+   ],
+   "kinds": [
+    "commitment",
+    "decision"
+   ],
+   "kw": [
+    "shared calendar"
+   ]
+  },
+  {
+   "id": "T2",
+   "stale": true,
+   "label": "Vinyl signs for everything was reversed later in the meeting",
+   "anchors": [
+    "Let's go with the vinyl, the cheaper option",
+    "I'll tell the vendor vinyl"
+   ],
+   "kinds": [
+    "decision",
+    "commitment"
+   ],
+   "text": "^(?!.*(tactile|braille|room id|wayfinding)).*vinyl"
+  },
+  {
+   "id": "T3",
+   "stale": true,
+   "label": "The open house on Saturday January 9 was replaced by January 16",
+   "anchors": [
+    "I had been thinking of Saturday the ninth",
+    "I had been thinking Saturday the ninth"
+   ],
+   "kinds": [
+    "decision",
+    "commitment",
+    "update"
+   ],
+   "text": "^(?!.*(\\b16\\b|16th|sixteenth))(?=.*open house).*(\\b9\\b|9th|ninth)"
+  },
+  {
+   "id": "T4",
+   "stale": true,
+   "label": "Tom handed the keycard list to Pete",
+   "anchors": [
+    "I'll handle the keycard access list"
+   ],
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Lindqvist|Tom",
+   "text": "^(?!.*(send|forward|names)).*(keycard|key card|access list)"
+  },
+  {
+   "id": "T5",
+   "stale": false,
+   "label": "Rana did not take on the volunteer point of contact; she is checking with her director",
+   "anchors": [
+    "I guess that falls to me"
+   ],
+   "kinds": [
+    "commitment"
+   ],
+   "who": "Haddad|Rana",
+   "text": "volunteer"
+  },
+  {
+   "id": "T6",
+   "stale": true,
+   "label": "The elevator certification is no longer pending; it came through later in the meeting",
+   "anchors": [
+    "I put in for it last month"
+   ],
+   "kinds": [
+    "commitment",
+    "question",
+    "risk"
+   ],
+   "text": "elevator.*(pending|chase|await|waiting|follow up|obtain|apply|not yet|haven't)|(pending|chase|await|obtain).*elevator"
+  },
+  {
+   "id": "T7",
+   "stale": true,
+   "label": "Holding the second installment became unnecessary: it is due on delivery",
+   "anchors": [
+    "Well, hold the second installment until we know"
+   ],
+   "kinds": [
+    "decision",
+    "commitment"
+   ],
+   "text": "hold.*installment|installment.*hold"
+  },
+  {
+   "id": "T8",
+   "stale": false,
+   "label": "Asking the families about the mural was declined",
+   "anchors": [
+    "I could ask some of the families"
+   ],
+   "kinds": [
+    "commitment"
+   ],
+   "text": "famil"
+  },
+  {
+   "id": "T9",
+   "stale": false,
+   "label": "The parking lot repaving is not this project (Grace: not ours)",
+   "anchors": [
+    "The one about the repaving"
+   ],
+   "kinds": [
+    "commitment",
+    "decision",
+    "risk",
+    "question",
+    "update"
+   ],
+   "text": "parking|repav"
+  }
+ ]
+}

@@ -1,0 +1,507 @@
+CONTEXT TOKEN (copy it exactly into "context"): MKG2|seed|20261019T140000Z|e9538352
+
+You read one meeting transcript and list what a project manager needs to know from it. Meetings ramble: most of what is said needs no item. Pick out what matters; do not account for every line.
+
+THE MEETING is below, under === MEETING ===. Each statement has a number (S001, S002, ...), a time and a speaker.
+
+OPEN THREADS (what the board already tracks from earlier meetings): none (this is the first meeting)
+
+WHAT TO LIST, one item each:
+- commitment: someone says they will do something, or accepts a request ("I'll", "yes, I'll take it", "I can do that"). "Maybe I could", "I could probably" and "someone should" are not commitments.
+- decision: the group settles a choice ("let's do", "we're going with", "that's the decision"). Options discussed but not settled are not decisions.
+- question: something left open that someone still has to answer or decide.
+- risk: something that could delay or block the work.
+- update: a fact about progress, or a change to plans, dates, money or scope.
+
+FINAL STATE ONLY. Meetings change their mind. When something said early is changed later (a decision reversed, a date moved, an owner switched, something pending that came through), list only the final state, cite the statement where it was settled, and do not list the earlier version.
+
+FIELDS for each item:
+- "kind": commitment | decision | question | risk | update
+- "topic": 2 to 5 words naming the subject; use the same topic for items about the same subject.
+- "who": for a commitment, the person who will do it; otherwise the person who raised or settled it. Use the speaker name as written in the transcript ("Lindqvist, Tom"), or null.
+- "what": one plain line a team member would understand without having been in the meeting.
+- "due": the date or time exactly as said ("by Friday", "end of next week"), or null. Do not convert it.
+- "importance": "high" for what a leader would want to know (decisions, deadlines, risks to the opening date or the budget, commitments other work depends on); otherwise "normal".
+- "thread": the ID from OPEN THREADS that this item continues, or null.
+- "seg": the one statement number where it is said most clearly (for a commitment, where the person agrees).
+- "words": 3 to 10 words copied exactly from that statement, character for character. Do not paraphrase, shorten or fix them.
+
+At most 40 items; fewer, clearer items are better. Leave out greetings, small talk, stories, technical difficulties and arranging this meeting itself.
+
+OUTPUT: one fenced json code block and nothing else:
+{"context": "...", "lastSeg": "the number of the final statement in the meeting", "summary": "3 to 5 plain sentences: what the meeting was about and what came out of it", "items": [{"kind": "...", "topic": "...", "who": "...", "what": "...", "due": null, "importance": "normal", "thread": null, "seg": "S001", "words": "..."}]}
+
+=== MEETING ===
+MEETING: 2026-10-19 (Monday), Harbor Point reopening kickoff
+SEGMENTS:
+S001 [00:00:05] Okafor, Grace: Hi everyone, give it another minute, I think a few people are still getting in.
+S002 [00:00:11] Lindqvist, Tom: Morning.
+S003 [00:00:14] Haddad, Rana: Good morning. Can you hear me okay? My headset has been acting up all week.
+S004 [00:00:19] Okafor, Grace: Yeah, you're fine, Rana. Tom, you're a little quiet.
+S005 [00:00:23] Lindqvist, Tom: Is that better? I moved closer to the thing.
+S006 [00:00:27] Okafor, Grace: Much better. Did everybody survive the weekend? That rain on Saturday was something else.
+S007 [00:00:35] Haddad, Rana: Oh my gosh, our basement took on water again. Not a lot, but enough that I spent Sunday with a wet vac instead of doing anything fun.
+S008 [00:00:44] Lindqvist, Tom: My daughter had a soccer tournament in it. They played the whole thing. I don't know who decided that was a good idea. Everybody was just covered in mud. They lost, too, so it was a great day all around.
+S009 [00:00:59] Okafor, Grace: Oh no. Well, at least they played.
+S010 [00:01:04] Mensah, Abena: Sorry, sorry, I was in the wrong link. Hi everyone.
+S011 [00:01:08] Okafor, Grace: Hi Abena, no worries, we haven't started. We're just talking about the rain.
+S012 [00:01:13] Mensah, Abena: Don't get me started. My street flooded at the corner, like it does every time.
+S013 [00:01:22] Kowalski, Pete: Hey, Pete here, I'm on, I'm just going to keep my camera off, the connection at home isn't great this morning.
+S014 [00:01:28] Okafor, Grace: That's fine. Luis said he'd dial in from the site. Luis, are you on?
+S015 [00:01:44] Okafor, Grace: Luis? I see you in the list but I don't think we can hear you.
+S016 [00:01:52] Delgado, Luis: Can you hear me now? I'm on the phone, I'm out at the building.
+S017 [00:01:56] Okafor, Grace: Yes, we got you. It's a little windy.
+S018 [00:02:00] Delgado, Luis: Yeah, I'm standing outside the east entrance, they're running a saw inside so I came out. I'll try to find somewhere quieter.
+S019 [00:02:08] Okafor, Grace: Okay. Ken said he'll join late, he's got a budget thing until ten thirty. So let's just get going. This is the first one of these, so bear with me. The point of this meeting is the Harbor Point reopening. The renovation is wrapping up and we need to get from a construction site to a community center that is actually open, with people in it, programs running, the whole thing. And there's a lot of moving parts, which is why I wanted everybody in one room, so to speak.
+S020 [00:02:47] Lindqvist, Tom: A virtual room.
+S021 [00:02:49] Okafor, Grace: A virtual room. So I don't have a fancy agenda. I have a list. And I'm going to go through it and we'll see where we land. I'm recording so I can go back to it, because I know I won't remember everything.
+S022 [00:03:05] Haddad, Rana: That's smart.
+S023 [00:03:09] Okafor, Grace: So the big question everybody keeps asking me is when do we open. And the honest answer is I don't know yet. What I've been telling people is we're aiming for the week of January eleventh. That's the soft target. But it depends on a few things, and the biggest one is the inspection.
+S024 [00:03:32] Lindqvist, Tom: Yeah, that's the one I'm worried about.
+S025 [00:03:35] Okafor, Grace: Go ahead, Tom.
+S026 [00:03:37] Lindqvist, Tom: So we can't get a certificate of occupancy without the final fire inspection, and the city inspectors are backed up. Last I heard it's three to four weeks out from when you call. And you can't call until the contractor says the sprinkler work is done, which Luis can speak to. But if we wait for that and then call, we're looking at, I don't know, mid December at the earliest, and if anything fails we go to the back of the line.
+S027 [00:04:12] Okafor, Grace: Right. That's what I was afraid of.
+S028 [00:04:16] Mensah, Abena: Can you book the inspection before the sprinkler work is done? Like, get on the calendar and then just be ready?
+S029 [00:04:23] Lindqvist, Tom: Sometimes. It depends who you get at the fire marshal's office. Some of them will let you hold a slot. Some of them won't.
+S030 [00:04:33] Delgado, Luis: The sprinklers should be done by the end of the month. The heads are in, they're doing the pressure test next week, I think Wednesday or Thursday.
+S031 [00:04:44] Okafor, Grace: Okay. So Tom, can you get us on their calendar?
+S032 [00:04:48] Lindqvist, Tom: Yeah. I'll call the fire marshal's office this week and get us on the inspection calendar. Even if it's a tentative date. I'll tell them end of month for the sprinklers.
+S033 [00:05:00] Okafor, Grace: Perfect. Thank you.
+S034 [00:05:03] Lindqvist, Tom: I'll warn you though, the last time I did this for the library branch, it took me like six calls to get a person. Six. And the voicemail box was full half the time. So it might be more like end of this week, beginning of next.
+S035 [00:05:19] Okafor, Grace: That's fine, just keep me posted.
+S036 [00:05:22] Haddad, Rana: Was that the library on Fifth? The one with the roof thing?
+S037 [00:05:26] Lindqvist, Tom: That's the one. The roof thing was a whole saga. They had a leak right over the children's section, and we had to close that whole side for, what was it, two months? And then the inspector came back and found a problem with the exit sign wiring, which had nothing to do with the roof. So that added another three weeks. I'm still not over it.
+S038 [00:05:53] Haddad, Rana: I remember the kids' area being closed. My nephew was devastated, that was his favorite place.
+S039 [00:06:01] Lindqvist, Tom: Yeah, it was a whole thing. Anyway. That's the inspection.
+S040 [00:06:07] Okafor, Grace: Okay. So I'm writing down that the January eleventh target depends on the inspection, and we don't really know until Tom gets a date. I don't want to tell anybody publicly that we're opening on the eleventh until we know.
+S041 [00:06:23] Mensah, Abena: That's going to be hard because people are already asking. I've had like four emails from the neighborhood association.
+S042 [00:06:30] Okafor, Grace: I know. Let's just say early next year for now.
+S043 [00:06:35] Mensah, Abena: Okay. Early next year. I can work with that. For the open house I had been thinking of Saturday the ninth, so the weekend right before. Kind of a preview. But if we don't know, I won't put it in anything yet.
+S044 [00:06:50] Okafor, Grace: Let's come back to the open house. I have it further down. Luis, you're still there?
+S045 [00:06:56] Delgado, Luis: I'm here. I'm in the trailer now, is that better?
+S046 [00:07:00] Okafor, Grace: So much better. Okay, so the furniture. Where are we with that?
+S047 [00:07:05] Delgado, Luis: So the furniture order is in, it's been in since August. The delivery is scheduled for December seventh. But I talked to the supplier last week and they said there may be a delay on the stacking chairs and the folding tables because of something with their factory. They didn't give me a date. They just said there may be a slip.
+S048 [00:07:31] Okafor, Grace: How much of a slip?
+S049 [00:07:33] Delgado, Luis: They didn't say. Could be a week, could be a month. I'll be honest, with this supplier I don't love it. When we did the senior center they were two months late on the lounge furniture.
+S050 [00:07:46] Lindqvist, Tom: Oh, I remember that.
+S051 [00:07:48] Delgado, Luis: Yeah. So I'm not saying it's going to happen, I'm just saying the December seventh delivery could slip, and the chairs and tables are the part they're worried about.
+S052 [00:07:59] Okafor, Grace: Okay. That's a problem, because we can't really have an open house without chairs.
+S053 [00:08:05] Haddad, Rana: Maybe I could look into renting chairs as a backup, I don't know. I'd have to see what that costs.
+S054 [00:08:13] Okafor, Grace: Hmm. Let's hold that thought. Luis, can you get something in writing from them?
+S055 [00:08:19] Delgado, Luis: Yeah. I'll get written confirmation of the delivery date from the supplier by Friday. If they won't commit, I'll at least get it in an email that they can't commit.
+S056 [00:08:31] Okafor, Grace: That works. Thank you.
+S057 [00:08:35] Kowalski, Pete: Sorry, can I jump in on something related?
+S058 [00:08:39] Okafor, Grace: Sure, go ahead.
+S059 [00:08:41] Kowalski, Pete: It's not chairs. It's the room booking. The new booking system, RoomLoop. We bought the licenses, they're active. That part's done. But nobody at the front desk has used it yet. And the old system goes away when the old building contract ends. So somebody needs to train the front desk folks before we open, otherwise on day one nobody can book a room.
+S060 [00:09:08] Okafor, Grace: Right. Who would normally do that?
+S061 [00:09:12] Kowalski, Pete: I mean, normally the vendor does a training, but we didn't buy the training package. That was cut.
+S062 [00:09:19] Okafor, Grace: Of course it was.
+S063 [00:09:22] Kowalski, Pete: I could do it, but honestly I don't know how the front desk actually works day to day. Like how they handle the recurring bookings, the community groups, the free rooms versus the paid rooms. I know the software, I don't know the workflow.
+S064 [00:09:39] Haddad, Rana: I know the workflow. That's basically my whole life.
+S065 [00:09:43] Okafor, Grace: Okay, so let's figure out training. I don't want to decide it this second, but somebody has to own it.
+S066 [00:09:50] Kowalski, Pete: And I could probably set up a shared calendar for room bookings in the meantime, if people want. Just a stopgap until RoomLoop is up.
+S067 [00:09:59] Okafor, Grace: Let's park that. I don't want to add another tool people have to learn and then un-learn.
+S068 [00:10:05] Kowalski, Pete: Fair enough.
+S069 [00:10:08] Mensah, Abena: Honestly I'm with Grace on that. Every time we set up a temporary thing it becomes permanent. We still have that spreadsheet from the 2019 summer camp signups and people still use it.
+S070 [00:10:20] Kowalski, Pete: That spreadsheet will outlive all of us.
+S071 [00:10:24] Mensah, Abena: It really will.
+S072 [00:10:27] Okafor, Grace: Okay. Tom, on the building side, there was something about keycards?
+S073 [00:10:32] Lindqvist, Tom: Yeah. So the new building has keycard access on the staff doors and the storage rooms. Somebody has to give the access system a list of who gets which card. I can handle that. I'll handle the keycard access list. I've got most of the names already from the old building.
+S074 [00:10:51] Okafor, Grace: Great.
+S075 [00:10:53] Kowalski, Pete: Wait, is that the access system that's tied into our network? Because I think that's ours.
+S076 [00:10:59] Lindqvist, Tom: I don't know, honestly. Is it?
+S077 [00:11:02] Kowalski, Pete: I'd have to check. I think the new one is. Let me look and I'll come back to it.
+S078 [00:11:08] Okafor, Grace: Okay. Let's keep moving and come back. I've got a lot on this list.
+S079 [00:11:14] Haddad, Rana: Grace, sorry, before we move on, is there coffee in the new building yet? Like, is the kitchen going to be done?
+S080 [00:11:22] Okafor, Grace: The kitchen is done, I think. Luis?
+S081 [00:11:25] Delgado, Luis: Kitchen is done except for the hood. The hood vent is on order. The appliances are in.
+S082 [00:11:33] Haddad, Rana: Okay, that's all I needed to know. The coffee situation in the old building was criminal.
+S083 [00:11:39] Lindqvist, Tom: That machine was older than me.
+S084 [00:11:43] Mensah, Abena: It made one kind of coffee and it was bad.
+S085 [00:11:48] Okafor, Grace: We'll get a real coffee maker. That is a promise I can actually keep. Okay. Next on my list is signage. Abena, I think you've been looking at this?
+S086 [00:12:00] Mensah, Abena: Yes. So we need all the signage for the building. Room names and numbers on every door, the wayfinding signs, so the big ones that say this way to the gym, this way to the community room, and then the outside sign, which is a separate thing, that's in the construction contract I think.
+S087 [00:12:23] Delgado, Luis: Outside sign is ours, yes. That's in the contract. Don't worry about that one.
+S088 [00:12:28] Mensah, Abena: Good. So the interior signs. I got a quote. I want to wait until Ken is here to talk numbers though, because the number is not great.
+S089 [00:12:37] Okafor, Grace: Okay. Let's hold that until Ken joins. What about the open house more generally? Actually no, I said I'd come back to that. Let me go in order. The mural.
+S090 [00:12:51] Mensah, Abena: Oh, the mural.
+S091 [00:12:53] Okafor, Grace: So people keep asking me about the mural in the lobby. The one the kids from the after-school program painted, what, eight years ago?
+S092 [00:13:02] Haddad, Rana: Nine. It was nine years ago. I was there. It took the whole summer.
+S093 [00:13:08] Okafor, Grace: Nine years. So the lobby is being redone, and I don't actually know whether the mural wall is staying or not.
+S094 [00:13:17] Lindqvist, Tom: I think it's being painted over. That's what the drawings show, I'm pretty sure. But I'm not sure that was ever actually decided by anybody, it might just be what the architect drew.
+S095 [00:13:29] Mensah, Abena: If it's getting painted over I want photos of it first. Good ones. And honestly I think people are going to be upset. Some of those kids are adults now and they come back.
+S096 [00:13:40] Haddad, Rana: They would absolutely be upset. One of them works at the bakery on the corner now. She asks me about it every time I go in.
+S097 [00:13:49] Okafor, Grace: Okay. I don't know the answer on that. I'm going to put it down as an open question. Luis, do you know?
+S098 [00:13:56] Delgado, Luis: I'd have to look at the finish schedule. I'm not at my desk. The lobby walls are scheduled for December though, so there's some time.
+S099 [00:14:06] Okafor, Grace: Okay. It's open. Let's not lose it.
+S100 [00:14:10] Kowalski, Pete: Grace, I checked on the keycard thing.
+S101 [00:14:13] Okafor, Grace: Oh, already? Okay.
+S102 [00:14:16] Kowalski, Pete: Yeah, it's on the network. The new access system is ours, IT manages it. The cards get programmed through our admin console. So it probably makes more sense for us to own the list, because otherwise Tom's going to send me a spreadsheet and I'm going to type it in anyway.
+S103 [00:14:34] Lindqvist, Tom: Okay, then it's yours, Pete. Honestly that's a relief.
+S104 [00:14:39] Kowalski, Pete: Yeah, I'll take it. I'll get the staff list from HR and set up the keycard access list. Tom, if you can send me the names you already have, that'd help.
+S105 [00:14:49] Lindqvist, Tom: Yeah, I'll forward what I've got.
+S106 [00:14:53] Okafor, Grace: Great. So Pete has keycards. Okay, so where was I. The mural is open. Training, we said we'd come back to. Furniture, Luis is getting it in writing. Inspection, Tom's calling.
+S107 [00:15:08] Haddad, Rana: Can I say something about the chairs again?
+S108 [00:15:11] Okafor, Grace: Sure.
+S109 [00:15:14] Haddad, Rana: It's just, if the open house is in January and the furniture slips into January, we're going to be scrambling. The community room alone needs like a hundred and twenty chairs for an event. I don't think we can borrow that many.
+S110 [00:15:30] Mensah, Abena: The school district lends chairs sometimes. We did that for the budget hearing.
+S111 [00:15:35] Haddad, Rana: That was like forty chairs though. And they were the tiny ones.
+S112 [00:15:40] Mensah, Abena: Oh, right. The tiny ones. People were sitting with their knees up to their chins.
+S113 [00:15:46] Lindqvist, Tom: I remember that. The council member had to stand.
+S114 [00:15:51] Okafor, Grace: Okay, I hear you. I want to come back to that when we talk about the open house. Let me check something real quick, I want to see if Ken's on yet.
+S115 [00:16:08] Okafor, Grace: No, not yet. Okay. Let me do the internet thing. Pete, where are we with the internet at the new building?
+S116 [00:16:17] Kowalski, Pete: So, that one's not good news. The fiber line. We ordered the fiber line in July. The provider has to run it from the street to the building, and they keep pushing the install. The latest I got, and this was Thursday, is that they can't install until mid December. That's the earliest.
+S117 [00:16:40] Okafor, Grace: Mid December.
+S118 [00:16:43] Kowalski, Pete: Mid December. And the problem is, RoomLoop is cloud based. No internet, no booking system. The keycards also need the network to sync, although they have a local mode, so that's less bad. But the booking system, nothing works without internet.
+S119 [00:17:00] Haddad, Rana: And when were we going to train the front desk?
+S120 [00:17:04] Kowalski, Pete: Well that's the thing. If training is in early December, there's no internet in the building yet.
+S121 [00:17:11] Okafor, Grace: Okay. That's a real problem. Let's not solve it this second, I want to get through the list, but I'm writing it down as a risk. The fiber install is mid December at the earliest and that's after when we'd want to train.
+S122 [00:17:27] Kowalski, Pete: Yeah. And I'll be honest, mid December from this provider means maybe January. I've dealt with them before. When we did the east depot, they gave us a date four times.
+S123 [00:17:40] Lindqvist, Tom: Four times?
+S124 [00:17:42] Kowalski, Pete: Four times. And then the guy showed up on a Saturday with no notice and nobody was there to let him in. So we went back to the queue.
+S125 [00:17:52] Mensah, Abena: That's painful.
+S126 [00:17:54] Kowalski, Pete: It was. Anyway. It's on my radar.
+S127 [00:17:59] Okafor, Grace: Okay. Thank you. I'm going to go grab some water, I'll be right back, keep talking amongst yourselves.
+S128 [00:18:07] Haddad, Rana: Abena, did you see the email about the parking lot?
+S129 [00:18:11] Mensah, Abena: The one about the repaving? Yeah. Are they really doing it in the spring?
+S130 [00:18:15] Haddad, Rana: That's what it said. Which means the parking lot is going to be torn up right when the summer programs start.
+S131 [00:18:23] Lindqvist, Tom: That's not really part of this project though, is it? The parking lot is a public works thing.
+S132 [00:18:29] Haddad, Rana: It's not part of it, but it's going to affect it. You can't run a summer camp with no parking.
+S133 [00:18:35] Lindqvist, Tom: True. I mean they'll do it in sections probably. That's what they did at the pool.
+S134 [00:18:41] Haddad, Rana: Did they? I don't remember that.
+S135 [00:18:44] Lindqvist, Tom: Yeah. Half and half. It was fine. A little annoying.
+S136 [00:18:49] Mensah, Abena: Everything public works does is a little annoying.
+S137 [00:18:54] Okafor, Grace: I'm back. What did I miss?
+S138 [00:18:56] Haddad, Rana: Just the parking lot. They're repaving in the spring.
+S139 [00:19:00] Okafor, Grace: Oh, I saw that. That's not ours though. That's a whole other thing. Okay. Luis, can you tell everyone about the punch list?
+S140 [00:19:10] Delgado, Luis: Yes. So the punch list. Before we turn the building over, we walk through it with the contractor and everybody writes down everything that's not right. Scuffs, doors that don't close, outlets that don't work, whatever. The contractor fixes it. It's usually a long list. I'd like to do the walkthrough in the next few weeks so there's time for them to fix it before the inspection.
+S141 [00:19:39] Okafor, Grace: That makes sense. When are you thinking?
+S142 [00:19:43] Delgado, Luis: I was thinking the week of November ninth. I need to check with the superintendent. Let me get back to you on the day.
+S143 [00:19:52] Okafor, Grace: Okay. Do we all need to be there?
+S144 [00:19:55] Delgado, Luis: It helps if the people who are going to use the rooms come. Rana for the program rooms, Pete for the server closet and the front desk, Tom for the mechanical. Abena if you care about the signs.
+S145 [00:20:10] Mensah, Abena: I do care about the signs.
+S146 [00:20:13] Delgado, Luis: Then come.
+S147 [00:20:16] Okafor, Grace: Okay. Luis will come back with a day. So let me just, I want to read back what I have so far, because I'm already losing track.
+S148 [00:20:26] Okafor, Grace: Opening, soft target is the week of January eleventh, depends on the fire inspection. Tom is calling the fire marshal this week. Furniture is supposed to come December seventh, might slip, Luis is getting it in writing by Friday. Pete has keycards. Fiber is mid December, which is a problem for training. Training, nobody owns it yet. Mural is open. Signage we're waiting for Ken. Punch list, Luis is finding a day. Did I miss anything?
+S149 [00:21:06] Haddad, Rana: Chairs.
+S150 [00:21:07] Okafor, Grace: Chairs. Right. Chairs are tied to the furniture.
+S151 [00:21:12] Lindqvist, Tom: And the elevator.
+S152 [00:21:15] Okafor, Grace: What about the elevator?
+S153 [00:21:17] Lindqvist, Tom: The elevator needs its own certification, separate from the fire inspection. It's the state, not the city. I put in for it last month. I haven't heard back yet. I'll chase it.
+S154 [00:21:31] Okafor, Grace: Okay, the elevator certification is pending. Add that.
+S155 [00:21:36] Mensah, Abena: Can I ask a dumb question? If the elevator isn't certified can we still open? Like with just the ground floor?
+S156 [00:21:43] Lindqvist, Tom: Technically maybe, but the community room is upstairs. And it wouldn't be accessible. So, no, not really.
+S157 [00:21:52] Mensah, Abena: Okay. That's what I figured.
+S158 [00:21:55] Okafor, Grace: It's not a dumb question. Okay. I think that's my first page. Let me check if Ken's on.
+S159 [00:22:11] Okafor, Grace: Still no Ken. Okay, let's do the open house now then, and come back to the money when he's here. Abena, you wanted the ninth?
+S160 [00:22:21] Mensah, Abena: I had been thinking Saturday the ninth. The idea was, we open the week of the eleventh, and the weekend before we do a community open house, tours, the kids' programs do demos, the mayor's office maybe comes, that kind of thing. Like a soft launch before the real opening.
+S161 [00:22:43] Haddad, Rana: I love that. The kids would love that.
+S162 [00:22:47] Mensah, Abena: But I know it depends on the inspection, so I don't want to lock it.
+S163 [00:22:52] Okafor, Grace: Yeah. And if the furniture slips, the ninth is tight. Let's not decide today. Let's see where Tom lands on the inspection.
+S164 [00:23:02] Delgado, Luis: Can I say one thing on the open house?
+S165 [00:23:04] Okafor, Grace: Go ahead.
+S166 [00:23:07] Delgado, Luis: If you're having the public in before the certificate of occupancy, you can't. Just so everyone knows. No public in the building until we have the certificate. Even for a tour.
+S167 [00:23:19] Okafor, Grace: Oh. Right. Okay, that's important. So the open house has to be after the certificate, period.
+S168 [00:23:28] Delgado, Luis: Has to be after.
+S169 [00:23:30] Mensah, Abena: Okay. Good to know. That changes my thinking.
+S170 [00:23:35] Okafor, Grace: Okay. Let's keep going and see where things land. Rana, you wanted to say something about programs?
+S171 [00:23:43] Haddad, Rana: Yeah. So the program schedule for winter. I'm building it now. The question I keep running into is when do I tell the instructors to start. Because they need notice. Most of them want three weeks. If we're opening the week of the eleventh, I need to tell them by mid December, and if it moves, I have to un-tell them.
+S172 [00:24:07] Okafor, Grace: I get it. For now, plan for the week of the eleventh, but don't send anything to the instructors until we have the inspection date.
+S173 [00:24:17] Haddad, Rana: Okay. I'll draft it but I won't send it.
+S174 [00:24:21] Okafor, Grace: That's perfect.
+S175 [00:24:30] Okafor, Grace: Okay, so training. I said we'd come back to it. Pete knows the software, Rana knows the workflow. Can we put you two together somehow?
+S176 [00:24:41] Haddad, Rana: I mean, I could run the training sessions for the front desk if Pete shows me the system first. I'm the one who's going to get the calls when they can't figure it out anyway.
+S177 [00:24:52] Kowalski, Pete: That works for me. I'd rather do one session with Rana than five with everyone.
+S178 [00:24:58] Okafor, Grace: Rana, are you okay owning that? The front desk training?
+S179 [00:25:03] Haddad, Rana: Yes. I'll run the RoomLoop training sessions for the front desk staff. I'm thinking the first two weeks of December, a couple of sessions so people on different shifts can make it.
+S180 [00:25:17] Okafor, Grace: Great. And Pete, you'll do a walk-through for Rana?
+S181 [00:25:20] Kowalski, Pete: Yeah, I'll do a walk-through of RoomLoop with Rana next week. I just need an hour. Rana, I'll find a time on your calendar.
+S182 [00:25:30] Haddad, Rana: Mornings are better for me. Afternoons I'm usually at the pool site.
+S183 [00:25:35] Kowalski, Pete: Mornings, got it.
+S184 [00:25:39] Okafor, Grace: Okay, that's training. Although, the internet thing.
+S185 [00:25:44] Kowalski, Pete: Yeah, the internet is still the problem. If the sessions are in the new building in early December, there's no fiber.
+S186 [00:25:52] Haddad, Rana: Could we do them somewhere else? Like at the main office?
+S187 [00:25:56] Kowalski, Pete: We could, but then they're not learning it at the actual front desk with the actual equipment. It's not ideal. Let me think about it.
+S188 [00:26:05] Okafor, Grace: Okay, let's come back to that too. I feel like I'm saying come back to that a lot.
+S189 [00:26:11] Mensah, Abena: That's how these go.
+S190 [00:26:16] Sato, Ken: Hi, sorry, sorry. My other meeting ran over. Did I miss the money part?
+S191 [00:26:22] Okafor, Grace: Ken! No, we saved it for you. Perfect timing actually.
+S192 [00:26:27] Sato, Ken: Lucky me. Okay, what are we looking at?
+S193 [00:26:32] Okafor, Grace: Abena, go ahead with signage.
+S194 [00:26:36] Mensah, Abena: Okay. So the interior signage. We had eighteen thousand budgeted for signage. The quote came in at twenty-three thousand five hundred. So we're over by fifty-five hundred.
+S195 [00:26:49] Sato, Ken: Ouch.
+S196 [00:26:52] Mensah, Abena: Yeah. And that's the cheaper of two quotes. The other one was almost thirty.
+S197 [00:26:58] Sato, Ken: What's driving it?
+S198 [00:27:00] Mensah, Abena: Mostly the room signs. There's a lot of rooms. And the wayfinding signs are big. There's an option to do vinyl instead of the rigid panels, which is a lot cheaper. If we did vinyl for everything we'd be at about seventeen thousand, so under budget.
+S199 [00:27:20] Okafor, Grace: Okay. That seems like the easy answer. Let's go with the vinyl, the cheaper option, and we're under budget. Done.
+S200 [00:27:29] Sato, Ken: I like done.
+S201 [00:27:31] Mensah, Abena: Okay. I'll tell the vendor vinyl.
+S202 [00:27:35] Lindqvist, Tom: Is the vinyl going to hold up? The old building had those stick-on signs and they peeled within a year. The gym one was hanging by a corner for like six months.
+S203 [00:27:46] Mensah, Abena: They say it's a better grade now. Commercial grade.
+S204 [00:27:50] Lindqvist, Tom: They always say that.
+S205 [00:27:53] Sato, Ken: Can I ask about the furniture while I'm here? I saw an email that there might be a delay.
+S206 [00:28:01] Delgado, Luis: Yeah, that's me. The supplier says the chairs and tables might slip from December seventh. I'm getting it in writing by Friday.
+S207 [00:28:11] Sato, Ken: Okay. Do we have any penalty clause on that? Because if we do, I want to know before we pay the second installment.
+S208 [00:28:19] Delgado, Luis: I'd have to look at the contract. I don't think we do. It's a purchase order, not a construction contract.
+S209 [00:28:28] Sato, Ken: Okay. Well, hold the second installment until we know. I'm not paying in full for a delivery that might not come.
+S210 [00:28:37] Delgado, Luis: Understood.
+S211 [00:28:39] Sato, Ken: When's the second installment due?
+S212 [00:28:42] Delgado, Luis: I think on delivery. Let me check. I'm not sure.
+S213 [00:28:47] Sato, Ken: Okay, check and let me know.
+S214 [00:28:50] Haddad, Rana: On the chairs, so if the furniture slips, we need a plan B for the open house. I was thinking we could rent chairs.
+S215 [00:28:59] Okafor, Grace: Yeah, I think we need a plan B. Rana, can you look into that? Actually get numbers?
+S216 [00:29:05] Haddad, Rana: Yeah, okay. I'll get two quotes for rental chairs, just in case. For a hundred and twenty chairs. I'll get them before our next meeting.
+S217 [00:29:15] Okafor, Grace: Great. Thank you. Ken, does a chair rental even fit anywhere in the budget?
+S218 [00:29:21] Sato, Ken: Depends what it costs. There's a contingency line. It's not huge. Let's see the quotes first.
+S219 [00:29:30] Mensah, Abena: Sorry, can I go back to the signs for a second? Something's bugging me.
+S220 [00:29:35] Okafor, Grace: Sure.
+S221 [00:29:37] Mensah, Abena: I just realized, the room signs have to be accessible. Like, tactile. Raised letters and braille. That's a requirement for the room identification signs, it's not optional. And I'm pretty sure the vinyl doesn't do that. The vinyl is flat.
+S222 [00:29:54] Lindqvist, Tom: Yeah, that's right. The room ID signs have to be tactile. That's code. The inspector will look at that.
+S223 [00:30:03] Okafor, Grace: Oh. Okay. So the vinyl doesn't work for the room signs.
+S224 [00:30:08] Mensah, Abena: Not for the room signs. It would be fine for the big wayfinding signs, the banners and the directional ones. Those don't have to be tactile.
+S225 [00:30:17] Sato, Ken: So what does that do to the number?
+S226 [00:30:19] Mensah, Abena: Let me think. If the room ID signs are the compliant rigid ones and the wayfinding is vinyl, it's going to be somewhere in between. I'd guess around twenty, twenty-one thousand. I'd have to get it requoted.
+S227 [00:30:35] Okafor, Grace: Alright, scratch the vinyl for everything. We'll do the compliant tactile signs for the room IDs, and vinyl only for the wayfinding banners. That's the decision. I'd rather pay a bit more than fail the inspection over signs.
+S228 [00:30:51] Lindqvist, Tom: Agreed. Failing over signs would be the most embarrassing thing.
+S229 [00:30:56] Mensah, Abena: Okay. I'll get it requoted that way.
+S230 [00:31:00] Sato, Ken: So we're probably still over, by two or three thousand. Let me look at it. Worst case, I can see if we can move the fifty-five hundred from the contingency line so we're covered either way. That way we don't have to come back to this. I'll have an answer by the end of next week.
+S231 [00:31:18] Okafor, Grace: That would be great, Ken. Thank you.
+S232 [00:31:22] Sato, Ken: No promises on the contingency. It's also covering the parking thing, potentially, which I'm sure someone has heard about.
+S233 [00:31:31] Haddad, Rana: The repaving? We were just talking about it.
+S234 [00:31:34] Sato, Ken: Yeah. There's a question whether we pay for the part of the lot that's ours. Not this project, but same money.
+S235 [00:31:43] Okafor, Grace: Not this project. Let's not open that one.
+S236 [00:31:47] Sato, Ken: Fine by me.
+S237 [00:31:51] Delgado, Luis: Grace, sorry, the saw just stopped so I can actually hear. Did I miss anything for me?
+S238 [00:31:58] Okafor, Grace: Ken wants to know about the second installment on the furniture.
+S239 [00:32:03] Delgado, Luis: Right, I heard that part. I'll look at the purchase order.
+S240 [00:32:08] Okafor, Grace: Okay. So, Ken, while you're here, is there anything else money-wise we should know?
+S241 [00:32:15] Sato, Ken: The big one is the year-end. Anything we're paying for out of this year's money has to be invoiced by December fifteenth. After that it rolls to next year's budget and that's a whole process. So if anyone is buying anything, the invoice has to be in by the fifteenth.
+S242 [00:32:36] Okafor, Grace: That's important. Everyone hear that? December fifteenth for invoices.
+S243 [00:32:42] Kowalski, Pete: Does that include the RoomLoop renewal? Because that comes up in January.
+S244 [00:32:49] Sato, Ken: If it's invoiced in January it's next year's money. That's fine, that's already in next year's budget.
+S245 [00:32:56] Kowalski, Pete: Okay, good.
+S246 [00:32:58] Mensah, Abena: And the signs? If I get them requoted, they need to be invoiced by the fifteenth?
+S247 [00:33:05] Sato, Ken: If you want them on this year's money, yes. Which I would prefer, honestly. Next year is tighter.
+S248 [00:33:12] Mensah, Abena: Okay. Then I need to move fast on the requote.
+S249 [00:33:17] Okafor, Grace: Can we get a deposit invoiced and then the rest later?
+S250 [00:33:22] Sato, Ken: Usually yes. Ask the vendor.
+S251 [00:33:26] Mensah, Abena: Okay, I'll ask.
+S252 [00:33:29] Haddad, Rana: Ken, what about the rental chairs if we need them? That would be January.
+S253 [00:33:36] Sato, Ken: Then next year. We'll figure it out. Get the quotes.
+S254 [00:33:40] Haddad, Rana: Okay.
+S255 [00:33:44] Okafor, Grace: Okay. Ken, I know you have to go soon.
+S256 [00:33:48] Sato, Ken: I have about ten minutes.
+S257 [00:33:52] Okafor, Grace: Then let me just make sure. You're looking at the contingency for the signs, answer by end of next week. Anything else you need from us?
+S258 [00:34:01] Sato, Ken: Just the requote from Abena when it's in, and the chair quotes. And Luis on the installment.
+S259 [00:34:09] Okafor, Grace: Got it.
+S260 [00:34:13] Lindqvist, Tom: While Ken's here, actually, can I raise the boiler? It's not really a reopening thing but it's money.
+S261 [00:34:20] Okafor, Grace: Is it urgent?
+S262 [00:34:22] Lindqvist, Tom: Not urgent. It's just, the new boiler has a maintenance contract option, and nobody's decided whether to take it. If we don't, it's on my team. I'd rather have the contract. But it's not this week.
+S263 [00:34:37] Sato, Ken: Send me the numbers on it. Not today though.
+S264 [00:34:42] Lindqvist, Tom: Fair. It can wait. Honestly the old boiler, the stories I could tell you. We had to bang on it with a wrench every winter. There's a dent in the side the shape of a wrench. I'm not kidding.
+S265 [00:34:57] Haddad, Rana: I believe it. That basement was terrifying.
+S266 [00:35:01] Lindqvist, Tom: The basement was terrifying. There was a room down there nobody had a key to. For like ten years. Finally we had a locksmith open it and it was just old election signs. Hundreds of them.
+S267 [00:35:16] Mensah, Abena: That's amazing.
+S268 [00:35:18] Lindqvist, Tom: We still have some. If anyone wants a 2011 school board sign.
+S269 [00:35:24] Okafor, Grace: Okay, okay. Ken, thank you. Before you go, anything on the open house budget? Abena's thinking about an event.
+S270 [00:35:33] Sato, Ken: There's a small events line, a couple thousand. It's in Abena's area I think.
+S271 [00:35:39] Mensah, Abena: Yeah, it's mine. That should cover it if we keep it simple. Refreshments, some printing.
+S272 [00:35:46] Sato, Ken: Then you're fine. Alright, I've got to jump to my next one. Sorry to leave early.
+S273 [00:35:53] Okafor, Grace: No problem. Thanks Ken.
+S274 [00:35:55] Sato, Ken: Bye all.
+S275 [00:36:00] Okafor, Grace: Okay. Where are we. Signage is decided, compliant for the room signs, vinyl for wayfinding. Abena is getting it requoted. Ken is looking at contingency. Rana's getting chair quotes. Rana's doing training, Pete's doing a walk-through for Rana. Okay. I feel better. Pete, do you want to talk about the hotspot thing or the internet thing more?
+S276 [00:36:30] Kowalski, Pete: Not yet, I want to look into something first. Later in the meeting maybe.
+S277 [00:36:37] Okafor, Grace: Okay. Then let's talk about the website, because that's a thing too. Abena?
+S278 [00:36:43] Mensah, Abena: So the website. The center's page still says closed for renovation with a photo of the old building. It needs to be updated with the new photos and the new hours and the program list once we know it. I can do the page, that's easy. But I need the photos, and the building isn't really photogenic right now.
+S279 [00:37:05] Delgado, Luis: It's really not. There's drywall dust on everything.
+S280 [00:37:10] Mensah, Abena: So I'm going to wait on photos until the cleaning crew has been through. When is that?
+S281 [00:37:17] Delgado, Luis: After the punch list. So late November, early December.
+S282 [00:37:22] Mensah, Abena: Okay. Then I'll plan photos for early December. And I'll update the text now, the hours and that, so it's not so stale. I'll just keep the old photo for now.
+S283 [00:37:33] Okafor, Grace: That sounds good.
+S284 [00:37:35] Haddad, Rana: Can you take the photos of the mural before they paint over it? If they paint over it.
+S285 [00:37:41] Mensah, Abena: Yes. If it's getting painted, I'll photograph it before December. Do we know yet?
+S286 [00:37:47] Okafor, Grace: No. We still don't know about the mural. It's still open.
+S287 [00:37:52] Lindqvist, Tom: I can ask the architect.
+S288 [00:37:55] Okafor, Grace: Would you? That would help. But I also think it's not really an architect decision, it's a community decision.
+S289 [00:38:04] Lindqvist, Tom: Fair. I'll ask what's in the drawings, at least. And then somebody has to decide.
+S290 [00:38:11] Okafor, Grace: Okay. The mural question is still open, and it's more than what's in the drawings. Let's leave it open for now.
+S291 [00:38:20] Haddad, Rana: I could ask some of the families what they think. Informally.
+S292 [00:38:25] Okafor, Grace: Let's hold off on that. I don't want to start a petition before we know what we're doing.
+S293 [00:38:31] Haddad, Rana: Ha. Fair enough. That's exactly what would happen.
+S294 [00:38:36] Mensah, Abena: There would be a petition by Thursday.
+S295 [00:38:41] Okafor, Grace: By Wednesday. Okay. So, next. Accessibility in general, beyond the signs. Tom, is everything else good?
+S296 [00:38:50] Lindqvist, Tom: As far as I know. The ramps are in, the bathrooms are compliant, the door widths are fine. The elevator is the one open item, that's the certification. The hearing loop in the community room, I'm not sure that got installed. Luis?
+S297 [00:39:08] Delgado, Luis: The hearing loop is in the contract. I'd have to check if it's been done. I think it's after drywall.
+S298 [00:39:15] Lindqvist, Tom: Can you check?
+S299 [00:39:18] Delgado, Luis: Yeah, I'll check on the hearing loop.
+S300 [00:39:21] Okafor, Grace: Good catch, Tom.
+S301 [00:39:24] Lindqvist, Tom: We had complaints at the old building about it. The old one never worked. People would come to the community meetings and just not hear anything.
+S302 [00:39:32] Haddad, Rana: Mrs. Abernathy used to complain about it every single time.
+S303 [00:39:37] Lindqvist, Tom: Every single time. She was right though.
+S304 [00:39:41] Haddad, Rana: She was always right. That was the problem.
+S305 [00:39:46] Okafor, Grace: Okay. Abena, comms. What's the plan for telling people?
+S306 [00:39:52] Mensah, Abena: So I want to do a few things. A press release when we have a date, a flyer for the neighborhood and the schools, social posts, and an email to our list. The email list is about four thousand people. I can draft everything ahead and just fill in the date.
+S307 [00:40:12] Okafor, Grace: Good.
+S308 [00:40:14] Mensah, Abena: The other thing is the neighborhood association. They've been really patient and I'd like to give them a heads up before the public announcement. Like a day or two ahead. They'll appreciate it.
+S309 [00:40:27] Okafor, Grace: I like that. Let's do that.
+S310 [00:40:29] Mensah, Abena: And the city council member's office will want to know. They always want to do a ribbon cutting.
+S311 [00:40:37] Okafor, Grace: Of course they will.
+S312 [00:40:39] Lindqvist, Tom: As long as they don't want to cut the ribbon on the elevator.
+S313 [00:40:44] Mensah, Abena: Ha. I'll keep them away from the elevator.
+S314 [00:40:49] Okafor, Grace: Okay. Let me check the time. We're at about half an hour. Okay. Let's take a quick breather. Actually no, let's keep going, I know people have things after.
+S315 [00:41:00] Haddad, Rana: I have the pool at eleven thirty.
+S316 [00:41:04] Okafor, Grace: We'll be done by eleven. Okay. Luis, anything else on the construction side we haven't covered?
+S317 [00:41:12] Delgado, Luis: Let me think. The hood vent for the kitchen, I said that. The outside sign, that's ours. The landscaping is going to wait until spring, it's too late in the year to plant. So the front will look a little bare when we open. Just so nobody's surprised.
+S318 [00:41:32] Okafor, Grace: That's fine. Bare is fine.
+S319 [00:41:36] Mensah, Abena: Can we put some planters out? For the open house? Something seasonal?
+S320 [00:41:42] Delgado, Luis: You can put planters, sure, just not in the fire lane.
+S321 [00:41:47] Mensah, Abena: Noted. No planters in the fire lane.
+S322 [00:41:51] Lindqvist, Tom: The fire inspector will notice planters in the fire lane. Ask me how I know.
+S323 [00:41:57] Haddad, Rana: Okay, how do you know?
+S324 [00:41:59] Lindqvist, Tom: The library branch. Again. Somebody put a bench in the fire lane for a reading event. Inspector came the same day. We failed. Because of a bench.
+S325 [00:42:11] Haddad, Rana: The library branch is cursed.
+S326 [00:42:13] Lindqvist, Tom: The library branch is absolutely cursed.
+S327 [00:42:18] Okafor, Grace: Okay. Anything else from you, Luis?
+S328 [00:42:22] Delgado, Luis: Not right now. I'll have the punch list date for you before the end, I'm texting the superintendent.
+S329 [00:42:29] Okafor, Grace: Perfect. Okay. Rana, programs, anything beyond the schedule?
+S330 [00:42:35] Haddad, Rana: The after-school program. The parents need to know where pickup is in the new building. It's a different door. I need to make a little map and send it out. Probably in December.
+S331 [00:42:48] Okafor, Grace: Okay. Can Abena help with the map?
+S332 [00:42:51] Mensah, Abena: Sure, send me what you need and I'll make it look nice.
+S333 [00:42:56] Haddad, Rana: Okay. And then the summer camp registration, but that's not until March, so that's not this.
+S334 [00:43:04] Okafor, Grace: Not this. Good. I want to keep this to the reopening or we'll be here all day.
+S335 [00:43:11] Haddad, Rana: Agreed.
+S336 [00:43:15] Kowalski, Pete: Grace, can I talk about the hotspot idea now? I looked into something.
+S337 [00:43:21] Okafor, Grace: Yes, go ahead.
+S338 [00:43:23] Kowalski, Pete: So the issue is, no fiber in early December, so no internet for RoomLoop training at the front desk. What we could do is use a cellular hotspot. We have a couple in IT. RoomLoop doesn't need a lot of bandwidth. It's just a web app. So a hotspot might be fine for training. I haven't tested it in that building though, and the cell signal in there might be bad, because of the concrete.
+S339 [00:43:52] Okafor, Grace: Pete, can you check whether we can run the training on a hotspot? Like actually try it in the building?
+S340 [00:44:00] Kowalski, Pete: Yeah, I'll test that. I'll take a hotspot out to the building and try RoomLoop at the front desk. I can do it when I'm out there for the walk-through with Rana.
+S341 [00:44:12] Haddad, Rana: Oh, so we'd do the walk-through at the new building?
+S342 [00:44:16] Kowalski, Pete: If that works for you. Two birds.
+S343 [00:44:19] Haddad, Rana: That works. A morning, though.
+S344 [00:44:23] Kowalski, Pete: A morning.
+S345 [00:44:25] Okafor, Grace: Love it. Okay.
+S346 [00:44:30] Lindqvist, Tom: Oh, hang on. Sorry. I just got an email. The elevator certification came through. The state approved it Thursday, it just took them until now to email me.
+S347 [00:44:42] Okafor, Grace: Wait, really? That's great!
+S348 [00:44:45] Lindqvist, Tom: Yeah. Certificate number and everything. So the elevator is done. We can cross that off.
+S349 [00:44:51] Mensah, Abena: Finally some good news.
+S350 [00:44:54] Haddad, Rana: Okay, that made my morning.
+S351 [00:44:57] Lindqvist, Tom: I'll forward it to you, Grace, for the file.
+S352 [00:45:01] Okafor, Grace: Thank you. Okay. So the elevator is certified, the fire inspection is the one we're waiting on. Okay. Let's go back to the open house, because I think now we can actually talk about it.
+S353 [00:45:16] Mensah, Abena: Okay. So given what Luis said, that no public can come in before the certificate of occupancy, the ninth worries me. If Tom gets an inspection date in mid December and we pass, we get the certificate maybe a week later. That's already close to the holidays. And if anything fails, the ninth is gone.
+S354 [00:45:40] Lindqvist, Tom: I would not plan anything public in the first two weeks of January. Not with this inspector backlog.
+S355 [00:45:48] Delgado, Luis: I agree. Give yourself a buffer.
+S356 [00:45:52] Okafor, Grace: So what are we thinking? The open house after the opening instead of before?
+S357 [00:45:58] Mensah, Abena: What if we flip it. We open quietly the week of the eleventh, staff only, just getting the front desk running, and then we do the open house the Saturday after, so the sixteenth. That gives us a week buffer, and the building has had a week of real use, so we've found the problems.
+S358 [00:46:20] Haddad, Rana: I like that better honestly. The first week is always a mess.
+S359 [00:46:25] Kowalski, Pete: And if the fiber is late, a week buffer helps me too.
+S360 [00:46:30] Okafor, Grace: Okay. I like that. Let's do it. The open house is Saturday, January sixteenth, not the ninth. And we open to staff the week of the eleventh, assuming the inspection happens. Everybody okay with that?
+S361 [00:46:46] Lindqvist, Tom: Yes.
+S362 [00:46:47] Haddad, Rana: Yes.
+S363 [00:46:48] Delgado, Luis: Yes.
+S364 [00:46:50] Mensah, Abena: Yes, that's my favorite version.
+S365 [00:46:53] Okafor, Grace: Okay. Decided. Open house January sixteenth.
+S366 [00:46:58] Kowalski, Pete: Can I say yes too? I was muted.
+S367 [00:47:02] Okafor, Grace: Pete says yes too.
+S368 [00:47:06] Mensah, Abena: Okay so for the open house I'm going to need a few things. Volunteers for tours, someone from each program to do a demo, refreshments, and somebody who's the point person for volunteers on the day. Like, the person volunteers report to.
+S369 [00:47:24] Okafor, Grace: Who would that be?
+S370 [00:47:27] Haddad, Rana: I guess that falls to me, since most of the volunteers come through the programs. But I need to check with my director first, because it's a Saturday and I'm not usually on Saturdays.
+S371 [00:47:39] Okafor, Grace: Okay. So the volunteer point of contact for the open house is still open. Rana's checking with her director.
+S372 [00:47:48] Haddad, Rana: Right. Don't put me down yet.
+S373 [00:47:51] Okafor, Grace: I won't. Okay, Abena, comms. Now that we have a date for the open house, what do you need?
+S374 [00:47:59] Mensah, Abena: So I'll draft the press release and the flyer for the open house. I'll send them to you for review, Grace. I can have them to you by November sixth. Then we hold them until we know the inspection date.
+S375 [00:48:14] Okafor, Grace: November sixth works. Thank you.
+S376 [00:48:17] Mensah, Abena: And then we have the announcement question. When do we actually announce?
+S377 [00:48:23] Okafor, Grace: Yeah. Let me think about this out loud. I don't want to announce the open house and then cancel it. That's the worst thing.
+S378 [00:48:32] Lindqvist, Tom: That would be bad.
+S379 [00:48:35] Mensah, Abena: The neighborhood association would never let us forget it.
+S380 [00:48:40] Okafor, Grace: So here's what I want. We don't announce any public date, not the opening, not the open house, until the fire inspection is actually booked. Once Tom has a date on the calendar, we give the neighborhood association a heads-up, and then a day or two later we announce publicly. That's the rule.
+S381 [00:49:02] Mensah, Abena: Booked, or passed?
+S382 [00:49:04] Okafor, Grace: Booked. If we wait for passed we'll only have two weeks to get the word out, that's not enough. Booked. We take the risk.
+S383 [00:49:14] Mensah, Abena: Okay. Booked. Neighborhood association first. Got it.
+S384 [00:49:19] Lindqvist, Tom: No pressure, Tom.
+S385 [00:49:22] Okafor, Grace: No pressure, Tom.
+S386 [00:49:24] Lindqvist, Tom: I'll call today. Honestly. After this.
+S387 [00:49:29] Haddad, Rana: Can I ask a question about the open house? Are we doing food? Because the kitchen hood isn't done.
+S388 [00:49:36] Delgado, Luis: The hood should be done by then. It's on order, it'll be in by mid December.
+S389 [00:49:44] Haddad, Rana: Okay, but if it isn't, we can't cook. We can still do things that don't need cooking though.
+S390 [00:49:50] Mensah, Abena: Cookies and coffee. Nobody needs a hood for cookies and coffee.
+S391 [00:49:55] Haddad, Rana: And the good coffee maker that Grace promised.
+S392 [00:49:59] Okafor, Grace: And the good coffee maker that I promised. I'm going to regret saying that on a recording.
+S393 [00:50:06] Lindqvist, Tom: It's on the record now.
+S394 [00:50:10] Okafor, Grace: Okay. Luis, any word from the superintendent?
+S395 [00:50:15] Delgado, Luis: Yes, he just texted back. Thursday the twelfth works. November twelfth. Nine in the morning. We'll do the punch list walkthrough then.
+S396 [00:50:25] Okafor, Grace: November twelfth at nine. Can everybody make that?
+S397 [00:50:29] Lindqvist, Tom: I can.
+S398 [00:50:32] Kowalski, Pete: I can. I'll move something.
+S399 [00:50:34] Haddad, Rana: I have a staff meeting at ten, but I can do nine to ten.
+S400 [00:50:39] Mensah, Abena: I can come for the first hour.
+S401 [00:50:43] Okafor, Grace: Okay. Luis, can you send everybody the invite?
+S402 [00:50:47] Delgado, Luis: Yeah, I'll send the invite for the punch list walkthrough today. Wear boots. The site is muddy after the rain.
+S403 [00:50:55] Haddad, Rana: Boots. Okay. I'll dig mine out of the basement. If they're not underwater.
+S404 [00:51:02] Mensah, Abena: Speaking of which, how's the basement?
+S405 [00:51:05] Haddad, Rana: Dry, for now. My husband wants to put in a sump pump. I said we've been saying that for six years.
+S406 [00:51:14] Lindqvist, Tom: Get the sump pump. I'm telling you. Best money I ever spent. Our old house, every spring, like clockwork, a few inches. Put in the pump, never again.
+S407 [00:51:26] Haddad, Rana: That's what he keeps saying. I'll tell him Tom said so.
+S408 [00:51:31] Lindqvist, Tom: Tell him Tom said so.
+S409 [00:51:36] Okafor, Grace: Okay. Sump pumps aside. Let me check the list. I think we've done most of it. Let me read back.
+S410 [00:51:46] Okafor, Grace: Inspection: Tom is calling the fire marshal's office, today apparently. Elevator: certified, done. Furniture: delivery is December seventh, might slip, Luis is getting it in writing by Friday, and Luis is checking when the second installment is due, and Ken wants to hold the second installment until we know. Chairs: Rana's getting two rental quotes. Keycards: Tom has those.
+S411 [00:52:18] Kowalski, Pete: No, I've got keycards. We switched, it's on our network.
+S412 [00:52:23] Okafor, Grace: Sorry, yes. Pete has keycards. Tom's sending Pete the names he has.
+S413 [00:52:29] Lindqvist, Tom: Right, I'll send those over.
+S414 [00:52:33] Okafor, Grace: Training: Rana is running the front desk training the first two weeks of December. Pete is doing a walk-through with Rana next week, at the new building, and testing a hotspot while he's there. Internet: fiber is mid December at the earliest, that's the risk. Signage: compliant tactile signs for the room IDs, vinyl for wayfinding. Abena is getting it requoted. Ken is looking at moving the fifty-five hundred from contingency, answer end of next week. Invoices for this year's money by December fifteenth.
+S415 [00:53:19] Mensah, Abena: Right.
+S416 [00:53:21] Okafor, Grace: Mural: still open. Tom is asking what's in the drawings. Hearing loop: Luis is checking. Website: Abena's updating the text now, photos in December. Open house: January sixteenth, Saturday. Staff open the week of the eleventh, if we pass inspection. Abena's sending the press release and flyer drafts to me by November sixth. We announce only when the inspection is booked, neighborhood association first. Volunteer point person: open, Rana's checking with her director. Punch list walkthrough: November twelfth at nine, Luis is sending the invite.
+S417 [00:54:04] Delgado, Luis: That's everything I have.
+S418 [00:54:07] Haddad, Rana: The winter program schedule. I'm drafting it but holding it.
+S419 [00:54:12] Okafor, Grace: Right, Rana's drafting the winter schedule but holding it until we have the inspection date. And the pickup map for the after-school parents, Rana and Abena. Okay. That's a lot.
+S420 [00:54:25] Mensah, Abena: It's a lot, but it feels better than it did an hour ago.
+S421 [00:54:30] Okafor, Grace: It does. Okay, so I think I want to do this every week until we open. Same time, Monday at ten. Is that okay for everyone?
+S422 [00:54:40] Lindqvist, Tom: Mondays are fine.
+S423 [00:54:43] Haddad, Rana: Mondays are good as long as we're done before eleven thirty.
+S424 [00:54:48] Kowalski, Pete: Works for me.
+S425 [00:54:50] Delgado, Luis: I'll be at the site on Mondays mostly, so I'll be on the phone like today.
+S426 [00:54:56] Okafor, Grace: That's fine. I'll send out the series. And I'll try to send notes after each one, although honestly that's what this recording is for.
+S427 [00:55:06] Mensah, Abena: Are you going to use the AI thing on it?
+S428 [00:55:10] Okafor, Grace: I'm going to try. We'll see.
+S429 [00:55:14] Kowalski, Pete: Good luck. Half of this meeting was about the library branch.
+S430 [00:55:18] Lindqvist, Tom: The library branch is a valuable lesson for us all.
+S431 [00:55:22] Haddad, Rana: The library branch is cursed, is the lesson.
+S432 [00:55:27] Okafor, Grace: Okay, okay. Before we go, does anyone have anything else? Anything that's keeping you up at night about this?
+S433 [00:55:36] Kowalski, Pete: Honestly, the fiber. I'm going to keep pushing the provider. If they slip into January, I'm going to have to get creative.
+S434 [00:55:46] Okafor, Grace: What does creative mean?
+S435 [00:55:48] Kowalski, Pete: Hotspots for the front desk for the first few weeks, maybe. Not ideal for the keycards and the cameras. But it'd get us open. Let's see what the test shows first.
+S436 [00:56:02] Okafor, Grace: Okay. Keep me posted on the fiber.
+S437 [00:56:05] Kowalski, Pete: Will do.
+S438 [00:56:08] Lindqvist, Tom: For me it's the inspection, obviously. If we get a bad inspector, we're in trouble. Some of them are really picky. If we fail on something small, it's another three or four weeks, and the whole January plan goes.
+S439 [00:56:24] Okafor, Grace: Right. Which is why the punch list matters. Let's make sure we find everything before the inspector does.
+S440 [00:56:31] Delgado, Luis: That's the idea. I'll make sure the contractor takes it seriously.
+S441 [00:56:37] Mensah, Abena: For me it's the mural, honestly. I think it could become a whole thing in the neighborhood if it's handled badly. I'd rather we decide it on purpose than have people find out when they walk in and it's gone.
+S442 [00:56:52] Okafor, Grace: That's fair. Let's get Tom's answer on the drawings and then I'll take it to the director. I'd rather it be decided than just happen.
+S443 [00:57:03] Haddad, Rana: For me it's the chairs. A hundred and twenty people and no chairs is my nightmare.
+S444 [00:57:11] Okafor, Grace: We'll get the quotes. We won't have an open house with no chairs. That I promise too.
+S445 [00:57:18] Lindqvist, Tom: She's making a lot of promises today.
+S446 [00:57:22] Okafor, Grace: I know. Coffee and chairs. I can do coffee and chairs.
+S447 [00:57:27] Mensah, Abena: Can I mention one more thing? It's small.
+S448 [00:57:31] Okafor, Grace: Go ahead.
+S449 [00:57:33] Mensah, Abena: Photo consent. If we take photos at the open house and the kids' programs are doing demos, we need photo releases from the parents. I'll put that in with the program stuff. Rana, can we send the form with the pickup map?
+S450 [00:57:50] Haddad, Rana: Yes, that's easy. Same email.
+S451 [00:57:54] Mensah, Abena: Perfect.
+S452 [00:57:58] Okafor, Grace: Good thinking. Anything else? No? Okay.
+S453 [00:58:05] Delgado, Luis: Oh, one thing. The furniture installment. I just looked it up on my phone. The second installment is due on delivery, so we don't pay until it shows up anyway. So Ken doesn't have to hold anything, it's automatic.
+S454 [00:58:21] Okafor, Grace: Oh good. That's easy. I'll tell Ken.
+S455 [00:58:25] Delgado, Luis: I'll email him too.
+S456 [00:58:29] Okafor, Grace: Okay. Then I think we're done. Thank you all. That was a lot but it was really useful. I'll see you all next Monday at ten.
+S457 [00:58:40] Mensah, Abena: Thanks Grace.
+S458 [00:58:41] Haddad, Rana: Thanks everyone. Bye.
+S459 [00:58:43] Lindqvist, Tom: Bye. Boots on the twelfth.
+S460 [00:58:47] Kowalski, Pete: Bye all.
+S461 [00:58:50] Delgado, Luis: Bye.
+S462 [00:58:53] Okafor, Grace: Oh wait, sorry, Pete, are you still on?
+S463 [00:58:58] Kowalski, Pete: Yeah, still here.
+S464 [00:59:01] Okafor, Grace: Quick one. On the keycards. Does the front desk staff get access to the storage rooms or just the front door? Because last time we gave everyone everything and then things went missing.
+S465 [00:59:14] Kowalski, Pete: I'd say front door and their own office. Storage only for the program leads. But that's your call.
+S466 [00:59:23] Okafor, Grace: Let's do that. Front door and offices for front desk staff, storage rooms only for program leads.
+S467 [00:59:32] Kowalski, Pete: Okay, I'll set it up that way.
+S468 [00:59:35] Okafor, Grace: Thanks. And tell me if HR is slow with the list.
+S469 [00:59:40] Kowalski, Pete: HR is always slow with the list. But I'll tell you.
+S470 [00:59:46] Okafor, Grace: Ha. Okay. Thanks Pete. Bye.
+S471 [00:59:50] Kowalski, Pete: Bye.

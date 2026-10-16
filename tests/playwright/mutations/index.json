@@ -1,0 +1,240 @@
+[
+ {
+  "id": "D01",
+  "title": "AI-203 left as possible match; no update",
+  "row": "R01",
+  "expect": [
+   [
+    "COV-UNRESOLVED",
+    "AI-203"
+   ]
+  ]
+ },
+ {
+  "id": "D02",
+  "title": "Coordination minted as new task instead of AI-204 update",
+  "row": "R02",
+  "expect": [
+   [
+    "NEW-DUPLICATE",
+    "NEW-6"
+   ],
+   [
+    "COV-CONTRADICTION",
+    "AI-204"
+   ],
+   [
+    "COV-UNBOUND-DISPOSITION",
+    "S022"
+   ]
+  ]
+ },
+ {
+  "id": "D03",
+  "title": "POC minted as new task instead of AI-205 update",
+  "row": "R14",
+  "expect": [
+   [
+    "NEW-DUPLICATE",
+    "NEW-6"
+   ],
+   [
+    "COV-POSSIBLE-MATCH",
+    "AI-205"
+   ]
+  ]
+ },
+ {
+  "id": "D04",
+  "title": "Route verification split into verify + guidance",
+  "row": "R04",
+  "expect": [
+   [
+    "OVER-SPLIT",
+    "NEW-2+NEW-6"
+   ],
+   [
+    "COV-UNBOUND-DISPOSITION",
+    "S026"
+   ]
+  ]
+ },
+ {
+  "id": "D05",
+  "title": "Staging task drops the alternate-area contingency",
+  "row": "R05",
+  "expect": [
+   [
+    "CONTINGENCY-DROPPED",
+    "NEW-3"
+   ]
+  ]
+ },
+ {
+  "id": "D06",
+  "title": "Information task drops the partner-site slide deck",
+  "row": "R06",
+  "expect": [
+   [
+    "DELIVERABLE-DROPPED",
+    "NEW-1"
+   ]
+  ]
+ },
+ {
+  "id": "D07",
+  "title": "Invitation update minted as a P2 tasking",
+  "row": "R07",
+  "expect": [
+   [
+    "ADMIN-IN-PROJECT",
+    "NEW-6"
+   ]
+  ]
+ },
+ {
+  "id": "D08",
+  "title": "Conditional observer instruction minted as unowned task",
+  "row": "R09",
+  "expect": [
+   [
+    "CONDITIONAL-TASKING",
+    "NEW-6"
+   ]
+  ]
+ },
+ {
+  "id": "D09",
+  "title": "Working-plan discussion filed against P2, AI-206 not updated",
+  "row": "R12",
+  "expect": [
+   [
+    "DISP-ABOUT-PROJECT",
+    "S036"
+   ],
+   [
+    "DISP-ABOUT-PROJECT",
+    "S037"
+   ],
+   [
+    "COV-UNBOUND-DISPOSITION",
+    "S035"
+   ],
+   [
+    "COV-UNBOUND-DISPOSITION",
+    "S038"
+   ],
+   [
+    "COV-UNBOUND-DISPOSITION",
+    "S042"
+   ],
+   [
+    "COV-UNBOUND-DISPOSITION",
+    "S043"
+   ]
+  ]
+ },
+ {
+  "id": "D10",
+  "title": "selfReview omitted",
+  "row": "R13",
+  "expect": [
+   [
+    "SELF-REVIEW-MISSING",
+    "selfReview"
+   ]
+  ]
+ },
+ {
+  "id": "D11",
+  "title": "selfReview claims no similar task for a duplicate",
+  "row": "R02",
+  "expect": [
+   [
+    "NEW-DUPLICATE",
+    "NEW-3"
+   ]
+  ]
+ },
+ {
+  "id": "D12",
+  "title": "Slide-deck information merged with transcript, dated from \"today's transcript\"",
+  "row": "R16",
+  "expect": [
+   [
+    "TIME-UNGROUNDED",
+    "NEW-6"
+   ]
+  ]
+ },
+ {
+  "id": "D13",
+  "title": "Others' work in progress minted as an unowned task",
+  "row": "R09",
+  "expect": [
+   [
+    "TASK-NO-ACCEPTANCE",
+    "NEW-6"
+   ]
+  ]
+ },
+ {
+  "id": "D14",
+  "title": "Transcript and summaries bundled from one sentence",
+  "row": "R16",
+  "expect": [
+   [
+    "DELIVERABLES-MERGED",
+    "NEW-5"
+   ]
+  ]
+ },
+ {
+  "id": "D15",
+  "title": "Transcript task dated from the words \"today's transcript\"",
+  "row": "R17",
+  "expect": [
+   [
+    "TIME-UNGROUNDED",
+    "NEW-4"
+   ]
+  ]
+ },
+ {
+  "id": "D16",
+  "title": "Task marked completed on \"I think I have that done\"",
+  "row": "R18",
+  "expect": [
+   [
+    "SUPPORT-MISSING",
+    "Status:AI-205#14"
+   ]
+  ]
+ },
+ {
+  "id": "D17",
+  "title": "Task handed to someone who did not take it on",
+  "row": "R18",
+  "expect": [
+   [
+    "SUPPORT-MISSING",
+    "Reassign:AI-206#14"
+   ]
+  ]
+ },
+ {
+  "id": "D18",
+  "title": "Two different owners for one task in the same reply",
+  "row": "R19",
+  "expect": [
+   [
+    "OP-CONFLICT",
+    "Reassign:AI-204#2"
+   ],
+   [
+    "SUPPORT-MISSING",
+    "Reassign:AI-204#14"
+   ]
+  ]
+ }
+]

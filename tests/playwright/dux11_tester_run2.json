@@ -1,0 +1,1268 @@
+{
+ "context": "MKG1|transcript|20261012T140000Z|bf29491e",
+ "ops": [
+  {
+   "op": "Reassign",
+   "tasking": "AI-204",
+   "from": null,
+   "to": "alvarez",
+   "src": [
+    {
+     "seg": "S023",
+     "quote": "I will start coordinating with the Partner agency so that when you arrive, you can go directly to the site"
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-204",
+   "text": "Sofia committed to coordinate direct site access and use of the intended staging area upon arrival. James prefers to stage files at the final location, then use another workspace while technical setup finishes. Final staging arrangements remain to be confirmed.",
+   "src": [
+    {
+     "seg": "S020",
+     "quote": "I would prefer to deliver the files there, set up the equipment, and be out of the way before the active transfer period begins."
+    },
+    {
+     "seg": "S022",
+     "quote": "Yes. That is probably the best approach."
+    },
+    {
+     "seg": "S023",
+     "quote": "I will start coordinating with the Partner agency"
+    }
+   ]
+  },
+  {
+   "op": "Reassign",
+   "tasking": "AI-205",
+   "from": null,
+   "to": "alvarez",
+   "src": [
+    {
+     "seg": "S024",
+     "quote": "can you get us a direct point of contact we can call if we have trouble getting into the site"
+    },
+    {
+     "seg": "S025",
+     "quote": "Yes. Absolutely."
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-205",
+   "text": "Sofia accepted responsibility for providing a direct site-access and staging point of contact to James and Raj before their departure. The contact must be usable if they have difficulty reaching the correct site or staging area.",
+   "src": [
+    {
+     "seg": "S024",
+     "quote": "before Raj and I leave, can you get us a direct point of contact"
+    },
+    {
+     "seg": "S025",
+     "quote": "Yes. Absolutely."
+    },
+    {
+     "seg": "S034",
+     "quote": "The main thing for Raj and me is having a point of contact and knowing the site arrangements before we arrive."
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-1",
+   "project": "P2",
+   "label": "Verify the designated site entry route is suitable for the transfer requirements and confirm which route to use",
+   "assignee": "alvarez",
+   "src": [
+    {
+     "seg": "S026",
+     "quote": "We also need to know whether there is a specific connection route or entry process because of the file size and equipment we are bringing."
+    },
+    {
+     "seg": "S027",
+     "quote": "There is a route identified. I need to check that it is suitable for your transfer requirements."
+    },
+    {
+     "seg": "S029",
+     "quote": "I will work through that so you know which route to use."
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-2",
+   "project": "P2",
+   "label": "Inform the Partner agency about the weight of the equipment and file cases",
+   "assignee": null,
+   "src": [
+    {
+     "seg": "S039",
+     "quote": "Please make sure the Partner agency knows the equipment and file cases are heavy."
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-3",
+   "project": "P2",
+   "label": "Verify staging-area load suitability and identify an alternate staging area if needed",
+   "assignee": null,
+   "src": [
+    {
+     "seg": "S039",
+     "quote": "We do not want to put them somewhere that cannot support the load."
+    },
+    {
+     "seg": "S040",
+     "quote": "we need to verify it. If it does not work, there is another staging area nearby."
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-203",
+   "text": "The previously discussed transfer period of May 18–28 is now being described as May 18–22, with the year unspecified. May 18 may be a setup and configuration day. James indicated that staging files and connecting equipment before transfer activity would help readiness. These are planning expectations, not confirmed changes to the task deadline or blocked status.",
+   "src": [
+    {
+     "seg": "S014",
+     "quote": "The transfer period that had been discussed as May eighteenth through May twenty-eighth is now being described as May eighteenth through May twenty-second."
+    },
+    {
+     "seg": "S016",
+     "quote": "it would help if the technical team could have files staged and equipment connected before then."
+    },
+    {
+     "seg": "S017",
+     "quote": "I think the eighteenth is being treated as the setup and configuration day"
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-207",
+   "text": "James and Raj are planning to depart on May 14 and expect to arrive May 17, subject to traffic, weather and equipment issues. James expects arrival on the seventeenth to allow preparation for setup on the eighteenth. The year and final travel dates are not confirmed.",
+   "src": [
+    {
+     "seg": "S015",
+     "quote": "Raj and I are planning to leave on the fourteenth. It may take us several days to get there"
+    },
+    {
+     "seg": "S015",
+     "quote": "We expect to arrive on the seventeenth."
+    },
+    {
+     "seg": "S018",
+     "quote": "If we arrive on the seventeenth, we can get settled and be ready for the eighteenth."
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-206",
+   "text": "Monitoring equipment may be mounted on the temporary stand or kept on ground-level tables. Stand mounting depends on suitable mounts, stability, wind and vibration conditions, and the final transfer plan. Standard clips may be insufficient. No mounting choice was finalized.",
+   "src": [
+    {
+     "seg": "S007",
+     "quote": "The view from the work tables may be sufficient, and the equipment is fairly large."
+    },
+    {
+     "seg": "S008",
+     "quote": "We can support it on the stand if we have the correct mounts. The concern is stability."
+    },
+    {
+     "seg": "S009",
+     "quote": "The standard clips may not be sufficient."
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-206",
+   "text": "Dana described the working integration approach: the transfer equipment connects directly to its support system, while the temporary workstation provides power, workspace, connectivity and a position for monitoring. James reported normal connectivity and a backup option. The team will bring a portable power unit because dedicated power is unavailable.",
+   "src": [
+    {
+     "seg": "S037",
+     "quote": "The transfer equipment will connect directly to the support system."
+    },
+    {
+     "seg": "S038",
+     "quote": "We will have our normal connection capability and a backup option."
+    },
+    {
+     "seg": "S042",
+     "quote": "There is no dedicated power. We are bringing the portable power unit."
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "AI-204",
+   "text": "An observer-attendance coordination process is being developed. The observer list may change, names already known have been sent to the event coordinator, and a flexible day-by-day observer schedule is being developed. This does not establish a finalized visitor list or schedule.",
+   "src": [
+    {
+     "seg": "S030",
+     "quote": "I sent the names I have to the event coordinator, but that list may still grow or shrink."
+    },
+    {
+     "seg": "S031",
+     "quote": "A separate process is being developed so that group can stay informed about the day-by-day flow of activity."
+    },
+    {
+     "seg": "S033",
+     "quote": "Our side is developing a flexible day-by-day schedule so observers can decide when to attend."
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-4",
+   "project": "P2",
+   "label": "Send information from the prior partner discussion, including the partner-site slide deck",
+   "assignee": "alvarez",
+   "dueDate": "2026-10-12",
+   "duePhrase": "this morning",
+   "src": [
+    {
+     "seg": "S019",
+     "quote": "I will send everyone information from yesterday’s discussion this morning. There will be a partner-site slide deck with location details."
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-5",
+   "project": "P2",
+   "label": "Provide today's coordination transcript to the group",
+   "assignee": "alvarez",
+   "dueDate": "2026-10-12",
+   "duePhrase": "today",
+   "src": [
+    {
+     "seg": "S033",
+     "quote": "I will provide today’s transcript to this group"
+    },
+    {
+     "seg": "S033",
+     "quote": "I am putting those materials together now to get them out today."
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-6",
+   "project": "P2",
+   "label": "Distribute summaries from yesterday's partner session",
+   "assignee": "alvarez",
+   "dueDate": "2026-10-12",
+   "duePhrase": "today",
+   "src": [
+    {
+     "seg": "S033",
+     "quote": "you will also get the summaries from yesterday’s partner session."
+    },
+    {
+     "seg": "S033",
+     "quote": "I am putting those materials together now to get them out today."
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-7",
+   "project": "P2",
+   "label": "Forward the updated recurring coordination invitation directly to James",
+   "assignee": "alvarez",
+   "src": [
+    {
+     "seg": "S045",
+     "quote": "Can you forward the recurring coordination invitation directly to James? He did not receive the updated invitation after it was recreated."
+    },
+    {
+     "seg": "S047",
+     "quote": "Okay."
+    },
+    {
+     "seg": "S050",
+     "quote": "All right, I think I have that done. James, let me know if you receive it."
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-8",
+   "project": "P2",
+   "label": "Send the recurring coordination invitation to Raj's alternate email address",
+   "assignee": "alvarez",
+   "src": [
+    {
+     "seg": "S046",
+     "quote": "Also, send it to Raj’s alternate email address. He only has the original invitation."
+    },
+    {
+     "seg": "S047",
+     "quote": "Okay."
+    },
+    {
+     "seg": "S050",
+     "quote": "All right, I think I have that done."
+    }
+   ]
+  },
+  {
+   "op": "NewTasking",
+   "ref": "NEW-9",
+   "project": "P2",
+   "label": "Add Priya and Dana to the recurring coordination invitation",
+   "assignee": "alvarez",
+   "src": [
+    {
+     "seg": "S049",
+     "quote": "Add Priya and Dana."
+    },
+    {
+     "seg": "S050",
+     "quote": "All right, I think I have that done."
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "NEW-7",
+   "text": "Sofia said she thinks the invitation update is done, but James had not yet confirmed receipt.",
+   "src": [
+    {
+     "seg": "S050",
+     "quote": "I think I have that done. James, let me know if you receive it."
+    },
+    {
+     "seg": "S051",
+     "quote": "I have my email open. It may take a minute."
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "NEW-8",
+   "text": "Sofia indicated she thinks the invitation updates were done; delivery to Raj's alternate email was not independently confirmed.",
+   "src": [
+    {
+     "seg": "S050",
+     "quote": "All right, I think I have that done."
+    }
+   ]
+  },
+  {
+   "op": "ProgressNote",
+   "tasking": "NEW-9",
+   "text": "Sofia indicated she thinks the attendee additions were done; no separate confirmation of the updated attendee list was provided.",
+   "src": [
+    {
+     "seg": "S050",
+     "quote": "All right, I think I have that done."
+    }
+   ]
+  }
+ ],
+ "flags": [
+  {
+   "kind": "open_question",
+   "about": [
+    "P2",
+    "AI-204"
+   ],
+   "src": [
+    "S004",
+    "S013",
+    "S030"
+   ],
+   "note": "The number and identities of additional observers remain unsettled. Confirm how the visitor list will be finalized and managed."
+  },
+  {
+   "kind": "ambiguous_reference",
+   "about": [
+    "P2",
+    "AI-204"
+   ],
+   "src": [
+    "S013"
+   ],
+   "note": "Dana addresses Morgan regarding visitor-list management, but Morgan is not in the INDEX. Identify Morgan before creating any durable ownership record."
+  },
+  {
+   "kind": "conflict",
+   "about": [
+    "P2",
+    "AI-203",
+    "AI-207"
+   ],
+   "src": [
+    "S014",
+    "S017"
+   ],
+   "note": "The transfer period was described as May 18–28 and then May 18–22. The year is unstated. The Monday-through-Friday description matches May 18–22 in 2026, which predates this meeting, but not those dates in 2027. Confirm the year, actual transfer dates and setup day."
+  },
+  {
+   "kind": "implied_change",
+   "about": [
+    "AI-207"
+   ],
+   "src": [
+    "S015",
+    "S018"
+   ],
+   "note": "James and Raj plan departure on May 14 and arrival on May 17, but these are expectations, not a finalized travel plan. Confirm the year and whether these dates should be adopted."
+  },
+  {
+   "kind": "implied_change",
+   "about": [
+    "AI-205"
+   ],
+   "src": [
+    "S024",
+    "S025",
+    "S015"
+   ],
+   "note": "The partner access contact is needed before James and Raj leave on the fourteenth. The intended deadline is clear relative to departure, but the calendar year and formal deadline are not confirmed."
+  },
+  {
+   "kind": "ownership",
+   "about": [
+    "NEW-2"
+   ],
+   "src": [
+    "S039",
+    "S044"
+   ],
+   "note": "Someone must notify the Partner agency that the equipment and file cases are heavy. Sofia may be the appropriate owner because she is coordinating partner arrangements, but she did not explicitly accept this particular communication."
+  },
+  {
+   "kind": "ownership",
+   "about": [
+    "NEW-3"
+   ],
+   "src": [
+    "S039",
+    "S040",
+    "S044"
+   ],
+   "note": "A load-suitability verification and alternate staging-area determination are required. Sofia may coordinate this with the Partner agency, while technical staff may perform the assessment. No individual clearly accepted ownership."
+  },
+  {
+   "kind": "open_question",
+   "about": [
+    "P2",
+    "AI-204"
+   ],
+   "src": [
+    "S031",
+    "S032",
+    "S033"
+   ],
+   "note": "Observer communication and the flexible day-by-day attendance schedule are still being developed. Confirm whether this requires a separate tracked deliverable and named owner."
+  },
+  {
+   "kind": "ambiguous_reference",
+   "about": [
+    "P2",
+    "NEW-9"
+   ],
+   "src": [
+    "S048",
+    "S049"
+   ],
+   "note": "Priya is identified only by first name and is not in the INDEX. Do not create a durable party record until her identity is established."
+  },
+  {
+   "kind": "open_question",
+   "about": [
+    "NEW-7"
+   ],
+   "src": [
+    "S050",
+    "S051"
+   ],
+   "note": "James had not confirmed receiving the updated recurring invitation. Confirm receipt separately from Sofia's reported sending action."
+  }
+ ],
+ "coveredProjects": [
+  "P2"
+ ],
+ "segments": [
+  {
+   "seg": "S001",
+   "dispositions": [
+    {
+     "kind": "administrative",
+     "about": null
+    }
+   ]
+  },
+  {
+   "seg": "S002",
+   "dispositions": [
+    {
+     "kind": "administrative",
+     "about": null
+    }
+   ]
+  },
+  {
+   "seg": "S003",
+   "dispositions": [
+    {
+     "kind": "administrative",
+     "about": null
+    }
+   ]
+  },
+  {
+   "seg": "S004",
+   "dispositions": [
+    {
+     "kind": "open_question",
+     "about": [
+      "P2",
+      "AI-204"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S005",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S006",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S007",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S008",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S009",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S010",
+   "dispositions": [
+    {
+     "kind": "context_only",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S011",
+   "dispositions": [
+    {
+     "kind": "uncertain_requires_review",
+     "about": [
+      "AI-206"
+     ],
+     "note": "Requesting documentation was raised as a possibility, not accepted as a task."
+    }
+   ]
+  },
+  {
+   "seg": "S012",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S013",
+   "dispositions": [
+    {
+     "kind": "open_question",
+     "about": [
+      "AI-204"
+     ]
+    },
+    {
+     "kind": "uncertain_requires_review",
+     "about": [
+      "P2"
+     ],
+     "note": "Morgan's identity cannot be resolved from the INDEX."
+    }
+   ]
+  },
+  {
+   "seg": "S014",
+   "dispositions": [
+    {
+     "kind": "status_update",
+     "about": [
+      "AI-203"
+     ],
+     "note": "Updated planning expectations, not a completed task or a changed registered deadline."
+    },
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-207"
+     ]
+    },
+    {
+     "kind": "open_question",
+     "about": [
+      "P2",
+      "AI-207"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S015",
+   "dispositions": [
+    {
+     "kind": "status_update",
+     "about": [
+      "AI-207"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S016",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-203"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S017",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-203",
+      "AI-207"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S018",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-207"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S019",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-4"
+     ]
+    },
+    {
+     "kind": "uncertain_requires_review",
+     "about": [
+      "AI-204"
+     ],
+     "note": "Additional advance-arrival arrangements were described conditionally and are covered by the existing site coordination tasking."
+    }
+   ]
+  },
+  {
+   "seg": "S020",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-204"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S021",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-204"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S022",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-204"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S023",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "AI-204"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S024",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-205"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S025",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "AI-205"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S026",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-204"
+     ]
+    },
+    {
+     "kind": "open_question",
+     "about": [
+      "NEW-1"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S027",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-1"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S028",
+   "dispositions": [
+    {
+     "kind": "context_only",
+     "about": [
+      "NEW-1"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S029",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-1"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S030",
+   "dispositions": [
+    {
+     "kind": "status_update",
+     "about": [
+      "AI-204"
+     ]
+    },
+    {
+     "kind": "open_question",
+     "about": [
+      "P2"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S031",
+   "dispositions": [
+    {
+     "kind": "status_update",
+     "about": [
+      "AI-204"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S032",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S033",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-5"
+     ]
+    },
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-6"
+     ]
+    },
+    {
+     "kind": "status_update",
+     "about": [
+      "AI-204"
+     ]
+    },
+    {
+     "kind": "administrative",
+     "about": [
+      "P2"
+     ],
+     "note": "Weekly meeting cadence continues; no separate task or schedule change was specified."
+    }
+   ]
+  },
+  {
+   "seg": "S034",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-205"
+     ]
+    },
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-207"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S035",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S036",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S037",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S038",
+   "dispositions": [
+    {
+     "kind": "status_update",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S039",
+   "dispositions": [
+    {
+     "kind": "open_question",
+     "about": [
+      "NEW-3"
+     ]
+    },
+    {
+     "kind": "uncertain_requires_review",
+     "about": [
+      "NEW-2"
+     ],
+     "note": "Communicating equipment weight is explicitly required, but nobody accepted ownership."
+    }
+   ]
+  },
+  {
+   "seg": "S040",
+   "dispositions": [
+    {
+     "kind": "open_question",
+     "about": [
+      "NEW-3"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S041",
+   "dispositions": [
+    {
+     "kind": "open_question",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S042",
+   "dispositions": [
+    {
+     "kind": "status_update",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S043",
+   "dispositions": [
+    {
+     "kind": "discussion_of_register_item",
+     "about": [
+      "AI-206"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S044",
+   "dispositions": [
+    {
+     "kind": "uncertain_requires_review",
+     "about": [
+      "NEW-2",
+      "NEW-3",
+      "AI-204"
+     ],
+     "note": "Sofia accepted general tracking and communication responsibility, not explicitly the two individual verification and notification tasks."
+    }
+   ]
+  },
+  {
+   "seg": "S045",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-7"
+     ],
+     "note": "The request is accepted in S047."
+    }
+   ]
+  },
+  {
+   "seg": "S046",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-8"
+     ],
+     "note": "The request is accepted in S047."
+    }
+   ]
+  },
+  {
+   "seg": "S047",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-7",
+      "NEW-8"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S048",
+   "dispositions": [
+    {
+     "kind": "open_question",
+     "about": [
+      "NEW-9"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S049",
+   "dispositions": [
+    {
+     "kind": "commitment",
+     "about": [
+      "NEW-9"
+     ],
+     "note": "The instruction to add Priya and Dana is acknowledged in S050."
+    }
+   ]
+  },
+  {
+   "seg": "S050",
+   "dispositions": [
+    {
+     "kind": "status_update",
+     "about": [
+      "NEW-7",
+      "NEW-8",
+      "NEW-9"
+     ]
+    },
+    {
+     "kind": "open_question",
+     "about": [
+      "NEW-7"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S051",
+   "dispositions": [
+    {
+     "kind": "status_update",
+     "about": [
+      "NEW-7"
+     ]
+    }
+   ]
+  },
+  {
+   "seg": "S052",
+   "dispositions": [
+    {
+     "kind": "administrative",
+     "about": null
+    }
+   ]
+  }
+ ],
+ "register": [
+  {
+   "id": "AI-203",
+   "coverage": "updated",
+   "segs": [
+    "S014",
+    "S016",
+    "S017"
+   ]
+  },
+  {
+   "id": "AI-204",
+   "coverage": "updated",
+   "segs": [
+    "S004",
+    "S019",
+    "S020",
+    "S021",
+    "S022",
+    "S023",
+    "S030",
+    "S031",
+    "S033"
+   ]
+  },
+  {
+   "id": "AI-205",
+   "coverage": "updated",
+   "segs": [
+    "S024",
+    "S025",
+    "S034"
+   ]
+  },
+  {
+   "id": "AI-206",
+   "coverage": "updated",
+   "segs": [
+    "S005",
+    "S006",
+    "S007",
+    "S008",
+    "S009",
+    "S010",
+    "S011",
+    "S012",
+    "S032",
+    "S035",
+    "S036",
+    "S037",
+    "S038",
+    "S041",
+    "S042",
+    "S043"
+   ]
+  },
+  {
+   "id": "AI-207",
+   "coverage": "updated",
+   "segs": [
+    "S014",
+    "S015",
+    "S017",
+    "S018",
+    "S034"
+   ]
+  },
+  {
+   "id": "BL-202",
+   "coverage": "not_discussed",
+   "segs": []
+  }
+ ],
+ "selfReview": {
+  "newVsExisting": [
+   {
+    "ref": "NEW-1",
+    "nearest": "AI-204",
+    "whyNew": "Verifying and confirming a suitable route is independently completable and is not necessarily achieved by coordinating general access and staging."
+   },
+   {
+    "ref": "NEW-2",
+    "nearest": "AI-204",
+    "whyNew": "Notifying the partner about equipment weight is a specific communication that can be completed independently of general staging coordination."
+   },
+   {
+    "ref": "NEW-3",
+    "nearest": "AI-204",
+    "whyNew": "Establishing load suitability and identifying an alternate if necessary requires a distinct verification beyond arranging access and staging."
+   },
+   {
+    "ref": "NEW-4",
+    "nearest": "AI-204",
+    "whyNew": "Distributing information and a slide deck is a standalone deliverable rather than completion of partner-site coordination."
+   },
+   {
+    "ref": "NEW-5",
+    "nearest": null,
+    "whyNew": "Delivering today's transcript has its own completion condition and is not covered by an active register tasking."
+   },
+   {
+    "ref": "NEW-6",
+    "nearest": null,
+    "whyNew": "Delivering yesterday's partner-session summaries is a separate deliverable from today's transcript."
+   },
+   {
+    "ref": "NEW-7",
+    "nearest": "AI-205",
+    "whyNew": "Forwarding a recurring meeting invitation to James is distinct from supplying the partner-site access point of contact."
+   },
+   {
+    "ref": "NEW-8",
+    "nearest": "AI-205",
+    "whyNew": "Sending the invitation to Raj's alternate address is independently completable and is not covered by a registered tasking."
+   },
+   {
+    "ref": "NEW-9",
+    "nearest": "AI-205",
+    "whyNew": "Adding two recipients to the recurring invitation is a separate administrative deliverable with no matching active tasking."
+   }
+  ]
+ }
+}

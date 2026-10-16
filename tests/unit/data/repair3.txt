@@ -1,0 +1,7 @@
+The workbench checked your reply against the transcript and the register and found the problems below.
+Fix only these. Keep every other op, flag, disposition and register row as it is.
+Return the complete corrected reply in the same format: one JSON block, including segments, register and selfReview.
+
+MUST FIX:
+1. NEW-3 merges commitments with different timing ("this morning", "today"); give each its own tasking and due date.
+2. NEW-1 rests on no request, commitment, decision or open question in the transcript. Remove it; if the point matters, record it as a suggestion or open_question flag instead.

@@ -1,0 +1,1536 @@
+{
+  "mkgWorkspace": "0.1",
+  "tool": "workbench 0.1",
+  "contract": {
+    "specVersion": "0.3.0",
+    "ontologyVersion": "https://example.org/mkg/0.3.0",
+    "context": {
+      "file": "delta-context-0.3.0.jsonld",
+      "iri": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+      "sha256": "131585c5e46f0e7db383323a072d6d68fb0ef8788bbb7b07a5a24effa95191bc"
+    },
+    "shacl": {
+      "file": "delta-shacl-0.3.0.ttl",
+      "sha256": "9319bb91f981db51372dbbaf09efee1f76564972ba5e0ab96f6729df50cb6ed1"
+    },
+    "construct": {
+      "file": "delta-to-cco-construct-0.3.0.rq",
+      "sha256": "ee308dcd374350cf535f5d2679a32ff2fce7906a7e66f1318facb7a75b95ca61"
+    },
+    "fold": {
+      "file": "fold-rules-0.3.0.yaml",
+      "sha256": "bffb73d61efeba3e8033d1e04a6eaaf1f9297db25cd5e1cb4bda20fc53a0f73f"
+    }
+  },
+  "packages": [
+    {
+      "mkgPackage": "0.1",
+      "tool": "workbench 0.1",
+      "contract": {
+        "specVersion": "0.3.0",
+        "context": {
+          "file": "delta-context-0.3.0.jsonld",
+          "iri": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+          "sha256": "131585c5e46f0e7db383323a072d6d68fb0ef8788bbb7b07a5a24effa95191bc"
+        }
+      },
+      "meeting": {
+        "id": "20260924T140000Z",
+        "meetingAt": "2026-09-24T10:00:00-04:00",
+        "title": "Baseline register import",
+        "kind": "manual"
+      },
+      "sources": [],
+      "deltas": [],
+      "extension": {
+        "graph": "https://example.org/mkg/data/delta/20260924T140000Z/ext",
+        "doc": {
+          "@context": {
+            "@vocab": "https://example.org/mkg/delta-ext#",
+            "tasking": {
+              "@type": "@id"
+            },
+            "prerequisite": {
+              "@type": "@id"
+            },
+            "about": {
+              "@type": "@id"
+            },
+            "from": {
+              "@type": "@id"
+            },
+            "to": {
+              "@type": "@id"
+            },
+            "source": {
+              "@type": "@id"
+            },
+            "party": {
+              "@type": "@id"
+            },
+            "project": {
+              "@type": "@id"
+            },
+            "decision": {
+              "@type": "@id"
+            },
+            "replaces": {
+              "@type": "@id"
+            },
+            "assignee": {
+              "@type": "@id"
+            },
+            "duplicate": {
+              "@type": "@id"
+            },
+            "survivor": {
+              "@type": "@id"
+            }
+          },
+          "@graph": [
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext",
+              "@type": "ExtensionDelta",
+              "meetingAt": "2026-09-24T10:00:00-04:00",
+              "note": "Baseline register import (manual). Outside delta contract 0.3.0: no transcript provenance."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/010",
+              "@type": "NewProject",
+              "sequence": 10,
+              "project": "https://example.org/mkg/data/project/P1",
+              "code": "P1",
+              "name": "Intake portal redesign",
+              "description": "Replace the paper-style intake form with a guided, step-by-step web workflow.",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/020",
+              "@type": "NewProject",
+              "sequence": 20,
+              "project": "https://example.org/mkg/data/project/P2",
+              "code": "P2",
+              "name": "Partner data exchange",
+              "description": "Stand up a scheduled, secure file exchange with a partner agency under the new agreement.",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/030",
+              "@type": "NewProject",
+              "sequence": 30,
+              "project": "https://example.org/mkg/data/project/P3",
+              "code": "P3",
+              "name": "Reporting dashboard migration",
+              "description": "Move weekly operational reports out of spreadsheets and into the shared dashboard.",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/040",
+              "@type": "NewProject",
+              "sequence": 40,
+              "project": "https://example.org/mkg/data/project/P4",
+              "code": "P4",
+              "name": "Records retention cleanup",
+              "description": "Apply the retention schedule to the shared drive and archive expired folders.",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/050",
+              "@type": "NewParty",
+              "sequence": 50,
+              "party": "https://example.org/mkg/data/person/chen",
+              "kind": "person",
+              "name": "Mei Chen",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/060",
+              "@type": "NewParty",
+              "sequence": 60,
+              "party": "https://example.org/mkg/data/person/patel",
+              "kind": "person",
+              "name": "Raj Patel",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/070",
+              "@type": "NewParty",
+              "sequence": 70,
+              "party": "https://example.org/mkg/data/person/nguyen",
+              "kind": "person",
+              "name": "Linh Nguyen",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/080",
+              "@type": "NewParty",
+              "sequence": 80,
+              "party": "https://example.org/mkg/data/person/brooks",
+              "kind": "person",
+              "name": "Dana Brooks",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/090",
+              "@type": "NewParty",
+              "sequence": 90,
+              "party": "https://example.org/mkg/data/person/alvarez",
+              "kind": "person",
+              "name": "Sofia Alvarez",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/100",
+              "@type": "NewParty",
+              "sequence": 100,
+              "party": "https://example.org/mkg/data/person/ortiz",
+              "kind": "person",
+              "name": "James Ortiz",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/110",
+              "@type": "NewParty",
+              "sequence": 110,
+              "party": "https://example.org/mkg/data/person/legal",
+              "kind": "organization",
+              "name": "Legal office",
+              "aliases": [
+                "legal"
+              ],
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/120",
+              "@type": "NewParty",
+              "sequence": 120,
+              "party": "https://example.org/mkg/data/person/records",
+              "kind": "organization",
+              "name": "Records office",
+              "aliases": [
+                "records"
+              ],
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/130",
+              "@type": "NewParty",
+              "sequence": 130,
+              "party": "https://example.org/mkg/data/person/partner",
+              "kind": "organization",
+              "name": "Partner agency",
+              "aliases": [
+                "the partner",
+                "their side"
+              ],
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/140",
+              "@type": "NewTasking",
+              "sequence": 140,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/140/tasking",
+              "project": "https://example.org/mkg/data/project/P1",
+              "code": "AI-101",
+              "label": "Draft user journey for first-time filers",
+              "assignee": "https://example.org/mkg/data/person/chen",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/150",
+              "@type": "Status",
+              "sequence": 150,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/140/tasking",
+              "status": "CompletedStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/160",
+              "@type": "DueDate",
+              "sequence": 160,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/140/tasking",
+              "dueDate": "2026-09-12",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/170",
+              "@type": "NewTasking",
+              "sequence": 170,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/170/tasking",
+              "project": "https://example.org/mkg/data/project/P1",
+              "code": "AI-102",
+              "label": "Inventory every field on the current intake form",
+              "assignee": "https://example.org/mkg/data/person/patel",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/180",
+              "@type": "Status",
+              "sequence": 180,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/170/tasking",
+              "status": "CompletedStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/190",
+              "@type": "DueDate",
+              "sequence": 190,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/170/tasking",
+              "dueDate": "2026-09-10",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/200",
+              "@type": "NewTasking",
+              "sequence": 200,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/200/tasking",
+              "project": "https://example.org/mkg/data/project/P1",
+              "code": "AI-103",
+              "label": "Build clickable prototype of steps 1-3",
+              "assignee": "https://example.org/mkg/data/person/nguyen",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/210",
+              "@type": "Status",
+              "sequence": 210,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/200/tasking",
+              "status": "InProgressStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/220",
+              "@type": "DueDate",
+              "sequence": 220,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/200/tasking",
+              "dueDate": "2026-10-02",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/230",
+              "@type": "NewTasking",
+              "sequence": 230,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/230/tasking",
+              "project": "https://example.org/mkg/data/project/P1",
+              "code": "AI-104",
+              "label": "Decide which unused fields to drop",
+              "assignee": "https://example.org/mkg/data/person/chen",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/240",
+              "@type": "Status",
+              "sequence": 240,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/230/tasking",
+              "status": "BlockedStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/250",
+              "@type": "DueDate",
+              "sequence": 250,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/230/tasking",
+              "dueDate": "2026-09-24",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/260",
+              "@type": "NewTasking",
+              "sequence": 260,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/260/tasking",
+              "project": "https://example.org/mkg/data/project/P1",
+              "code": "AI-105",
+              "label": "Run the accessibility review",
+              "assignee": "https://example.org/mkg/data/person/brooks",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/270",
+              "@type": "Status",
+              "sequence": 270,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/260/tasking",
+              "status": "OpenStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/280",
+              "@type": "DueDate",
+              "sequence": 280,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/260/tasking",
+              "dueDate": "2026-10-08",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/290",
+              "@type": "NewTasking",
+              "sequence": 290,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/290/tasking",
+              "project": "https://example.org/mkg/data/project/P1",
+              "code": "BL-101",
+              "label": "Get an accessibility review slot scheduled",
+              "assignee": "https://example.org/mkg/data/person/brooks",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/300",
+              "@type": "Status",
+              "sequence": 300,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/290/tasking",
+              "status": "CompletedStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/310",
+              "@type": "NewTasking",
+              "sequence": 310,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/310/tasking",
+              "project": "https://example.org/mkg/data/project/P1",
+              "code": "BL-102",
+              "label": "Get legal review of fields 41 and 57",
+              "assignee": "https://example.org/mkg/data/person/alvarez",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/320",
+              "@type": "Status",
+              "sequence": 320,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/310/tasking",
+              "status": "OpenStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/330",
+              "@type": "NewTasking",
+              "sequence": 330,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/330/tasking",
+              "project": "https://example.org/mkg/data/project/P2",
+              "code": "AI-201",
+              "label": "Get the data sharing agreement signed",
+              "assignee": "https://example.org/mkg/data/person/alvarez",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/340",
+              "@type": "Status",
+              "sequence": 340,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/330/tasking",
+              "status": "CompletedStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/350",
+              "@type": "DueDate",
+              "sequence": 350,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/330/tasking",
+              "dueDate": "2026-09-19",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/360",
+              "@type": "NewTasking",
+              "sequence": 360,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/360/tasking",
+              "project": "https://example.org/mkg/data/project/P2",
+              "code": "AI-202",
+              "label": "Draft the file layout spec",
+              "assignee": "https://example.org/mkg/data/person/ortiz",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/370",
+              "@type": "Status",
+              "sequence": 370,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/360/tasking",
+              "status": "CompletedStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/380",
+              "@type": "DueDate",
+              "sequence": 380,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/360/tasking",
+              "dueDate": "2026-09-17",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/390",
+              "@type": "NewTasking",
+              "sequence": 390,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/390/tasking",
+              "project": "https://example.org/mkg/data/project/P2",
+              "code": "AI-203",
+              "label": "Run a test transfer with a sample file",
+              "assignee": "https://example.org/mkg/data/person/ortiz",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/400",
+              "@type": "Status",
+              "sequence": 400,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/390/tasking",
+              "status": "BlockedStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/410",
+              "@type": "DueDate",
+              "sequence": 410,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/390/tasking",
+              "dueDate": "2026-10-01",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/420",
+              "@type": "NewTasking",
+              "sequence": 420,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/420/tasking",
+              "project": "https://example.org/mkg/data/project/P2",
+              "code": "BL-202",
+              "label": "Get the firewall rule approved",
+              "assignee": "https://example.org/mkg/data/person/patel",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/430",
+              "@type": "Status",
+              "sequence": 430,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/420/tasking",
+              "status": "OpenStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/440",
+              "@type": "NewTasking",
+              "sequence": 440,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/440/tasking",
+              "project": "https://example.org/mkg/data/project/P3",
+              "code": "AI-302",
+              "label": "Rebuild the five weekly reports in the dashboard",
+              "assignee": "https://example.org/mkg/data/person/nguyen",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/450",
+              "@type": "Status",
+              "sequence": 450,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/440/tasking",
+              "status": "InProgressStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/460",
+              "@type": "DueDate",
+              "sequence": 460,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/440/tasking",
+              "dueDate": "2026-10-15",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/470",
+              "@type": "NewTasking",
+              "sequence": 470,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/470/tasking",
+              "project": "https://example.org/mkg/data/project/P3",
+              "code": "AI-303",
+              "label": "Confirm the data refresh schedule",
+              "assignee": "https://example.org/mkg/data/person/patel",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/480",
+              "@type": "Status",
+              "sequence": 480,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/470/tasking",
+              "status": "OpenStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/490",
+              "@type": "DueDate",
+              "sequence": 490,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/470/tasking",
+              "dueDate": "2026-09-30",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/500",
+              "@type": "NewTasking",
+              "sequence": 500,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/500/tasking",
+              "project": "https://example.org/mkg/data/project/P4",
+              "code": "AI-401",
+              "label": "Map shared drive folders to retention categories",
+              "assignee": "https://example.org/mkg/data/person/ortiz",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/510",
+              "@type": "Status",
+              "sequence": 510,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/500/tasking",
+              "status": "BlockedStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/520",
+              "@type": "DueDate",
+              "sequence": 520,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/500/tasking",
+              "dueDate": "2026-09-15",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/530",
+              "@type": "NewTasking",
+              "sequence": 530,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/530/tasking",
+              "project": "https://example.org/mkg/data/project/P4",
+              "code": "BL-401",
+              "label": "Records office issues updated retention schedule",
+              "assignee": "https://example.org/mkg/data/person/ortiz",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/540",
+              "@type": "Status",
+              "sequence": 540,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/530/tasking",
+              "status": "OpenStatus",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/550",
+              "@type": "PrerequisiteAdd",
+              "sequence": 550,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/200/tasking",
+              "prerequisite": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/290/tasking",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/560",
+              "@type": "PrerequisiteAdd",
+              "sequence": 560,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/230/tasking",
+              "prerequisite": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/310/tasking",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/570",
+              "@type": "PrerequisiteAdd",
+              "sequence": 570,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/390/tasking",
+              "prerequisite": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/420/tasking",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/580",
+              "@type": "PrerequisiteAdd",
+              "sequence": 580,
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/500/tasking",
+              "prerequisite": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/530/tasking",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/590",
+              "@type": "Decision",
+              "sequence": 590,
+              "about": [
+                "https://example.org/mkg/data/project/P1"
+              ],
+              "text": "Keep the existing case number format",
+              "project": "https://example.org/mkg/data/project/P1",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/600",
+              "@type": "DecisionCode",
+              "sequence": 600,
+              "decision": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/590",
+              "code": "D-101",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/610",
+              "@type": "Decision",
+              "sequence": 610,
+              "about": [
+                "https://example.org/mkg/data/project/P3"
+              ],
+              "text": "Retire the monthly roll-up report",
+              "project": "https://example.org/mkg/data/project/P3",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/620",
+              "@type": "DecisionCode",
+              "sequence": 620,
+              "decision": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/610",
+              "code": "D-301",
+              "contractGap": "Manual or baseline entry: 0.3.0 has no provenance route for non-transcript sources."
+            }
+          ]
+        },
+        "sha256": "87ae376c7b01777cf8b06fbacb64deb30184152c33aa2a5719f68843e17fb32a"
+      },
+      "flags": [],
+      "acceptedAt": "2026-10-08T12:34:08.661Z"
+    },
+    {
+      "mkgPackage": "0.1",
+      "tool": "workbench 0.1",
+      "contract": {
+        "specVersion": "0.3.0",
+        "context": {
+          "file": "delta-context-0.3.0.jsonld",
+          "iri": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+          "sha256": "131585c5e46f0e7db383323a072d6d68fb0ef8788bbb7b07a5a24effa95191bc"
+        }
+      },
+      "meeting": {
+        "id": "20261001T140000Z",
+        "meetingAt": "2026-10-01T10:00:00-04:00",
+        "title": "Weekly board walk",
+        "kind": "transcript"
+      },
+      "sources": [
+        {
+          "id": "S001",
+          "t": "00:00:40",
+          "speaker": "chen",
+          "speakerName": "Chen, Mei",
+          "text": "Quick one on the intake fields. Legal came back, and both forty-one and fifty-seven have to stay. So we can close out the field decision. We're dropping the other twenty-seven."
+        },
+        {
+          "id": "S002",
+          "t": "00:01:30",
+          "speaker": "nguyen",
+          "speakerName": "Nguyen, Linh",
+          "text": "Great, then step three of the prototype is unblocked on my end. I'll have the full prototype by next Wednesday."
+        },
+        {
+          "id": "S003",
+          "t": "00:02:10",
+          "speaker": "brooks",
+          "speakerName": "Brooks, Dana",
+          "text": "Accessibility review is still on for the eighth."
+        },
+        {
+          "id": "S004",
+          "t": "00:03:05",
+          "speaker": "alvarez",
+          "speakerName": "Alvarez, Sofia",
+          "text": "On the partner exchange, the firewall rule finally went in yesterday."
+        },
+        {
+          "id": "S005",
+          "t": "00:03:30",
+          "speaker": "ortiz",
+          "speakerName": "Ortiz, James",
+          "text": "Good, so the test transfer can go. I'll run it Monday."
+        },
+        {
+          "id": "S006",
+          "t": "00:04:20",
+          "speaker": "patel",
+          "speakerName": "Patel, Raj",
+          "text": "Maybe someone should look at whether we can automate the monthly exports too."
+        },
+        {
+          "id": "S007",
+          "t": "00:04:45",
+          "speaker": "alvarez",
+          "speakerName": "Alvarez, Sofia",
+          "text": "Also, new thing from their side. They want an interconnection security agreement signed before any production transfer. I'll own that, target end of October."
+        },
+        {
+          "id": "S008",
+          "t": "00:05:30",
+          "speaker": "nguyen",
+          "speakerName": "Nguyen, Linh",
+          "text": "Dashboard update, three of the five reports are rebuilt now."
+        },
+        {
+          "id": "S009",
+          "t": "00:06:00",
+          "speaker": "brooks",
+          "speakerName": "Brooks, Dana",
+          "text": "Linh, can you take the refresh schedule confirmation off Raj's plate? He's buried in the firewall work."
+        },
+        {
+          "id": "S010",
+          "t": "00:06:08",
+          "speaker": "nguyen",
+          "speakerName": "Nguyen, Linh",
+          "text": "Sure, I'll take it."
+        },
+        {
+          "id": "S011",
+          "t": "00:06:40",
+          "speaker": "chen",
+          "speakerName": "Chen, Mei",
+          "text": "Records cleanup, still nothing from the records office."
+        },
+        {
+          "id": "S012",
+          "t": "00:07:10",
+          "speaker": "brooks",
+          "speakerName": "Brooks, Dana",
+          "text": "And for the dashboard we're going to publish nightly, to match the refresh."
+        }
+      ],
+      "deltas": [
+        {
+          "project": "P1",
+          "graph": "https://example.org/mkg/data/delta/20261001T140000Z/P1",
+          "doc": {
+            "@context": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+            "@graph": [
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P1",
+                "@type": "MeetingDelta",
+                "project": "https://example.org/mkg/data/project/P1",
+                "meetingAt": "2026-10-01T10:00:00-04:00",
+                "title": "Weekly board walk",
+                "operation": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P1/op/010",
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P1/op/020",
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P1/op/030"
+                ]
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P1/op/010",
+                "@type": "Status",
+                "sequence": 10,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S001"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/310/tasking",
+                "status": "CompletedStatus",
+                "expectedPriorStatus": "OpenStatus",
+                "note": "Legal reviewed fields 41 and 57"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P1/op/020",
+                "@type": "Status",
+                "sequence": 20,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S001"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/230/tasking",
+                "status": "CompletedStatus",
+                "expectedPriorStatus": "BlockedStatus",
+                "note": "Decision closed out; fields 41 and 57 stay, other 27 dropped"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P1/op/030",
+                "@type": "Decision",
+                "sequence": 30,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S001"
+                ],
+                "about": [
+                  "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/230/tasking"
+                ],
+                "text": "Keep fields 41 and 57 and drop the other 27 unused fields"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S001",
+                "@type": "TranscriptSource",
+                "segment": "S001",
+                "offset": "00:00:40",
+                "speaker": "https://example.org/mkg/data/person/chen",
+                "quote": "Quick one on the intake fields. Legal came back, and both forty-one and fifty-seven have to stay. So we can close out the field decision. We're dropping the other twenty-seven."
+              }
+            ]
+          },
+          "sha256": "f9a9f85068533321d6e71a8cc9ef621cdfa9c93b3a05a57d9fb317af8cb99ceb"
+        },
+        {
+          "project": "P2",
+          "graph": "https://example.org/mkg/data/delta/20261001T140000Z/P2",
+          "doc": {
+            "@context": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+            "@graph": [
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2",
+                "@type": "MeetingDelta",
+                "project": "https://example.org/mkg/data/project/P2",
+                "meetingAt": "2026-10-01T10:00:00-04:00",
+                "title": "Weekly board walk",
+                "operation": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/060",
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/070",
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/090",
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/100"
+                ]
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/060",
+                "@type": "Status",
+                "sequence": 60,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S004"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/420/tasking",
+                "status": "CompletedStatus",
+                "expectedPriorStatus": "OpenStatus",
+                "note": "Firewall rule approved and went in"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/070",
+                "@type": "Status",
+                "sequence": 70,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S005"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/390/tasking",
+                "status": "OpenStatus",
+                "expectedPriorStatus": "BlockedStatus",
+                "note": "Prerequisite BL-202 completed"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/090",
+                "@type": "NewTasking",
+                "sequence": 90,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S006"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/090/tasking",
+                "project": "https://example.org/mkg/data/project/P2",
+                "code": "AI-402",
+                "label": "Look at whether monthly exports can be automated"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/100",
+                "@type": "NewTasking",
+                "sequence": 100,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S007"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/100/tasking",
+                "project": "https://example.org/mkg/data/project/P2",
+                "code": "AI-403",
+                "label": "Get interconnection security agreement signed before production transfer",
+                "assignee": "https://example.org/mkg/data/person/alvarez"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S004",
+                "@type": "TranscriptSource",
+                "segment": "S004",
+                "offset": "00:03:05",
+                "speaker": "https://example.org/mkg/data/person/alvarez",
+                "quote": "On the partner exchange, the firewall rule finally went in yesterday."
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S005",
+                "@type": "TranscriptSource",
+                "segment": "S005",
+                "offset": "00:03:30",
+                "speaker": "https://example.org/mkg/data/person/ortiz",
+                "quote": "Good, so the test transfer can go. I'll run it Monday."
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S006",
+                "@type": "TranscriptSource",
+                "segment": "S006",
+                "offset": "00:04:20",
+                "speaker": "https://example.org/mkg/data/person/patel",
+                "quote": "Maybe someone should look at whether we can automate the monthly exports too."
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S007",
+                "@type": "TranscriptSource",
+                "segment": "S007",
+                "offset": "00:04:45",
+                "speaker": "https://example.org/mkg/data/person/alvarez",
+                "quote": "Also, new thing from their side. They want an interconnection security agreement signed before any production transfer. I'll own that, target end of October."
+              }
+            ]
+          },
+          "sha256": "b3bbdd825f96a10ed54771719b9034c19fd0ab719733bfdb4d665a74400af84a"
+        },
+        {
+          "project": "P3",
+          "graph": "https://example.org/mkg/data/delta/20261001T140000Z/P3",
+          "doc": {
+            "@context": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+            "@graph": [
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P3",
+                "@type": "MeetingDelta",
+                "project": "https://example.org/mkg/data/project/P3",
+                "meetingAt": "2026-10-01T10:00:00-04:00",
+                "title": "Weekly board walk",
+                "operation": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P3/op/110",
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P3/op/140"
+                ]
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P3/op/110",
+                "@type": "ProgressNote",
+                "sequence": 110,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S008"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/440/tasking",
+                "text": "Three of the five weekly reports are rebuilt"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P3/op/140",
+                "@type": "Decision",
+                "sequence": 140,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S012"
+                ],
+                "about": [
+                  "https://example.org/mkg/data/project/P3"
+                ],
+                "text": "Publish the dashboard nightly to match the refresh schedule"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S008",
+                "@type": "TranscriptSource",
+                "segment": "S008",
+                "offset": "00:05:30",
+                "speaker": "https://example.org/mkg/data/person/nguyen",
+                "quote": "Dashboard update, three of the five reports are rebuilt now."
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S012",
+                "@type": "TranscriptSource",
+                "segment": "S012",
+                "offset": "00:07:10",
+                "speaker": "https://example.org/mkg/data/person/brooks",
+                "quote": "And for the dashboard we're going to publish nightly, to match the refresh."
+              }
+            ]
+          },
+          "sha256": "125b79bc37b2afa644ed9e6e60371fae2e91dc8aba1bc45292f5b0d2b18e66f0"
+        },
+        {
+          "project": "P4",
+          "graph": "https://example.org/mkg/data/delta/20261001T140000Z/P4",
+          "doc": {
+            "@context": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+            "@graph": [
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P4",
+                "@type": "MeetingDelta",
+                "project": "https://example.org/mkg/data/project/P4",
+                "meetingAt": "2026-10-01T10:00:00-04:00",
+                "title": "Weekly board walk",
+                "operation": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/P4/op/130"
+                ]
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/P4/op/130",
+                "@type": "ProgressNote",
+                "sequence": 130,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261001T140000Z/source/S011"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/530/tasking",
+                "text": "Still nothing from the records office regarding the updated retention schedule"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S011",
+                "@type": "TranscriptSource",
+                "segment": "S011",
+                "offset": "00:06:40",
+                "speaker": "https://example.org/mkg/data/person/chen",
+                "quote": "Records cleanup, still nothing from the records office."
+              }
+            ]
+          },
+          "sha256": "ae1e7af7974ae5c067a1137af30e80599a2f554a190bdb7d13d926f1d3fb31a8"
+        }
+      ],
+      "extension": {
+        "graph": "https://example.org/mkg/data/delta/20261001T140000Z/ext",
+        "doc": {
+          "@context": {
+            "@vocab": "https://example.org/mkg/delta-ext#",
+            "tasking": {
+              "@type": "@id"
+            },
+            "prerequisite": {
+              "@type": "@id"
+            },
+            "about": {
+              "@type": "@id"
+            },
+            "from": {
+              "@type": "@id"
+            },
+            "to": {
+              "@type": "@id"
+            },
+            "source": {
+              "@type": "@id"
+            },
+            "party": {
+              "@type": "@id"
+            },
+            "project": {
+              "@type": "@id"
+            },
+            "decision": {
+              "@type": "@id"
+            },
+            "replaces": {
+              "@type": "@id"
+            },
+            "assignee": {
+              "@type": "@id"
+            },
+            "duplicate": {
+              "@type": "@id"
+            },
+            "survivor": {
+              "@type": "@id"
+            }
+          },
+          "@graph": [
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext",
+              "@type": "ExtensionDelta",
+              "meetingAt": "2026-10-01T10:00:00-04:00",
+              "note": "Observations outside delta contract 0.3.0. Not validated by the 0.3.0 SHACL or mapped by the CONSTRUCT until the contract supports them."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/031",
+              "@type": "DecisionCode",
+              "sequence": 31,
+              "source": [
+                "https://example.org/mkg/data/delta/20261001T140000Z/source/S001"
+              ],
+              "decision": "https://example.org/mkg/data/delta/20261001T140000Z/P1/op/030",
+              "code": "D-302",
+              "contractGap": "Display code for a decision; outside the 0.3.0 delta contract."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/040",
+              "@type": "DueDate",
+              "sequence": 40,
+              "source": [
+                "https://example.org/mkg/data/delta/20261001T140000Z/source/S002"
+              ],
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/200/tasking",
+              "dueDate": "2026-10-07",
+              "duePhrase": "next Wednesday",
+              "contractGap": "Date-only deadlines are unsupported in 0.3.0 (a Temporal Instant needs a clock time)."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/050",
+              "@type": "Discussed",
+              "sequence": 50,
+              "source": [
+                "https://example.org/mkg/data/delta/20261001T140000Z/source/S003"
+              ],
+              "about": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/260/tasking",
+              "contractGap": "Contract 0.3.0 has no 'discussed, no change' observation."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/080",
+              "@type": "DueDate",
+              "sequence": 80,
+              "source": [
+                "https://example.org/mkg/data/delta/20261001T140000Z/source/S005"
+              ],
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/390/tasking",
+              "dueDate": "2026-10-05",
+              "duePhrase": "Monday",
+              "contractGap": "Date-only deadlines are unsupported in 0.3.0 (a Temporal Instant needs a clock time)."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/102",
+              "@type": "DueDate",
+              "sequence": 102,
+              "source": [
+                "https://example.org/mkg/data/delta/20261001T140000Z/source/S007"
+              ],
+              "tasking": "https://example.org/mkg/data/delta/20261001T140000Z/P2/op/100/tasking",
+              "dueDate": "2026-10-31",
+              "duePhrase": "end of October",
+              "contractGap": "Date-only deadlines are unsupported in 0.3.0 (a Temporal Instant needs a clock time)."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/120",
+              "@type": "Reassign",
+              "sequence": 120,
+              "source": [
+                "https://example.org/mkg/data/delta/20261001T140000Z/source/S009",
+                "https://example.org/mkg/data/delta/20261001T140000Z/source/S010"
+              ],
+              "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/470/tasking",
+              "from": "https://example.org/mkg/data/person/patel",
+              "to": "https://example.org/mkg/data/person/nguyen",
+              "contractGap": "Reassignment is unsupported in contract 0.3.0 (no provenance-bearing assignment assertion yet)."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/ext/op/141",
+              "@type": "DecisionCode",
+              "sequence": 141,
+              "source": [
+                "https://example.org/mkg/data/delta/20261001T140000Z/source/S012"
+              ],
+              "decision": "https://example.org/mkg/data/delta/20261001T140000Z/P3/op/140",
+              "code": "D-303",
+              "contractGap": "Display code for a decision; outside the 0.3.0 delta contract."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S001",
+              "@type": "TranscriptSource",
+              "segment": "S001",
+              "offset": "00:00:40",
+              "speaker": "https://example.org/mkg/data/person/chen",
+              "quote": "Quick one on the intake fields. Legal came back, and both forty-one and fifty-seven have to stay. So we can close out the field decision. We're dropping the other twenty-seven."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S002",
+              "@type": "TranscriptSource",
+              "segment": "S002",
+              "offset": "00:01:30",
+              "speaker": "https://example.org/mkg/data/person/nguyen",
+              "quote": "Great, then step three of the prototype is unblocked on my end. I'll have the full prototype by next Wednesday."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S003",
+              "@type": "TranscriptSource",
+              "segment": "S003",
+              "offset": "00:02:10",
+              "speaker": "https://example.org/mkg/data/person/brooks",
+              "quote": "Accessibility review is still on for the eighth."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S005",
+              "@type": "TranscriptSource",
+              "segment": "S005",
+              "offset": "00:03:30",
+              "speaker": "https://example.org/mkg/data/person/ortiz",
+              "quote": "Good, so the test transfer can go. I'll run it Monday."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S007",
+              "@type": "TranscriptSource",
+              "segment": "S007",
+              "offset": "00:04:45",
+              "speaker": "https://example.org/mkg/data/person/alvarez",
+              "quote": "Also, new thing from their side. They want an interconnection security agreement signed before any production transfer. I'll own that, target end of October."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S009",
+              "@type": "TranscriptSource",
+              "segment": "S009",
+              "offset": "00:06:00",
+              "speaker": "https://example.org/mkg/data/person/brooks",
+              "quote": "Linh, can you take the refresh schedule confirmation off Raj's plate? He's buried in the firewall work."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S010",
+              "@type": "TranscriptSource",
+              "segment": "S010",
+              "offset": "00:06:08",
+              "speaker": "https://example.org/mkg/data/person/nguyen",
+              "quote": "Sure, I'll take it."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261001T140000Z/source/S012",
+              "@type": "TranscriptSource",
+              "segment": "S012",
+              "offset": "00:07:10",
+              "speaker": "https://example.org/mkg/data/person/brooks",
+              "quote": "And for the dashboard we're going to publish nightly, to match the refresh."
+            }
+          ]
+        },
+        "sha256": "8e1dd4b05a7a549402d547bca813ffeeb59f66b81a0bbfef4c937378a663ddbe"
+      },
+      "flags": [
+        {
+          "id": "https://example.org/mkg/data/delta/20261001T140000Z/flag/001",
+          "kind": "overdue",
+          "about": "AI-303",
+          "seg": "S009",
+          "note": "AI-303 due date (2026-09-30) was prior to meeting date (2026-10-01) with no Deadline op, and remains open after reassignment."
+        }
+      ],
+      "acceptedAt": "2026-10-08T12:44:32.565Z",
+      "fileName": "mkg-meeting-2026-10-01.json",
+      "attendance": {
+        "summary": {
+          "Meeting title": "Weekly board walk",
+          "Attended participants": "7",
+          "Start time": "10/1/26, 10:00:05 AM",
+          "End time": "10/1/26, 10:34:12 AM",
+          "Meeting duration": "34m 7s"
+        },
+        "title": "Weekly board walk",
+        "start": "10/1/26, 10:00:05 AM",
+        "end": "10/1/26, 10:34:12 AM",
+        "participants": [
+          {
+            "name": "Mei Chen",
+            "join": "10/1/26, 10:00:05 AM",
+            "leave": "10/1/26, 10:34:10 AM",
+            "duration": "34m 5s",
+            "email": "mchen@example.gov",
+            "role": "Organizer"
+          },
+          {
+            "name": "Raj Patel",
+            "join": "10/1/26, 10:00:22 AM",
+            "leave": "10/1/26, 10:34:12 AM",
+            "duration": "33m 50s",
+            "email": "rpatel@example.gov",
+            "role": "Presenter"
+          },
+          {
+            "name": "Linh Nguyen",
+            "join": "10/1/26, 10:00:31 AM",
+            "leave": "10/1/26, 10:34:05 AM",
+            "duration": "33m 34s",
+            "email": "lnguyen@example.gov",
+            "role": "Presenter"
+          },
+          {
+            "name": "Dana Brooks",
+            "join": "10/1/26, 10:01:02 AM",
+            "leave": "10/1/26, 10:34:00 AM",
+            "duration": "32m 58s",
+            "email": "dbrooks@example.gov",
+            "role": "Presenter"
+          },
+          {
+            "name": "Sofia Alvarez",
+            "join": "10/1/26, 10:00:44 AM",
+            "leave": "10/1/26, 10:33:40 AM",
+            "duration": "32m 56s",
+            "email": "salvarez@example.gov",
+            "role": "Presenter"
+          },
+          {
+            "name": "James Ortiz",
+            "join": "10/1/26, 10:02:15 AM",
+            "leave": "10/1/26, 10:34:12 AM",
+            "duration": "31m 57s",
+            "email": "jortiz@example.gov",
+            "role": "Presenter"
+          },
+          {
+            "name": "Priya Shah",
+            "join": "10/1/26, 10:05:40 AM",
+            "leave": "10/1/26, 10:29:00 AM",
+            "duration": "23m 20s",
+            "email": "pshah@example.gov",
+            "role": "Presenter"
+          }
+        ]
+      }
+    },
+    {
+      "mkgPackage": "0.1",
+      "tool": "workbench 0.1",
+      "contract": {
+        "specVersion": "0.3.0",
+        "context": {
+          "file": "delta-context-0.3.0.jsonld",
+          "iri": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+          "sha256": "131585c5e46f0e7db383323a072d6d68fb0ef8788bbb7b07a5a24effa95191bc"
+        }
+      },
+      "meeting": {
+        "id": "20261008T140000Z",
+        "meetingAt": "2026-10-08T10:00:00-04:00",
+        "title": "Weekly board walk",
+        "kind": "transcript"
+      },
+      "sources": [
+        {
+          "id": "S001",
+          "t": "00:00:12",
+          "speaker": "chen",
+          "speakerName": "Chen, Mei",
+          "text": "Partner exchange first. We still need the interconnection security agreement before anything moves to production. Sofia, can you get the interconnection security agreement signed? Target stays end of October."
+        },
+        {
+          "id": "S002",
+          "t": "00:00:31",
+          "speaker": "alvarez",
+          "speakerName": "Alvarez, Sofia",
+          "text": "Yes, that's mine. End of October."
+        },
+        {
+          "id": "S003",
+          "t": "00:00:55",
+          "speaker": "ortiz",
+          "speakerName": "Ortiz, James",
+          "text": "Test transfer ran Monday with the sample file. Clean on both sides, so that one is done."
+        }
+      ],
+      "deltas": [
+        {
+          "project": "P2",
+          "graph": "https://example.org/mkg/data/delta/20261008T140000Z/P2",
+          "doc": {
+            "@context": "https://example.org/mkg/delta-context-0.3.0.jsonld",
+            "@graph": [
+              {
+                "@id": "https://example.org/mkg/data/delta/20261008T140000Z/P2",
+                "@type": "MeetingDelta",
+                "project": "https://example.org/mkg/data/project/P2",
+                "meetingAt": "2026-10-08T10:00:00-04:00",
+                "title": "Weekly board walk",
+                "operation": [
+                  "https://example.org/mkg/data/delta/20261008T140000Z/P2/op/010",
+                  "https://example.org/mkg/data/delta/20261008T140000Z/P2/op/020"
+                ]
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261008T140000Z/P2/op/010",
+                "@type": "NewTasking",
+                "sequence": 10,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261008T140000Z/source/S001",
+                  "https://example.org/mkg/data/delta/20261008T140000Z/source/S002"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20261008T140000Z/P2/op/010/tasking",
+                "project": "https://example.org/mkg/data/project/P2",
+                "code": "AI-404",
+                "label": "Get the interconnection security agreement signed",
+                "assignee": "https://example.org/mkg/data/person/alvarez"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261008T140000Z/P2/op/020",
+                "@type": "Status",
+                "sequence": 20,
+                "source": [
+                  "https://example.org/mkg/data/delta/20261008T140000Z/source/S003"
+                ],
+                "tasking": "https://example.org/mkg/data/delta/20260924T140000Z/ext/op/390/tasking",
+                "status": "CompletedStatus",
+                "expectedPriorStatus": "OpenStatus",
+                "note": "Test transfer ran clean"
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261008T140000Z/source/S001",
+                "@type": "TranscriptSource",
+                "segment": "S001",
+                "offset": "00:00:12",
+                "speaker": "https://example.org/mkg/data/person/chen",
+                "quote": "Partner exchange first. We still need the interconnection security agreement before anything moves to production. Sofia, can you get the interconnection security agreement signed? Target stays end of October."
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261008T140000Z/source/S002",
+                "@type": "TranscriptSource",
+                "segment": "S002",
+                "offset": "00:00:31",
+                "speaker": "https://example.org/mkg/data/person/alvarez",
+                "quote": "Yes, that's mine. End of October."
+              },
+              {
+                "@id": "https://example.org/mkg/data/delta/20261008T140000Z/source/S003",
+                "@type": "TranscriptSource",
+                "segment": "S003",
+                "offset": "00:00:55",
+                "speaker": "https://example.org/mkg/data/person/ortiz",
+                "quote": "Test transfer ran Monday with the sample file. Clean on both sides, so that one is done."
+              }
+            ]
+          },
+          "sha256": "03b31d6173393e8dfc3a2c8bea759475e180a2d9babf4daad559b7671b1de0a2"
+        }
+      ],
+      "extension": {
+        "graph": "https://example.org/mkg/data/delta/20261008T140000Z/ext",
+        "doc": {
+          "@context": {
+            "@vocab": "https://example.org/mkg/delta-ext#",
+            "tasking": {
+              "@type": "@id"
+            },
+            "prerequisite": {
+              "@type": "@id"
+            },
+            "about": {
+              "@type": "@id"
+            },
+            "from": {
+              "@type": "@id"
+            },
+            "to": {
+              "@type": "@id"
+            },
+            "source": {
+              "@type": "@id"
+            },
+            "party": {
+              "@type": "@id"
+            },
+            "project": {
+              "@type": "@id"
+            },
+            "decision": {
+              "@type": "@id"
+            },
+            "replaces": {
+              "@type": "@id"
+            },
+            "assignee": {
+              "@type": "@id"
+            },
+            "duplicate": {
+              "@type": "@id"
+            },
+            "survivor": {
+              "@type": "@id"
+            }
+          },
+          "@graph": [
+            {
+              "@id": "https://example.org/mkg/data/delta/20261008T140000Z/ext",
+              "@type": "ExtensionDelta",
+              "meetingAt": "2026-10-08T10:00:00-04:00",
+              "note": "Observations outside delta contract 0.3.0. Not validated by the 0.3.0 SHACL or mapped by the CONSTRUCT until the contract supports them."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261008T140000Z/ext/op/012",
+              "@type": "DueDate",
+              "sequence": 12,
+              "source": [
+                "https://example.org/mkg/data/delta/20261008T140000Z/source/S001",
+                "https://example.org/mkg/data/delta/20261008T140000Z/source/S002"
+              ],
+              "tasking": "https://example.org/mkg/data/delta/20261008T140000Z/P2/op/010/tasking",
+              "dueDate": "2026-10-31",
+              "duePhrase": "end of October",
+              "contractGap": "Date-only deadlines are unsupported in 0.3.0 (a Temporal Instant needs a clock time)."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261008T140000Z/source/S001",
+              "@type": "TranscriptSource",
+              "segment": "S001",
+              "offset": "00:00:12",
+              "speaker": "https://example.org/mkg/data/person/chen",
+              "quote": "Partner exchange first. We still need the interconnection security agreement before anything moves to production. Sofia, can you get the interconnection security agreement signed? Target stays end of October."
+            },
+            {
+              "@id": "https://example.org/mkg/data/delta/20261008T140000Z/source/S002",
+              "@type": "TranscriptSource",
+              "segment": "S002",
+              "offset": "00:00:31",
+              "speaker": "https://example.org/mkg/data/person/alvarez",
+              "quote": "Yes, that's mine. End of October."
+            }
+          ]
+        },
+        "sha256": "72c24bad0b02374224d0a3372ca963aaebfb21f2dcf70fbf77e9db3c88e87cb3"
+      },
+      "flags": [],
+      "acceptedAt": "2026-10-08T12:51:01.754Z",
+      "fileName": "mkg-meeting-2026-10-08.json"
+    }
+  ]
+}

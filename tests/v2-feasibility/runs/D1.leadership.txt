@@ -1,0 +1,75 @@
+Team,
+
+The Harbor Point reopening kickoff on Monday, Oct 19, 2026 convened. On Harbor Point reopening: Tom Lindqvist took on 4 new actions (AI-101, AI-104, AI-112, AI-117); Luis Delgado took on 3 new actions (AI-102, AI-113, AI-118); Pete Kowalski took on 4 new actions (AI-103, AI-107, AI-115, AI-121); Rana Haddad took on 3 new actions (AI-105, AI-106, AI-108); Abena Mensah took on 5 new actions (AI-109, AI-111, AI-114, AI-116, AI-120); Ken Sato took on 1 new action (AI-110); Grace Okafor took on 1 new action (AI-119). Decided: Use compliant tactile room identification signs and vinyl wayfinding banners.; Open to staff the week of January eleventh if inspection requirements are met, and hold the public open house Saturday, January sixteenth.; Do not announce public opening dates until the fire inspection is booked; notify the neighborhood association before the public announcement.; Give front desk staff access to the front door and their offices only; restrict storage rooms to program leads.. Also reported: Furniture delivery remains scheduled for December seventh, but the stacking chairs and folding tables may slip.; Items charged to this year's budget must be invoiced by December fifteenth or move to next year's budget.; Landscaping will wait until spring, so the building front will look bare at opening.; The state approved the elevator certification, so the elevator is cleared.; The kitchen hood vent is on order and is expected by mid December.; The punch-list walkthrough is scheduled for November twelfth at nine in the morning.; The second furniture installment is due on delivery, so no payment is due before delivery occurs.. Still open: The team still needs to decide whether the existing lobby mural will remain or be painted over.; The open-house volunteer point of contact remains unassigned while Rana checks with her director.. Next up: “Call the fire marshal's office and seek a tentative inspection date.” (AI-101), Tom Lindqvist, “this week”; “Obtain written supplier confirmation of the furniture delivery date or confirmation that the supplier cannot commit.” (AI-102), Luis Delgado, “by Friday”; “Get the staff list from HR and set up the keycard access list in the IT-managed system.” (AI-103), Pete Kowalski; “Run RoomLoop training sessions for front desk staff.” (AI-106), Rana Haddad, “the first two weeks of December”; “Give Rana a RoomLoop walkthrough and schedule it on her calendar.” (AI-107), Pete Kowalski, “next week”; “Get two quotes to rent 120 chairs as an open-house backup.” (AI-108), Rana Haddad, “before our next meeting”; “Obtain a revised quote for tactile room signs and vinyl wayfinding signage.” (AI-109), Abena Mensah; “Assess whether contingency funds can cover the signage overage.” (AI-110), Ken Sato, “by the end of next week”; “Test a cellular hotspot and RoomLoop at the new building's front desk during the walkthrough with Rana.” (AI-115), Pete Kowalski; “Draft the open-house press release and flyer and send them to Grace for review.” (AI-116), Abena Mensah, “by November sixth”; “Call the fire marshal's office after the meeting.” (AI-117), Tom Lindqvist, “today”; “Send the invite for the punch-list walkthrough.” (AI-118), Luis Delgado, “today”; “Configure keycard access according to the approved access levels.” (AI-121), Pete Kowalski.
+
+Harbor Point reopening: new work: “Call the fire marshal's office and seek a tentative inspection date.” (Tom Lindqvist), and new work: “Obtain written supplier confirmation of the furniture delivery date or confirmation that the supplier cannot commit.” (Luis Delgado), and new work: “Get the staff list from HR and set up the keycard access list in the IT-managed system.” (Pete Kowalski), and new work: “Send Pete the staff names already collected from the old building.” (Tom Lindqvist), and new work: “Draft the winter program schedule but do not send it to instructors until an inspection date is set.” (Rana Haddad), and new work: “Run RoomLoop training sessions for front desk staff.” (Rana Haddad), and new work: “Give Rana a RoomLoop walkthrough and schedule it on her calendar.” (Pete Kowalski), and new work: “Get two quotes to rent 120 chairs as an open-house backup.” (Rana Haddad), and new work: “Obtain a revised quote for tactile room signs and vinyl wayfinding signage.” (Abena Mensah), and new work: “Assess whether contingency funds can cover the signage overage.” (Ken Sato), and new work: “Update the center website text now and plan new building photos after cleaning.” (Abena Mensah), and new work: “Ask the architect what the drawings specify for the lobby mural.” (Tom Lindqvist), and new work: “Check whether the community-room hearing loop has been installed.” (Luis Delgado), and new work: “Create a polished pickup map after Rana provides the needed information.” (Abena Mensah), and new work: “Test a cellular hotspot and RoomLoop at the new building's front desk during the walkthrough with Rana.” (Pete Kowalski), and new work: “Draft the open-house press release and flyer and send them to Grace for review.” (Abena Mensah), and new work: “Call the fire marshal's office after the meeting.” (Tom Lindqvist), and new work: “Send the invite for the punch-list walkthrough.” (Luis Delgado), and new work: “Take the mural decision to the director after receiving the drawings information.” (Grace Okafor), and new work: “Include parent photo-release forms with the program communications.” (Abena Mensah), and new work: “Configure keycard access according to the approved access levels.” (Pete Kowalski).
+Key developments:
+
+Harbor Point reopening: Furniture delivery remains scheduled for December seventh, but the stacking chairs and folding tables may slip.
+Harbor Point reopening: Items charged to this year's budget must be invoiced by December fifteenth or move to next year's budget.
+Harbor Point reopening: Landscaping will wait until spring, so the building front will look bare at opening.
+Harbor Point reopening: The state approved the elevator certification, so the elevator is cleared.
+Harbor Point reopening: The kitchen hood vent is on order and is expected by mid December.
+Harbor Point reopening: The punch-list walkthrough is scheduled for November twelfth at nine in the morning.
+Harbor Point reopening: The second furniture installment is due on delivery, so no payment is due before delivery occurs.
+
+Decisions
+
+Harbor Point reopening: Use compliant tactile room identification signs and vinyl wayfinding banners.
+Harbor Point reopening: Open to staff the week of January eleventh if inspection requirements are met, and hold the public open house Saturday, January sixteenth.
+Harbor Point reopening: Do not announce public opening dates until the fire inspection is booked; notify the neighborhood association before the public announcement.
+Harbor Point reopening: Give front desk staff access to the front door and their offices only; restrict storage rooms to program leads.
+
+Management attention/risks
+
+Harbor Point reopening: Fire inspection backlog and a failed inspection could delay the certificate of occupancy and January opening plan.
+Harbor Point reopening: Fiber installation is not expected before mid December and may delay RoomLoop training and booking operations.
+
+Near-term next steps
+
+Harbor Point reopening: this week: “Call the fire marshal's office and seek a tentative inspection date.” (Tom Lindqvist)
+Harbor Point reopening: by Friday: “Obtain written supplier confirmation of the furniture delivery date or confirmation that the supplier cannot commit.” (Luis Delgado)
+Harbor Point reopening: the first two weeks of December: “Run RoomLoop training sessions for front desk staff.” (Rana Haddad)
+Harbor Point reopening: next week: “Give Rana a RoomLoop walkthrough and schedule it on her calendar.” (Pete Kowalski)
+Harbor Point reopening: before our next meeting: “Get two quotes to rent 120 chairs as an open-house backup.” (Rana Haddad)
+Harbor Point reopening: by the end of next week: “Assess whether contingency funds can cover the signage overage.” (Ken Sato)
+Harbor Point reopening: early December: “Update the center website text now and plan new building photos after cleaning.” (Abena Mensah)
+Harbor Point reopening: by November sixth: “Draft the open-house press release and flyer and send them to Grace for review.” (Abena Mensah)
+Harbor Point reopening: today: “Call the fire marshal's office after the meeting.” (Tom Lindqvist)
+Harbor Point reopening: today: “Send the invite for the punch-list walkthrough.” (Luis Delgado)
+Harbor Point reopening: new: “Get the staff list from HR and set up the keycard access list in the IT-managed system.” (Pete Kowalski)
+Harbor Point reopening: new: “Send Pete the staff names already collected from the old building.” (Tom Lindqvist)
+Harbor Point reopening: new: “Draft the winter program schedule but do not send it to instructors until an inspection date is set.” (Rana Haddad)
+Harbor Point reopening: new: “Obtain a revised quote for tactile room signs and vinyl wayfinding signage.” (Abena Mensah)
+Harbor Point reopening: new: “Ask the architect what the drawings specify for the lobby mural.” (Tom Lindqvist)
+Harbor Point reopening: new: “Check whether the community-room hearing loop has been installed.” (Luis Delgado)
+Harbor Point reopening: new: “Create a polished pickup map after Rana provides the needed information.” (Abena Mensah)
+Harbor Point reopening: new: “Test a cellular hotspot and RoomLoop at the new building's front desk during the walkthrough with Rana.” (Pete Kowalski)
+Harbor Point reopening: new: “Take the mural decision to the director after receiving the drawings information.” (Grace Okafor)
+Harbor Point reopening: new: “Include parent photo-release forms with the program communications.” (Abena Mensah)
+Harbor Point reopening: new: “Configure keycard access according to the approved access levels.” (Pete Kowalski)
+
+Project task status and accountable owners
+
+Project	Current/Overdue work	Status	Owner
+Harbor Point reopening	AI-101 Call the fire marshal's office and seek a tentative inspection date.	Open, due “this week”	Tom Lindqvist
+Harbor Point reopening	AI-102 Obtain written supplier confirmation of the furniture delivery date or confirmation that the supplier cannot commit.	Open, due “by Friday”	Luis Delgado
+Harbor Point reopening	AI-103 Get the staff list from HR and set up the keycard access list in the IT-managed system.	Open	Pete Kowalski
+Harbor Point reopening	AI-104 Send Pete the staff names already collected from the old building.	Open	Tom Lindqvist
+Harbor Point reopening	AI-105 Draft the winter program schedule but do not send it to instructors until an inspection date is set.	Open	Rana Haddad
+Harbor Point reopening	AI-106 Run RoomLoop training sessions for front desk staff.	Open, due “the first two weeks of December”	Rana Haddad
+Harbor Point reopening	AI-107 Give Rana a RoomLoop walkthrough and schedule it on her calendar.	Open, due “next week”	Pete Kowalski
+Harbor Point reopening	AI-108 Get two quotes to rent 120 chairs as an open-house backup.	Open, due “before our next meeting”	Rana Haddad
+Harbor Point reopening	AI-109 Obtain a revised quote for tactile room signs and vinyl wayfinding signage.	Open	Abena Mensah
+Harbor Point reopening	AI-110 Assess whether contingency funds can cover the signage overage.	Open, due “by the end of next week”	Ken Sato
+Harbor Point reopening	AI-111 Update the center website text now and plan new building photos after cleaning.	Open, due “early December”	Abena Mensah
+Harbor Point reopening	AI-112 Ask the architect what the drawings specify for the lobby mural.	Open	Tom Lindqvist
+Harbor Point reopening	AI-113 Check whether the community-room hearing loop has been installed.	Open	Luis Delgado
+Harbor Point reopening	AI-114 Create a polished pickup map after Rana provides the needed information.	Open	Abena Mensah
+Harbor Point reopening	AI-115 Test a cellular hotspot and RoomLoop at the new building's front desk during the walkthrough with Rana.	Open	Pete Kowalski
+Harbor Point reopening	AI-116 Draft the open-house press release and flyer and send them to Grace for review.	Open, due “by November sixth”	Abena Mensah
+Harbor Point reopening	AI-117 Call the fire marshal's office after the meeting.	Open, due “today”	Tom Lindqvist
+Harbor Point reopening	AI-118 Send the invite for the punch-list walkthrough.	Open, due “today”	Luis Delgado
+Harbor Point reopening	AI-119 Take the mural decision to the director after receiving the drawings information.	Open	Grace Okafor
+Harbor Point reopening	AI-120 Include parent photo-release forms with the program communications.	Open	Abena Mensah
+Harbor Point reopening	AI-121 Configure keycard access according to the approved access levels.	Open	Pete Kowalski

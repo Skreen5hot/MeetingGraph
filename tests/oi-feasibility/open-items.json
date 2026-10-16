@@ -1,0 +1,79 @@
+[
+ {
+  "id": "20261001T140000Z|S039|ownership|AI-403",
+  "kind": "owner",
+  "target": "AI-403",
+  "question": "Who owns AI-403 \"Verify staging-area load suitability for heavy equipment and file cases, identify an alternate staging area if needed, and confirm the appropriate location\"?",
+  "needed": "One person who accepts it."
+ },
+ {
+  "id": "20261001T140000Z|S013|ambiguous_reference|P2",
+  "kind": "who",
+  "target": "P2",
+  "question": "Who is \"Morgan\" (addressed directly about observers in the Oct 1 meeting)?",
+  "needed": "Their full name and organization, or the person in PEOPLE they are."
+ },
+ {
+  "id": "20261001T140000Z|S048|ambiguous_reference|P2",
+  "kind": "who",
+  "target": "P2",
+  "question": "Who is \"Priya\", who was to be added to the invitation?",
+  "needed": "Their full name and organization, or the person in PEOPLE they are."
+ },
+ {
+  "id": "20261001T140000Z|S050|open_question|P2",
+  "kind": "question",
+  "target": "P2",
+  "question": "Were the invitation updates sent, and did James receive his?",
+  "needed": "Yes or no for \"sent\" and for \"received\"."
+ },
+ {
+  "id": "20261001T140000Z|S007|open_question|AI-206",
+  "kind": "question",
+  "target": "AI-206",
+  "question": "Will the monitoring equipment be mounted on the temporary workstation stand, or placed on separate tables?",
+  "needed": "The decision."
+ },
+ {
+  "id": "20261001T140000Z|S004|open_question|P2",
+  "kind": "question",
+  "target": "P2",
+  "question": "What is the final observer list, and how will observers be managed and receive the schedule and briefings?",
+  "needed": "The list, or who provides it, and the process."
+ },
+ {
+  "id": "20261001T140000Z|S038|open_question|P2",
+  "kind": "question",
+  "target": "P2",
+  "question": "Is connectivity confirmed (normal connection capability plus a backup option)?",
+  "needed": "Yes or no, or what is still missing."
+ },
+ {
+  "id": "20261001T140000Z|S014|open_question|AI-203",
+  "kind": "question",
+  "target": "AI-203",
+  "question": "What is the confirmed transfer period (May 18–22 or May 18–28), in which year, and which days apply to hands-on staff versus observers?",
+  "needed": "Start and end dates with the year; which days apply to whom."
+ },
+ {
+  "id": "20261001T140000Z|S014|open_question|AI-207",
+  "kind": "question",
+  "target": "AI-207",
+  "question": "What is the confirmed transfer period (May 18–22 or May 18–28), in which year, and which days apply to hands-on staff versus observers?",
+  "needed": "Start and end dates with the year; which days apply to whom."
+ },
+ {
+  "id": "20261001T140000Z|S014|implied_change|AI-203",
+  "kind": "dates",
+  "target": "AI-203",
+  "question": "Does the transfer schedule change the due date of AI-203 \"Run a test transfer with a sample file\" (now 2026-10-01)? If so, to what date?",
+  "needed": "One full date with the year, or \"no change\"."
+ },
+ {
+  "id": "20261001T140000Z|S014|implied_change|AI-207",
+  "kind": "dates",
+  "target": "AI-207",
+  "question": "Does the transfer schedule change the due date of AI-207 \"Finalize transfer travel and arrival plan\" (now none)? If so, to what date?",
+  "needed": "One full date with the year, or \"no change\"."
+ }
+]

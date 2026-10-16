@@ -1,0 +1,796 @@
+
+Part A: Matches
+
+Mention (as spoken)	Resolved to	Confidence
+partner transfer	P2	high
+Morgan	NEW-P1, Morgan Reyes	high
+staging-area load verification	AI-403	high
+monitoring equipment	AI-206	high
+invitation	20261001T140000Z|S050|open_question|P2	high
+transfer dates	AI-203, AI-207	high
+travel	AI-207	high
+loading dock access	NEW-1	high
+badge pickup location	NEW-2	high
+connection route / route item	AI-402	high
+summaries from the partner session	AI-406	high
+slide deck	AI-404	high
+hardware list	NEW-4	high
+
+Part B: Delta
+
+JSON
+ Copy
+{
+  "context": "MKG1|transcript|20261008T140000Z|57b4238c",
+  "ops": [
+    {
+      "op": "NewParty",
+      "ref": "NEW-P1",
+      "kind": "person",
+      "name": "Morgan Reyes",
+      "src": [
+        {
+          "seg": "S002",
+          "quote": "I'm Morgan Reyes. I lead the partner network team"
+        }
+      ]
+    },
+    {
+      "op": "Reassign",
+      "tasking": "AI-403",
+      "from": null,
+      "to": "alvarez",
+      "src": [
+        {
+          "seg": "S004",
+          "quote": "Sofia, can you own the staging-area load verification, including finding an alternate area"
+        },
+        {
+          "seg": "S005",
+          "quote": "Yes, I'll take the staging-area load check and find an alternate area if we need one."
+        }
+      ]
+    },
+    {
+      "op": "Decision",
+      "project": "P2",
+      "about": [
+        "AI-206"
+      ],
+      "text": "Keep the monitoring equipment on separate tables rather than the temporary workstation stand.",
+      "replaces": null,
+      "src": [
+        {
+          "seg": "S007",
+          "quote": "We've decided to keep the monitoring equipment on separate tables, not on the temporary workstation stand."
+        }
+      ]
+    },
+    {
+      "op": "ProgressNote",
+      "tasking": "AI-203",
+      "text": "The transfer period is tentatively the eighteenth through the twenty-second, but the year remains unconfirmed with the partner.",
+      "src": [
+        {
+          "seg": "S012",
+          "quote": "It's probably the eighteenth through the twenty-second, but we're still confirming the year with the partner"
+        }
+      ]
+    },
+    {
+      "op": "ProgressNote",
+      "tasking": "AI-207",
+      "text": "Travel will be held until the transfer period is settled.",
+      "src": [
+        {
+          "seg": "S013",
+          "quote": "We'll hold off on travel until that's settled."
+        }
+      ]
+    },
+    {
+      "op": "NewTasking",
+      "ref": "NEW-1",
+      "project": "P2",
+      "label": "Check partner-site loading dock access and hours",
+      "assignee": "chen",
+      "dueDate": null,
+      "duePhrase": null,
+      "src": [
+        {
+          "seg": "S014",
+          "quote": "I'll own checking the loading dock access at the partner site. The dock hours may be limited."
+        },
+        {
+          "seg": "S016",
+          "quote": "the dock is where the truck unloads. The staging area is inside."
+        }
+      ]
+    },
+    {
+      "op": "NewTasking",
+      "ref": "NEW-2",
+      "project": "P2",
+      "label": "Send badge pickup location and office hours to James",
+      "assignee": "NEW-P1",
+      "dueDate": "2026-10-09",
+      "duePhrase": "by Friday",
+      "src": [
+        {
+          "seg": "S017",
+          "quote": "I'll send the badge pickup location to James by Friday."
+        },
+        {
+          "seg": "S018",
+          "quote": "Please include the hours for the badge office too."
+        },
+        {
+          "seg": "S019",
+          "quote": "Will do."
+        }
+      ]
+    },
+    {
+      "op": "Status",
+      "tasking": "AI-402",
+      "status": "completed",
+      "note": "The route was checked against transfer requirements and confirmed suitable.",
+      "src": [
+        {
+          "seg": "S020",
+          "quote": "I've checked it against the transfer requirements and it is suitable."
+        },
+        {
+          "seg": "S022",
+          "quote": "Yes, that one is complete."
+        }
+      ]
+    },
+    {
+      "op": "NewTasking",
+      "ref": "NEW-3",
+      "project": "P2",
+      "label": "Add portable power unit to the shipping list",
+      "assignee": "chen",
+      "dueDate": "2026-10-08",
+      "duePhrase": "today",
+      "src": [
+        {
+          "seg": "S023",
+          "quote": "Mei, can you add it to the shipping list?"
+        },
+        {
+          "seg": "S024",
+          "quote": "Yes, I'll add the portable power unit to the shipping list today."
+        }
+      ]
+    },
+    {
+      "op": "Status",
+      "tasking": "AI-406",
+      "status": "completed",
+      "note": "Sofia reported sending the partner-session summaries on Monday.",
+      "src": [
+        {
+          "seg": "S025",
+          "quote": "I sent the summaries from the partner session on Monday, so that one is done as well."
+        }
+      ]
+    },
+    {
+      "op": "ProgressNote",
+      "tasking": "AI-404",
+      "text": "The slide deck needs one additional location photo; Sofia committed to send it by Wednesday.",
+      "src": [
+        {
+          "seg": "S027",
+          "quote": "The slide deck still needs one more location photo. I'll send it by Wednesday."
+        }
+      ]
+    },
+    {
+      "op": "NewTasking",
+      "ref": "NEW-4",
+      "project": "P2",
+      "label": "Send hardware list to partner team",
+      "assignee": "ortiz",
+      "dueDate": null,
+      "duePhrase": null,
+      "src": [
+        {
+          "seg": "S028",
+          "quote": "Will your team need anything from us before we arrive?"
+        },
+        {
+          "seg": "S029",
+          "quote": "Just the hardware list. If you can send that a week before you arrive"
+        },
+        {
+          "seg": "S030",
+          "quote": "I can do that."
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "kind": "overdue",
+      "about": [
+        "AI-203"
+      ],
+      "src": [
+        "S012"
+      ],
+      "note": "AI-203 remains incomplete after its 2026-10-01 due date; the tentative transfer period has no confirmed year."
+    },
+    {
+      "kind": "implied_change",
+      "about": [
+        "AI-404"
+      ],
+      "src": [
+        "S027"
+      ],
+      "note": "Sofia plans to send the slide deck by Wednesday, 2026-10-14; this is an implied schedule change, not an explicit deadline change."
+    },
+    {
+      "kind": "overdue",
+      "about": [
+        "AI-404"
+      ],
+      "src": [
+        "S027"
+      ],
+      "note": "AI-404 remains incomplete after its 2026-10-01 due date."
+    }
+  ],
+  "coveredProjects": [
+    "P2"
+  ],
+  "segments": [
+    {
+      "seg": "S001",
+      "dispositions": [
+        {
+          "kind": "context_only",
+          "about": [
+            "P2"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S002",
+      "dispositions": [
+        {
+          "kind": "administrative",
+          "about": [
+            "NEW-P1"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S003",
+      "dispositions": [
+        {
+          "kind": "administrative",
+          "about": [
+            "NEW-P1"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S004",
+      "dispositions": [
+        {
+          "kind": "discussion_of_register_item",
+          "about": [
+            "AI-403"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S005",
+      "dispositions": [
+        {
+          "kind": "commitment",
+          "about": [
+            "AI-403"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S006",
+      "dispositions": [
+        {
+          "kind": "context_only",
+          "about": [
+            "AI-206"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S007",
+      "dispositions": [
+        {
+          "kind": "decision",
+          "about": [
+            "AI-206"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S008",
+      "dispositions": [
+        {
+          "kind": "discussion_of_register_item",
+          "about": [
+            "AI-206"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S009",
+      "dispositions": [
+        {
+          "kind": "open_question",
+          "about": [
+            "P2"
+          ],
+          "note": "Answered in S010; it updates the earlier open item only."
+        }
+      ]
+    },
+    {
+      "seg": "S010",
+      "dispositions": [
+        {
+          "kind": "status_update",
+          "about": [
+            "P2"
+          ],
+          "note": "Provides the answer to the earlier invitation-receipt open item."
+        }
+      ]
+    },
+    {
+      "seg": "S011",
+      "dispositions": [
+        {
+          "kind": "open_question",
+          "about": [
+            "AI-203",
+            "AI-207"
+          ],
+          "note": "Answered partially in S012."
+        }
+      ]
+    },
+    {
+      "seg": "S012",
+      "dispositions": [
+        {
+          "kind": "status_update",
+          "about": [
+            "AI-203",
+            "AI-207"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S013",
+      "dispositions": [
+        {
+          "kind": "status_update",
+          "about": [
+            "AI-207"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S014",
+      "dispositions": [
+        {
+          "kind": "commitment",
+          "about": [
+            "NEW-1"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S015",
+      "dispositions": [
+        {
+          "kind": "discussion_of_register_item",
+          "about": [
+            "AI-403",
+            "NEW-1"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S016",
+      "dispositions": [
+        {
+          "kind": "discussion_of_register_item",
+          "about": [
+            "AI-403",
+            "NEW-1"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S017",
+      "dispositions": [
+        {
+          "kind": "status_update",
+          "about": null,
+          "note": "Badge requests were reported as submitted; no existing register item matches that status."
+        },
+        {
+          "kind": "commitment",
+          "about": [
+            "NEW-2"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S018",
+      "dispositions": [
+        {
+          "kind": "open_question",
+          "about": [
+            "NEW-2"
+          ],
+          "note": "Accepted in S019."
+        }
+      ]
+    },
+    {
+      "seg": "S019",
+      "dispositions": [
+        {
+          "kind": "commitment",
+          "about": [
+            "NEW-2"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S020",
+      "dispositions": [
+        {
+          "kind": "status_update",
+          "about": [
+            "AI-402"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S021",
+      "dispositions": [
+        {
+          "kind": "open_question",
+          "about": [
+            "AI-402"
+          ],
+          "note": "Answered in S022."
+        }
+      ]
+    },
+    {
+      "seg": "S022",
+      "dispositions": [
+        {
+          "kind": "status_update",
+          "about": [
+            "AI-402"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S023",
+      "dispositions": [
+        {
+          "kind": "open_question",
+          "about": [
+            "NEW-3"
+          ],
+          "note": "Accepted in S024."
+        }
+      ]
+    },
+    {
+      "seg": "S024",
+      "dispositions": [
+        {
+          "kind": "commitment",
+          "about": [
+            "NEW-3"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S025",
+      "dispositions": [
+        {
+          "kind": "status_update",
+          "about": [
+            "AI-406"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S026",
+      "dispositions": [
+        {
+          "kind": "open_question",
+          "about": [
+            "AI-404"
+          ],
+          "note": "Answered in S027."
+        }
+      ]
+    },
+    {
+      "seg": "S027",
+      "dispositions": [
+        {
+          "kind": "commitment",
+          "about": [
+            "AI-404"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S028",
+      "dispositions": [
+        {
+          "kind": "open_question",
+          "about": [
+            "NEW-4"
+          ],
+          "note": "Answered and accepted in S029-S030."
+        }
+      ]
+    },
+    {
+      "seg": "S029",
+      "dispositions": [
+        {
+          "kind": "discussion_of_register_item",
+          "about": [
+            "NEW-4"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S030",
+      "dispositions": [
+        {
+          "kind": "commitment",
+          "about": [
+            "NEW-4"
+          ]
+        }
+      ]
+    },
+    {
+      "seg": "S031",
+      "dispositions": [
+        {
+          "kind": "administrative",
+          "about": null
+        }
+      ]
+    },
+    {
+      "seg": "S032",
+      "dispositions": [
+        {
+          "kind": "status_update",
+          "about": null,
+          "note": "The debrief room booking is logistical context and does not match a register item."
+        }
+      ]
+    },
+    {
+      "seg": "S033",
+      "dispositions": [
+        {
+          "kind": "administrative",
+          "about": null
+        }
+      ]
+    }
+  ],
+  "register": [
+    {
+      "id": "AI-201",
+      "coverage": "not_discussed"
+    },
+    {
+      "id": "AI-202",
+      "coverage": "not_discussed"
+    },
+    {
+      "id": "AI-203",
+      "coverage": "updated",
+      "segs": [
+        "S011",
+        "S012"
+      ],
+      "note": "The transfer period was discussed but remains tentative and lacks a confirmed year."
+    },
+    {
+      "id": "AI-204",
+      "coverage": "not_discussed"
+    },
+    {
+      "id": "AI-205",
+      "coverage": "not_discussed"
+    },
+    {
+      "id": "AI-206",
+      "coverage": "updated",
+      "segs": [
+        "S006",
+        "S007",
+        "S008"
+      ],
+      "note": "The equipment placement was decided."
+    },
+    {
+      "id": "AI-207",
+      "coverage": "updated",
+      "segs": [
+        "S011",
+        "S012",
+        "S013"
+      ],
+      "note": "Travel is on hold pending confirmation of the transfer period."
+    },
+    {
+      "id": "AI-402",
+      "coverage": "updated",
+      "segs": [
+        "S020",
+        "S021",
+        "S022"
+      ],
+      "note": "The connection and entry route was confirmed suitable and completed."
+    },
+    {
+      "id": "AI-403",
+      "coverage": "updated",
+      "segs": [
+        "S004",
+        "S005",
+        "S015",
+        "S016"
+      ],
+      "note": "Sofia accepted ownership; the loading dock check is distinct from the staging-area verification."
+    },
+    {
+      "id": "AI-404",
+      "coverage": "updated",
+      "segs": [
+        "S026",
+        "S027"
+      ],
+      "note": "The slide deck remains pending one location photo; Sofia committed to send it by Wednesday."
+    },
+    {
+      "id": "AI-405",
+      "coverage": "not_discussed"
+    },
+    {
+      "id": "AI-406",
+      "coverage": "updated",
+      "segs": [
+        "S025"
+      ],
+      "note": "Sofia reported the partner-session summaries were sent and complete."
+    },
+    {
+      "id": "BL-202",
+      "coverage": "not_discussed"
+    }
+  ],
+  "answers": [
+    {
+      "item": "20261001T140000Z|S039|ownership|AI-403",
+      "seg": "S005",
+      "quote": "Yes, I'll take the staging-area load check and find an alternate area if we need one.",
+      "answer": "Sofia Alvarez accepted ownership of the staging-area verification and alternate-area contingency.",
+      "status": "answered"
+    },
+    {
+      "item": "20261001T140000Z|S013|ambiguous_reference|P2",
+      "seg": "S002",
+      "quote": "I'm Morgan Reyes. I lead the partner network team",
+      "answer": "Morgan is Morgan Reyes of the partner network team.",
+      "status": "answered"
+    },
+    {
+      "item": "20261001T140000Z|S050|open_question|P2",
+      "seg": "S010",
+      "quote": "Yes, I got the invitation, and Raj got his as well.",
+      "answer": "Yes, James received the invitation update.",
+      "status": "answered"
+    },
+    {
+      "item": "20261001T140000Z|S007|open_question|AI-206",
+      "seg": "S007",
+      "quote": "We've decided to keep the monitoring equipment on separate tables",
+      "answer": "The monitoring equipment will be placed on separate tables.",
+      "status": "answered"
+    },
+    {
+      "item": "20261001T140000Z|S014|open_question|AI-203",
+      "seg": "S012",
+      "quote": "It's probably the eighteenth through the twenty-second, but we're still confirming the year",
+      "answer": "The tentative period is the eighteenth through the twenty-second, but the year is still unconfirmed.",
+      "status": "partial"
+    },
+    {
+      "item": "20261001T140000Z|S014|open_question|AI-207",
+      "seg": "S012",
+      "quote": "It's probably the eighteenth through the twenty-second, but we're still confirming the year",
+      "answer": "The tentative period is the eighteenth through the twenty-second, but the year is still unconfirmed.",
+      "status": "partial"
+    }
+  ],
+  "selfReview": {
+    "newVsExisting": [
+      {
+        "ref": "NEW-1",
+        "nearest": "AI-204",
+        "whyNew": "Checking loading dock access and hours is a separate verification from coordinating site access and staging arrangements."
+      },
+      {
+        "ref": "NEW-2",
+        "nearest": "AI-204",
+        "whyNew": "Sending badge pickup details and office hours is a distinct deliverable from coordinating partner-site access and staging."
+      },
+      {
+        "ref": "NEW-3",
+        "nearest": null,
+        "whyNew": "No active tasking covers adding the portable power unit to the shipping list."
+      },
+      {
+        "ref": "NEW-4",
+        "nearest": "AI-203",
+        "whyNew": "Sending the hardware list is a separate pre-arrival deliverable, not the test transfer itself."
+      }
+    ]
+  }
+}
+
+
+Part C: Questions for the reviewer
+
+AI-203 is overdue based on its 2026-10-01 due date. Should its schedule be updated once the transfer year and dates are confirmed?
+Should AI-404's planned Wednesday, October 14, 2026 slide-deck delivery be recorded as a revised deadline?
+AI-404 is overdue based on its 2026-10-01 due date. Should its deadline be formally revised?
+
