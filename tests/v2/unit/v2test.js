@@ -881,6 +881,13 @@ async function section(name, fn) { try { await fn(); } catch (e) { ok(name + ' (
      fb.derived.closedProjects.some(c => c.code === 'LB') && !fa.packages.some(p => (p.projects || []).some(x => x.code === 'LB')), [fma.reply.summary]);
   const listed = w => { const d = (w.derived || {}).packages || {}; return w.packages.every(p => (d.inUse || []).includes(p.id) || (d.boardDecisions || []).includes(p.id)) && !(d.superseded || [1]).length && !(d.conflicts || [1]).length; };
   ok('t54e in a shared file every package is listed in derived (in use, or a board decision counted), and nothing is superseded or in conflict', listed(fa) && listed(fb) && fa.packages.length > 0);
+  // AT-I15 (Dossier Studio spec v0.3.3): an owner from before the range who is not in the shared register.
+  const regNames = w => ((((w.derived || {}).people || {}).people) || []).map(p => p.name);
+  const banners = w => (((w.derived || {}).threads) || []).find(t => t.what === 'Order the opening banners') || {};
+  const fromOf = (w, nm) => (((((w.derived || {}).people || {}).people) || []).find(p => p.name === nm) || { labels: [] }).labels.map(l => l.from);
+  ok('t54f a thread owner from before the range is kept in derived but is not in the shared register (shared-HP); with the spreadsheet start shared, the owner is in it (shared-HP-LB)',
+     banners(fa).owner === 'Dana Brooks' && !regNames(fa).includes('Dana Brooks') && banners(fb).owner === 'Dana Brooks' && fromOf(fb, 'Dana Brooks').includes('spreadsheet') &&
+     !JSON.stringify(fa).includes('dana.brooks@'), [banners(fa).owner, regNames(fa)]);
   const fmissing = [];
   for (const [f, w] of Object.entries(built)) {
     for (const [k, sec] of [['meeting', 'meeting'], ['seed', 'seed'], ['board', 'board']]) { const d = defined(sec), q = new Set(); w.packages.filter(p => p.kind === k).forEach(p => paths(p, '', q)); for (const x of q) if (!d.has(x)) fmissing.push(f + ' ' + sec + ': ' + x); }

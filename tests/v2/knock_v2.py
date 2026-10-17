@@ -223,6 +223,7 @@ KNOCKS = [  # (name, module, old, new, the check that must fail)
     ('fixtures: the save time format changes', 'store.js', "return m ? m[1] + (m[2] || '').padEnd(3, '0').slice(0, 3) :", "return m ? m[1] + (m[2] || '').padEnd(4, '0').slice(0, 4) :", 't54a'),
     ('sharing: board decisions not listed in derived', 'export.js', "boardDecisions: d.packages.boardDecisions.filter(id => kept.has(id)) };", "boardDecisions: [] };", 't54e'),
     ('sharing: statements of to-check items kept', 'export.js', "items.filter(it => !it.toCheck).map(it => it.seg)", "items.map(it => it.seg)", 't54c'),
+    ('sharing: the register covers the whole workspace', 'export.js', "  d.people = PE.register(out);", "  d.people = PE.register(all);", 't54f'),
     ('IDs: to the second again', 'store.js', "return m ? m[1] + (m[2] || '').padEnd(3, '0').slice(0, 3) :", "return m ? m[1] :", 't53g'),
     ('IDs: the spreadsheet start to the second', 'seed.js', "${S.stamp(at)}", "${at.replace(/[-:.]/g, '').slice(0, 15)}", 't53g'),
     ('schema: a field saved that the document does not define', 'store.js', "items, minted: { maxNum }, newProjects: newProjects || [], aliases: aliases || [],", "items, minted: { maxNum }, newProjects: newProjects || [], aliases: aliases || [], undocumented: true,", 't53h'),

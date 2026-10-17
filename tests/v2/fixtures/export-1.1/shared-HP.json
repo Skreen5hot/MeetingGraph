@@ -88,6 +88,7 @@
     "openIds": [
      "HP-A-261001-01",
      "HP-A-261001-02",
+     "HP-A-261001-03",
      "HP-A-261005-01",
      "HP-Q-261001-01",
      "HP-R-261001-01",
@@ -546,6 +547,7 @@
     "token": "MKG2|followup|20261019T140000Z|fixture",
     "kind": "followup",
     "openIds": [
+     "HP-A-261001-03",
      "HP-A-261005-01",
      "HP-A-261012-02",
      "HP-A-261012-03",
@@ -799,6 +801,40 @@
     "parked": false
    },
    {
+    "id": "HP-A-261001-03",
+    "kind": "action",
+    "project": "HP",
+    "owner": "Dana Brooks",
+    "what": "Order the opening banners",
+    "due": null,
+    "dueDate": null,
+    "topic": "",
+    "seg": null,
+    "importance": "normal",
+    "status": "open",
+    "statusStack": [
+     "open"
+    ],
+    "waitsOn": null,
+    "created": "20261001T000000Z",
+    "mentions": [
+     "20261001T000000Z"
+    ],
+    "lastTouch": "20261001T000000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261001T000000Z",
+      "item": 3,
+      "event": "created"
+     }
+    ],
+    "toCheck": false,
+    "quiet": 3,
+    "parked": true
+   },
+   {
     "id": "HP-Q-261001-01",
     "kind": "question",
     "project": "HP",
@@ -826,7 +862,7 @@
     "history": [
      {
       "meeting": "20261001T000000Z",
-      "item": 3,
+      "item": 4,
       "event": "created"
      },
      {
@@ -869,7 +905,7 @@
     "history": [
      {
       "meeting": "20261001T000000Z",
-      "item": 4,
+      "item": 5,
       "event": "created"
      },
      {
@@ -931,7 +967,7 @@
     "history": [
      {
       "meeting": "20261001T000000Z",
-      "item": 5,
+      "item": 6,
       "event": "created"
      }
     ],

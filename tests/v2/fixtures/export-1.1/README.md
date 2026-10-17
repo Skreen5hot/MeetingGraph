@@ -19,7 +19,7 @@ Synthetic files for apps that read MeetingGraph's export, such as Dossier Studio
 
 | Date | Package | What it exercises |
 |---|---|---|
-| 2026-10-01 | Spreadsheet start | `kind: seed`; people with emails; actions, a question, a risk, a decision; no statements. |
+| 2026-10-01 | Spreadsheet start | `kind: seed`; people with emails; actions, a question, a risk, a decision; no statements. Dana Brooks owns "Order the opening banners" and never speaks in a meeting (see below). |
 | 2026-10-05 | Meeting "Harbor Point weekly" | A new action (`HP-A-261005-01`) and a status update. It falls before `shared-HP.json`'s range, so its work appears there only in `derived`. |
 | 2026-10-12 | Meeting "Joint project walk" (HP and LB), saved and then **re-saved** | See the table below. The re-save marks the decision important; the first save is `superseded`. |
 | 2026-10-13 to 10-17 | Board decisions | `not_needed`, then `undo` on LB "Order the books"; `settled` on "Send the notice draft to legal"; `raise`, then `lower`, on the permit risk. |
@@ -54,4 +54,5 @@ The meeting also has an `attendance` report, which is never in a shared file. It
 - **Work from before the range.** `shared-HP.json` starts on 2026-10-10, so the spreadsheet start and the 2026-10-05 meeting are not in it. Their items still appear in `derived.threads`, with history that points at packages outside the file.
 - **The range ends on 2026-10-31.** In `shared-HP-LB.json`, LB is still closed, because the reopen of 2026-11-01 is after the range.
 - **Only saves in use.** The superseded save and Sam's conflicting save are absent; `derived.packages.superseded` and `.conflicts` are empty, and every package is listed in `derived.packages.inUse` or `.boardDecisions`.
+- **An owner who is not in the shared register** (Dossier Studio AT-I15). In `shared-HP.json`, the thread "Order the opening banners" keeps its owner, Dana Brooks, in `derived.threads`, but she is not in `derived.people`: the spreadsheet start that names her is before the range, and she never speaks in a shared meeting. In `shared-HP-LB.json` the spreadsheet start is shared, so she is in the register (`from: spreadsheet`), without her email.
 - **Package IDs** end in millisecond stamps (`…-20261012T183000250`).

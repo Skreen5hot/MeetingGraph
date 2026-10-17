@@ -49,8 +49,8 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
 
 ## Expected results (2026-10-17)
 - v2:
-  - unit 231/231;
-  - knockouts 206 of 206 killed;
+  - unit 232/232;
+  - knockouts 207 of 207 killed;
   - slice in the browser 53/53, full page 57/57;
   - page knockouts (`tests/v2/knock_page.py`) 8 of 8 killed;
   - kit checker self-test 44/44, knockouts 19 of 19;

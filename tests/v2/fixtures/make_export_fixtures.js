@@ -45,8 +45,10 @@ function build() {
   const csv = ['Type,Project,Title,Owner,Email,Teams name,Due,Status,Waiting on,Notes',
     'Project,Harbor Point reopening,,,,,,,,Reopen the Harbor Point branch.', 'Project,Library build,,,,,,,,Build the new library annex.',
     'Person,,Grace Okafor,,grace.okafor@example.org,"Okafor, Grace",,,,', 'Person,,Tom Lindqvist,,tom.lindqvist@example.org,"Lindqvist, Tom",,,,',
-    'Person,,Ana Ruiz,,ana.ruiz@example.org,,,,,',
+    'Person,,Ana Ruiz,,ana.ruiz@example.org,,,,,', 'Person,,Dana Brooks,,dana.brooks@example.org,"Brooks, Dana",,,,',
     'Action,Harbor Point reopening,Book the fire inspection,Grace Okafor,,,,Open,,', 'Action,Harbor Point reopening,Get caterer quotes,Tom Lindqvist,,,,Open,,',
+    // AT-I15: an owner who never speaks in a meeting. Before shared-HP.json's range, so not in its shared register.
+    'Action,Harbor Point reopening,Order the opening banners,Dana Brooks,,,,Open,,',
     'Question,Harbor Point reopening,Which caterer does the opening?,Grace Okafor,,,,Open,,', 'Risk,Harbor Point reopening,The occupancy permit may slip,Grace Okafor,,,,Open,,',
     'Decision,Harbor Point reopening,Keep the case number format,,,,,,,', 'Action,Library build,Pick the architect,Tom Lindqvist,,,,Open,,',
     'Action,Library build,Order the books,Ana Ruiz,,,,Open,,'].join('\n');

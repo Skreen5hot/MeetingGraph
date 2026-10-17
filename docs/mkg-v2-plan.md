@@ -1455,8 +1455,10 @@ Nothing new is recorded. The graph, the chat request and the meeting workflow ar
 - `make_export_fixtures.js` builds them through the real pipeline: a spreadsheet start, meetings checked and reviewed, a re-save, a conflict, all seven board decisions, verified, near and to-check items, PM-added, reviewer, merged and split items, a "No owner" answer, attendance, and two projects.
 - t54a fails if the committed files differ from what the code builds. They are kept byte for byte (`.gitattributes`).
 
+**AT-I15 fixture case** (Aaron, 2026-10-17: "address AT-I15"). Dossier Studio's spec v0.3.3 needed a thread owner missing from a shared register. The spreadsheet start now gives Dana Brooks an HP action, and she never speaks: `shared-HP.json` keeps her as the thread's owner without a register entry, and `shared-HP-LB.json` has her in the register. Check t54f, with a knockout (the register built from the whole workspace).
+
 **Tests:**
-- unit 231/231 (t53i, t54a–e);
+- unit 232/232 (t53i, t54a–f);
 - knockouts: 6 new;
 - the browser suites unchanged.
 
