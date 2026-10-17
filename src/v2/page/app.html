@@ -1266,11 +1266,18 @@ function wireBoardFilter() {
   applyBoardFilter();
 }
 
+/* Your name, recorded with every decision (Aaron, 2026-10-17): the dialogs ask for it themselves, filled in from Process
+   meeting or from this machine, so a decision never fails for a name the user has no place to type. */
+const myName = () => $('saved-by').value.trim() || (function () { try { return localStorage.getItem('mkg2-saved-by') || ''; } catch (err) { return ''; } })();
+function rememberName(by) { $('saved-by').value = by; try { localStorage.setItem('mkg2-saved-by', by); } catch (err) { /* per-machine convenience only */ } }
+const nameField = id => `<label class="small" for="${id}">Your name (required)</label><input type="text" id="${id}" value="${esc(myName())}" placeholder="Recorded with the decision" style="width:100%;margin:2px 0 8px">`;
+
 // A board decision, from the item dialog: one item at a time.
-function decide(action, ids, note, label) {
-  const by = $('saved-by').value.trim() || (function () { try { return localStorage.getItem('mkg2-saved-by') || ''; } catch (err) { return ''; } })();
+function decide(action, ids, note, label, name) {
+  const by = String(name == null ? myName() : name).trim();
   const r = S.boardDecision({ board: S.replay(state.pkgs), action, ids, note, savedBy: by });
-  if (r.error) return { error: r.error + (by ? '' : ' (Your name: Process meeting, step 5.)') };
+  if (r.error) return { error: r.error };
+  rememberName(by);
   addPkg(r.pkg); idbPut(r.pkg); download(r.pkg.id + '.json', r.pkg);
   ui.asOf = null; renderSaved();
   toast(`${label || S.DECISIONS[action]}: ${ids.join(', ')}. Put the downloaded file (${r.pkg.id}.json) in the team folder.`);
@@ -1292,16 +1299,18 @@ function openProjectDecision(action, code) {
         : `The ${cl ? cl.ids.length : 0} item${cl && cl.ids.length === 1 ? '' : 's'} closed with it go back to the status ${cl && cl.ids.length === 1 ? 'it' : 'they'} had, and the project is listed again in new meeting requests.`}
         Recorded with your name and this note as your decision, not as meeting evidence.</p>
       ${close && open.length ? `<details style="margin:0 0 8px"><summary class="src">The ${open.length} open item${open.length === 1 ? '' : 's'}</summary><ul class="items">${open.map(t => `<li>${esc(t.id)} ${esc(t.what)} ${pill(t.status)}</li>`).join('')}</ul></details>` : ''}
+      ${nameField('p-by')}
       <label class="small" for="p-note">Note (required)</label>
       <input type="text" id="p-note" placeholder="Why, in a few words" style="width:100%;margin:2px 0 8px">
       <div class="actions" style="margin:0"><button class="btn primary" data-pact="${action}" data-code="${esc(code)}">${close ? 'Close the project' : 'Reopen the project'}</button></div>
       <p id="p-msg" class="msg"></p></section></div>`;
   $('hist').showModal();
 }
-function decideProject(action, code, note) {
-  const by = $('saved-by').value.trim() || (function () { try { return localStorage.getItem('mkg2-saved-by') || ''; } catch (err) { return ''; } })();
+function decideProject(action, code, note, name) {
+  const by = String(name == null ? myName() : name).trim();
   const r = S.projectDecision({ board: S.replay(state.pkgs), action, project: code, note, savedBy: by });
-  if (r.error) return { error: r.error + (by ? '' : ' (Your name: Process meeting, step 5.)') };
+  if (r.error) return { error: r.error };
+  rememberName(by);
   addPkg(r.pkg); idbPut(r.pkg); download(r.pkg.id + '.json', r.pkg);
   ui.asOf = null; ui.project = code; renderSaved();
   toast(`${action === 'close_project' ? 'Project closed' : 'Project reopened'}. Put the downloaded file (${r.pkg.id}.json) in the team folder.`);
@@ -1337,6 +1346,7 @@ function openHistory(id) {
     ${A.b.closedProjects.has(t.project) ? `<p class="note">This item's project is closed${t.closedWithProject ? ', and the item was closed with it' : ''}. To change it, reopen the project from its page.</p>` : ''}
     ${t.kind === 'decision' || !A.latest || !acts.length ? '' : `<section class="decide-box"><h4>Record a Board decision</h4>
       <p class="sub">Recorded with your name and this note as your decision, not as meeting evidence. It changes this item only.</p>
+      ${nameField('d-by')}
       <label class="small" for="d-note">Note (required)</label>
       <input type="text" id="d-note" placeholder="Why, in a few words" style="width:100%;margin:2px 0 8px">
       <div class="actions" style="margin:0">${acts.map(a => `<button class="btn" data-dact="${a}" data-id="${esc(t.id)}">${esc(decisionLabel(a, t))}</button>`).join('')}</div>
@@ -1473,9 +1483,9 @@ document.addEventListener('click', ev => {
   const pc = ev.target.closest('[data-pclose]'), po = ev.target.closest('[data-preopen]');
   if (pc || po) { openProjectDecision(pc ? 'close_project' : 'reopen_project', (pc || po).dataset[pc ? 'pclose' : 'preopen']); return; }
   const pa = ev.target.closest('[data-pact]');
-  if (pa) { const r = decideProject(pa.dataset.pact, pa.dataset.code, $('p-note').value); if (r.error) msg('p-msg', r.error, 'bad'); else $('hist').close(); return; }
+  if (pa) { const r = decideProject(pa.dataset.pact, pa.dataset.code, $('p-note').value, $('p-by').value); if (r.error) msg('p-msg', r.error, 'bad'); else $('hist').close(); return; }
   const da = ev.target.closest('[data-dact]');
-  if (da) { const r = decide(da.dataset.dact, [da.dataset.id], $('d-note').value, da.textContent); if (r.error) msg('d-msg', r.error, 'bad'); else $('hist').close(); return; }
+  if (da) { const r = decide(da.dataset.dact, [da.dataset.id], $('d-note').value, da.textContent, $('d-by').value); if (r.error) msg('d-msg', r.error, 'bad'); else $('hist').close(); return; }
   if (ev.target.id === 'back') { $('board').classList.remove('show-panel'); return; }
   if (ev.target.id === 'close-hist' || ev.target.id === 'hist') $('hist').close();
 });

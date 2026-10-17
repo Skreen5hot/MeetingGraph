@@ -62,15 +62,24 @@ def save(pg, name='Test PM'):
     return json.load(open(path, encoding='utf-8'))
 
 
+def fill_if(pg, sel, v):
+    """Fill a field only if it is there, so a knockout that removes it fails a check rather than crashing the run."""
+    if pg.locator(sel).count(): pg.fill(sel, v)
+
+
 def decide(pg, action, ids, note):
     """One item at a time, in its dialog (UX A8): open it, write the note, press the decision."""
     tab(pg, 'board'); out = None
     for i in ids:
         opendlg(pg, i)
         pg.fill('#d-note', note)
-        with pg.expect_download() as d: pg.click(f'[data-dact="{action}"]')
+        try:   # crash-safe: a knockout that stops the decision fails the checks that follow, not the run
+            with pg.expect_download(timeout=3000) as d: pg.click(f'[data-dact="{action}"]')
+            out = json.load(open(d.value.path(), encoding='utf-8'))
+        except Exception:
+            out = {}
+            if pg.locator('#hist[open]').count(): pg.click('#close-hist')
         pg.wait_for_timeout(150)
-        out = json.load(open(d.value.path(), encoding='utf-8'))
     return out
 
 
@@ -148,8 +157,8 @@ with sync_playwright() as pw:
     check('f7f an open question offers "Mark resolved" (UX A12)', label(pg, 'settled') == 'Mark resolved')
     pg.click('#close-hist')
     p1 = decide(pg, 'settled', [acts[0]], 'Confirmed by email')
-    check('f8 Settled outside a meeting: a board package with the name and note; the item is done and says so', p1['kind'] == 'board' and p1['savedBy'] == 'Test PM' and
-          thread(pg, acts[0])['status'] == 'done' and thread(pg, acts[0])['settledOutside']['note'] == 'Confirmed by email', thread(pg, acts[0]))
+    check('f8 Settled outside a meeting: a board package with the name and note; the item is done and says so', p1.get('kind') == 'board' and p1.get('savedBy') == 'Test PM' and
+          thread(pg, acts[0])['status'] == 'done' and (thread(pg, acts[0])['settledOutside'] or {}).get('note') == 'Confirmed by email', thread(pg, acts[0]))
     opendlg(pg, acts[0]); restore = label(pg, 'undo'); pg.click('#close-hist')
     decide(pg, 'undo', [acts[0]], 'Too early')
     check('f9 the restore names the status it restores ("Restore status: Open"), and does it (UX A11)', restore == 'Restore status: Open' and
@@ -164,6 +173,9 @@ with sync_playwright() as pw:
           pg.locator('#panel .ownerwork .snap.closed').count() == 0, sec)
     opendlg(pg, acts[4]); pg.fill('#d-note', ''); pg.click('[data-dact="settled"]'); pg.wait_for_timeout(100)
     check('f11 a decision with no note is refused, next to the buttons', 'Add a note' in pg.inner_text('#hist .decide-box #d-msg'))
+    check('f11b the item dialog has its own name field, filled in', pg.locator('#hist .decide-box #d-by').count() == 1 and pg.input_value('#d-by') != '')
+    pg.fill('#d-note', 'x'); fill_if(pg, '#d-by', ''); pg.click('[data-dact="settled"]'); pg.wait_for_timeout(100)
+    check('f11c with no name, the item dialog asks for it', 'Add your name' in pg.inner_text('#hist .decide-box #d-msg'))
     pg.click('#close-hist')
     dec = next(i for w, i in ids.items() if '-D-' in i) if any('-D-' in i for i in ids.values()) else None
     if dec: opendlg(pg, dec)
@@ -306,11 +318,20 @@ with sync_playwright() as pw:
     pg.click('[data-pact="close_project"]'); pg.wait_for_timeout(100)
     check('f35 without a note, nothing is closed', 'Add a note' in pg.inner_text('#p-msg'))
     pg.fill('#p-note', 'Handed over to operations')
-    with pg.expect_download() as d: pg.click('[data-pact="close_project"]')
-    cpk = json.load(open(d.value.path(), encoding='utf-8')); pg.wait_for_timeout(200)
+    # The name (Aaron, 2026-10-17): asked in the dialog itself, filled in from Process meeting; empty, the dialog says so
+    check('f35b the close dialog has its own name field, filled in with the name already given', pg.locator('#hist #p-by').count() == 1 and pg.input_value('#p-by') == pg.input_value('#saved-by') != '')
+    pg.evaluate("() => { document.getElementById('saved-by').value = ''; }"); pg.fill('#p-by', ''); pg.click('[data-pact="close_project"]'); pg.wait_for_timeout(100)
+    check('f35c with no name, nothing is closed and the dialog asks for it', 'Add your name' in pg.inner_text('#p-msg') and pg.locator('#projects details.closedp').count() == 0)
+    if pg.locator('#hist[open] #p-by').count(): pg.fill('#p-by', 'Dana PM')   # a knockout may have closed it already
+    cpk = {}
+    if pg.locator('#hist[open] [data-pact="close_project"]').count():
+        with pg.expect_download() as d: pg.click('[data-pact="close_project"]')
+        cpk = json.load(open(d.value.path(), encoding='utf-8'))
+    pg.wait_for_timeout(200)
     still = pg.evaluate('() => { const b = window.MKG2_store.replay(window.MKG2_state.pkgs); return [...b.threads.values()].filter(t => t.project === "HP" && t.kind !== "decision" && !["done", "not_needed"].includes(t.status)).length; }')
+    check('f36b the name typed in the dialog is recorded, and kept for the next decision', cpk.get('savedBy') == 'Dana PM' and pg.input_value('#saved-by') == 'Dana PM')
     check('f36 closed: a board decision with the note; its open items are not needed; the project is listed under "Closed projects" with its banner',
-          cpk['action'] == 'close_project' and cpk['project'] == 'HP' and cpk['note'] == 'Handed over to operations' and still == 0 and
+          cpk.get('action') == 'close_project' and cpk.get('project') == 'HP' and cpk.get('note') == 'Handed over to operations' and still == 0 and
           pg.locator('#projects details.closedp [data-project="HP"]').count() == 1 and 'This project was closed' in pg.inner_text('#panel') and pg.locator('#close-proj').count() == 0, [still])
     pg.click('[data-preopen="HP"]'); pg.wait_for_timeout(150); pg.fill('#p-note', 'Back in scope')
     with pg.expect_download() as d: pg.click('[data-pact="reopen_project"]')

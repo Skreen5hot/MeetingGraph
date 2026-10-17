@@ -20,7 +20,7 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
   - `modules/`: plain JS, also run by Node: transcript, request, reply, store (packages, IDs, the replay, board and project decisions), dates, people, attendance, interventions (the Dashboard), review, email (meeting and Program reports), summary, seed.
   - `page/app.html`: v1's screens and CSS over v2; edit it directly.
   - `build_v2.py`: puts the modules into the page.
-- `dist/MeetingGraph2.html`: the v2 build (sha256 `462d34d3…`, 2026-10-16, §10.20–§10.29).
+- `dist/MeetingGraph2.html`: the v2 build (sha256 `37293fdb…`, 2026-10-17, §10.20–§10.29, plus the name field in the decision dialogs).
 - `tests/v2`:
   - `unit/v2test.js`
   - `knock_v2.py` (knockouts)
@@ -48,7 +48,7 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
 - v2:
   - unit 217/217;
   - knockouts 180 of 180 killed;
-  - slice in the browser 53/53, full page 48/48;
+  - slice in the browser 53/53, full page 53/53 (page knockouts, `tests/v2/knock_page.py`: 5 of 5 killed);
   - kit checker self-test 44/44, knockouts 19 of 19;
   - sample (variant J) checker 21/21, knockouts 19 of 19.
 - v1:
@@ -70,6 +70,7 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
   - Closing marks the project's open actions, questions and risks not needed, as closed with it; its decisions stay in effect.
   - A closed project is left out of new requests and the Dashboard, and listed under "Closed projects" on the Board.
   - Reopening restores each item's earlier status.
+- **Every decision dialog asks for the name itself** (item and project dialogs), filled in from Process meeting or this machine; the name typed there is kept for the next save.
 - **"State as of"** sets the date and history for everything: the Board, the Dashboard and the reports.
 - **userEmail and real meeting content are sensitive.** Never put real transcripts or seeds into the repo or tests; the fixtures are mock or Aaron-approved.
 
