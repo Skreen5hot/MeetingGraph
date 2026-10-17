@@ -837,6 +837,12 @@ async function section(name, fn) { try { await fn(); } catch (e) { ok(name + ' (
   const sameSec2 = S.meetingPackage({ pkgs: [], projects: [both[0]], meeting: M1, statements: st, request: { token: 'z', kind: 'seed', openIds: [] }, checked: { items: [], reply: {}, cut: null, note: null, lastSegOk: true }, savedAt: '2026-10-20T12:00:00.456Z' });
   ok('t53g package IDs carry the save time to the millisecond: two saves in one second differ; a time without milliseconds gets 000', sameSec.id.endsWith('-20261020T120000123') &&
      sameSec.id !== sameSec2.id && S.stamp('2026-10-19T16:00:00Z') === '20261019T160000000' && (bd.id || '').endsWith('-20261021T090000000') && ps.id.endsWith('-20261012T120000000'), [sameSec.id, bd.id]);
+  // §10.31: a board decision saved after the end of the range is not in the shared file's derived board.
+  const late = S.boardDecision({ board: S.replay(all.filter(p => p !== m2)), action: 'undo', ids: [idOf('Book the inspection')], note: 'Not booked after all', savedBy: 'PM', savedAt: '2026-11-01T09:00:00.000Z' }).pkg || {};
+  const lateR = (EX.reduced(all.concat([late]), { projects: ['HP'], from: '2026-10-01', to: '2026-10-31' }).file || { derived: { threads: [] } }).derived;
+  const lateT = lateR.threads.find(t => t.id === idOf('Book the inspection')) || {};
+  ok('t53i the derived board of a shared file stops at the end of the range: a board decision saved after it is left out', !!late.id && lateT.status === 'done' &&
+     S.replay(all.concat([late])).threads.get(idOf('Book the inspection')).status === 'open', [lateT.status]);
   // t53h: every field of every package the tests built, and of the export, is defined in the schema document.
   const doc = fs.readFileSync(path.join(ROOT, 'docs', 'mkg2-export-schema.md'), 'utf8');
   const defined = sec => { const m = new RegExp('<!-- fields:' + sec + ' -->([\\s\\S]*?)<!-- /fields -->').exec(doc); return new Set(m ? [...m[1].matchAll(/`([^`]+)`/g)].map(x => x[1]) : []); };
@@ -854,6 +860,34 @@ async function section(name, fn) { try { await fn(); } catch (e) { ok(name + ' (
   need('workspace', [Object.assign({}, ws, { packages: [], derived: null }), Object.assign({}, rf, { packages: [], derived: null })]);
   need('derived', [ws.derived, rf.derived, EX.derived(BUILT.filter(p => p.kind === 'board' || p.kind === 'meeting' || p.kind === 'seed'))].filter(Boolean));
   ok('t53h every field the tests saved or exported is defined in docs/mkg2-export-schema.md', missing.length === 0 && BUILT.length > 20, missing.slice(0, 400));
+  // ---------- the export 1.1 conformance fixtures (§10.31) ----------
+  const FX = require(path.join(ROOT, 'tests', 'v2', 'fixtures', 'make_export_fixtures.js'));
+  let built = {};
+  try { built = FX.build(); } catch (e) { built = {}; }
+  const stale = ['full.json', 'shared-HP.json', 'shared-HP-LB.json'].filter(f => { let have = ''; try { have = fs.readFileSync(path.join(FX.OUT, f), 'utf8').replace(/\r\n/g, '\n'); } catch (e) { /* missing */ } return !built[f] || FX.text(built[f]) !== have; });
+  ok('t54a the conformance fixtures are current: rebuilt from the code, they match the committed files (run make_export_fixtures.js after a change)', stale.length === 0, stale);
+  const ff = built['full.json'] || { packages: [], derived: { packages: { conflicts: [], superseded: [] }, people: { noOwner: [] } } }, fa = built['shared-HP.json'] || { packages: [], derived: { threads: [], closedProjects: [] } }, fb = built['shared-HP-LB.json'] || { packages: [], derived: { threads: [], closedProjects: [] } };
+  const fit = ff.packages.filter(p => p.kind === 'meeting').flatMap(p => p.items), acts = new Set(ff.packages.filter(p => p.kind === 'board').map(p => p.action));
+  ok('t54b the full fixture covers the contract: a spreadsheet start, a re-save, a conflict, all seven board decisions, verified, near and to-check items, PM-added, reviewer, merged and split items, attendance and a "No owner" label',
+     ff.packages.some(p => p.kind === 'seed') && ff.derived.packages.superseded.length === 1 && ff.derived.packages.conflicts.length === 1 &&
+     ['settled', 'not_needed', 'undo', 'raise', 'lower', 'close_project', 'reopen_project'].every(a => acts.has(a)) &&
+     ['verified', 'near', 'not found'].every(x => fit.some(i => i.src === x)) && fit.some(i => i.toCheck) && fit.some(i => i.added) && fit.some(i => i.byReview) &&
+     fit.some(i => i.mergedInto) && fit.some(i => i.statusOf) && fit.some(i => i.src === 'near' && i.seg !== i.citedSeg) && ff.packages.some(p => p.attendance) &&
+     ff.derived.people.noOwner.length === 1, [ff.packages.length, [...acts]]);
+  const fma = fa.packages.find(p => p.kind === 'meeting' && p.meeting.date === '2026-10-12') || { reply: {} };
+  ok('t54c the shared fixtures show what sharing does: no emails or attendance; the joint meeting\'s summary dropped for HP alone and kept for both; work from before the range in derived; a reopen after the range not counted',
+     !JSON.stringify(fa).includes('@') && !JSON.stringify(fb).includes('@') && !JSON.stringify(fa).includes('"attendance"') && fma.reply.summary === null && !(fma.statements || [{ id: 'S005' }]).some(x => x.id === 'S005') && (fma.statements || []).some(x => x.id === 'S003') &&
+     fb.packages.filter(p => p.kind === 'meeting').every(p => p.reply.summary) && fa.derived.threads.some(t => t.created < '20261010') && !fa.packages.some(p => p.kind === 'seed') &&
+     fb.derived.closedProjects.some(c => c.code === 'LB') && !fa.packages.some(p => (p.projects || []).some(x => x.code === 'LB')), [fma.reply.summary]);
+  const listed = w => { const d = (w.derived || {}).packages || {}; return w.packages.every(p => (d.inUse || []).includes(p.id) || (d.boardDecisions || []).includes(p.id)) && !(d.superseded || [1]).length && !(d.conflicts || [1]).length; };
+  ok('t54e in a shared file every package is listed in derived (in use, or a board decision counted), and nothing is superseded or in conflict', listed(fa) && listed(fb) && fa.packages.length > 0);
+  const fmissing = [];
+  for (const [f, w] of Object.entries(built)) {
+    for (const [k, sec] of [['meeting', 'meeting'], ['seed', 'seed'], ['board', 'board']]) { const d = defined(sec), q = new Set(); w.packages.filter(p => p.kind === k).forEach(p => paths(p, '', q)); for (const x of q) if (!d.has(x)) fmissing.push(f + ' ' + sec + ': ' + x); }
+    const dw = defined('workspace'), qw = paths(Object.assign({}, w, { packages: [], derived: null }), '', new Set()); for (const x of qw) if (!dw.has(x)) fmissing.push(f + ' workspace: ' + x);
+    const dd = defined('derived'), qd = paths(w.derived, '', new Set()); for (const x of qd) if (!dd.has(x)) fmissing.push(f + ' derived: ' + x);
+  }
+  ok('t54d every field in the fixtures is defined in docs/mkg2-export-schema.md', fmissing.length === 0 && Object.keys(built).length === 3, fmissing.slice(0, 40));
   });
 
   // ---------- the counts-only summary ----------

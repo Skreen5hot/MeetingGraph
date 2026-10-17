@@ -1,0 +1,1289 @@
+{
+ "mkg2Workspace": "1.1",
+ "reduced": true,
+ "exportedAt": "2026-11-04T12:00:00.000Z",
+ "scope": {
+  "projects": [
+   "HP"
+  ],
+  "from": "2026-10-10",
+  "to": "2026-10-31"
+ },
+ "packages": [
+  {
+   "mkg2": "1.0",
+   "kind": "meeting",
+   "id": "mkg2-meeting-HP-20261012T140000Z-20261012T183000250",
+   "savedAt": "2026-10-12T18:30:00.250Z",
+   "savedBy": "Pat Morgan",
+   "supersedes": "mkg2-meeting-HP-20261012T140000Z-20261012T160000000",
+   "project": {
+    "code": "HP",
+    "name": "Harbor Point reopening"
+   },
+   "projects": [
+    {
+     "code": "HP",
+     "name": "Harbor Point reopening"
+    }
+   ],
+   "meeting": {
+    "id": "20261012T140000Z",
+    "date": "2026-10-12",
+    "time": "10:00",
+    "offset": "-04:00",
+    "title": "Joint project walk",
+    "dayKey": "261012",
+    "dayKeys": {
+     "HP": "261012"
+    }
+   },
+   "statements": [
+    {
+     "id": "S001",
+     "t": "00:00:10",
+     "speaker": "Okafor, Grace",
+     "text": "The fire inspection is booked for the 20th, so that one is done."
+    },
+    {
+     "id": "S003",
+     "t": "00:02:00",
+     "speaker": "Okafor, Grace",
+     "text": "I can send the notice draft to legal tomorrow."
+    },
+    {
+     "id": "S004",
+     "t": "00:03:00",
+     "speaker": "Lindqvist, Tom",
+     "text": "Let's go with the north entrance for the reopening."
+    },
+    {
+     "id": "S006",
+     "t": "00:05:00",
+     "speaker": "Okafor, Grace",
+     "text": "The caterer question is settled: Harbor Catering will do the opening."
+    },
+    {
+     "id": "S007",
+     "t": "00:06:00",
+     "speaker": "Lindqvist, Tom",
+     "text": "Do we need a second exit sign by the stairs?"
+    },
+    {
+     "id": "S008",
+     "t": "00:07:00",
+     "speaker": "Okafor, Grace",
+     "text": "I'll chase the permit office on Monday."
+    },
+    {
+     "id": "S009",
+     "t": "00:08:00",
+     "speaker": "Front desk",
+     "text": "We can print the opening signs this week."
+    }
+   ],
+   "request": {
+    "token": "MKG2|followup|20261012T140000Z|fixture",
+    "kind": "followup",
+    "openIds": [
+     "HP-A-261001-01",
+     "HP-A-261001-02",
+     "HP-A-261005-01",
+     "HP-Q-261001-01",
+     "HP-R-261001-01",
+     "HP-D-261001-01"
+    ]
+   },
+   "reply": {
+    "summary": null,
+    "lastSeg": "S009",
+    "lastSegOk": true,
+    "cut": null,
+    "note": null
+   },
+   "items": [
+    {
+     "n": 1,
+     "ref": "N1",
+     "kind": "update",
+     "topic": "",
+     "who": "Okafor, Grace",
+     "what": "The fire inspection is booked",
+     "due": null,
+     "importance": "normal",
+     "thread": "HP-A-261001-01",
+     "status": "done",
+     "waitsOn": null,
+     "seg": "S001",
+     "words": "The fire inspection is booked",
+     "notes": [],
+     "citedSeg": "S001",
+     "src": "verified",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": null,
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": null,
+     "person": "Grace Okafor",
+     "id": null,
+     "applied": true,
+     "waitsOnId": null
+    },
+    {
+     "n": 3,
+     "ref": "N3",
+     "kind": "commitment",
+     "topic": "",
+     "who": "Okafor, Grace",
+     "what": "Send the notice draft to legal",
+     "due": "tomorrow",
+     "importance": "normal",
+     "thread": null,
+     "status": null,
+     "waitsOn": null,
+     "seg": "S003",
+     "words": "send the notice draft to legal",
+     "notes": [
+      "the words are in S003, not S002; corrected"
+     ],
+     "citedSeg": "S002",
+     "src": "near",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": "HP",
+     "project": "HP",
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": "2026-10-13",
+     "person": "Grace Okafor",
+     "movedByPM": false,
+     "placedByPM": false,
+     "id": "HP-A-261012-01",
+     "applied": false,
+     "waitsOnId": null
+    },
+    {
+     "n": 4,
+     "ref": "N4",
+     "kind": "decision",
+     "topic": "",
+     "who": "Lindqvist, Tom",
+     "what": "Use the north entrance for the reopening",
+     "due": null,
+     "importance": "high",
+     "thread": null,
+     "status": null,
+     "waitsOn": null,
+     "seg": "S004",
+     "words": "go with the north entrance",
+     "notes": [],
+     "citedSeg": "S004",
+     "src": "verified",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": "HP",
+     "project": "HP",
+     "edited": [
+      "importance"
+     ],
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": null,
+     "person": "Tom Lindqvist",
+     "movedByPM": false,
+     "placedByPM": false,
+     "id": "HP-D-261012-01",
+     "applied": false,
+     "waitsOnId": null
+    },
+    {
+     "n": 5,
+     "ref": "N5",
+     "kind": "commitment",
+     "topic": "",
+     "who": "Ruiz, Ana",
+     "what": "Bring the cake",
+     "due": null,
+     "importance": "normal",
+     "thread": null,
+     "status": null,
+     "waitsOn": null,
+     "seg": "S005",
+     "words": "I will bring the cake",
+     "notes": [],
+     "citedSeg": "S005",
+     "src": "not found",
+     "toCheck": true,
+     "whoIsSpeaker": true,
+     "chatProject": "HP",
+     "project": "HP",
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": null,
+     "person": "Ana Ruiz",
+     "movedByPM": false,
+     "placedByPM": false,
+     "id": "HP-A-261012-02",
+     "applied": false,
+     "waitsOnId": null
+    },
+    {
+     "n": 6,
+     "ref": "N6",
+     "kind": "update",
+     "topic": "",
+     "who": "Okafor, Grace",
+     "what": "Harbor Catering will do the opening",
+     "due": null,
+     "importance": "normal",
+     "thread": "HP-Q-261001-01",
+     "status": "done",
+     "waitsOn": null,
+     "seg": "S006",
+     "words": "Harbor Catering will do the opening",
+     "notes": [],
+     "citedSeg": "S006",
+     "src": "verified",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": null,
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": null,
+     "person": "Grace Okafor",
+     "id": null,
+     "applied": true,
+     "waitsOnId": null
+    },
+    {
+     "n": 7,
+     "ref": "N7",
+     "kind": "question",
+     "topic": "",
+     "who": "Lindqvist, Tom",
+     "what": "Is a second exit sign needed by the stairs?",
+     "due": null,
+     "importance": "normal",
+     "thread": null,
+     "status": null,
+     "waitsOn": null,
+     "seg": "S007",
+     "words": "a second exit sign by the stairs",
+     "notes": [],
+     "citedSeg": "S007",
+     "src": "verified",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": "HP",
+     "project": "HP",
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": null,
+     "person": "Tom Lindqvist",
+     "movedByPM": false,
+     "placedByPM": false,
+     "id": "HP-Q-261012-01",
+     "applied": false,
+     "waitsOnId": null
+    },
+    {
+     "n": 8,
+     "ref": "N8",
+     "kind": "question",
+     "topic": "",
+     "who": "Lindqvist, Tom",
+     "what": "Second exit sign by the stairs",
+     "due": null,
+     "importance": "normal",
+     "thread": null,
+     "status": null,
+     "waitsOn": null,
+     "seg": "S007",
+     "words": "Do we need a second exit sign",
+     "notes": [],
+     "citedSeg": "S007",
+     "src": "verified",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": "HP",
+     "project": "HP",
+     "edited": [
+      "same as"
+     ],
+     "mergedInto": 7,
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": null,
+     "person": "Tom Lindqvist",
+     "movedByPM": false,
+     "placedByPM": false,
+     "id": null,
+     "applied": false,
+     "waitsOnId": null
+    },
+    {
+     "n": 9,
+     "ref": "N9",
+     "kind": "commitment",
+     "topic": "",
+     "who": "Okafor, Grace",
+     "what": "Chase the permit office",
+     "due": "on Monday",
+     "importance": "normal",
+     "thread": null,
+     "status": null,
+     "waitsOn": null,
+     "seg": "S008",
+     "words": "chase the permit office on Monday",
+     "notes": [
+      "new action about HP-R-261001-01"
+     ],
+     "citedSeg": "S008",
+     "src": "verified",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": "HP",
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": "2026-10-19",
+     "person": "Grace Okafor",
+     "relatedTo": "HP-R-261001-01",
+     "project": "HP",
+     "movedByPM": false,
+     "placedByPM": false,
+     "id": "HP-A-261012-03",
+     "applied": false,
+     "waitsOnId": null
+    },
+    {
+     "n": 13,
+     "ref": null,
+     "kind": "update",
+     "topic": "",
+     "who": "Okafor, Grace",
+     "person": "Grace Okafor",
+     "what": "Chase the permit office",
+     "due": null,
+     "dueDate": null,
+     "importance": "normal",
+     "thread": "HP-R-261001-01",
+     "status": "in_progress",
+     "waitsOn": null,
+     "seg": "S008",
+     "citedSeg": "S008",
+     "words": "chase the permit office on Monday",
+     "src": "verified",
+     "toCheck": false,
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "notes": [
+      "the status of HP-R-261001-01, from item 9"
+     ],
+     "whoIsSpeaker": true,
+     "statusOf": 9,
+     "id": null,
+     "applied": true,
+     "waitsOnId": null
+    },
+    {
+     "n": 10,
+     "ref": "N10",
+     "kind": "commitment",
+     "topic": "",
+     "who": null,
+     "what": "Print the opening signs",
+     "due": "this week",
+     "importance": "normal",
+     "thread": null,
+     "status": null,
+     "waitsOn": null,
+     "seg": "S009",
+     "words": "print the opening signs this week",
+     "notes": [],
+     "citedSeg": "S009",
+     "src": "verified",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": "HP",
+     "project": "HP",
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": "2026-10-16",
+     "person": null,
+     "movedByPM": false,
+     "placedByPM": false,
+     "id": "HP-A-261012-04",
+     "applied": false,
+     "waitsOnId": null
+    },
+    {
+     "n": 11,
+     "ref": null,
+     "kind": "commitment",
+     "topic": "",
+     "who": "Okafor, Grace",
+     "what": "Sign the catering contract",
+     "due": "next week",
+     "importance": "normal",
+     "thread": null,
+     "status": null,
+     "waitsOn": null,
+     "seg": "S006",
+     "citedSeg": "S006",
+     "words": "The caterer question is settled: Harbor Catering will do the",
+     "src": "verified",
+     "toCheck": false,
+     "added": true,
+     "notes": [
+      "added from the statement, not by the chat"
+     ],
+     "whoIsSpeaker": true,
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": "2026-10-23",
+     "person": "Grace Okafor",
+     "project": "HP",
+     "movedByPM": false,
+     "placedByPM": true,
+     "id": "HP-A-261012-05",
+     "applied": false,
+     "waitsOnId": null
+    },
+    {
+     "n": 12,
+     "ref": null,
+     "kind": "update",
+     "topic": "",
+     "who": null,
+     "person": null,
+     "what": "Closed with HP-Q-261001-01, settled in this meeting",
+     "due": null,
+     "dueDate": null,
+     "importance": "normal",
+     "thread": "HP-A-261001-02",
+     "status": "done",
+     "waitsOn": null,
+     "seg": "S006",
+     "citedSeg": "S006",
+     "words": "Harbor Catering will do the opening",
+     "src": "verified",
+     "toCheck": false,
+     "notes": [
+      "closed by the reviewer: related to HP-Q-261001-01, settled at S006"
+     ],
+     "whoIsSpeaker": true,
+     "relatedTo": "HP-Q-261001-01",
+     "byReview": true,
+     "id": null,
+     "applied": true,
+     "waitsOnId": null
+    }
+   ],
+   "minted": {
+    "maxNum": {
+     "HP:A": 5,
+     "HP:D": 1,
+     "HP:Q": 1
+    }
+   },
+   "newProjects": [],
+   "aliases": [
+    {
+     "label": "Ruiz, Ana",
+     "person": "Ana Ruiz"
+    },
+    {
+     "label": "Front desk",
+     "person": null
+    }
+   ],
+   "reduced": true
+  },
+  {
+   "mkg2": "1.0",
+   "kind": "meeting",
+   "id": "mkg2-meeting-HP-20261019T140000Z-20261019T150000000",
+   "savedAt": "2026-10-19T15:00:00.000Z",
+   "savedBy": "Pat Morgan",
+   "supersedes": null,
+   "project": {
+    "code": "HP",
+    "name": "Harbor Point reopening"
+   },
+   "projects": [
+    {
+     "code": "HP",
+     "name": "Harbor Point reopening"
+    }
+   ],
+   "meeting": {
+    "id": "20261019T140000Z",
+    "date": "2026-10-19",
+    "time": "10:00",
+    "offset": "-04:00",
+    "title": "Harbor Point weekly",
+    "dayKey": "261019",
+    "dayKeys": {
+     "HP": "261019"
+    }
+   },
+   "statements": [
+    {
+     "id": "S001",
+     "t": "00:00:05",
+     "speaker": "Okafor, Grace",
+     "text": "The reopening notice went out to legal and is approved."
+    },
+    {
+     "id": "S002",
+     "t": "00:00:40",
+     "speaker": "Lindqvist, Tom",
+     "text": "The exit sign is not needed, the code allows one."
+    }
+   ],
+   "request": {
+    "token": "MKG2|followup|20261019T140000Z|fixture",
+    "kind": "followup",
+    "openIds": [
+     "HP-A-261005-01",
+     "HP-A-261012-02",
+     "HP-A-261012-03",
+     "HP-A-261012-04",
+     "HP-A-261012-05",
+     "HP-Q-261012-01",
+     "HP-R-261001-01",
+     "HP-D-261001-01",
+     "HP-D-261012-01"
+    ]
+   },
+   "reply": {
+    "summary": "The reopening notice is approved, and the second exit sign is not needed.",
+    "lastSeg": "S002",
+    "lastSegOk": true,
+    "cut": null,
+    "note": null
+   },
+   "items": [
+    {
+     "n": 1,
+     "ref": "N1",
+     "kind": "update",
+     "topic": "",
+     "who": "Okafor, Grace",
+     "what": "The reopening notice is approved",
+     "due": null,
+     "importance": "normal",
+     "thread": "HP-A-261005-01",
+     "status": "done",
+     "waitsOn": null,
+     "seg": "S001",
+     "words": "the reopening notice went out to legal",
+     "notes": [],
+     "citedSeg": "S001",
+     "src": "verified",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": null,
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": null,
+     "person": "Grace Okafor",
+     "id": null,
+     "applied": true,
+     "waitsOnId": null
+    },
+    {
+     "n": 2,
+     "ref": "N2",
+     "kind": "update",
+     "topic": "",
+     "who": "Lindqvist, Tom",
+     "what": "The second exit sign is not needed",
+     "due": null,
+     "importance": "normal",
+     "thread": "HP-Q-261012-01",
+     "status": "done",
+     "waitsOn": null,
+     "seg": "S002",
+     "words": "The exit sign is not needed",
+     "notes": [],
+     "citedSeg": "S002",
+     "src": "verified",
+     "toCheck": false,
+     "whoIsSpeaker": true,
+     "chatProject": null,
+     "statusUndone": false,
+     "statusConfirmed": false,
+     "dueDate": null,
+     "person": "Tom Lindqvist",
+     "id": null,
+     "applied": true,
+     "waitsOnId": null
+    }
+   ],
+   "minted": {
+    "maxNum": {}
+   },
+   "newProjects": [],
+   "aliases": [],
+   "reduced": true
+  },
+  {
+   "mkg2": "1.0",
+   "kind": "board",
+   "id": "mkg2-board-settled-HP-A-261012-01-20261015T090000000",
+   "savedAt": "2026-10-15T09:00:00.000Z",
+   "savedBy": "Pat Morgan",
+   "supersedes": null,
+   "action": "settled",
+   "threads": [
+    "HP-A-261012-01"
+   ],
+   "note": "Sent by email on the 13th",
+   "after": "20261012T140000Z",
+   "reduced": true
+  },
+  {
+   "mkg2": "1.0",
+   "kind": "board",
+   "id": "mkg2-board-raise-HP-R-261001-01-20261016T090000000",
+   "savedAt": "2026-10-16T09:00:00.000Z",
+   "savedBy": "Pat Morgan",
+   "supersedes": null,
+   "action": "raise",
+   "threads": [
+    "HP-R-261001-01"
+   ],
+   "note": "Bring it to the next meeting",
+   "after": "20261012T140000Z",
+   "reduced": true
+  },
+  {
+   "mkg2": "1.0",
+   "kind": "board",
+   "id": "mkg2-board-lower-HP-R-261001-01-20261017T090000000",
+   "savedAt": "2026-10-17T09:00:00.000Z",
+   "savedBy": "Pat Morgan",
+   "supersedes": null,
+   "action": "lower",
+   "threads": [
+    "HP-R-261001-01"
+   ],
+   "note": "Covered by email instead",
+   "after": "20261012T140000Z",
+   "reduced": true
+  }
+ ],
+ "derived": {
+  "computedFrom": "the whole workspace, up to the end of the range, cut to the chosen projects",
+  "asOf": {
+   "meetingId": "20261019T140000Z",
+   "date": "2026-10-19",
+   "title": "Harbor Point weekly"
+  },
+  "packages": {
+   "inUse": [
+    "mkg2-meeting-HP-20261012T140000Z-20261012T183000250",
+    "mkg2-meeting-HP-20261019T140000Z-20261019T150000000"
+   ],
+   "superseded": [],
+   "conflicts": [],
+   "boardDecisions": [
+    "mkg2-board-settled-HP-A-261012-01-20261015T090000000",
+    "mkg2-board-raise-HP-R-261001-01-20261016T090000000",
+    "mkg2-board-lower-HP-R-261001-01-20261017T090000000"
+   ]
+  },
+  "projects": [
+   {
+    "code": "HP",
+    "name": "Harbor Point reopening"
+   }
+  ],
+  "closedProjects": [],
+  "threads": [
+   {
+    "id": "HP-A-261001-01",
+    "kind": "action",
+    "project": "HP",
+    "owner": "Grace Okafor",
+    "what": "Book the fire inspection",
+    "due": null,
+    "dueDate": null,
+    "topic": "",
+    "seg": null,
+    "importance": "normal",
+    "status": "done",
+    "statusStack": [
+     "open",
+     "in_progress",
+     "done"
+    ],
+    "waitsOn": null,
+    "created": "20261001T000000Z",
+    "mentions": [
+     "20261001T000000Z",
+     "20261005T140000Z",
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261001T000000Z",
+      "item": 1,
+      "event": "created"
+     },
+     {
+      "meeting": "20261005T140000Z",
+      "item": 2,
+      "event": "in_progress",
+      "what": "The fire inspection is being scheduled",
+      "byReview": false
+     },
+     {
+      "meeting": "20261012T140000Z",
+      "item": 1,
+      "event": "done",
+      "what": "The fire inspection is booked",
+      "byReview": false
+     }
+    ],
+    "toCheck": false,
+    "quiet": 0,
+    "parked": false
+   },
+   {
+    "id": "HP-A-261001-02",
+    "kind": "action",
+    "project": "HP",
+    "owner": "Tom Lindqvist",
+    "what": "Get caterer quotes",
+    "due": null,
+    "dueDate": null,
+    "topic": "",
+    "seg": null,
+    "importance": "normal",
+    "status": "done",
+    "statusStack": [
+     "open",
+     "done"
+    ],
+    "waitsOn": null,
+    "created": "20261001T000000Z",
+    "mentions": [
+     "20261001T000000Z",
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261001T000000Z",
+      "item": 2,
+      "event": "created"
+     },
+     {
+      "meeting": "20261012T140000Z",
+      "item": 12,
+      "event": "done",
+      "what": "Closed with HP-Q-261001-01, settled in this meeting",
+      "byReview": true
+     }
+    ],
+    "toCheck": false,
+    "quiet": 0,
+    "parked": false
+   },
+   {
+    "id": "HP-Q-261001-01",
+    "kind": "question",
+    "project": "HP",
+    "owner": "Grace Okafor",
+    "what": "Which caterer does the opening?",
+    "due": null,
+    "dueDate": null,
+    "topic": "",
+    "seg": null,
+    "importance": "normal",
+    "status": "done",
+    "statusStack": [
+     "open",
+     "done"
+    ],
+    "waitsOn": null,
+    "created": "20261001T000000Z",
+    "mentions": [
+     "20261001T000000Z",
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261001T000000Z",
+      "item": 3,
+      "event": "created"
+     },
+     {
+      "meeting": "20261012T140000Z",
+      "item": 6,
+      "event": "done",
+      "what": "Harbor Catering will do the opening",
+      "byReview": false
+     }
+    ],
+    "toCheck": false,
+    "quiet": 0,
+    "parked": false
+   },
+   {
+    "id": "HP-R-261001-01",
+    "kind": "risk",
+    "project": "HP",
+    "owner": "Grace Okafor",
+    "what": "The occupancy permit may slip",
+    "due": null,
+    "dueDate": null,
+    "topic": "",
+    "seg": null,
+    "importance": "normal",
+    "status": "in_progress",
+    "statusStack": [
+     "open",
+     "in_progress"
+    ],
+    "waitsOn": null,
+    "created": "20261001T000000Z",
+    "mentions": [
+     "20261001T000000Z",
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261001T000000Z",
+      "item": 4,
+      "event": "created"
+     },
+     {
+      "meeting": "20261012T140000Z",
+      "item": 9,
+      "event": "related",
+      "what": "Chase the permit office",
+      "related": "HP-A-261012-03"
+     },
+     {
+      "meeting": "20261012T140000Z",
+      "item": 13,
+      "event": "in_progress",
+      "what": "Chase the permit office",
+      "byReview": false
+     },
+     {
+      "board": "mkg2-board-raise-HP-R-261001-01-20261016T090000000",
+      "event": "raise",
+      "by": "Pat Morgan",
+      "note": "Bring it to the next meeting",
+      "at": "2026-10-16T09:00:00.000Z"
+     },
+     {
+      "board": "mkg2-board-lower-HP-R-261001-01-20261017T090000000",
+      "event": "lower",
+      "by": "Pat Morgan",
+      "note": "Covered by email instead",
+      "at": "2026-10-17T09:00:00.000Z"
+     }
+    ],
+    "toCheck": false,
+    "quiet": 1,
+    "parked": false
+   },
+   {
+    "id": "HP-D-261001-01",
+    "kind": "decision",
+    "project": "HP",
+    "owner": null,
+    "what": "Keep the case number format",
+    "due": null,
+    "dueDate": null,
+    "topic": "",
+    "seg": null,
+    "importance": "normal",
+    "status": "decided",
+    "statusStack": [
+     "decided"
+    ],
+    "waitsOn": null,
+    "created": "20261001T000000Z",
+    "mentions": [
+     "20261001T000000Z"
+    ],
+    "lastTouch": "20261001T000000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261001T000000Z",
+      "item": 5,
+      "event": "created"
+     }
+    ],
+    "toCheck": false,
+    "quiet": 0,
+    "parked": false
+   },
+   {
+    "id": "HP-A-261005-01",
+    "kind": "action",
+    "project": "HP",
+    "owner": "Grace Okafor",
+    "what": "Draft the reopening notice",
+    "due": "by Friday",
+    "dueDate": "2026-10-09",
+    "topic": "",
+    "seg": "S001",
+    "importance": "normal",
+    "status": "done",
+    "statusStack": [
+     "open",
+     "done"
+    ],
+    "waitsOn": null,
+    "created": "20261005T140000Z",
+    "mentions": [
+     "20261005T140000Z",
+     "20261019T140000Z"
+    ],
+    "lastTouch": "20261019T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261005T140000Z",
+      "item": 1,
+      "event": "created"
+     },
+     {
+      "meeting": "20261019T140000Z",
+      "item": 1,
+      "event": "done",
+      "what": "The reopening notice is approved",
+      "byReview": false
+     }
+    ],
+    "toCheck": false,
+    "quiet": 0,
+    "parked": false
+   },
+   {
+    "id": "HP-A-261012-01",
+    "kind": "action",
+    "project": "HP",
+    "owner": "Grace Okafor",
+    "what": "Send the notice draft to legal",
+    "due": "tomorrow",
+    "dueDate": "2026-10-13",
+    "topic": "",
+    "seg": "S003",
+    "importance": "normal",
+    "status": "done",
+    "statusStack": [
+     "open",
+     "done"
+    ],
+    "waitsOn": null,
+    "created": "20261012T140000Z",
+    "mentions": [
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": {
+     "by": "Pat Morgan",
+     "note": "Sent by email on the 13th",
+     "at": "2026-10-15T09:00:00.000Z"
+    },
+    "history": [
+     {
+      "meeting": "20261012T140000Z",
+      "item": 3,
+      "event": "created"
+     },
+     {
+      "board": "mkg2-board-settled-HP-A-261012-01-20261015T090000000",
+      "event": "settled",
+      "by": "Pat Morgan",
+      "note": "Sent by email on the 13th",
+      "at": "2026-10-15T09:00:00.000Z"
+     }
+    ],
+    "toCheck": false,
+    "quiet": 0,
+    "parked": false
+   },
+   {
+    "id": "HP-D-261012-01",
+    "kind": "decision",
+    "project": "HP",
+    "owner": "Tom Lindqvist",
+    "what": "Use the north entrance for the reopening",
+    "due": null,
+    "dueDate": null,
+    "topic": "",
+    "seg": "S004",
+    "importance": "high",
+    "status": "decided",
+    "statusStack": [
+     "decided"
+    ],
+    "waitsOn": null,
+    "created": "20261012T140000Z",
+    "mentions": [
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261012T140000Z",
+      "item": 4,
+      "event": "created"
+     }
+    ],
+    "toCheck": false,
+    "quiet": 0,
+    "parked": false
+   },
+   {
+    "id": "HP-A-261012-02",
+    "kind": "action",
+    "project": "HP",
+    "owner": "Ana Ruiz",
+    "what": "Bring the cake",
+    "due": null,
+    "dueDate": null,
+    "topic": "",
+    "seg": "S005",
+    "importance": "normal",
+    "status": "open",
+    "statusStack": [
+     "open"
+    ],
+    "waitsOn": null,
+    "created": "20261012T140000Z",
+    "mentions": [
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261012T140000Z",
+      "item": 5,
+      "event": "created"
+     }
+    ],
+    "toCheck": true,
+    "quiet": 1,
+    "parked": false
+   },
+   {
+    "id": "HP-Q-261012-01",
+    "kind": "question",
+    "project": "HP",
+    "owner": "Tom Lindqvist",
+    "what": "Is a second exit sign needed by the stairs?",
+    "due": null,
+    "dueDate": null,
+    "topic": "",
+    "seg": "S007",
+    "importance": "normal",
+    "status": "done",
+    "statusStack": [
+     "open",
+     "done"
+    ],
+    "waitsOn": null,
+    "created": "20261012T140000Z",
+    "mentions": [
+     "20261012T140000Z",
+     "20261019T140000Z"
+    ],
+    "lastTouch": "20261019T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261012T140000Z",
+      "item": 7,
+      "event": "created"
+     },
+     {
+      "meeting": "20261019T140000Z",
+      "item": 2,
+      "event": "done",
+      "what": "The second exit sign is not needed",
+      "byReview": false
+     }
+    ],
+    "toCheck": false,
+    "quiet": 0,
+    "parked": false
+   },
+   {
+    "id": "HP-A-261012-03",
+    "kind": "action",
+    "project": "HP",
+    "owner": "Grace Okafor",
+    "what": "Chase the permit office",
+    "due": "on Monday",
+    "dueDate": "2026-10-19",
+    "topic": "",
+    "seg": "S008",
+    "importance": "normal",
+    "status": "open",
+    "statusStack": [
+     "open"
+    ],
+    "waitsOn": null,
+    "created": "20261012T140000Z",
+    "mentions": [
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261012T140000Z",
+      "item": 9,
+      "event": "created"
+     }
+    ],
+    "toCheck": false,
+    "relatedTo": "HP-R-261001-01",
+    "quiet": 1,
+    "parked": false
+   },
+   {
+    "id": "HP-A-261012-04",
+    "kind": "action",
+    "project": "HP",
+    "owner": null,
+    "what": "Print the opening signs",
+    "due": "this week",
+    "dueDate": "2026-10-16",
+    "topic": "",
+    "seg": "S009",
+    "importance": "normal",
+    "status": "open",
+    "statusStack": [
+     "open"
+    ],
+    "waitsOn": null,
+    "created": "20261012T140000Z",
+    "mentions": [
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261012T140000Z",
+      "item": 10,
+      "event": "created"
+     }
+    ],
+    "toCheck": false,
+    "quiet": 1,
+    "parked": false
+   },
+   {
+    "id": "HP-A-261012-05",
+    "kind": "action",
+    "project": "HP",
+    "owner": "Grace Okafor",
+    "what": "Sign the catering contract",
+    "due": "next week",
+    "dueDate": "2026-10-23",
+    "topic": "",
+    "seg": "S006",
+    "importance": "normal",
+    "status": "open",
+    "statusStack": [
+     "open"
+    ],
+    "waitsOn": null,
+    "created": "20261012T140000Z",
+    "mentions": [
+     "20261012T140000Z"
+    ],
+    "lastTouch": "20261012T140000Z",
+    "raised": null,
+    "settledOutside": null,
+    "history": [
+     {
+      "meeting": "20261012T140000Z",
+      "item": 11,
+      "event": "created"
+     }
+    ],
+    "toCheck": false,
+    "quiet": 1,
+    "parked": false
+   }
+  ],
+  "unlinked": [],
+  "people": {
+   "people": [
+    {
+     "name": "Grace Okafor",
+     "labels": [
+      {
+       "label": "Okafor, Grace",
+       "from": "speaker"
+      }
+     ]
+    },
+    {
+     "name": "Tom Lindqvist",
+     "labels": [
+      {
+       "label": "Lindqvist, Tom",
+       "from": "speaker"
+      }
+     ]
+    },
+    {
+     "name": "Front desk",
+     "labels": []
+    },
+    {
+     "name": "Ana Ruiz",
+     "labels": [
+      {
+       "label": "Ruiz, Ana",
+       "from": "review"
+      }
+     ]
+    }
+   ],
+   "noOwner": [
+    {
+     "label": "Front desk",
+     "from": "review"
+    }
+   ]
+  }
+ }
+}

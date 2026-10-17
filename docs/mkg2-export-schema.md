@@ -1,6 +1,6 @@
 # MeetingGraph 2 export format
 
-Version `1.1` (plan §10.30, 2026-10-17). This is the contract for apps that read MeetingGraph's files, such as Dossier Studio. MeetingGraph owns it; a change to it is a numbered plan change.
+Version `1.1` (plan §10.30, 2026-10-17; clarified in §10.31). This is the contract for apps that read MeetingGraph's files, such as Dossier Studio. MeetingGraph owns it; a change to it is a numbered plan change.
 
 A unit test (`t53h` in `tests/v2/unit/v2test.js`) fails if a package MeetingGraph saves holds a field that is not in the tables below. The tables are therefore complete for everything MeetingGraph writes. Fields marked *optional* may be absent.
 
@@ -25,6 +25,11 @@ A unit test (`t53h` in `tests/v2/unit/v2test.js`) fails if a package MeetingGrap
    - an item with `mergedInto` is the same as another item of its meeting;
    - an item with `statusOf` carries a status split off another item (see `relatedTo`).
 10. **Sources to check.** An item with `toCheck: true` has words that were not found in the transcript. MeetingGraph leaves it out of emails; a reader should not treat it as evidence.
+11. **How quoted words are found.** MeetingGraph compares *words in order*, not characters:
+    - case and punctuation are ignored, and dashes, curly quotes and spaces are normalised;
+    - whole words only (`is` never matches inside `island`).
+
+    So `items[].words` is not always an exact character substring of the statement: `the 2nd is` is found in `the 2nd. Is`. To use MeetingGraph's check, trust `src` (`verified` or `near`, with `toCheck: false`), or apply the same rule.
 
 ## 2. Identifiers
 
@@ -65,12 +70,17 @@ A unit test (`t53h` in `tests/v2/unit/v2test.js`) fails if a package MeetingGrap
 
 **A reduced file differs from the full file as follows.** Each of its packages keeps its source's `id` and carries `reduced: true`: it is a view of that save, not a different save.
 - Only the chosen projects' items are kept, with their `projects`, `minted` and `meeting.dayKeys` entries.
-- Only the statements a kept item cites (`seg`) are kept. `citedSeg` may then name a statement that is not in the file.
+- Only the statements a kept item cites (`seg`) are kept, except for items still to check (`toCheck: true`), whose words were not found in the statement (§10.31). `citedSeg`, and the `seg` of a to-check item, may then name a statement that is not in the file.
 - `reply.summary` is `null` when the meeting also covered projects that were not chosen.
 - `attendance` is removed. `aliases` keep only the labels of kept statements and items.
 - `request.openIds` and `newProjects` are cut down to the chosen projects.
 - A spreadsheet start keeps only the people its kept items name, with no `email`.
-- `derived` is computed from the whole workspace up to the end of the range, then cut down to the chosen projects.
+- `derived` is computed from the whole workspace up to the end of the range, then cut down to the chosen projects:
+  - meetings after `scope.to`, and board decisions saved after it, are left out (§10.31);
+  - its threads can include work created before `scope.from`, whose packages and statements are not in the file;
+  - `derived.packages.superseded` and `.conflicts` are always empty, because only the saves in use are shared, and every package in the file is listed in `derived.packages.inUse` or `.boardDecisions`;
+  - `derived.people` covers only the shared packages, so a `threads[].owner` from before the range may have no entry: treat an owner as a display name.
+- **Fixtures.** Synthetic full and shared files that exercise every rule are in `tests/v2/fixtures/export-1.1/`, with a README. A unit test rebuilds them from the code, so they always match it.
 
 ## 4. Meeting package (`kind: "meeting"`)
 
@@ -169,7 +179,7 @@ A unit test (`t53h` in `tests/v2/unit/v2test.js`) fails if a package MeetingGrap
 | `items[].seg` | **The checked source statement**: where the quoted words were found. Use this one. |
 | `items[].citedSeg` | The statement the chat cited. It differs from `seg` when the words were found nearby. |
 | `items[].words` | 3–10 words quoted from the statement. |
-| `items[].src` | `verified` (in the cited statement), `near` (within two statements), `misplaced` (elsewhere in the meeting) or `not found`. |
+| `items[].src` | `verified` (in the cited statement), `near` (within two statements), `misplaced` (elsewhere in the meeting) or `not found`, by the word rule in section 1, rule 11. |
 | `items[].toCheck` | True for `misplaced` or `not found`: not evidence (rule 10). |
 | `items[].notes` | How the item was adjusted when read or reviewed (plain-language notes). |
 | `items[].edited` | *Optional.* What the PM changed: `thread`, `same as`, `owner`, `due`, `due date`, `importance`. |
@@ -333,7 +343,7 @@ A decision made on the Board, outside a meeting, with a name and a note. It is n
 | `threads[].closedWithProject.board` | the board package; |
 | `threads[].toCheck` | the item that created it had a source to check; |
 | `threads[].history` | what happened to it, in order. A meeting entry: |
-| `threads[].history[].meeting` | the meeting ID; |
+| `threads[].history[].meeting` | the meeting ID; the item is in that meeting's save in use (`derived.packages.inUse`); |
 | `threads[].history[].item` | the item `n` in that meeting's package; |
 | `threads[].history[].event` | `created`, `update`, `done`, `blocked`, `in_progress` (an applied status), `related` (new work about it), or a board `action`; |
 | `threads[].history[].what` | the item's line; |

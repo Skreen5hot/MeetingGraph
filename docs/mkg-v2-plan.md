@@ -1435,3 +1435,34 @@ Nothing new is recorded. The graph, the chat request and the meeting workflow ar
   - knockouts 201 of 201 (21 new);
   - full page 57/57 (f38–f40, f38b; the f25d wait removed);
   - page knockouts 8 of 8 (3 new).
+
+### 10.31 The export: a bug fix, clarifications and conformance fixtures (Aaron, 2026-10-17: "agree proceed", after the review of Dossier Studio spec v0.3.1)
+
+**The bug (mine, from §10.30).** A shared file's `derived` board counted board decisions saved after the end of the range, up to the next meeting (or every later one, if there was none). Now board decisions saved after `scope.to` are left out, as the schema document said. Check t53i.
+
+**One change found while building the fixtures.** A shared file no longer keeps the statements cited only by items still "to check".
+- Those items' words were not found in the statement, so the statement is not evidence of anything.
+- In the fixture it was a personal remark ("my kid has a cold").
+- The item itself is still in the file, marked `toCheck`.
+
+**The schema document, clarified** (behaviour unchanged):
+- the source check compares words in order, ignoring case and punctuation, so `words` is not always an exact character substring (rule 11);
+- in a shared file, `superseded` and `conflicts` are empty, every package is listed in `inUse` or `boardDecisions`, `derived` can hold work from before the range, and the people register covers only the shared packages;
+- `history[].meeting` joins to that meeting's save in use.
+
+**Conformance fixtures** (`tests/v2/fixtures/export-1.1/`, with a README for the Dossier Studio developer).
+- Three synthetic files: `full.json`, `shared-HP.json` and `shared-HP-LB.json`.
+- `make_export_fixtures.js` builds them through the real pipeline: a spreadsheet start, meetings checked and reviewed, a re-save, a conflict, all seven board decisions, verified, near and to-check items, PM-added, reviewer, merged and split items, a "No owner" answer, attendance, and two projects.
+- t54a fails if the committed files differ from what the code builds. They are kept byte for byte (`.gitattributes`).
+
+**Tests:**
+- unit 231/231 (t53i, t54a–e);
+- knockouts: 6 new;
+- the browser suites unchanged.
+
+**Sent with this to the Dossier Studio developer: five corrections to spec v0.3.1.**
+1. Trust `src` rather than requiring an exact substring.
+2. Replace the save-precedence logic with "every package is in `derived.packages.inUse` or `.boardDecisions`".
+3. Drop the "diagnostic full fixture" import mode.
+4. Reword AT-I08 to show `derived`.
+5. Treat a thread owner missing from the register as a display name.

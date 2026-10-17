@@ -5,7 +5,7 @@ MeetingGraph turns meeting transcripts into a reliable project board. **The prod
 The team folder of package files (JSON) is the source of truth; the browser mirrors it.
 
 ## How we work (Aaron is the ratifying architect)
-- **Plan before build.** Changes are written up as a numbered section of `docs/mkg-v2-plan.md` (latest: §10.30, the export as a contract for other apps, built 2026-10-17) and approved by Aaron before they are built. When Aaron approves ("approved", "proceed"), build it: no extra chat-test gates.
+- **Plan before build.** Changes are written up as a numbered section of `docs/mkg-v2-plan.md` (latest: §10.31, the export's bug fix, clarifications and conformance fixtures, built 2026-10-17) and approved by Aaron before they are built. When Aaron approves ("approved", "proceed"), build it: no extra chat-test gates.
 - **Test before build** for anything that changes the chat contract (the request text or reply format): run it on gpt-5.6-terra-low first (Aaron runs it), score it, then build.
 - **Keep v1's screens.** The PM expects v1's board, screens and email formats; v2 changes what is underneath. Screen changes come from the PM or Aaron.
 - **Structural fixes** over patches or prompt nagging. If the model can't be held to a rule, the build handles it.
@@ -20,7 +20,7 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
   - `modules/`: plain JS, also run by Node: transcript, request, reply, store (packages, IDs, the replay, board and project decisions), dates, people, attendance, export (the workspace file, `derived`, Export for sharing), interventions (the Dashboard), review, email (meeting and Program reports), summary, seed.
   - `page/app.html`: v1's screens and CSS over v2; edit it directly.
   - `build_v2.py`: puts the modules into the page.
-- `dist/MeetingGraph2.html`: the v2 build (sha256 `dee9f2e7…`, 2026-10-17, §10.20–§10.30).
+- `dist/MeetingGraph2.html`: the v2 build (sha256 `1ac58f46…`, 2026-10-17, §10.20–§10.31).
 - `docs/mkg2-export-schema.md`: the export format, a contract for other apps (Dossier Studio). Every field saved must be in it: unit check t53h fails otherwise. Changing it is a plan change.
 - `tests/v2`:
   - `unit/v2test.js`
@@ -28,6 +28,7 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
   - `e2e_slice.py` (Playwright, meeting to email)
   - `e2e_full.py` (Playwright: review, board decisions, people, review again, conflicts, reports, Dashboard, Close project, the exports)
   - `knock_page.py` (knockouts of page code, against `e2e_full.py`; about 5 minutes each)
+  - `fixtures/export-1.1/`: the export's conformance fixtures for Dossier Studio, built by `fixtures/make_export_fixtures.js`. After any change to what is saved or exported, run it: unit check t54a fails until the files match the code.
 - `tests/v2-feasibility`: the v2 kit (mock seed and follow-up meetings, requests, key, checker, the PM's sample emails). See its README.
 - `tests/real`: tools for real meetings without their content (`score_real.py`, `make_variant.py`, `README.txt`). Real replies and keys go in `tests/real/local/` (git-ignored); never commit real meeting content.
 - v1, frozen:
@@ -48,8 +49,8 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
 
 ## Expected results (2026-10-17)
 - v2:
-  - unit 225/225;
-  - knockouts 201 of 201 killed;
+  - unit 231/231;
+  - knockouts 206 of 206 killed;
   - slice in the browser 53/53, full page 57/57;
   - page knockouts (`tests/v2/knock_page.py`) 8 of 8 killed;
   - kit checker self-test 44/44, knockouts 19 of 19;

@@ -1468,7 +1468,8 @@ function reduced(pkgs, { projects, from, to, exportedAt } = {}) {
     if (q.minted && q.minted.maxNum) q.minted.maxNum = Object.fromEntries(Object.entries(q.minted.maxNum).filter(([k]) => !k.includes(':') || codes.has(k.split(':')[0])));
     if (q.meeting.dayKeys) q.meeting.dayKeys = Object.fromEntries(Object.entries(q.meeting.dayKeys).filter(([c]) => codes.has(c)));
     if (p.kind === 'meeting') {
-      const cited = new Set(items.map(it => it.seg).filter(Boolean));
+      // Only statements that are evidence: an item still "to check" cites a statement its words were not found in (§10.31).
+      const cited = new Set(items.filter(it => !it.toCheck).map(it => it.seg).filter(Boolean));
       q.statements = (p.statements || []).filter(s => cited.has(s.id)).map(clone);
       const speakers = new Set(q.statements.map(s => s.speaker)), whos = new Set(items.map(it => it.who).filter(Boolean));
       q.aliases = (p.aliases || []).filter(a => speakers.has(a.label) || whos.has(a.label)).map(clone);
@@ -1489,10 +1490,11 @@ function reduced(pkgs, { projects, from, to, exportedAt } = {}) {
     const ts = (p.threads || []).filter(id => { const t = full.threads.get(id); return codes.has(t ? t.project : String(id).split('-')[0]); });
     if (ts.length) out.push(Object.assign(clone(p), { threads: ts, reduced: true }));
   }
-  // derived: the board as of the end of the range (the first meeting after "to" is left out), cut to the chosen projects;
-  // its people are those the shared packages name.
+  // derived: the board as of the end of the range, cut to the chosen projects: meetings after "to" are left out, and so
+  // are board decisions saved after it (§10.31: they had counted until the next meeting). Its people are those the shared
+  // packages name.
   const next = used.find(p => p.meeting.date > to);
-  const d = derived(all, { upTo: next ? next.meeting.id : null, keep: c => codes.has(c), computedFrom: 'the whole workspace, up to the end of the range, cut to the chosen projects' });
+  const d = derived(all.filter(p => p.kind !== 'board' || String(p.savedAt).slice(0, 10) <= to), { upTo: next ? next.meeting.id : null, keep: c => codes.has(c), computedFrom: 'the whole workspace, up to the end of the range, cut to the chosen projects' });
   const kept = new Set(out.map(p => p.id));
   d.packages = { inUse: d.packages.inUse.filter(id => kept.has(id)), superseded: [], conflicts: [], boardDecisions: d.packages.boardDecisions.filter(id => kept.has(id)) };
   d.people = PE.register(out);
