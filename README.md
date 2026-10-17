@@ -48,6 +48,7 @@ MeetingGraph does not call an AI service. It writes a request, you paste it into
 ## Where the data lives
 
 - **The team folder is the record.** Every save downloads a JSON file: a meeting, a board decision or a spreadsheet start. To restore the board on any machine, use *Open files*. *Export workspace* writes everything into one file.
+- **Sharing with another app.** *Export for sharing* (Workspace tab) writes a reduced copy for apps such as Dossier Studio: the projects and dates you choose, only the statements their items cite, with no email addresses and no attendance. It is not a backup, and MeetingGraph won't open it. The file format is defined in [`docs/mkg2-export-schema.md`](docs/mkg2-export-schema.md).
 - **The browser keeps a copy only for convenience.** Nothing is sent to a server: the page runs entirely in your browser.
 - **Nothing is overwritten.** Saving a meeting again replaces the earlier save on the board, and both files stay in the history.
 - **Starting out.** You can begin a board from a spreadsheet (*Workspace → Initial setup*) using [`templates/mkg2-seed-template.csv`](templates/mkg2-seed-template.csv); [`mkg2-seed-guide.txt`](templates/mkg2-seed-guide.txt) explains the columns. To try the tool, use *Load sample baseline* (fictional data).
@@ -62,6 +63,7 @@ MeetingGraph does not call an AI service. It writes a request, you paste it into
 | `templates/` | The spreadsheet template, an example and a guide. |
 | `tests/v2/` | Unit tests, knockouts (mutations that each test must catch), and browser tests (Playwright). |
 | `tests/v2-feasibility/`, `tests/real/` | The kits used to test the chat requests, with mock meetings only. |
+| `docs/mkg2-export-schema.md` | The export format: the contract for other apps that read MeetingGraph's files. |
 | `docs/mkg-v2-plan.md` | The design and every approved change (§10 is the build). |
 | `archive/v1/` | MeetingGraph 1, archived. Its sources (`src/base`, `src/ports`, `src/modules`, `src/ui`, `build.py`) and tests are kept frozen. |
 

@@ -1350,3 +1350,88 @@ Nothing new is recorded. The graph, the chat request and the meeting workflow ar
 - knockouts 180 of 180 (three older ones re-anchored);
 - browser 53/53 and 48/48 (e24, f33–f37).
 
+
+### 10.30 The export as a contract for other apps (Aaron, 2026-10-17: "I approve, write up the MeetingGraph side"; ratified "Ratified by me"; built 2026-10-17)
+
+**Why.** Dossier Studio, a separate app, will read MeetingGraph's workspace export. Its spec v0.2 had to guess what the fields mean, and guessed several wrong (see the decision sent with spec v0.3). MeetingGraph owns the export format: these five changes make it a documented contract.
+- Nothing here changes the chat request, the review, the board or the PM's screens. The only new control is one card on the Workspace tab.
+- Dossier Studio depends only on the export format, never on MeetingGraph's code.
+
+**1. The schema document** (`docs/mkg2-export-schema.md`, new).
+- It defines every field of every package kind (meeting, seed, board, a switched save) and of the workspace file.
+- **What each field means, where that isn't obvious:**
+  - `who` is the chat's label: the owner for a commitment, otherwise whoever raised or settled the item. `person` is the owner as the review resolved it.
+  - `seg` is the checked source statement. `citedSeg` is what the chat claimed. `src` and `toCheck` say whether the quoted words were found.
+  - `byReview` items are the reviewer's closures; `added` items were typed by the PM. Neither is something a speaker said (A1).
+  - `statusOf` items are a status split off another item; `mergedInto` items are duplicates. Neither is a separate piece of work.
+  - `supersedes` and `alsoSupersedes` decide which saves count: drop the superseded ones; if two saves of one meeting remain, the first-saved is used.
+- **The board decisions and what each does on replay:** settled, not_needed, undo, raise, lower, close_project and reopen_project.
+- **How to read it:**
+  - the packages are the record, and `derived` (2, below) is a convenience;
+  - unknown fields must be kept, not rejected.
+- **A unit test keeps the document honest.** It builds one package of every kind and fails if any field it holds is not in the document.
+
+**2. A `derived` section in "Export workspace".** The file stays `mkg2Workspace` and goes from `1.0` to `1.1`.
+- The `packages` are unchanged, and older pages still load the file.
+- `derived` is the board as replayed from every package at export time:
+  - `asOf`: the last meeting's ID and date;
+  - `packages`: which saves are in use, which are superseded, and the conflicts;
+  - `projects` and `closedProjects`: who closed each one, when, the note, and the items closed with it;
+  - `threads`: each item's ID, kind, project, owner, what was said, due date (as said and resolved), status, status history, waits-on, related item, parked, raised, settled outside a meeting, closed with the project, "to check", and its history of meetings and decisions;
+  - `unlinked`: items that point at an ID a re-saved meeting dropped.
+- It is computed by the same replay the Board uses, so it can't disagree with the Board. A reader that finds it inconsistent with the packages should trust the packages.
+- It holds no Dashboard questions and no email text: those are views, not records.
+
+**3. The people register in the export** (in `derived`, as `people`).
+- It holds each person's name and every label that means them, each marked with where it came from:
+  - the spreadsheet (its name and Teams name);
+  - a meeting's speaker label;
+  - a review's answer.
+- It also lists the labels answered "No owner".
+- It holds no email addresses. The full export still has them inside the spreadsheet packages, because that file is the team folder's backup.
+- **Stable person IDs are deferred.** People stay keyed by name until a need is shown, because adding IDs would touch the review and the saved files.
+
+**4. "Export for sharing"** (a new card on the Workspace tab).
+- You choose projects (ticked boxes) and a date range. The file it writes is a reduced copy for another app, not a backup:
+  - the workspace file and each package in it are marked `reduced: true`;
+  - only meetings, spreadsheet starts and board decisions of the chosen projects within the dates are kept;
+  - in a meeting that covered other projects, only the chosen projects' items are kept. The chat's meeting summary is kept only if the meeting covered no other project.
+  - **Only the statements the kept items cite are kept;** the rest of the transcript is left out.
+  - No email addresses and no attendance (who joined and left, and when).
+  - Open-thread lists, new-project records and `derived` are cut down to the chosen projects.
+- Names stay: the speakers, the owners, and `savedBy` (needed to show whose decision a decision was).
+- **MeetingGraph refuses to open a reduced file** ("This is an export for sharing, not a backup"). A partial copy must never mix with the real board.
+- A reduced package keeps its source's ID and says so (`reduced: true`), so a reader can tell it is a view of that save, not a different save.
+
+**5. Package IDs to the millisecond.**
+- New IDs end in the save time to the millisecond (`…-20261017T080312123`). Today they stop at the second, so two saves of one meeting within one second share an ID: a known limit, which this removes.
+- Older IDs stay valid and are never rewritten.
+- This applies to meetings, spreadsheet starts, board and project decisions, and switched saves.
+
+**Not in this change:**
+- anything about personality or communication style (that is Dossier Studio's, under its own governance review);
+- stable person IDs;
+- JSON-LD;
+- any change to what the chat is asked.
+
+**Tests (each check with a knockout):**
+- unit: the schema-coverage test; `derived` equal to the replay; the register's sources and its "No owner" labels; the reduced export (no emails, no attendance, only the chosen projects and dates, only cited statements, the summary kept or dropped correctly, `reduced` marks); millisecond IDs, and two saves in one second getting different IDs;
+- browser:
+  - "Export workspace" writes `1.1` with `derived`, and the page loads it back;
+  - "Export for sharing" writes the reduced file;
+  - "Open files" refuses that reduced file;
+  - the 1.1-second wait in f25d is removed.
+
+**After it is built:**
+- CLAUDE.md drops the same-second ID limit from the known limits.
+- The schema document is what Dossier Studio's spec v0.3 is written against.
+
+**Built (2026-10-17):**
+- `src/v2/modules/export.js` (new): the workspace file, `derived`, Export for sharing; `people.js`: the register; `store.js` and `seed.js`: millisecond IDs; the page: the card, the refusal, the 1.1 export.
+- A reduced file includes only the saves in use; superseded saves stay in the backup.
+- `docs/mkg2-export-schema.md` (new). Unit check t53h records every package the tests build and fails on any field the document does not define.
+- Tests:
+  - unit 225/225 (t53a–h);
+  - knockouts 201 of 201 (21 new);
+  - full page 57/57 (f38–f40, f38b; the f25d wait removed);
+  - page knockouts 8 of 8 (3 new).

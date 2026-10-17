@@ -49,6 +49,19 @@ function questions(items, speakers, people) {
   return out;
 }
 
-const api = { peopleOf, resolve, suggest, questions, clean };
+/* The people register for the export (§10.30): each person with every label that means them, and where the label's
+   meaning came from (the spreadsheet, a meeting's speaker label, or a review's answer, which wins as in peopleOf), and
+   the labels answered "No owner". No email addresses. */
+function register(pkgs) {
+  const pp = peopleOf(pkgs), used = S.current(pkgs).used, from = new Map();
+  for (const p of used) if (p.kind === 'meeting') for (const s of p.statements || []) if (!from.has(s.speaker)) from.set(s.speaker, 'speaker');
+  for (const p of used) if (p.kind === 'seed') for (const x of p.people || []) { from.set(x.name, 'spreadsheet'); if (x.teams) from.set(x.teams, 'spreadsheet'); }
+  for (const p of used) if (p.kind === 'meeting') for (const a of p.aliases || []) from.set(a.label, 'review');
+  const labels = [...pp.byLabel].map(([label, person]) => ({ label, person, from: from.get(label) || 'speaker' }));
+  return { people: pp.names.map(name => ({ name, labels: labels.filter(l => l.person === name).map(l => ({ label: l.label, from: l.from })) })),
+           noOwner: labels.filter(l => l.person === null).map(l => ({ label: l.label, from: l.from })) };
+}
+
+const api = { peopleOf, resolve, suggest, questions, clean, register };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.MKG2_people = api;
 })(this);

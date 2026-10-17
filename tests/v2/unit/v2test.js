@@ -9,6 +9,12 @@ const S = require(path.join(MOD, 'store.js')), E = require(path.join(MOD, 'email
 const SD = require(path.join(MOD, 'seed.js'));
 const DT = require(path.join(MOD, 'dates.js')), PE = require(path.join(MOD, 'people.js')), RV = require(path.join(MOD, 'review.js'));
 const AT = require(path.join(MOD, 'attendance.js'));
+const EX = require(path.join(MOD, 'export.js'));
+// Every package the tests build is recorded, for the schema-coverage check (t53h, §10.30): each field it holds must be
+// defined in docs/mkg2-export-schema.md.
+const BUILT = [];
+for (const [m, f] of [[S, 'meetingPackage'], [SD, 'seedPackage']]) { const g = m[f]; m[f] = function () { const r = g.apply(this, arguments); BUILT.push(r); return r; }; }
+for (const f of ['boardDecision', 'projectDecision', 'switchTo']) { const g = S[f]; S[f] = function () { const r = g.apply(this, arguments); if (r && r.pkg) BUILT.push(r.pkg); return r; }; }
 // The reviewed copy of the §10.20 request (variant J). It edits the real modules' D and F texts, so a knockout in the
 // modules' request.js makes the page's request differ from it.
 const KJ = require(path.join(ROOT, 'tests', 'v2-feasibility', 'sample-v1', 'variant-j.js'));
@@ -772,6 +778,82 @@ async function section(name, fn) { try { await fn(); } catch (e) { ok(name + ' (
   ok('t50g the meeting email lists the attendees (as matched people) in its overview; without a report it has no attendee line', emA.includes('Attendees (3): Grace Okafor, Tom Lindqvist, Zed Visitor') &&
      !em0.includes('Attendees') && emA.indexOf('Attendees') < emA.indexOf('2. Executive Summary'));
   ok('t49o nothing is named when the later meeting saw every ID, or when there is no later meeting', S.unseenLater([ps, pk, later], pk).length === 0 && S.unseenLater([ps, pk], pk).length === 0);
+  });
+
+  // ---------- the export as a contract (§10.30) ----------
+  await section('the export', async () => {
+  const H = 'Type,Project,Title,Owner,Email,Teams name,Due,Status,Waiting on,Notes';
+  const sd = SD.readSeed([H, 'Project,Harbor Point reopening,,,,,,,,', 'Project,Library build,,,,,,,,',
+    'Person,,Grace Okafor,,grace@example.org,"Okafor, Grace",,,,', 'Person,,Tom Lindqvist,,tom@example.org,"Lindqvist, Tom",,,,', 'Person,,Ana Ruiz,,ana@example.org,,,,,',
+    'Action,Harbor Point reopening,Book the inspection,Grace Okafor,,,,Open,,', 'Action,Library build,Pick the architect,Tom Lindqvist,,,,Open,,',
+    'Action,Library build,Order the books,Ana Ruiz,,,,Open,,'].join('\n'));
+  const ps = SD.seedPackage({ seed: sd, codes: { 'Harbor Point reopening': 'HP', 'Library build': 'LB' }, asOf: '2026-10-12', savedAt: '2026-10-12T12:00:00.000Z' });
+  const idOf = w => ps.items.find(x => x.what === w).id;
+  const st = [{ id: 'S001', t: '00:01:00', speakerName: 'Okafor, Grace', text: 'I will book the fire inspection for Friday.' },
+              { id: 'S002', t: '00:02:00', speakerName: 'Lindqvist, Tom', text: 'The architect shortlist for the library is ready.' },
+              { id: 'S003', t: '00:03:00', speakerName: 'Okafor, Grace', text: 'My kid has a cold this week, sorry.' }];
+  const items = [{ n: 1, kind: 'commitment', topic: 'inspection', who: 'Okafor, Grace', person: 'Grace Okafor', what: 'Book the fire inspection', due: 'Friday', dueDate: '2026-10-23',
+      importance: 'normal', thread: null, status: null, waitsOn: null, project: 'HP', seg: 'S001', citedSeg: 'S001', words: 'book the fire inspection', src: 'verified', toCheck: false, notes: [] },
+    { n: 2, kind: 'update', topic: 'architect', who: 'Lindqvist, Tom', person: 'Tom Lindqvist', what: 'The architect shortlist is ready', due: null, dueDate: null,
+      importance: 'normal', thread: idOf('Pick the architect'), status: 'in_progress', waitsOn: null, seg: 'S002', citedSeg: 'S002', words: 'the architect shortlist', src: 'verified', toCheck: false, notes: [] }];
+  const M1 = { id: '20261020T140000Z', date: '2026-10-20', time: '10:00', offset: '-04:00', title: 'Weekly board walk' };
+  const chk = { items, reply: { summary: 'The team covered the inspection and the library architect.' }, cut: null, note: null, lastSegOk: true };
+  const att = { title: 'Weekly board walk', start: 's', end: 'e', duration: 'd', participants: [{ name: 'Okafor, Grace', person: 'Grace Okafor', role: 'Organizer', join: 'j', leave: 'l', duration: 'd' }] };
+  const both = [{ code: 'HP', name: 'Harbor Point reopening' }, { code: 'LB', name: 'Library build' }];
+  const m1 = S.meetingPackage({ pkgs: [ps], projects: both, meeting: M1, statements: st, request: { token: 'x', kind: 'followup', openIds: [idOf('Book the inspection'), idOf('Pick the architect')] },
+    checked: chk, savedBy: 'PM', savedAt: '2026-10-20T16:00:00.000Z', attendance: att, aliases: [{ label: 'Okafor, Grace', person: 'Grace Okafor' }, { label: 'Room mic', person: null }] });
+  const m1b = S.meetingPackage({ pkgs: [ps, m1], projects: both, meeting: M1, statements: st, request: m1.request, checked: chk, savedBy: 'PM', savedAt: '2026-10-20T17:00:00.000Z',
+    attendance: att, aliases: m1.aliases });
+  const bd = S.boardDecision({ board: S.replay([ps, m1, m1b]), action: 'not_needed', ids: [idOf('Order the books')], note: 'Dropped', savedBy: 'PM', savedAt: '2026-10-21T09:00:00.000Z' }).pkg || {};
+  const bh = S.boardDecision({ board: S.replay([ps, m1, m1b]), action: 'settled', ids: [idOf('Book the inspection')], note: 'Booked', savedBy: 'PM', savedAt: '2026-10-21T09:30:00.000Z' }).pkg || {};
+  const M2 = { id: '20261110T150000Z', date: '2026-11-10', time: '10:00', offset: '-05:00', title: 'November walk' };
+  const m2 = S.meetingPackage({ pkgs: [ps, m1, m1b, bd, bh], projects: [both[0]], meeting: M2, statements: [st[0]], request: { token: 'y', kind: 'followup', openIds: [] },
+    checked: { items: [], reply: { summary: 'November.' }, cut: null, note: null, lastSegOk: true }, savedBy: 'PM', savedAt: '2026-11-10T18:00:00.000Z' });
+  const all = [ps, m1, m1b, bd, bh, m2];
+  const ws = EX.workspace(all, { exportedAt: '2026-11-11T00:00:00.000Z' }), b = S.replay(all), dv = ws.derived || {};
+  ok('t53a "Export workspace" is 1.1: the packages unchanged, and derived is the replayed board (statuses, saves in use and superseded, board decisions, as of the last meeting)',
+     ws.mkg2Workspace === '1.1' && JSON.stringify(ws.packages) === JSON.stringify(all) && (dv.threads || []).length === b.order.length &&
+     (dv.threads || []).every(t => b.threads.get(t.id) && b.threads.get(t.id).status === t.status) && (dv.threads || []).some(t => t.status === 'not_needed') &&
+     ((dv.packages || {}).superseded || []).join() === m1.id && ((dv.packages || {}).inUse || []).includes(m1b.id) && !((dv.packages || {}).inUse || []).includes(m1.id) &&
+     ((dv.packages || {}).boardDecisions || []).length === 2 && (dv.asOf || {}).date === '2026-11-10', dv.packages);
+  const reg = (dv.people || { people: [], noOwner: [] }), lab = (nm, l) => ((reg.people.find(x => x.name === nm) || { labels: [] }).labels.find(x => x.label === l) || {}).from;
+  ok('t53b the people register: each person with their labels and where each came from (a review answer wins); "No owner" labels listed; no email addresses',
+     lab('Grace Okafor', 'Grace Okafor') === 'spreadsheet' && lab('Grace Okafor', 'Okafor, Grace') === 'review' && lab('Tom Lindqvist', 'Lindqvist, Tom') === 'spreadsheet' &&
+     reg.noOwner.some(x => x.label === 'Room mic' && x.from === 'review') && !JSON.stringify(reg).includes('@'), reg);
+  const rd = EX.reduced(all, { projects: ['HP'], from: '2026-10-01', to: '2026-10-31', exportedAt: '2026-11-11T00:00:00.000Z' }), rf = rd.file || { packages: [], derived: { threads: [] } };
+  const rm = rf.packages.find(p => p.kind === 'meeting') || { items: [], statements: [], reply: {} }, rs = rf.packages.find(p => p.kind === 'seed') || { items: [], people: [] };
+  const txt = JSON.stringify(rf);
+  ok('t53c "Export for sharing": only the chosen project and dates, the save in use, the cited statements; no emails, no attendance, no meeting-wide summary of a meeting that covered other projects',
+     rf.reduced === true && rf.packages.every(p => p.reduced === true) && rf.packages.length === 3 && rm.id === m1b.id && !rf.packages.some(p => p.id === m2.id || p.id === m1.id || p.id === bd.id) &&
+     rm.items.map(x => x.n).join() === '1' && rm.statements.map(x => x.id).join() === 'S001' && !txt.includes('cold') && !txt.includes('@') && !('attendance' in rm) && rm.reply.summary === null &&
+     rm.projects.map(x => x.code).join() === 'HP' && rs.items.every(x => x.project === 'HP') && rs.people.map(x => x.name).join() === 'Grace Okafor' &&
+     rm.aliases.map(a => a.label).join() === 'Okafor, Grace' && rf.derived.threads.length && rf.derived.threads.every(t => t.project === 'HP') && rf.derived.asOf.date === '2026-10-20' &&
+     rf.scope.projects.join() === 'HP', [rf.packages.map(p => p.id), rm.items.length, rm.statements.length, rm.reply.summary]);
+  const rd2 = EX.reduced(all, { projects: ['HP', 'LB'], from: '2026-10-01', to: '2026-10-31' }), rm2 = ((rd2.file || { packages: [] }).packages.find(p => p.kind === 'meeting') || { reply: {}, statements: [] });
+  ok('t53d a meeting that covered only the chosen projects keeps its summary; both projects keep both cited statements', rm2.reply.summary === chk.reply.summary && rm2.statements.length === 2 && rd2.file.packages.length === 4);
+  ok('t53e "Export for sharing" needs a project and a date range in order', !!EX.reduced(all, { projects: [], from: '2026-10-01', to: '2026-10-31' }).error && !!EX.reduced(all, { projects: ['HP'], from: '2026-11-01', to: '2026-10-01' }).error);
+  ok('t53f a reduced file, or a reduced package, is known as one; a backup is not', EX.isReduced(rf) && EX.isReduced(rm) && !EX.isReduced(ws) && !EX.isReduced(m1b));
+  const sameSec = S.meetingPackage({ pkgs: [], projects: [both[0]], meeting: M1, statements: st, request: { token: 'z', kind: 'seed', openIds: [] }, checked: { items: [], reply: {}, cut: null, note: null, lastSegOk: true }, savedAt: '2026-10-20T12:00:00.123Z' });
+  const sameSec2 = S.meetingPackage({ pkgs: [], projects: [both[0]], meeting: M1, statements: st, request: { token: 'z', kind: 'seed', openIds: [] }, checked: { items: [], reply: {}, cut: null, note: null, lastSegOk: true }, savedAt: '2026-10-20T12:00:00.456Z' });
+  ok('t53g package IDs carry the save time to the millisecond: two saves in one second differ; a time without milliseconds gets 000', sameSec.id.endsWith('-20261020T120000123') &&
+     sameSec.id !== sameSec2.id && S.stamp('2026-10-19T16:00:00Z') === '20261019T160000000' && (bd.id || '').endsWith('-20261021T090000000') && ps.id.endsWith('-20261012T120000000'), [sameSec.id, bd.id]);
+  // t53h: every field of every package the tests built, and of the export, is defined in the schema document.
+  const doc = fs.readFileSync(path.join(ROOT, 'docs', 'mkg2-export-schema.md'), 'utf8');
+  const defined = sec => { const m = new RegExp('<!-- fields:' + sec + ' -->([\\s\\S]*?)<!-- /fields -->').exec(doc); return new Set(m ? [...m[1].matchAll(/`([^`]+)`/g)].map(x => x[1]) : []); };
+  const MAPS = new Set(['minted.maxNum', 'meeting.dayKeys']);
+  const paths = (o, pre, out) => {
+    if (Array.isArray(o)) { o.forEach(x => paths(x, pre + '[]', out)); return out; }
+    if (o && typeof o === 'object' && !MAPS.has(pre)) for (const k of Object.keys(o)) { const q = pre ? pre + '.' + k : k; out.add(q); paths(o[k], q, out); }
+    return out;
+  };
+  const missing = [];
+  const need = (sec, objs) => { const d = defined(sec), ps2 = new Set(); objs.forEach(o => paths(o, '', ps2)); for (const q of ps2) if (!d.has(q)) missing.push(sec + ': ' + q); };
+  need('meeting', BUILT.filter(p => p.kind === 'meeting'));
+  need('seed', BUILT.filter(p => p.kind === 'seed'));
+  need('board', BUILT.filter(p => p.kind === 'board'));
+  need('workspace', [Object.assign({}, ws, { packages: [], derived: null }), Object.assign({}, rf, { packages: [], derived: null })]);
+  need('derived', [ws.derived, rf.derived, EX.derived(BUILT.filter(p => p.kind === 'board' || p.kind === 'meeting' || p.kind === 'seed'))].filter(Boolean));
+  ok('t53h every field the tests saved or exported is defined in docs/mkg2-export-schema.md', missing.length === 0 && BUILT.length > 20, missing.slice(0, 400));
   });
 
   // ---------- the counts-only summary ----------

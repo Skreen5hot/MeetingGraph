@@ -5,7 +5,7 @@ MeetingGraph turns meeting transcripts into a reliable project board. **The prod
 The team folder of package files (JSON) is the source of truth; the browser mirrors it.
 
 ## How we work (Aaron is the ratifying architect)
-- **Plan before build.** Changes are written up as a numbered section of `docs/mkg-v2-plan.md` (latest: §10.29) and approved by Aaron before they are built. When Aaron approves ("approved", "proceed"), build it: no extra chat-test gates.
+- **Plan before build.** Changes are written up as a numbered section of `docs/mkg-v2-plan.md` (latest: §10.30, the export as a contract for other apps, built 2026-10-17) and approved by Aaron before they are built. When Aaron approves ("approved", "proceed"), build it: no extra chat-test gates.
 - **Test before build** for anything that changes the chat contract (the request text or reply format): run it on gpt-5.6-terra-low first (Aaron runs it), score it, then build.
 - **Keep v1's screens.** The PM expects v1's board, screens and email formats; v2 changes what is underneath. Screen changes come from the PM or Aaron.
 - **Structural fixes** over patches or prompt nagging. If the model can't be held to a rule, the build handles it.
@@ -17,15 +17,17 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
 
 ## Layout
 - `src/v2/`: v2 (plan `docs/mkg-v2-plan.md` §10).
-  - `modules/`: plain JS, also run by Node: transcript, request, reply, store (packages, IDs, the replay, board and project decisions), dates, people, attendance, interventions (the Dashboard), review, email (meeting and Program reports), summary, seed.
+  - `modules/`: plain JS, also run by Node: transcript, request, reply, store (packages, IDs, the replay, board and project decisions), dates, people, attendance, export (the workspace file, `derived`, Export for sharing), interventions (the Dashboard), review, email (meeting and Program reports), summary, seed.
   - `page/app.html`: v1's screens and CSS over v2; edit it directly.
   - `build_v2.py`: puts the modules into the page.
-- `dist/MeetingGraph2.html`: the v2 build (sha256 `37293fdb…`, 2026-10-17, §10.20–§10.29, plus the name field in the decision dialogs).
+- `dist/MeetingGraph2.html`: the v2 build (sha256 `dee9f2e7…`, 2026-10-17, §10.20–§10.30).
+- `docs/mkg2-export-schema.md`: the export format, a contract for other apps (Dossier Studio). Every field saved must be in it: unit check t53h fails otherwise. Changing it is a plan change.
 - `tests/v2`:
   - `unit/v2test.js`
   - `knock_v2.py` (knockouts)
   - `e2e_slice.py` (Playwright, meeting to email)
-  - `e2e_full.py` (Playwright: review, board decisions, people, review again, conflicts, reports, Dashboard, Close project)
+  - `e2e_full.py` (Playwright: review, board decisions, people, review again, conflicts, reports, Dashboard, Close project, the exports)
+  - `knock_page.py` (knockouts of page code, against `e2e_full.py`; about 5 minutes each)
 - `tests/v2-feasibility`: the v2 kit (mock seed and follow-up meetings, requests, key, checker, the PM's sample emails). See its README.
 - `tests/real`: tools for real meetings without their content (`score_real.py`, `make_variant.py`, `README.txt`). Real replies and keys go in `tests/real/local/` (git-ignored); never commit real meeting content.
 - v1, frozen:
@@ -44,11 +46,12 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
   - `pip install -r requirements.txt && playwright install chromium`
   - `npm install`
 
-## Expected results (2026-10-16)
+## Expected results (2026-10-17)
 - v2:
-  - unit 217/217;
-  - knockouts 180 of 180 killed;
-  - slice in the browser 53/53, full page 53/53 (page knockouts, `tests/v2/knock_page.py`: 5 of 5 killed);
+  - unit 225/225;
+  - knockouts 201 of 201 killed;
+  - slice in the browser 53/53, full page 57/57;
+  - page knockouts (`tests/v2/knock_page.py`) 8 of 8 killed;
   - kit checker self-test 44/44, knockouts 19 of 19;
   - sample (variant J) checker 21/21, knockouts 19 of 19.
 - v1:
@@ -60,7 +63,8 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
 ## Product rules worth knowing before touching code
 - **A1:** a reviewer's or PM's decision is never meeting evidence. It is recorded with their name and note, apart from the meeting basis.
 - **A2:** nothing is overwritten; records supersede. A re-save supersedes the earlier save, and both files stay.
-- **IDs** are `CODE-KIND-YYMMDD[b]-NN`, minted at Save and never changed.
+- **IDs** are `CODE-KIND-YYMMDD[b]-NN`, minted at Save and never changed. Package IDs end in the save time to the millisecond (since §10.30; older ones stop at the second).
+- **The export is a contract** (`docs/mkg2-export-schema.md`): "Export workspace" is the backup (1.1, with `derived`); "Export for sharing" is a reduced view for another app (chosen projects and dates, only cited statements, no emails, no attendance), and the page refuses to open it.
 - **Board decisions** are made one item at a time, in the item dialog, each with a note:
   - Mark completed / Mark resolved;
   - Mark as not needed;
@@ -87,7 +91,6 @@ The team folder of package files (JSON) is the source of truth; the browser mirr
 - **Known limits to tell the PM:**
   - the chat's recall varies between runs; the review is where misses are caught;
   - the chat's summary isn't edited by the review;
-  - v1 files can't be loaded (start v2 from the spreadsheet);
-  - two saves of one meeting within the same second would share an ID.
+  - v1 files can't be loaded (start v2 from the spreadsheet).
 - **The first-time-user session** (acceptance 10) is still open; a one-page quick start would cover most of it.
 - **v1's open items are parked:** §16.18 (leave out a bad change by default), open-question wording, the confirmation run, person items.

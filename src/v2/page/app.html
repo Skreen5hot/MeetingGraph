@@ -418,6 +418,14 @@ details.closedp > summary{cursor:pointer;color:var(--muted);font-size:13px;paddi
       <details id="saved-box" class="box"><summary>Review a saved meeting again</summary><ul class="items" id="saved-list"></ul></details>
       <div id="conflicts"></div>
     </section>
+    <section class="card" id="share">
+      <h3>Export for sharing (for another app)</h3>
+      <p class="small" style="margin-top:0">A reduced copy for another app, such as Dossier Studio: the projects and dates you choose, and only the transcript statements their items cite, with no email addresses and no attendance. It is not a backup, and this page won't open it; the backup is "Export workspace" in the top bar. Names and the quoted statements are in it: check it before you send it.</p>
+      <div id="share-projects"></div>
+      <div class="row"><label class="field">From<input type="date" id="share-from"></label><label class="field">To<input type="date" id="share-to"></label></div>
+      <div class="actions"><button class="btn" id="share-btn">Export for sharing</button></div>
+      <p id="share-msg" class="msg"></p>
+    </section>
     <section class="card">
       <h3>Initial setup: start a board from a spreadsheet (CSV)</h3>
       <p class="small" style="margin-top:0">One CSV with your projects, people, actions, questions, risks and decisions (templates/mkg2-seed-template.csv). Every ID is minted here.</p>
@@ -448,7 +456,7 @@ details.closedp > summary{cursor:pointer;color:var(--muted);font-size:13px;paddi
 (function () {
 'use strict';
 const T = window.MKG2_transcript, Q = window.MKG2_request, R = window.MKG2_reply, S = window.MKG2_store, E = window.MKG2_email, U = window.MKG2_summary;
-const DT = window.MKG2_dates, PE = window.MKG2_people, RV = window.MKG2_review, AT = window.MKG2_attendance, IV = window.MKG2_interventions;
+const DT = window.MKG2_dates, PE = window.MKG2_people, RV = window.MKG2_review, AT = window.MKG2_attendance, IV = window.MKG2_interventions, EX = window.MKG2_export;
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const state = { pkgs: [], prepared: null, request: null, checked: null, saved: null, answers: {}, relTicks: new Set(), proposals: [], reviewOf: null };
@@ -481,16 +489,36 @@ function renderSaved() {
     return `<p class="note">The meeting ${esc(c.meeting)} was saved twice: the board uses the save by ${esc(pk(c.used).savedBy || '?')} (${esc(pk(c.used).savedAt || '')}). ` +
       c.others.map(o => `<button class="secondary" data-switch="${i}|${esc(o)}">Use the save by ${esc(pk(o).savedBy || '?')} (${esc(pk(o).savedAt || '')}) instead</button>`).join(' ') + '</p>';
   }).join('');
+  renderShare(used);
   renderBoard();
 }
+// "Export for sharing" (§10.30): the projects to tick, and the dates, first to last meeting unless already set.
+function renderShare(used) {
+  const was = new Set([...document.querySelectorAll('[data-share]')].filter(x => x.checked).map(x => x.dataset.share)), ps = projects();
+  $('share-projects').innerHTML = ps.length ? ps.map(p => `<label><input type="checkbox" data-share="${esc(p.code)}"${was.has(p.code) ? ' checked' : ''}> ${esc(p.name)}</label>`).join(' ') : '<p class="src">No projects yet.</p>';
+  const ds = used.map(p => p.meeting.date).sort();
+  if (ds.length && !$('share-from').value) $('share-from').value = ds[0];
+  if (ds.length && !$('share-to').value) $('share-to').value = ds[ds.length - 1];
+  $('share-btn').disabled = !ps.length;
+}
+$('share-btn').addEventListener('click', () => {
+  const codes = [...document.querySelectorAll('[data-share]')].filter(x => x.checked).map(x => x.dataset.share);
+  const from = $('share-from').value, to = $('share-to').value;
+  const r = EX.reduced(state.pkgs, { projects: codes, from, to });
+  if (r.error) return msg('share-msg', r.error, 'bad');
+  const nm = r.file.packages.filter(p => p.kind === 'meeting').length, other = r.file.packages.length - nm;
+  download(`mkg2-share-${codes.join('-')}-${today()}.json`, r.file);
+  msg('share-msg', `Exported ${nm} meeting${nm === 1 ? '' : 's'} and ${other} other record${other === 1 ? '' : 's'} of ${codes.join(', ')}, ${from} to ${to}. Check the file before you send it.`, 'ok');
+});
 $('load-btn').addEventListener('click', () => $('load-files').click());
 $('load-files').addEventListener('change', async e => {
-  let n = 0, v1 = 0, other = 0; const loaded = [];
+  let n = 0, v1 = 0, other = 0, shared = 0; const loaded = [];
   for (const f of e.target.files) {
     try {
       const p = JSON.parse(await f.text());
       if (p && (p.mkgWorkspace || p.mkgPackage)) { v1++; continue; }   // a MeetingGraph 1 workspace or package
-      if (p && p.mkg2Workspace) { for (const q of p.packages || []) if (addPkg(q)) { n++; idbPut(q); loaded.push(q); } continue; }   // Export workspace
+      if (EX.isReduced(p)) { shared++; continue; }   // an export for sharing (§10.30): a partial view, never a board
+      if (p && p.mkg2Workspace) { for (const q of p.packages || []) if (!EX.isReduced(q) && addPkg(q)) { n++; idbPut(q); loaded.push(q); } continue; }   // Export workspace
       if (addPkg(p)) { n++; idbPut(p); loaded.push(p); } else if (!p || !p.mkg2) other++;
     } catch (err) { other++; }
   }
@@ -500,10 +528,11 @@ $('load-files').addEventListener('change', async e => {
     .flatMap(p => S.laterMeetings(state.pkgs, p).map(l => l.meeting.title + ' (' + l.meeting.date + ')')))];
   if (n) parts.push(`${n} saved meeting${n > 1 ? 's' : ''} loaded.`);
   if (v1) parts.push(`${v1 === 1 ? 'That is a MeetingGraph 1 file' : v1 + ' files are from MeetingGraph 1'} (a workspace or a meeting package). MeetingGraph 2 starts its own board and can't read version 1 boards yet, so nothing was loaded from ${v1 === 1 ? 'it' : 'them'}. Load the mkg2-… files this page saved.`);
+  if (shared) parts.push(`${shared === 1 ? 'That is an export for sharing' : shared + ' files are exports for sharing'}: a reduced copy for another app, not a backup, so nothing was loaded from ${shared === 1 ? 'it' : 'them'}. Open the saved mkg2-… files, or an "Export workspace" file.`);
   if (other) parts.push(`${other} file${other > 1 ? 's are' : ' is'} not a MeetingGraph file.`);
   if (!parts.length) parts.push('Those meetings are already loaded.');
   if (n && late.length) parts.push(`Some of these meetings are earlier than meetings already on the board, whose requests didn't list their items, so the same work may appear twice. Use "Same as…" in "Review this meeting again" on: ${late.join(', ')}.`);
-  msg('meeting-msg', parts.join(' '), n && !v1 && !other ? 'ok' : 'warn'); toast(parts.join(' '));
+  msg('meeting-msg', parts.join(' '), n && !v1 && !other && !shared ? 'ok' : 'warn'); toast(parts.join(' '));
 });
 
 /* ---------- start a board from a spreadsheet (plan §10.14) ---------- */
@@ -1491,8 +1520,8 @@ document.addEventListener('click', ev => {
 });
 $('export-ws').addEventListener('click', () => {
   if (!state.pkgs.length) return toast('Nothing to export yet.');
-  download(`mkg2-workspace-${today()}.json`, { mkg2Workspace: '1.0', exportedAt: new Date().toISOString(), packages: state.pkgs });
-  toast('Workspace exported: every saved meeting, board and decision in one file.');
+  download(`mkg2-workspace-${today()}.json`, EX.workspace(state.pkgs));
+  toast('Workspace exported: every saved meeting, board and decision in one file, with the board as it stands.');
 });
 $('clear-ws').addEventListener('click', async () => {
   if (!confirm('Clear this browser\'s copy? The files in the team folder are not touched; open them again to restore the board.')) return;

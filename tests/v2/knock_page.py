@@ -11,6 +11,10 @@ K = [  # the name field in the decision dialogs (Aaron, 2026-10-17)
     ('the name is not remembered', "  rememberName(by);\n", "", 'f36b'),
     ('no name field in the item dialog', "      ${nameField('d-by')}\n", "", 'f11b'),
     ('the item dialog name is ignored', "da.textContent, $('d-by').value)", "da.textContent)", 'f11c'),
+    # the export as a contract (§10.30)
+    ('"Export workspace" writes the old file', "EX.workspace(state.pkgs)", "{ mkg2Workspace: '1.0', exportedAt: new Date().toISOString(), packages: state.pkgs }", 'f38 '),
+    ('"Export for sharing" writes the full workspace', "download(`mkg2-share-${codes.join('-')}-${today()}.json`, r.file);", "download(`mkg2-share-${codes.join('-')}-${today()}.json`, EX.workspace(state.pkgs));", 'f39 '),
+    ('an export for sharing is opened as a board', "      if (EX.isReduced(p)) { shared++; continue; }", "      if (false) { shared++; continue; }", 'f40 '),
 ]
 orig = open(P, encoding='utf-8', newline='').read()
 killed = 0

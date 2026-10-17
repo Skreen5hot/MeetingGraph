@@ -4,7 +4,8 @@
    Nothing stops the import except a file with no Type column; every other problem is per row (the §10.14 table). */
 (function (root) {
 'use strict';
-const TYPES = { project: 'project', person: 'person', action: 'action', question: 'question', risk: 'risk', decision: 'decision' };
+const S = (typeof module !== 'undefined' && module.exports) ? require('./store.js') : root.MKG2_store;
+const TYPES ={ project: 'project', person: 'person', action: 'action', question: 'question', risk: 'risk', decision: 'decision' };
 const KIND = { action: 'commitment', question: 'question', risk: 'risk', decision: 'decision' };
 const STATUS = { '': 'open', open: 'open', 'in progress': 'in_progress', in_progress: 'in_progress', blocked: 'blocked', done: 'done', closed: 'done', complete: 'done', completed: 'done' };
 const key = s => String(s == null ? '' : s).trim().replace(/\s+/g, ' ').toLowerCase();
@@ -122,7 +123,7 @@ function seedPackage({ seed, codes, asOf, savedBy, savedAt, prev }) {
   const projectList = seed.projects.map(p => ({ code: codes[p.name], name: p.name, desc: p.notes || '' }));   // desc: the board's project line, as v1
   return {
     mkg2: '1.0', kind: 'seed',
-    id: `mkg2-seed-${projectList.map(p => p.code).join('-')}-${asOf.replace(/-/g, '')}-${at.replace(/[-:.]/g, '').slice(0, 15)}`,
+    id: `mkg2-seed-${projectList.map(p => p.code).join('-')}-${asOf.replace(/-/g, '')}-${S.stamp(at)}`,
     savedAt: at, savedBy: savedBy || null, supersedes: prev ? prev.id : null,   // a second seed of the same projects replaces the first
     project: projectList[0], projects: projectList,
     meeting: { id: asOf.replace(/-/g, '') + 'T000000Z', date: asOf, title: 'Board as of ' + asOf, dayKey: dk },

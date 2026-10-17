@@ -7,6 +7,9 @@
 const LETTER = { commitment: 'A', question: 'Q', risk: 'R', decision: 'D' };
 const THREAD_KIND = { A: 'action', Q: 'question', R: 'risk', D: 'decision' };
 const pad2 = n => String(n).padStart(2, '0');
+// The save time in a package ID, to the millisecond (§10.30): 2026-10-17T08:03:12.123Z -> 20261017T080312123.
+// IDs saved before it stop at the second; they stay valid and are never rewritten.
+const stamp = at => { const s = String(at).replace(/[-:]/g, ''), m = /^(\d{8}T\d{6})(?:\.(\d+))?/.exec(s); return m ? m[1] + (m[2] || '').padEnd(3, '0').slice(0, 3) : s.replace(/\W/g, '').slice(0, 18); };
 
 // The default project code: the initials of the name's words (2-4 letters), unique among the codes already used.
 function defaultCode(name, used) {
@@ -87,7 +90,7 @@ function meetingPackage({ pkgs, project, projects, meeting, statements, request,
   const at = savedAt || new Date().toISOString();
   return {
     mkg2: '1.0', kind: 'meeting',
-    id: `mkg2-meeting-${primary ? primary.code + '-' : ''}${meeting.id}-${at.replace(/[-:.]/g, '').slice(0, 15)}`,
+    id: `mkg2-meeting-${primary ? primary.code + '-' : ''}${meeting.id}-${stamp(at)}`,
     savedAt: at, savedBy: savedBy || null, supersedes: prev ? prev.id : null,
     project: primary ? { code: primary.code, name: primary.name } : null,
     projects: covered.map(c => ({ code: c.code, name: c.name })),
@@ -261,7 +264,7 @@ function boardDecision({ board, action, ids, note, savedBy, savedAt }) {
   }
   if (errors.length) return { error: errors.join(' ') };
   const at = savedAt || new Date().toISOString();
-  return { pkg: { mkg2: '1.0', kind: 'board', id: `mkg2-board-${action}-${ids[0]}-${at.replace(/[-:.]/g, '').slice(0, 15)}`, savedAt: at,
+  return { pkg: { mkg2: '1.0', kind: 'board', id: `mkg2-board-${action}-${ids[0]}-${stamp(at)}`, savedAt: at,
                   savedBy: String(savedBy).trim(), supersedes: null, action, threads: ids.slice(), note: String(note).trim(),
                   after: board.meetings.length ? board.meetings[board.meetings.length - 1].meeting.id : null } };
 }
@@ -276,7 +279,7 @@ function projectDecision({ board, action, project, note, savedBy, savedAt }) {
   if (action === 'close_project' && board.closedProjects.has(project)) return { error: 'This project is already closed.' };
   if (action === 'reopen_project' && !board.closedProjects.has(project)) return { error: 'This project is not closed.' };
   const at = savedAt || new Date().toISOString();
-  return { pkg: { mkg2: '1.0', kind: 'board', id: `mkg2-board-${action}-${project}-${at.replace(/[-:.]/g, '').slice(0, 15)}`, savedAt: at,
+  return { pkg: { mkg2: '1.0', kind: 'board', id: `mkg2-board-${action}-${project}-${stamp(at)}`, savedAt: at,
                   savedBy: String(savedBy).trim(), supersedes: null, action, project, threads: [], note: String(note).trim(),
                   after: board.meetings.length ? board.meetings[board.meetings.length - 1].meeting.id : null } };
 }
@@ -287,7 +290,7 @@ function switchTo(pkgs, conflict, otherId, savedBy, savedAt) {
   const other = pkgs.find(p => p.id === otherId);
   if (!other || !conflict.others.includes(otherId)) return { error: 'That save is not part of this conflict.' };
   const at = savedAt || new Date().toISOString();
-  return { pkg: Object.assign(JSON.parse(JSON.stringify(other)), { id: `${other.id}-chosen-${at.replace(/[-:.]/g, '').slice(0, 15)}`, savedAt: at, savedBy: savedBy || null,
+  return { pkg: Object.assign(JSON.parse(JSON.stringify(other)), { id: `${other.id}-chosen-${stamp(at)}`, savedAt: at, savedBy: savedBy || null,
     supersedes: conflict.used, alsoSupersedes: [otherId] }) };
 }
 
@@ -398,6 +401,6 @@ function projectsOf(pkgs) {
 }
 
 const api = { defaultCode, validCode, displayName, meetingPackage, current, replay, openThreads, mint, dayKeyFor, projectsOf, placeItems,
-  boardDecision, projectDecision, switchTo, laterMeetings, unseenLater, fitThreads, DECISIONS, PARK_AFTER, timeKey, LETTER };
+  boardDecision, projectDecision, switchTo, stamp, laterMeetings, unseenLater, fitThreads, DECISIONS, PARK_AFTER, timeKey, LETTER };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.MKG2_store = api;
 })(this);

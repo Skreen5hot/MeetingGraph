@@ -418,6 +418,14 @@ details.closedp > summary{cursor:pointer;color:var(--muted);font-size:13px;paddi
       <details id="saved-box" class="box"><summary>Review a saved meeting again</summary><ul class="items" id="saved-list"></ul></details>
       <div id="conflicts"></div>
     </section>
+    <section class="card" id="share">
+      <h3>Export for sharing (for another app)</h3>
+      <p class="small" style="margin-top:0">A reduced copy for another app, such as Dossier Studio: the projects and dates you choose, and only the transcript statements their items cite, with no email addresses and no attendance. It is not a backup, and this page won't open it; the backup is "Export workspace" in the top bar. Names and the quoted statements are in it: check it before you send it.</p>
+      <div id="share-projects"></div>
+      <div class="row"><label class="field">From<input type="date" id="share-from"></label><label class="field">To<input type="date" id="share-to"></label></div>
+      <div class="actions"><button class="btn" id="share-btn">Export for sharing</button></div>
+      <p id="share-msg" class="msg"></p>
+    </section>
     <section class="card">
       <h3>Initial setup: start a board from a spreadsheet (CSV)</h3>
       <p class="small" style="margin-top:0">One CSV with your projects, people, actions, questions, risks and decisions (templates/mkg2-seed-template.csv). Every ID is minted here.</p>
@@ -767,6 +775,9 @@ if (typeof module !== 'undefined' && module.exports) module.exports = api; else 
 const LETTER = { commitment: 'A', question: 'Q', risk: 'R', decision: 'D' };
 const THREAD_KIND = { A: 'action', Q: 'question', R: 'risk', D: 'decision' };
 const pad2 = n => String(n).padStart(2, '0');
+// The save time in a package ID, to the millisecond (§10.30): 2026-10-17T08:03:12.123Z -> 20261017T080312123.
+// IDs saved before it stop at the second; they stay valid and are never rewritten.
+const stamp = at => { const s = String(at).replace(/[-:]/g, ''), m = /^(\d{8}T\d{6})(?:\.(\d+))?/.exec(s); return m ? m[1] + (m[2] || '').padEnd(3, '0').slice(0, 3) : s.replace(/\W/g, '').slice(0, 18); };
 
 // The default project code: the initials of the name's words (2-4 letters), unique among the codes already used.
 function defaultCode(name, used) {
@@ -847,7 +858,7 @@ function meetingPackage({ pkgs, project, projects, meeting, statements, request,
   const at = savedAt || new Date().toISOString();
   return {
     mkg2: '1.0', kind: 'meeting',
-    id: `mkg2-meeting-${primary ? primary.code + '-' : ''}${meeting.id}-${at.replace(/[-:.]/g, '').slice(0, 15)}`,
+    id: `mkg2-meeting-${primary ? primary.code + '-' : ''}${meeting.id}-${stamp(at)}`,
     savedAt: at, savedBy: savedBy || null, supersedes: prev ? prev.id : null,
     project: primary ? { code: primary.code, name: primary.name } : null,
     projects: covered.map(c => ({ code: c.code, name: c.name })),
@@ -1021,7 +1032,7 @@ function boardDecision({ board, action, ids, note, savedBy, savedAt }) {
   }
   if (errors.length) return { error: errors.join(' ') };
   const at = savedAt || new Date().toISOString();
-  return { pkg: { mkg2: '1.0', kind: 'board', id: `mkg2-board-${action}-${ids[0]}-${at.replace(/[-:.]/g, '').slice(0, 15)}`, savedAt: at,
+  return { pkg: { mkg2: '1.0', kind: 'board', id: `mkg2-board-${action}-${ids[0]}-${stamp(at)}`, savedAt: at,
                   savedBy: String(savedBy).trim(), supersedes: null, action, threads: ids.slice(), note: String(note).trim(),
                   after: board.meetings.length ? board.meetings[board.meetings.length - 1].meeting.id : null } };
 }
@@ -1036,7 +1047,7 @@ function projectDecision({ board, action, project, note, savedBy, savedAt }) {
   if (action === 'close_project' && board.closedProjects.has(project)) return { error: 'This project is already closed.' };
   if (action === 'reopen_project' && !board.closedProjects.has(project)) return { error: 'This project is not closed.' };
   const at = savedAt || new Date().toISOString();
-  return { pkg: { mkg2: '1.0', kind: 'board', id: `mkg2-board-${action}-${project}-${at.replace(/[-:.]/g, '').slice(0, 15)}`, savedAt: at,
+  return { pkg: { mkg2: '1.0', kind: 'board', id: `mkg2-board-${action}-${project}-${stamp(at)}`, savedAt: at,
                   savedBy: String(savedBy).trim(), supersedes: null, action, project, threads: [], note: String(note).trim(),
                   after: board.meetings.length ? board.meetings[board.meetings.length - 1].meeting.id : null } };
 }
@@ -1047,7 +1058,7 @@ function switchTo(pkgs, conflict, otherId, savedBy, savedAt) {
   const other = pkgs.find(p => p.id === otherId);
   if (!other || !conflict.others.includes(otherId)) return { error: 'That save is not part of this conflict.' };
   const at = savedAt || new Date().toISOString();
-  return { pkg: Object.assign(JSON.parse(JSON.stringify(other)), { id: `${other.id}-chosen-${at.replace(/[-:.]/g, '').slice(0, 15)}`, savedAt: at, savedBy: savedBy || null,
+  return { pkg: Object.assign(JSON.parse(JSON.stringify(other)), { id: `${other.id}-chosen-${stamp(at)}`, savedAt: at, savedBy: savedBy || null,
     supersedes: conflict.used, alsoSupersedes: [otherId] }) };
 }
 
@@ -1158,7 +1169,7 @@ function projectsOf(pkgs) {
 }
 
 const api = { defaultCode, validCode, displayName, meetingPackage, current, replay, openThreads, mint, dayKeyFor, projectsOf, placeItems,
-  boardDecision, projectDecision, switchTo, laterMeetings, unseenLater, fitThreads, DECISIONS, PARK_AFTER, timeKey, LETTER };
+  boardDecision, projectDecision, switchTo, stamp, laterMeetings, unseenLater, fitThreads, DECISIONS, PARK_AFTER, timeKey, LETTER };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.MKG2_store = api;
 })(this);
 
@@ -1276,7 +1287,20 @@ function questions(items, speakers, people) {
   return out;
 }
 
-const api = { peopleOf, resolve, suggest, questions, clean };
+/* The people register for the export (§10.30): each person with every label that means them, and where the label's
+   meaning came from (the spreadsheet, a meeting's speaker label, or a review's answer, which wins as in peopleOf), and
+   the labels answered "No owner". No email addresses. */
+function register(pkgs) {
+  const pp = peopleOf(pkgs), used = S.current(pkgs).used, from = new Map();
+  for (const p of used) if (p.kind === 'meeting') for (const s of p.statements || []) if (!from.has(s.speaker)) from.set(s.speaker, 'speaker');
+  for (const p of used) if (p.kind === 'seed') for (const x of p.people || []) { from.set(x.name, 'spreadsheet'); if (x.teams) from.set(x.teams, 'spreadsheet'); }
+  for (const p of used) if (p.kind === 'meeting') for (const a of p.aliases || []) from.set(a.label, 'review');
+  const labels = [...pp.byLabel].map(([label, person]) => ({ label, person, from: from.get(label) || 'speaker' }));
+  return { people: pp.names.map(name => ({ name, labels: labels.filter(l => l.person === name).map(l => ({ label: l.label, from: l.from })) })),
+           noOwner: labels.filter(l => l.person === null).map(l => ({ label: l.label, from: l.from })) };
+}
+
+const api = { peopleOf, resolve, suggest, questions, clean, register };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.MKG2_people = api;
 })(this);
 
@@ -1368,6 +1392,119 @@ function forPackage(att, people, speakers) {
 
 const api = { decode, parse, match, forPackage };
 if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.MKG2_attendance = api;
+})(this);
+
+/* MeetingGraph v2 — the workspace export as a contract for other apps (plan §10.30; the fields are defined in
+   docs/mkg2-export-schema.md). "Export workspace" is the team folder's backup: every package, plus `derived`, the board as
+   the Board replays it, for a reader that should not re-implement the replay. "Export for sharing" is a reduced view for
+   another app (Dossier Studio): chosen projects and dates, only the statements the kept items cite, no email addresses and
+   no attendance. A reduced file is marked `reduced: true` and MeetingGraph never opens it as a board.
+   The packages are the record; `derived` is computed from them and never read back. */
+(function (root) {
+'use strict';
+const node = typeof module !== 'undefined' && module.exports;
+const S = node ? require('./store.js') : root.MKG2_store;
+const PE = node ? require('./people.js') : root.MKG2_people;
+
+const VERSION = '1.1';
+const clone = x => JSON.parse(JSON.stringify(x));
+const records = pkgs => pkgs.filter(p => p && p.mkg2 && (p.kind === 'meeting' || p.kind === 'seed'));
+const boards = pkgs => { const sup = new Set(pkgs.filter(p => p && p.mkg2).map(p => p.supersedes).filter(Boolean)); return pkgs.filter(p => p && p.mkg2 && p.kind === 'board' && !sup.has(p.id)); };
+
+/* The board as replayed from pkgs (opts.upTo: only what happened before that meeting ID), as plain JSON. keep: an optional
+   test on a project code, to cut it down to the chosen projects. */
+function derived(pkgs, opts) {
+  const o = opts || {}, keep = o.keep || (() => true);
+  const { used, conflicts } = S.current(pkgs);
+  const b = S.replay(pkgs, o.upTo ? { upTo: o.upTo } : {});
+  const inUse = used.filter(p => !o.upTo || p.meeting.id < o.upTo);
+  const last = inUse[inUse.length - 1] || null;
+  const usedIds = new Set(used.map(p => p.id)), other = new Set(conflicts.flatMap(c => c.others));
+  const codeOfId = id => String(id).split('-')[0];
+  return {
+    computedFrom: o.computedFrom || 'every package in this file',
+    asOf: last ? { meetingId: last.meeting.id, date: last.meeting.date, title: last.meeting.title } : null,
+    packages: {
+      inUse: inUse.map(p => p.id),
+      superseded: records(pkgs).filter(p => !usedIds.has(p.id) && !other.has(p.id)).map(p => p.id),
+      conflicts: clone(conflicts),
+      boardDecisions: boards(pkgs).map(p => p.id)
+    },
+    projects: S.projectsOf(pkgs).filter(p => keep(p.code)),
+    closedProjects: [...b.closedProjects].filter(([code]) => keep(code)).map(([code, c]) => Object.assign({ code }, clone(c))),
+    threads: b.order.map(id => b.threads.get(id)).filter(t => keep(t.project)).map(clone),
+    unlinked: clone(b.unlinked.filter(u => keep(codeOfId(u.thread)))),
+    people: PE.register(pkgs)
+  };
+}
+
+// "Export workspace": every package, unchanged, plus derived.
+function workspace(pkgs, { exportedAt } = {}) {
+  const ps = pkgs.filter(p => p && p.mkg2);
+  return { mkg2Workspace: VERSION, exportedAt: exportedAt || new Date().toISOString(), packages: ps, derived: derived(ps) };
+}
+
+/* "Export for sharing": projects (codes), from and to (YYYY-MM-DD, inclusive, by meeting date; a board decision by the
+   date it was saved). Returns { file } or { error }. Only the saves in use are shared; superseded saves stay home. */
+function reduced(pkgs, { projects, from, to, exportedAt } = {}) {
+  const codes = new Set(projects || []);
+  if (!codes.size) return { error: 'Choose at least one project.' };
+  if (!from || !to || from > to) return { error: 'Set a date range: From must be on or before To.' };
+  const all = pkgs.filter(p => p && p.mkg2), full = S.replay(all), used = S.current(all).used;
+  const inRange = d => d >= from && d <= to;
+  const projOf = (p, it) => it.project || (it.thread && full.threads.get(it.thread) ? full.threads.get(it.thread).project : null) ||
+    (it.id ? String(it.id).split('-')[0] : null) || (p.project && p.project.code) || null;
+  const out = [];
+  for (const p of used) {
+    if (!inRange(p.meeting.date)) continue;
+    const covered = (p.projects && p.projects.length ? p.projects : [p.project]).filter(Boolean);
+    const items = p.items.filter(it => codes.has(projOf(p, it)));
+    if (!items.length && !covered.some(c => codes.has(c.code))) continue;
+    const q = clone(p);
+    q.reduced = true;
+    q.items = clone(items);
+    q.projects = covered.filter(c => codes.has(c.code)).map(clone);
+    q.project = q.projects[0] || null;
+    if (q.minted && q.minted.maxNum) q.minted.maxNum = Object.fromEntries(Object.entries(q.minted.maxNum).filter(([k]) => !k.includes(':') || codes.has(k.split(':')[0])));
+    if (q.meeting.dayKeys) q.meeting.dayKeys = Object.fromEntries(Object.entries(q.meeting.dayKeys).filter(([c]) => codes.has(c)));
+    if (p.kind === 'meeting') {
+      const cited = new Set(items.map(it => it.seg).filter(Boolean));
+      q.statements = (p.statements || []).filter(s => cited.has(s.id)).map(clone);
+      const speakers = new Set(q.statements.map(s => s.speaker)), whos = new Set(items.map(it => it.who).filter(Boolean));
+      q.aliases = (p.aliases || []).filter(a => speakers.has(a.label) || whos.has(a.label)).map(clone);
+      // The chat's summary is of the whole meeting: kept only when the meeting covered nothing but the chosen projects.
+      q.reply = Object.assign({}, clone(p.reply || {}), { summary: covered.every(c => codes.has(c.code)) ? (p.reply || {}).summary || '' : null });
+      q.request = Object.assign({}, clone(p.request || {}), { openIds: ((p.request || {}).openIds || []).filter(id => { const t = full.threads.get(id); return codes.has(t ? t.project : String(id).split('-')[0]); }) });
+      q.newProjects = (p.newProjects || []).filter(x => x.code && codes.has(x.code)).map(clone);
+      delete q.attendance;
+    } else {   // a spreadsheet start: its people without emails, and only those the kept items name
+      const named = new Set(items.map(it => it.who).filter(Boolean));
+      q.people = (p.people || []).filter(x => named.has(x.name) || (x.teams && named.has(x.teams))).map(x => ({ name: x.name, teams: x.teams || null }));
+    }
+    out.push(q);
+  }
+  for (const p of boards(all)) {
+    if (!inRange(String(p.savedAt).slice(0, 10))) continue;
+    if (/_project$/.test(p.action)) { if (codes.has(p.project)) out.push(Object.assign(clone(p), { reduced: true })); continue; }
+    const ts = (p.threads || []).filter(id => { const t = full.threads.get(id); return codes.has(t ? t.project : String(id).split('-')[0]); });
+    if (ts.length) out.push(Object.assign(clone(p), { threads: ts, reduced: true }));
+  }
+  // derived: the board as of the end of the range (the first meeting after "to" is left out), cut to the chosen projects;
+  // its people are those the shared packages name.
+  const next = used.find(p => p.meeting.date > to);
+  const d = derived(all, { upTo: next ? next.meeting.id : null, keep: c => codes.has(c), computedFrom: 'the whole workspace, up to the end of the range, cut to the chosen projects' });
+  const kept = new Set(out.map(p => p.id));
+  d.packages = { inUse: d.packages.inUse.filter(id => kept.has(id)), superseded: [], conflicts: [], boardDecisions: d.packages.boardDecisions.filter(id => kept.has(id)) };
+  d.people = PE.register(out);
+  return { file: { mkg2Workspace: VERSION, reduced: true, exportedAt: exportedAt || new Date().toISOString(),
+    scope: { projects: [...codes], from, to }, packages: out, derived: d } };
+}
+
+// A file (or a package) that is a reduced view: never loaded as a board.
+const isReduced = x => !!(x && x.reduced === true);
+
+const api = { VERSION, workspace, derived, reduced, isReduced };
+if (typeof module !== 'undefined' && module.exports) module.exports = api; else root.MKG2_export = api;
 })(this);
 
 /* MeetingGraph v2 — the intervention dashboard (Aaron, 2026-10-16). What to ask, of whom, and why now: each open item
@@ -1889,7 +2026,8 @@ if (typeof module !== 'undefined' && module.exports) module.exports = api; else 
    Nothing stops the import except a file with no Type column; every other problem is per row (the §10.14 table). */
 (function (root) {
 'use strict';
-const TYPES = { project: 'project', person: 'person', action: 'action', question: 'question', risk: 'risk', decision: 'decision' };
+const S = (typeof module !== 'undefined' && module.exports) ? require('./store.js') : root.MKG2_store;
+const TYPES ={ project: 'project', person: 'person', action: 'action', question: 'question', risk: 'risk', decision: 'decision' };
 const KIND = { action: 'commitment', question: 'question', risk: 'risk', decision: 'decision' };
 const STATUS = { '': 'open', open: 'open', 'in progress': 'in_progress', in_progress: 'in_progress', blocked: 'blocked', done: 'done', closed: 'done', complete: 'done', completed: 'done' };
 const key = s => String(s == null ? '' : s).trim().replace(/\s+/g, ' ').toLowerCase();
@@ -2007,7 +2145,7 @@ function seedPackage({ seed, codes, asOf, savedBy, savedAt, prev }) {
   const projectList = seed.projects.map(p => ({ code: codes[p.name], name: p.name, desc: p.notes || '' }));   // desc: the board's project line, as v1
   return {
     mkg2: '1.0', kind: 'seed',
-    id: `mkg2-seed-${projectList.map(p => p.code).join('-')}-${asOf.replace(/-/g, '')}-${at.replace(/[-:.]/g, '').slice(0, 15)}`,
+    id: `mkg2-seed-${projectList.map(p => p.code).join('-')}-${asOf.replace(/-/g, '')}-${S.stamp(at)}`,
     savedAt: at, savedBy: savedBy || null, supersedes: prev ? prev.id : null,   // a second seed of the same projects replaces the first
     project: projectList[0], projects: projectList,
     meeting: { id: asOf.replace(/-/g, '') + 'T000000Z', date: asOf, title: 'Board as of ' + asOf, dayKey: dk },
@@ -2025,7 +2163,7 @@ if (typeof module !== 'undefined' && module.exports) module.exports = api; else 
 (function () {
 'use strict';
 const T = window.MKG2_transcript, Q = window.MKG2_request, R = window.MKG2_reply, S = window.MKG2_store, E = window.MKG2_email, U = window.MKG2_summary;
-const DT = window.MKG2_dates, PE = window.MKG2_people, RV = window.MKG2_review, AT = window.MKG2_attendance, IV = window.MKG2_interventions;
+const DT = window.MKG2_dates, PE = window.MKG2_people, RV = window.MKG2_review, AT = window.MKG2_attendance, IV = window.MKG2_interventions, EX = window.MKG2_export;
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const state = { pkgs: [], prepared: null, request: null, checked: null, saved: null, answers: {}, relTicks: new Set(), proposals: [], reviewOf: null };
@@ -2058,16 +2196,36 @@ function renderSaved() {
     return `<p class="note">The meeting ${esc(c.meeting)} was saved twice: the board uses the save by ${esc(pk(c.used).savedBy || '?')} (${esc(pk(c.used).savedAt || '')}). ` +
       c.others.map(o => `<button class="secondary" data-switch="${i}|${esc(o)}">Use the save by ${esc(pk(o).savedBy || '?')} (${esc(pk(o).savedAt || '')}) instead</button>`).join(' ') + '</p>';
   }).join('');
+  renderShare(used);
   renderBoard();
 }
+// "Export for sharing" (§10.30): the projects to tick, and the dates, first to last meeting unless already set.
+function renderShare(used) {
+  const was = new Set([...document.querySelectorAll('[data-share]')].filter(x => x.checked).map(x => x.dataset.share)), ps = projects();
+  $('share-projects').innerHTML = ps.length ? ps.map(p => `<label><input type="checkbox" data-share="${esc(p.code)}"${was.has(p.code) ? ' checked' : ''}> ${esc(p.name)}</label>`).join(' ') : '<p class="src">No projects yet.</p>';
+  const ds = used.map(p => p.meeting.date).sort();
+  if (ds.length && !$('share-from').value) $('share-from').value = ds[0];
+  if (ds.length && !$('share-to').value) $('share-to').value = ds[ds.length - 1];
+  $('share-btn').disabled = !ps.length;
+}
+$('share-btn').addEventListener('click', () => {
+  const codes = [...document.querySelectorAll('[data-share]')].filter(x => x.checked).map(x => x.dataset.share);
+  const from = $('share-from').value, to = $('share-to').value;
+  const r = EX.reduced(state.pkgs, { projects: codes, from, to });
+  if (r.error) return msg('share-msg', r.error, 'bad');
+  const nm = r.file.packages.filter(p => p.kind === 'meeting').length, other = r.file.packages.length - nm;
+  download(`mkg2-share-${codes.join('-')}-${today()}.json`, r.file);
+  msg('share-msg', `Exported ${nm} meeting${nm === 1 ? '' : 's'} and ${other} other record${other === 1 ? '' : 's'} of ${codes.join(', ')}, ${from} to ${to}. Check the file before you send it.`, 'ok');
+});
 $('load-btn').addEventListener('click', () => $('load-files').click());
 $('load-files').addEventListener('change', async e => {
-  let n = 0, v1 = 0, other = 0; const loaded = [];
+  let n = 0, v1 = 0, other = 0, shared = 0; const loaded = [];
   for (const f of e.target.files) {
     try {
       const p = JSON.parse(await f.text());
       if (p && (p.mkgWorkspace || p.mkgPackage)) { v1++; continue; }   // a MeetingGraph 1 workspace or package
-      if (p && p.mkg2Workspace) { for (const q of p.packages || []) if (addPkg(q)) { n++; idbPut(q); loaded.push(q); } continue; }   // Export workspace
+      if (EX.isReduced(p)) { shared++; continue; }   // an export for sharing (§10.30): a partial view, never a board
+      if (p && p.mkg2Workspace) { for (const q of p.packages || []) if (!EX.isReduced(q) && addPkg(q)) { n++; idbPut(q); loaded.push(q); } continue; }   // Export workspace
       if (addPkg(p)) { n++; idbPut(p); loaded.push(p); } else if (!p || !p.mkg2) other++;
     } catch (err) { other++; }
   }
@@ -2077,10 +2235,11 @@ $('load-files').addEventListener('change', async e => {
     .flatMap(p => S.laterMeetings(state.pkgs, p).map(l => l.meeting.title + ' (' + l.meeting.date + ')')))];
   if (n) parts.push(`${n} saved meeting${n > 1 ? 's' : ''} loaded.`);
   if (v1) parts.push(`${v1 === 1 ? 'That is a MeetingGraph 1 file' : v1 + ' files are from MeetingGraph 1'} (a workspace or a meeting package). MeetingGraph 2 starts its own board and can't read version 1 boards yet, so nothing was loaded from ${v1 === 1 ? 'it' : 'them'}. Load the mkg2-… files this page saved.`);
+  if (shared) parts.push(`${shared === 1 ? 'That is an export for sharing' : shared + ' files are exports for sharing'}: a reduced copy for another app, not a backup, so nothing was loaded from ${shared === 1 ? 'it' : 'them'}. Open the saved mkg2-… files, or an "Export workspace" file.`);
   if (other) parts.push(`${other} file${other > 1 ? 's are' : ' is'} not a MeetingGraph file.`);
   if (!parts.length) parts.push('Those meetings are already loaded.');
   if (n && late.length) parts.push(`Some of these meetings are earlier than meetings already on the board, whose requests didn't list their items, so the same work may appear twice. Use "Same as…" in "Review this meeting again" on: ${late.join(', ')}.`);
-  msg('meeting-msg', parts.join(' '), n && !v1 && !other ? 'ok' : 'warn'); toast(parts.join(' '));
+  msg('meeting-msg', parts.join(' '), n && !v1 && !other && !shared ? 'ok' : 'warn'); toast(parts.join(' '));
 });
 
 /* ---------- start a board from a spreadsheet (plan §10.14) ---------- */
@@ -3068,8 +3227,8 @@ document.addEventListener('click', ev => {
 });
 $('export-ws').addEventListener('click', () => {
   if (!state.pkgs.length) return toast('Nothing to export yet.');
-  download(`mkg2-workspace-${today()}.json`, { mkg2Workspace: '1.0', exportedAt: new Date().toISOString(), packages: state.pkgs });
-  toast('Workspace exported: every saved meeting, board and decision in one file.');
+  download(`mkg2-workspace-${today()}.json`, EX.workspace(state.pkgs));
+  toast('Workspace exported: every saved meeting, board and decision in one file, with the board as it stands.');
 });
 $('clear-ws').addEventListener('click', async () => {
   if (!confirm('Clear this browser\'s copy? The files in the team folder are not touched; open them again to restore the board.')) return;

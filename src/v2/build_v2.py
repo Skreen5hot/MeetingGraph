@@ -4,7 +4,7 @@ build is byte for byte the same on Windows and elsewhere. Usage: python3 src/v2/
 import hashlib, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
-ORDER = ['transcript.js', 'request.js', 'reply.js', 'store.js', 'dates.js', 'people.js', 'attendance.js', 'interventions.js', 'review.js', 'email.js', 'summary.js', 'seed.js']
+ORDER = ['transcript.js', 'request.js', 'reply.js', 'store.js', 'dates.js', 'people.js', 'attendance.js', 'export.js', 'interventions.js', 'review.js', 'email.js', 'summary.js', 'seed.js']
 
 
 def build():

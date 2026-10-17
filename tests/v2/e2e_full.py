@@ -280,7 +280,6 @@ with sync_playwright() as pw:
     pg2.locator(f'[data-again="{p1b["id"]}"]').click(); pg2.wait_for_timeout(250)
     merged = next(x['n'] for x in st(pg2) if (x.get('r') or {}).get('sameAs'))
     change(pg2, merged, 'sameAs', '')
-    pg2.wait_for_timeout(1100)   # a save's ID is to the second: a second save in the same second would share it
     p1c = save(pg2)
     new_ids = sorted(set(x['id'] for x in p1c['items'] if x.get('id')) - set(x['id'] for x in p1b['items'] if x.get('id')))
     sm = pg2.inner_text('#save-msg')
@@ -338,6 +337,35 @@ with sync_playwright() as pw:
     pg.wait_for_timeout(200)
     back = pg.evaluate('() => { const b = window.MKG2_store.replay(window.MKG2_state.pkgs); return [...b.threads.values()].filter(t => t.project === "HP" && t.kind !== "decision" && !["done", "not_needed"].includes(t.status)).length; }')
     check('f37 reopening puts its items back and lists the project again', back == n_open and pg.locator('#projects details.closedp').count() == 0 and pg.locator('#close-proj').count() == 1, [back, n_open])
+    # ---------------- the export as a contract (§10.30) ----------------
+    n_pkgs = pg.evaluate('() => window.MKG2_state.pkgs.length')
+    with pg.expect_download() as d: pg.click('#export-ws')
+    wsf = os.path.join(TMP, 'ws.json'); d.value.save_as(wsf); wsj = json.load(open(wsf, encoding='utf-8'))
+    dv = wsj.get('derived') or {}
+    check('f38 "Export workspace" writes 1.1: every package, and derived (the replayed board and the people register)', wsj.get('mkg2Workspace') == '1.1' and len(wsj.get('packages', [])) == n_pkgs and
+          len(dv.get('threads', [])) > 0 and len((dv.get('people') or {}).get('people', [])) > 0 and not wsj.get('reduced'), [wsj.get('mkg2Workspace'), len(dv.get('threads', []))])
+    ctx3 = br.new_context(timezone_id='America/New_York', accept_downloads=True); pg3 = ctx3.new_page(); pg3.on('pageerror', lambda e: errors.append(str(e)))
+    pg3.goto(PAGE); pg3.wait_for_timeout(300); pg3.set_input_files('#load-files', wsf); pg3.wait_for_timeout(300)
+    check('f38b a fresh page opens the 1.1 file: every package loads, and the board is the same', pg3.evaluate('() => window.MKG2_state.pkgs.length') == n_pkgs and
+          pg3.evaluate('() => window.MKG2_store.replay(window.MKG2_state.pkgs).order.length') == len(dv.get('threads', [])))
+    ctx3.close()
+    tab(pg, 'seed'); pg.wait_for_timeout(100)
+    if pg.locator('#share-projects [data-share="HP"]').count(): pg.check('#share-projects [data-share="HP"]')
+    sh = {}
+    if pg.locator('#share-btn').count():
+        try:
+            with pg.expect_download(timeout=3000) as d: pg.click('#share-btn')
+            shf = os.path.join(TMP, 'share.json'); d.value.save_as(shf); sh = json.load(open(shf, encoding='utf-8'))
+        except Exception: sh = {}
+    sht = json.dumps(sh)
+    check('f39 "Export for sharing" writes a reduced file of the chosen project: marked reduced, no emails, no attendance, only cited statements',
+          sh.get('reduced') is True and sh.get('scope', {}).get('projects') == ['HP'] and len(sh.get('packages', [])) > 0 and all(x.get('reduced') for x in sh['packages']) and
+          '@' not in sht and '"attendance"' not in sht and all(len(x.get('statements', [])) <= len({i.get('seg') for i in x['items']}) for x in sh['packages'] if x.get('kind') == 'meeting'),
+          [sh.get('scope'), [len(x.get('statements', [])) for x in sh.get('packages', [])]])
+    if sh:
+        pg.set_input_files('#load-files', shf); pg.wait_for_timeout(300)
+    check('f40 "Open files" refuses an export for sharing: nothing is loaded, and it says why', pg.evaluate('() => window.MKG2_state.pkgs.length') == n_pkgs and
+          'export for sharing' in pg.inner_text('#meeting-msg'), pg.inner_text('#meeting-msg'))
     check('f27 no page errors', not errors, errors)
     br.close()
 
